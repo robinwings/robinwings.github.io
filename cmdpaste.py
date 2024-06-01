@@ -3,6 +3,10 @@ import pyautogui
 import time
 import keyboard
 
+# yo chat gpt comments are so dumb wtf??
+# not gonna bother deleting tho cuz shi funny
+# - yulian
+
 # Load commands from JSON file
 print("Press F1 to start pasting commands, and press CTRL+C to exit.")
 with open('commands.json', 'r') as file:

@@ -1,0 +1,209 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Fu Xuan</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
+        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
+        var formattedStat = stat;
+        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
+        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()">
+    <h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+            <h1>Fu Xuan</h1>
+            <p>Head of the Divination Commission on the Luofu.<br>The person who uses the third eye and Matrix of Prescience to foretell the route of Xianzhou and the outcomes of events.<br><br><strong>ID:</strong> 1208<br>
+            <strong>Path:</strong> Preservation<br>
+            <strong>Element:</strong> Quantum<br>
+            <strong>Rarity:</strong> 5*</br></p>
+            <h2>Stats</h2>
+            <ul>
+                <li><strong>Max HP:</strong> 1474.70</li>
+                <li><strong>Max ATK:</strong> 465.70</li>
+                <li><strong>Max DEF:</strong> 606.38</li>
+                <li><strong>Speed:</strong> 100</li>
+                <li><strong>Taunt:</strong> 150</li>
+                <li><strong>CRIT Rate:</strong> 0.05</li>
+                <li><strong>CRIT DMG:</strong> 0.5</li>
+            </ul>
+
+            <h2>Skills</h2>
+            <ul>
+        
+                <li>
+                    <strong>Novaburst (Basic ATK):</strong>
+                    <select onchange="updateSkill('120801', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
+                    <div id="120801_description" data-original-description="Deals Quantum DMG equal to <b><unbreak>#1[i]</unbreak></b> of Fu Xuan's Max HP to a single enemy.">Deals Quantum DMG equal to <b><unbreak>#1[i]</unbreak></b> of Fu Xuan's Max HP to a single enemy.</div>
+                    <div id="120801_stats"></div>
+                    <div id="120801_data" style="display:none;" data-level1="0.25" data-level2="0.3" data-level3="0.35" data-level4="0.4" data-level5="0.45" data-level6="0.5" data-level7="0.55" data-level8="0.6" data-level9="0.65" data-levelid="1, 2, 0, 8, 0, 1" ></div>
+                </li>
+            
+                <li>
+                    <strong>Known by Stars, Shown by Hearts (Skill):</strong>
+                    <select onchange="updateSkill('120802', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="120802_description" data-original-description="Activates Matrix of Prescience, via which other team members will <u>Distribute</u> <unbreak>#1[i]</unbreak> of the DMG they receive (before this DMG is mitigated by any Shields) to Fu Xuan for <unbreak>#3[i]</unbreak> turn(s).<br>While affected by Matrix of Prescience, all team members gain the Knowledge effect, which increases their respective Max HP by <b><unbreak>#4[f1]</unbreak></b> of Fu Xuan's Max HP, and increases CRIT Rate by <b><unbreak>#5[f1]</unbreak></b>.<br>When Fu Xuan is <u>knocked down</u>, the Matrix of Prescience will be dispelled.">Activates Matrix of Prescience, via which other team members will <u>Distribute</u> <unbreak>#1[i]</unbreak> of the DMG they receive (before this DMG is mitigated by any Shields) to Fu Xuan for <unbreak>#3[i]</unbreak> turn(s).<br>While affected by Matrix of Prescience, all team members gain the Knowledge effect, which increases their respective Max HP by <b><unbreak>#4[f1]</unbreak></b> of Fu Xuan's Max HP, and increases CRIT Rate by <b><unbreak>#5[f1]</unbreak></b>.<br>When Fu Xuan is <u>knocked down</u>, the Matrix of Prescience will be dispelled.</div>
+                    <div id="120802_stats"></div>
+                    <div id="120802_data" style="display:none;" data-level1="0.65, 0, 3, 0.03, 0.06" data-level2="0.65, 0, 3, 0.033, 0.066" data-level3="0.65, 0, 3, 0.036, 0.072" data-level4="0.65, 0, 3, 0.039, 0.078" data-level5="0.65, 0, 3, 0.042, 0.084" data-level6="0.65, 0, 3, 0.044999998, 0.09" data-level7="0.65, 0, 3, 0.048750002, 0.0975" data-level8="0.65, 0, 3, 0.052500002, 0.105" data-level9="0.65, 0, 3, 0.05625, 0.1125" data-level10="0.65, 0, 3, 0.06, 0.12" data-level11="0.65, 0, 3, 0.063, 0.126" data-level12="0.65, 0, 3, 0.066, 0.132" data-level13="0.65, 0, 3, 0.069, 0.138" data-level14="0.65, 0, 3, 0.072, 0.144" data-level15="0.65, 0, 3, 0.075, 0.15" data-levelid="1, 2, 0, 8, 0, 2" ></div>
+                </li>
+            
+                <li>
+                    <strong>Woes of Many Morphed to One (Ultimate):</strong>
+                    <select onchange="updateSkill('120803', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="120803_description" data-original-description="Deals Quantum DMG equal to <b><unbreak>#1[i]</unbreak></b> of Fu Xuan's Max HP to all enemies and obtains 1 trigger count for the HP Restore effect granted by Fu Xuan's Talent.">Deals Quantum DMG equal to <b><unbreak>#1[i]</unbreak></b> of Fu Xuan's Max HP to all enemies and obtains 1 trigger count for the HP Restore effect granted by Fu Xuan's Talent.</div>
+                    <div id="120803_stats"></div>
+                    <div id="120803_data" style="display:none;" data-level1="0.6" data-level2="0.64" data-level3="0.68" data-level4="0.72" data-level5="0.76" data-level6="0.8" data-level7="0.85" data-level8="0.9" data-level9="0.95" data-level10="1" data-level11="1.04" data-level12="1.08" data-level13="1.12" data-level14="1.16" data-level15="1.2" data-levelid="1, 2, 0, 8, 0, 3" ></div>
+                </li>
+            
+                <li>
+                    <strong>Bleak Breeds Bliss (Talent):</strong>
+                    <select onchange="updateSkill('120804', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="120804_description" data-original-description="While Fu Xuan is still active in battle, Misfortune Avoidance is applied to the entire team. With Misfortune Avoidance, allies take <b><unbreak>#1[f1]</unbreak></b> less DMG.<br>When Fu Xuan's current HP falls to <unbreak>#2[i]</unbreak> of her Max HP or less, HP Restore will be triggered for Fu Xuan, restoring her HP by <b><unbreak>#3[i]</unbreak></b> of the amount of HP she is currently missing. This effect cannot be triggered if she receives a killing blow. This effect has 1 trigger count by default and can hold up to a maximum of 2 trigger counts.">While Fu Xuan is still active in battle, Misfortune Avoidance is applied to the entire team. With Misfortune Avoidance, allies take <b><unbreak>#1[f1]</unbreak></b> less DMG.<br>When Fu Xuan's current HP falls to <unbreak>#2[i]</unbreak> of her Max HP or less, HP Restore will be triggered for Fu Xuan, restoring her HP by <b><unbreak>#3[i]</unbreak></b> of the amount of HP she is currently missing. This effect cannot be triggered if she receives a killing blow. This effect has 1 trigger count by default and can hold up to a maximum of 2 trigger counts.</div>
+                    <div id="120804_stats"></div>
+                    <div id="120804_data" style="display:none;" data-level1="0.1, 0.5, 0.8" data-level2="0.108, 0.5, 0.81" data-level3="0.116, 0.5, 0.82" data-level4="0.124, 0.5, 0.83" data-level5="0.132, 0.5, 0.84" data-level6="0.14, 0.5, 0.85" data-level7="0.15, 0.5, 0.8625" data-level8="0.16, 0.5, 0.875" data-level9="0.17, 0.5, 0.8875" data-level10="0.18, 0.5, 0.9" data-level11="0.188, 0.5, 0.91" data-level12="0.196, 0.5, 0.92" data-level13="0.204, 0.5, 0.93" data-level14="0.212, 0.5, 0.94" data-level15="0.22, 0.5, 0.95" data-levelid="1, 2, 0, 8, 0, 4" ></div>
+                </li>
+            
+                <li>
+                    <strong>Attack (Unknown):</strong>
+                    <select onchange="updateSkill('120806', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="120806_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div>
+                    <div id="120806_stats"></div>
+                    <div id="120806_data" style="display:none;" data-level1="" data-levelid="1, 2, 0, 8, 0, 6" ></div>
+                </li>
+            
+                <li>
+                    <strong>Of Fortune Comes Fate (Technique):</strong>
+                    <select onchange="updateSkill('120807', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="120807_description" data-original-description="After the Technique is used, all team members receive a Barrier, lasting for <unbreak>#1[i]</unbreak> seconds. This Barrier can block all enemy attacks, and the team will not enter battle when attacked. Entering battle while the Barrier is active will have Fu Xuan automatically activate Matrix of Prescience at the start of the battle, lasting for <unbreak>#2[i]</unbreak> turn(s).">After the Technique is used, all team members receive a Barrier, lasting for <unbreak>#1[i]</unbreak> seconds. This Barrier can block all enemy attacks, and the team will not enter battle when attacked. Entering battle while the Barrier is active will have Fu Xuan automatically activate Matrix of Prescience at the start of the battle, lasting for <unbreak>#2[i]</unbreak> turn(s).</div>
+                    <div id="120807_stats"></div>
+                    <div id="120807_data" style="display:none;" data-level1="20, 2" data-levelid="1, 2, 0, 8, 0, 7" ></div>
+                </li>
+            
+            </ul>
+            <h2>Ascension Traces</h2>
+            <ul>
+        
+                            <li>
+                            <strong>Taiyi, the Macrocosmic:</strong><br>When Matrix of Prescience is active, Fu Xuan will regenerate 20 extra Energy when she uses her Skill.
+                            </li>
+                        
+                            <li>
+                            <strong>Dunjia, the Metamystic:</strong><br>When Fu Xuan's Ultimate is used, heals all other allies by an amount equal to 5% of Fu Xuan's Max HP plus 133.
+                            </li>
+                        
+                            <li>
+                            <strong>Liuren, the Sexagenary:</strong><br>If a target enemy applies Crowd Control debuffs to allies while the Matrix of Prescience is active, all allies will resist all Crowd Control debuffs applied by the enemy target during the current action. This effect can only be triggered once. When Matrix of Prescience is activated again, the number of times this effect can be triggered will reset.
+                            </li>
+                        
+                            </ul>
+                            <h2>Minor Traces</h2>
+                            <ul>
+                        
+                                <li>
+                                <strong>CRIT Rate Boost:</strong> 2.7%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT Rate Boost:</strong> 2.7%
+                                </li>
+                            
+                                <li>
+                                <strong>Effect RES Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT Rate Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT Rate Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>Effect RES Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 8.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT Rate Boost:</strong> 5.3%
+                                </li>
+                            
+            </ul>
+            <h2>Eidolons</h2>
+            <ul>
+        
+                <li>
+                    <strong>Dominus Pacis:</strong><br>The Knowledge effect increases CRIT DMG by <unbreak>30%</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Optimus Felix:</strong><br>If any team member is struck by a killing blow while Matrix of Prescience is active, then all allies who were struck by a killing blow during this action will not be knocked down, and <unbreak>70%</unbreak> of their Max HP is immediately restored. This effect can trigger 1 time per battle.
+                </li>
+            
+                <li>
+                    <strong>Apex Nexus:</strong><br>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Fortuna Stellaris:</strong><br>When other allies under Matrix of Prescience are attacked, Fu Xuan regenerates <unbreak>5</unbreak> Energy.
+                </li>
+            
+                <li>
+                    <strong>Arbiter Primus:</strong><br>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Omnia Vita:</strong><br>Once Matrix of Prescience is activated, it will keep a tally of the total HP lost by all team members in the current battle. Fu Xuan's Ultimate DMG will increase by <unbreak>200%</unbreak> of this tally of HP loss.<br>This tally is also capped at <unbreak>120%</unbreak> of Fu Xuan's Max HP and the tally value will reset and re-accumulate after Fu Xuan's Ultimate is used.
+                </li>
+            
+            </ul>
+            </body>
+        </html>
+        

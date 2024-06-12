@@ -1,0 +1,78 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../dark.css">
+        <title>Earthly Escapade</title>
+        
+<script>
+function updateRefinements(weaponId, level) {
+    var refinementDataElement = document.getElementById(weaponId + '_data');
+    var stats = refinementDataElement.getAttribute('data-level' + level);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    
+    var refinementsElement = document.getElementById(weaponId + '_refinements');
+    var originalDescription = refinementsElement.getAttribute('data-original-description');
+    
+    statsArray.forEach((stat, index) => {
+        var placeholder_i = `#${index + 1}[i]`;
+        var placeholder_f1 = `#${index + 1}[f1]`;
+
+        var formattedStat = stat;
+
+        originalDescription = originalDescription.replace(placeholder_i, formattedStat);
+        originalDescription = originalDescription.replace(placeholder_f1, formattedStat);
+    });
+
+    refinementsElement.innerHTML = originalDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateRefinements"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+    </head>
+    <body onload="initializeSkills()">
+<h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+<div style="margin-top:20px; margin-bottom:10px">
+  <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+        
+        <h1>Earthly Escapade</h1>
+        <p><strong>ID:</strong> 23021<br>
+           <strong>Rarity:</strong> 5*<br>
+           <strong>Path:</strong> Harmony<br></p>
+
+        <h2>Stats</h2>
+        <ul>
+            <li><strong>Max HP:</strong> 1164.00</li>
+            <li><strong>Max ATK:</strong> 529.00</li>
+            <li><strong>Max DEF:</strong> 463.00</li>
+        </ul>
+
+        <h2>Ability</h2>
+        <ul>
+            <li>
+                <strong>Superimposition:</strong> 
+                <select onchange="updateRefinements('23021', this.value)">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <div id="23021_refinements" data-original-description="Increases the wearer's CRIT DMG by <b><unbreak>#1[i]</unbreak></b>. At the start of the battle, the wearer gains Mask, lasting for <unbreak>#6[i]</unbreak> turn(s). While the wearer has Mask, the wearer's allies have their CRIT Rate increased by <b><unbreak>#5[i]</unbreak></b> and their CRIT DMG increased by <b><unbreak>#2[i]</unbreak></b>. For every 1 Skill Point the wearer recovers (including Skill Points that exceed the limit), they gain 1 stack of Radiant Flame. And when the wearer has <unbreak>#4[i]</unbreak> stacks of Radiant Flame, all the stacks are removed, and they gain Mask, lasting for <unbreak>#3[i]</unbreak> turn(s).">
+                    Increases the wearer's CRIT DMG by <b><unbreak>#1[i]</unbreak></b>. At the start of the battle, the wearer gains Mask, lasting for <unbreak>#6[i]</unbreak> turn(s). While the wearer has Mask, the wearer's allies have their CRIT Rate increased by <b><unbreak>#5[i]</unbreak></b> and their CRIT DMG increased by <b><unbreak>#2[i]</unbreak></b>. For every 1 Skill Point the wearer recovers (including Skill Points that exceed the limit), they gain 1 stack of Radiant Flame. And when the wearer has <unbreak>#4[i]</unbreak> stacks of Radiant Flame, all the stacks are removed, and they gain Mask, lasting for <unbreak>#3[i]</unbreak> turn(s).
+                </div>
+                <div id="23021_data" style="display:none;" data-level1="0.32, 0.28, 4, 4, 0.1, 3" data-level2="0.39, 0.35, 4, 4, 0.11, 3" data-level3="0.46, 0.42, 4, 4, 0.12, 3" data-level4="0.53, 0.49, 4, 4, 0.13, 3" data-level5="0.6, 0.56, 4, 4, 0.14, 3" data-levelid="2, 3, 0, 2, 1" >
+                </div>
+            </li>
+        </ul>
+    </body>
+    </html>
+    

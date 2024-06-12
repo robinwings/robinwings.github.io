@@ -1,0 +1,209 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Bronya</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
+        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
+        var formattedStat = stat;
+        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
+        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()">
+    <h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+            <h1>Bronya</h1>
+            <p>Heir apparent to the Supreme Guardian of Belobog.<br>She possesses pride befitting of a princess, but also the determination and integrity of a soldier.<br><br><strong>ID:</strong> 1101<br>
+            <strong>Path:</strong> Harmony<br>
+            <strong>Element:</strong> Wind<br>
+            <strong>Rarity:</strong> 5*</br></p>
+            <h2>Stats</h2>
+            <ul>
+                <li><strong>Max HP:</strong> 1241.86</li>
+                <li><strong>Max ATK:</strong> 582.12</li>
+                <li><strong>Max DEF:</strong> 533.61</li>
+                <li><strong>Speed:</strong> 99</li>
+                <li><strong>Taunt:</strong> 100</li>
+                <li><strong>CRIT Rate:</strong> 0.05</li>
+                <li><strong>CRIT DMG:</strong> 0.5</li>
+            </ul>
+
+            <h2>Skills</h2>
+            <ul>
+        
+                <li>
+                    <strong>Windrider Bullet (Basic ATK):</strong>
+                    <select onchange="updateSkill('110101', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
+                    <div id="110101_description" data-original-description="Deals Wind DMG equal to <b><unbreak>#1[i]</unbreak></b> of Bronya's ATK to a single enemy.">Deals Wind DMG equal to <b><unbreak>#1[i]</unbreak></b> of Bronya's ATK to a single enemy.</div>
+                    <div id="110101_stats"></div>
+                    <div id="110101_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 1, 0, 1, 0, 1" ></div>
+                </li>
+            
+                <li>
+                    <strong>Combat Redeployment (Skill):</strong>
+                    <select onchange="updateSkill('110102', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="110102_description" data-original-description="Dispels a <u>debuff</u> from a single ally, allows them to immediately take action, and increases their DMG by <b><unbreak>#1[i]</unbreak></b> for <unbreak>#3[i]</unbreak> turn(s).<br>When this Skill is used on Bronya herself, she cannot immediately take action again.">Dispels a <u>debuff</u> from a single ally, allows them to immediately take action, and increases their DMG by <b><unbreak>#1[i]</unbreak></b> for <unbreak>#3[i]</unbreak> turn(s).<br>When this Skill is used on Bronya herself, she cannot immediately take action again.</div>
+                    <div id="110102_stats"></div>
+                    <div id="110102_data" style="display:none;" data-level1="0.33, 0, 1, 1" data-level2="0.363, 0, 1, 1" data-level3="0.396, 0, 1, 1" data-level4="0.429, 0, 1, 1" data-level5="0.462, 0, 1, 1" data-level6="0.495, 0, 1, 1" data-level7="0.53625, 0, 1, 1" data-level8="0.5775, 0, 1, 1" data-level9="0.61875, 0, 1, 1" data-level10="0.66, 0, 1, 1" data-level11="0.693, 0, 1, 1" data-level12="0.726, 0, 1, 1" data-level13="0.759, 0, 1, 1" data-level14="0.792, 0, 1, 1" data-level15="0.825, 0, 1, 1" data-levelid="1, 1, 0, 1, 0, 2" ></div>
+                </li>
+            
+                <li>
+                    <strong>The Belobog March (Ultimate):</strong>
+                    <select onchange="updateSkill('110103', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="110103_description" data-original-description="Increases the ATK of all allies by <b><unbreak>#1[i]</unbreak></b>, and increases their CRIT DMG equal to <b><unbreak>#2[f1]</unbreak></b> of Bronya's CRIT DMG plus <b><unbreak>#3[f1]</unbreak></b> for <unbreak>#4[i]</unbreak> turn(s).">Increases the ATK of all allies by <b><unbreak>#1[i]</unbreak></b>, and increases their CRIT DMG equal to <b><unbreak>#2[f1]</unbreak></b> of Bronya's CRIT DMG plus <b><unbreak>#3[f1]</unbreak></b> for <unbreak>#4[i]</unbreak> turn(s).</div>
+                    <div id="110103_stats"></div>
+                    <div id="110103_data" style="display:none;" data-level1="0.33, 0.12, 0.12, 2" data-level2="0.352, 0.124, 0.128, 2" data-level3="0.374, 0.128, 0.13599999, 2" data-level4="0.396, 0.132, 0.144, 2" data-level5="0.418, 0.13599999, 0.152, 2" data-level6="0.44, 0.14, 0.16, 2" data-level7="0.4675, 0.145, 0.17, 2" data-level8="0.495, 0.15, 0.18, 2" data-level9="0.5225, 0.155, 0.19, 2" data-level10="0.55, 0.16, 0.2, 2" data-level11="0.572, 0.164, 0.208, 2" data-level12="0.594, 0.168, 0.216, 2" data-level13="0.616, 0.172, 0.224, 2" data-level14="0.638, 0.176, 0.232, 2" data-level15="0.66, 0.18, 0.24, 2" data-levelid="1, 1, 0, 1, 0, 3" ></div>
+                </li>
+            
+                <li>
+                    <strong>Leading the Way (Talent):</strong>
+                    <select onchange="updateSkill('110104', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="110104_description" data-original-description="After using her Basic ATK, Bronya's next action will be <u>Advanced Forward</u> by <b><unbreak>#1[i]</unbreak></b>.">After using her Basic ATK, Bronya's next action will be <u>Advanced Forward</u> by <b><unbreak>#1[i]</unbreak></b>.</div>
+                    <div id="110104_stats"></div>
+                    <div id="110104_data" style="display:none;" data-level1="0.15" data-level2="0.165" data-level3="0.18" data-level4="0.195" data-level5="0.21" data-level6="0.225" data-level7="0.24375" data-level8="0.2625" data-level9="0.28125" data-level10="0.3" data-level11="0.315" data-level12="0.33" data-level13="0.345" data-level14="0.36" data-level15="0.375" data-levelid="1, 1, 0, 1, 0, 4" ></div>
+                </li>
+            
+                <li>
+                    <strong>Attack (Unknown):</strong>
+                    <select onchange="updateSkill('110106', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="110106_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div>
+                    <div id="110106_stats"></div>
+                    <div id="110106_data" style="display:none;" data-level1="" data-levelid="1, 1, 0, 1, 0, 6" ></div>
+                </li>
+            
+                <li>
+                    <strong>Banner of Command (Technique):</strong>
+                    <select onchange="updateSkill('110107', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="110107_description" data-original-description="After using Bronya's Technique, at the start of the next battle, all allies' ATK increases by <unbreak>#1[i]</unbreak> for <unbreak>#2[i]</unbreak> turn(s).">After using Bronya's Technique, at the start of the next battle, all allies' ATK increases by <unbreak>#1[i]</unbreak> for <unbreak>#2[i]</unbreak> turn(s).</div>
+                    <div id="110107_stats"></div>
+                    <div id="110107_data" style="display:none;" data-level1="0.15, 2" data-levelid="1, 1, 0, 1, 0, 7" ></div>
+                </li>
+            
+            </ul>
+            <h2>Ascension Traces</h2>
+            <ul>
+        
+                            <li>
+                            <strong>Command:</strong><br>The CRIT Rate for Basic ATK increases to 100%.
+                            </li>
+                        
+                            <li>
+                            <strong>Battlefield:</strong><br>At the start of the battle, all allies' DEF increases by 20% for 2 turn(s).
+                            </li>
+                        
+                            <li>
+                            <strong>Military Might:</strong><br>When Bronya is on the field, all allies deal 10% more DMG.
+                            </li>
+                        
+                            </ul>
+                            <h2>Minor Traces</h2>
+                            <ul>
+                        
+                                <li>
+                                <strong>DMG Boost: Wind:</strong> 3.2%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT DMG Boost:</strong> 5.3%
+                                </li>
+                            
+                                <li>
+                                <strong>DMG Boost: Wind:</strong> 3.2%
+                                </li>
+                            
+                                <li>
+                                <strong>Effect RES Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DMG Boost: Wind:</strong> 4.8%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT DMG Boost:</strong> 8.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DMG Boost: Wind:</strong> 4.8%
+                                </li>
+                            
+                                <li>
+                                <strong>Effect RES Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT DMG Boost:</strong> 10.7%
+                                </li>
+                            
+                                <li>
+                                <strong>DMG Boost: Wind:</strong> 6.4%
+                                </li>
+                            
+            </ul>
+            <h2>Eidolons</h2>
+            <ul>
+        
+                <li>
+                    <strong>Hone Your Strength:</strong><br>When using Skill, there is a <unbreak>50%</unbreak> fixed chance of recovering 1 Skill Point. This effect has a 1-turn cooldown.
+                </li>
+            
+                <li>
+                    <strong>Quick March:</strong><br>When using Skill, the target ally's SPD increases by <unbreak>30%</unbreak> after taking action, lasting for 1 turn.
+                </li>
+            
+                <li>
+                    <strong>Bombardment:</strong><br>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Take by Surprise:</strong><br>After an ally other than Bronya uses Basic ATK on an enemy with Wind Weakness, Bronya immediately launches a follow-up attack on the target, dealing Wind DMG equal to <unbreak>80%</unbreak> of Bronya's Basic ATK DMG. This effect can only be triggered 1 time per turn.
+                </li>
+            
+                <li>
+                    <strong>Unstoppable:</strong><br>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Piercing Rainbow:</strong><br>The duration of the DMG Boost effect placed by the Skill on the target ally increases by <unbreak>1</unbreak> turn(s).
+                </li>
+            
+            </ul>
+            </body>
+        </html>
+        

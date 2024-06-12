@@ -1,0 +1,78 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../dark.css">
+        <title>Nowhere to Run</title>
+        
+<script>
+function updateRefinements(weaponId, level) {
+    var refinementDataElement = document.getElementById(weaponId + '_data');
+    var stats = refinementDataElement.getAttribute('data-level' + level);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    
+    var refinementsElement = document.getElementById(weaponId + '_refinements');
+    var originalDescription = refinementsElement.getAttribute('data-original-description');
+    
+    statsArray.forEach((stat, index) => {
+        var placeholder_i = `#${index + 1}[i]`;
+        var placeholder_f1 = `#${index + 1}[f1]`;
+
+        var formattedStat = stat;
+
+        originalDescription = originalDescription.replace(placeholder_i, formattedStat);
+        originalDescription = originalDescription.replace(placeholder_f1, formattedStat);
+    });
+
+    refinementsElement.innerHTML = originalDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateRefinements"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+    </head>
+    <body onload="initializeSkills()">
+<h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+<div style="margin-top:20px; margin-bottom:10px">
+  <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+        
+        <h1>Nowhere to Run</h1>
+        <p><strong>ID:</strong> 21033<br>
+           <strong>Rarity:</strong> 4*<br>
+           <strong>Path:</strong> Destruction<br></p>
+
+        <h2>Stats</h2>
+        <ul>
+            <li><strong>Max HP:</strong> 953.00</li>
+            <li><strong>Max ATK:</strong> 529.00</li>
+            <li><strong>Max DEF:</strong> 265.00</li>
+        </ul>
+
+        <h2>Ability</h2>
+        <ul>
+            <li>
+                <strong>Superimposition:</strong> 
+                <select onchange="updateRefinements('21033', this.value)">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <div id="21033_refinements" data-original-description="Increases the wearer's ATK by <b><unbreak>#1[i]</unbreak></b>. Whenever the wearer defeats an enemy, they restore HP equal to <b><unbreak>#2[i]</unbreak></b> of their ATK.">
+                    Increases the wearer's ATK by <b><unbreak>#1[i]</unbreak></b>. Whenever the wearer defeats an enemy, they restore HP equal to <b><unbreak>#2[i]</unbreak></b> of their ATK.
+                </div>
+                <div id="21033_data" style="display:none;" data-level1="0.24, 0.12" data-level2="0.3, 0.15" data-level3="0.36, 0.18" data-level4="0.42, 0.21" data-level5="0.48, 0.24" data-levelid="2, 1, 0, 3, 3" >
+                </div>
+            </li>
+        </ul>
+    </body>
+    </html>
+    

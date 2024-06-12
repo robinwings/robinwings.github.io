@@ -1,0 +1,217 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Blade</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
+        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
+        var formattedStat = stat;
+        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
+        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()">
+    <h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+            <h1>Blade</h1>
+            <p>A member of the Stellaron Hunters, and a swordsman who abandoned his body to become a blade.<br>Pledges loyalty to "Destiny's Slave," and possesses a terrifying self-healing ability.<br><br><strong>ID:</strong> 1205<br>
+            <strong>Path:</strong> Destruction<br>
+            <strong>Element:</strong> Wind<br>
+            <strong>Rarity:</strong> 5*</br></p>
+            <h2>Stats</h2>
+            <ul>
+                <li><strong>Max HP:</strong> 1358.28</li>
+                <li><strong>Max ATK:</strong> 543.31</li>
+                <li><strong>Max DEF:</strong> 485.10</li>
+                <li><strong>Speed:</strong> 97</li>
+                <li><strong>Taunt:</strong> 125</li>
+                <li><strong>CRIT Rate:</strong> 0.05</li>
+                <li><strong>CRIT DMG:</strong> 0.5</li>
+            </ul>
+
+            <h2>Skills</h2>
+            <ul>
+        
+                <li>
+                    <strong>Shard Sword (Basic ATK):</strong>
+                    <select onchange="updateSkill('120501', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
+                    <div id="120501_description" data-original-description="Deals <b><unbreak>#1[i]</unbreak></b> of Blade's ATK as Wind DMG to a target enemy.">Deals <b><unbreak>#1[i]</unbreak></b> of Blade's ATK as Wind DMG to a target enemy.</div>
+                    <div id="120501_stats"></div>
+                    <div id="120501_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 2, 0, 5, 0, 1" ></div>
+                </li>
+            
+                <li>
+                    <strong>Hellscape (Skill):</strong>
+                    <select onchange="updateSkill('120502', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="120502_description" data-original-description="Consumes HP equal to <unbreak>#1[i]</unbreak> of Blade's Max HP to enter the Hellscape state.<br>When Hellscape is active, his Skill cannot be used, his DMG dealt increases by <b><unbreak>#4[i]</unbreak></b>, and his Basic ATK Shard Sword is enhanced to Forest of Swords for <unbreak>#2[i]</unbreak> turn(s).<br>If Blade's current HP is insufficient, his HP will be reduced to 1 when he uses his Skill.<br>This Skill does not regenerate Energy. Using this Skill does not end the current turn.">Consumes HP equal to <unbreak>#1[i]</unbreak> of Blade's Max HP to enter the Hellscape state.<br>When Hellscape is active, his Skill cannot be used, his DMG dealt increases by <b><unbreak>#4[i]</unbreak></b>, and his Basic ATK Shard Sword is enhanced to Forest of Swords for <unbreak>#2[i]</unbreak> turn(s).<br>If Blade's current HP is insufficient, his HP will be reduced to 1 when he uses his Skill.<br>This Skill does not regenerate Energy. Using this Skill does not end the current turn.</div>
+                    <div id="120502_stats"></div>
+                    <div id="120502_data" style="display:none;" data-level1="0.3, 3, 1, 0.12" data-level2="0.3, 3, 1, 0.148" data-level3="0.3, 3, 1, 0.176" data-level4="0.3, 3, 1, 0.204" data-level5="0.3, 3, 1, 0.232" data-level6="0.3, 3, 1, 0.26" data-level7="0.3, 3, 1, 0.295" data-level8="0.3, 3, 1, 0.33" data-level9="0.3, 3, 1, 0.365" data-level10="0.3, 3, 1, 0.4" data-level11="0.3, 3, 1, 0.428" data-level12="0.3, 3, 1, 0.456" data-level13="0.3, 3, 1, 0.484" data-level14="0.3, 3, 1, 0.512" data-level15="0.3, 3, 1, 0.54" data-levelid="1, 2, 0, 5, 0, 2" ></div>
+                </li>
+            
+                <li>
+                    <strong>Death Sentence (Ultimate):</strong>
+                    <select onchange="updateSkill('120503', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="120503_description" data-original-description="Sets Blade's current HP to <unbreak>50</unbreak> of his Max HP and deals Wind DMG to a single enemy equal to the sum of <b><unbreak>#1[i]</unbreak></b> of his ATK, <b><unbreak>#2[i]</unbreak></b> of his Max HP, and <b><unbreak>#5[i]</unbreak></b> of the tally of Blade's HP loss in the current battle. At the same time, deals Wind DMG to adjacent targets equal to the sum of <b><unbreak>#3[f1]</unbreak></b> of his ATK, <b><unbreak>#4[i]</unbreak></b> of his Max HP, and <b><unbreak>#6[i]</unbreak></b> of the tally of his HP loss in the current battle.<br>The tally of Blade's HP loss in the current battle is capped at <unbreak>#7[i]</unbreak> of his Max HP. This value will be reset and re-accumulated after his Ultimate has been used.">Sets Blade's current HP to <unbreak>50</unbreak> of his Max HP and deals Wind DMG to a single enemy equal to the sum of <b><unbreak>#1[i]</unbreak></b> of his ATK, <b><unbreak>#2[i]</unbreak></b> of his Max HP, and <b><unbreak>#5[i]</unbreak></b> of the tally of Blade's HP loss in the current battle. At the same time, deals Wind DMG to adjacent targets equal to the sum of <b><unbreak>#3[f1]</unbreak></b> of his ATK, <b><unbreak>#4[i]</unbreak></b> of his Max HP, and <b><unbreak>#6[i]</unbreak></b> of the tally of his HP loss in the current battle.<br>The tally of Blade's HP loss in the current battle is capped at <unbreak>#7[i]</unbreak> of his Max HP. This value will be reset and re-accumulated after his Ultimate has been used.</div>
+                    <div id="120503_stats"></div>
+                    <div id="120503_data" style="display:none;" data-level1="0.24, 0.6, 0.096, 0.24, 0.6, 0.24, 0.9" data-level2="0.256, 0.64, 0.1024, 0.256, 0.64, 0.256, 0.9" data-level3="0.272, 0.68, 0.1088, 0.272, 0.68, 0.272, 0.9" data-level4="0.288, 0.72, 0.1152, 0.288, 0.72, 0.288, 0.9" data-level5="0.304, 0.76, 0.1216, 0.304, 0.76, 0.304, 0.9" data-level6="0.32, 0.8, 0.128, 0.32, 0.8, 0.32, 0.9" data-level7="0.34, 0.85, 0.13599999, 0.34, 0.85, 0.34, 0.9" data-level8="0.36, 0.9, 0.144, 0.36, 0.9, 0.36, 0.9" data-level9="0.38, 0.95, 0.152, 0.38, 0.95, 0.38, 0.9" data-level10="0.4, 1, 0.16, 0.4, 1, 0.4, 0.9" data-level11="0.416, 1.04, 0.1664, 0.416, 1.04, 0.416, 0.9" data-level12="0.432, 1.08, 0.1728, 0.432, 1.08, 0.432, 0.9" data-level13="0.448, 1.12, 0.1792, 0.448, 1.12, 0.448, 0.9" data-level14="0.464, 1.16, 0.1856, 0.464, 1.16, 0.464, 0.9" data-level15="0.48, 1.2, 0.192, 0.48, 1.2, 0.48, 0.9" data-levelid="1, 2, 0, 5, 0, 3" ></div>
+                </li>
+            
+                <li>
+                    <strong>Shuhu's Gift (Talent):</strong>
+                    <select onchange="updateSkill('120504', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="120504_description" data-original-description="When Blade sustains DMG or consumes his HP, he gains 1 stack of Charge, stacking up to 5 times. A max of 1 Charge stack can be gained every time he is attacked.<br>When Charge stack reaches maximum, immediately launches a <u>follow-up attack</u> on all enemies, dealing Wind DMG equal to <b><unbreak>#2[i]</unbreak></b> of Blade's ATK plus <b><unbreak>#4[i]</unbreak></b> of his Max HP. At the same time, restores Blade's HP by <unbreak>#3[i]</unbreak> of his Max HP. After the follow-up attack, all Charges are consumed.">When Blade sustains DMG or consumes his HP, he gains 1 stack of Charge, stacking up to 5 times. A max of 1 Charge stack can be gained every time he is attacked.<br>When Charge stack reaches maximum, immediately launches a <u>follow-up attack</u> on all enemies, dealing Wind DMG equal to <b><unbreak>#2[i]</unbreak></b> of Blade's ATK plus <b><unbreak>#4[i]</unbreak></b> of his Max HP. At the same time, restores Blade's HP by <unbreak>#3[i]</unbreak> of his Max HP. After the follow-up attack, all Charges are consumed.</div>
+                    <div id="120504_stats"></div>
+                    <div id="120504_data" style="display:none;" data-level1="3, 0.22, 0.25, 0.55" data-level2="3, 0.242, 0.25, 0.605" data-level3="3, 0.264, 0.25, 0.66" data-level4="3, 0.286, 0.25, 0.715" data-level5="3, 0.308, 0.25, 0.77" data-level6="3, 0.33, 0.25, 0.825" data-level7="3, 0.3575, 0.25, 0.89375" data-level8="3, 0.385, 0.25, 0.9625" data-level9="3, 0.4125, 0.25, 1.03125" data-level10="3, 0.44, 0.25, 1.1" data-level11="3, 0.462, 0.25, 1.155" data-level12="3, 0.484, 0.25, 1.21" data-level13="3, 0.506, 0.25, 1.265" data-level14="3, 0.528, 0.25, 1.32" data-level15="3, 0.55, 0.25, 1.375" data-levelid="1, 2, 0, 5, 0, 4" ></div>
+                </li>
+            
+                <li>
+                    <strong>Attack (Unknown):</strong>
+                    <select onchange="updateSkill('120506', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="120506_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div>
+                    <div id="120506_stats"></div>
+                    <div id="120506_data" style="display:none;" data-level1="" data-levelid="1, 2, 0, 5, 0, 6" ></div>
+                </li>
+            
+                <li>
+                    <strong>Karma Wind (Technique):</strong>
+                    <select onchange="updateSkill('120507', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="120507_description" data-original-description="Immediately attacks the enemy. After entering combat, consumes <unbreak>#2[i]</unbreak> of Blade's Max HP while dealing Wind DMG equal to <unbreak>#1[i]</unbreak> of his Max HP to all enemies.<br>If Blade's current HP is insufficient, his HP will be reduced to 1 when this Technique is used.">Immediately attacks the enemy. After entering combat, consumes <unbreak>#2[i]</unbreak> of Blade's Max HP while dealing Wind DMG equal to <unbreak>#1[i]</unbreak> of his Max HP to all enemies.<br>If Blade's current HP is insufficient, his HP will be reduced to 1 when this Technique is used.</div>
+                    <div id="120507_stats"></div>
+                    <div id="120507_data" style="display:none;" data-level1="0.4, 0.2" data-levelid="1, 2, 0, 5, 0, 7" ></div>
+                </li>
+            
+                <li>
+                    <strong>Forest of Swords (Basic ATK):</strong>
+                    <select onchange="updateSkill('120508', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
+                    <div id="120508_description" data-original-description="Consumes HP equal to <unbreak>#1[i]</unbreak> of Blade's Max HP and deals Wind DMG equal to the sum of <b><unbreak>#2[i]</unbreak></b> of his ATK and <b><unbreak>#4[i]</unbreak></b> of his Max HP to a single enemy. In addition, deals Wind DMG equal to the sum of <b><unbreak>#3[i]</unbreak></b> of Blade's ATK and <b><unbreak>#5[i]</unbreak></b> of his Max HP to adjacent targets.<br>If Blade's current HP is insufficient, his HP will be reduced to 1 when using Forest of Swords.<br>Forest of Swords cannot regenerate Skill Points.">Consumes HP equal to <unbreak>#1[i]</unbreak> of Blade's Max HP and deals Wind DMG equal to the sum of <b><unbreak>#2[i]</unbreak></b> of his ATK and <b><unbreak>#4[i]</unbreak></b> of his Max HP to a single enemy. In addition, deals Wind DMG equal to the sum of <b><unbreak>#3[i]</unbreak></b> of Blade's ATK and <b><unbreak>#5[i]</unbreak></b> of his Max HP to adjacent targets.<br>If Blade's current HP is insufficient, his HP will be reduced to 1 when using Forest of Swords.<br>Forest of Swords cannot regenerate Skill Points.</div>
+                    <div id="120508_stats"></div>
+                    <div id="120508_data" style="display:none;" data-level1="0.1, 0.2, 0.08, 0.5, 0.2" data-level2="0.1, 0.24, 0.096, 0.6, 0.24" data-level3="0.1, 0.28, 0.112, 0.7, 0.28" data-level4="0.1, 0.32, 0.128, 0.8, 0.32" data-level5="0.1, 0.36, 0.144, 0.9, 0.36" data-level6="0.1, 0.4, 0.16, 1, 0.4" data-level7="0.1, 0.44, 0.176, 1.1, 0.44" data-level8="0.1, 0.48, 0.192, 1.2, 0.48" data-level9="0.1, 0.52, 0.208, 1.3, 0.52" data-levelid="1, 2, 0, 5, 0, 8" ></div>
+                </li>
+            
+            </ul>
+            <h2>Ascension Traces</h2>
+            <ul>
+        
+                            <li>
+                            <strong>Vita Infinita:</strong><br>When Blade's current HP is at 50% of Max HP or lower, Incoming Healing increases by 20%.
+                            </li>
+                        
+                            <li>
+                            <strong>Neverending Deaths:</strong><br>If Blade hits a Weakness Broken enemy after using Forest of Swords, he will restore HP equal to 5% of his Max HP plus 100.
+                            </li>
+                        
+                            <li>
+                            <strong>Cyclone of Destruction:</strong><br>DMG dealt by Talent's follow-up attack increases by 20%.
+                            </li>
+                        
+                            </ul>
+                            <h2>Minor Traces</h2>
+                            <ul>
+                        
+                                <li>
+                                <strong>HP Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT Rate Boost:</strong> 2.7%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>Effect RES Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT Rate Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>Effect RES Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT Rate Boost:</strong> 5.3%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 8.0%
+                                </li>
+                            
+            </ul>
+            <h2>Eidolons</h2>
+            <ul>
+        
+                <li>
+                    <strong>Blade Cuts the Deepest in Hell:</strong><br>Blade's Ultimate deals additionally increased DMG to a single enemy target, with the increased amount equal to <unbreak>150%</unbreak> of the tally of Blade's HP loss in the current battle.<br>The tally of Blade's HP loss in the current battle is capped at <unbreak>90%</unbreak> of his Max HP. The tally value will be reset and re-accumulated after his Ultimate has been used.
+                </li>
+            
+                <li>
+                    <strong>Ten Thousand Sorrows From One Broken Dream:</strong><br>When Blade is in the Hellscape state, his CRIT Rate increases by <unbreak>15%</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Hardened Blade Bleeds Coldest Shade:</strong><br>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Rejected by Death, Infected With Life:</strong><br>When Blade's current HP drops to <unbreak>50%</unbreak> or lower of his Max HP, increases his Max HP by <unbreak>20%</unbreak>. Stacks up to <unbreak>2</unbreak> time(s).
+                </li>
+            
+                <li>
+                    <strong>Death By Ten Lords' Gaze:</strong><br>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Reborn Into an Empty Husk:</strong><br>The maximum number of Charge stacks is reduced to 4. The DMG of the follow-up attack triggered by Blade's Talent additionally increases by <unbreak>50%</unbreak> of his Max HP.
+                </li>
+            
+            </ul>
+            </body>
+        </html>
+        

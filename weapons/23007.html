@@ -1,0 +1,78 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../dark.css">
+        <title>Incessant Rain</title>
+        
+<script>
+function updateRefinements(weaponId, level) {
+    var refinementDataElement = document.getElementById(weaponId + '_data');
+    var stats = refinementDataElement.getAttribute('data-level' + level);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    
+    var refinementsElement = document.getElementById(weaponId + '_refinements');
+    var originalDescription = refinementsElement.getAttribute('data-original-description');
+    
+    statsArray.forEach((stat, index) => {
+        var placeholder_i = `#${index + 1}[i]`;
+        var placeholder_f1 = `#${index + 1}[f1]`;
+
+        var formattedStat = stat;
+
+        originalDescription = originalDescription.replace(placeholder_i, formattedStat);
+        originalDescription = originalDescription.replace(placeholder_f1, formattedStat);
+    });
+
+    refinementsElement.innerHTML = originalDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateRefinements"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+    </head>
+    <body onload="initializeSkills()">
+<h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+<div style="margin-top:20px; margin-bottom:10px">
+  <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+        
+        <h1>Incessant Rain</h1>
+        <p><strong>ID:</strong> 23007<br>
+           <strong>Rarity:</strong> 5*<br>
+           <strong>Path:</strong> Nihility<br></p>
+
+        <h2>Stats</h2>
+        <ul>
+            <li><strong>Max HP:</strong> 1058.00</li>
+            <li><strong>Max ATK:</strong> 582.00</li>
+            <li><strong>Max DEF:</strong> 463.00</li>
+        </ul>
+
+        <h2>Ability</h2>
+        <ul>
+            <li>
+                <strong>Superimposition:</strong> 
+                <select onchange="updateRefinements('23007', this.value)">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <div id="23007_refinements" data-original-description="Increases the wearer's Effect Hit Rate by <b><unbreak>#1[i]</unbreak></b>. When the wearer deals DMG to an enemy that currently has <unbreak>#4[i]</unbreak> or more debuffs, increases the wearer's CRIT Rate by <b><unbreak>#5[i]</unbreak></b>. After the wearer uses their Basic ATK, Skill, or Ultimate, there is a <unbreak>#2[i]</unbreak> base chance to implant Aether Code on a random hit target that does not yet have it. Targets with Aether Code receive <b><unbreak>#3[i]</unbreak></b> increased DMG for 1 turn.">
+                    Increases the wearer's Effect Hit Rate by <b><unbreak>#1[i]</unbreak></b>. When the wearer deals DMG to an enemy that currently has <unbreak>#4[i]</unbreak> or more debuffs, increases the wearer's CRIT Rate by <b><unbreak>#5[i]</unbreak></b>. After the wearer uses their Basic ATK, Skill, or Ultimate, there is a <unbreak>#2[i]</unbreak> base chance to implant Aether Code on a random hit target that does not yet have it. Targets with Aether Code receive <b><unbreak>#3[i]</unbreak></b> increased DMG for 1 turn.
+                </div>
+                <div id="23007_data" style="display:none;" data-level1="0.24, 1, 0.12, 3, 0.12" data-level2="0.28, 1, 0.14, 3, 0.14" data-level3="0.32, 1, 0.16, 3, 0.16" data-level4="0.36, 1, 0.18, 3, 0.18" data-level5="0.4, 1, 0.2, 3, 0.2" data-levelid="2, 3, 0, 0, 7" >
+                </div>
+            </li>
+        </ul>
+    </body>
+    </html>
+    

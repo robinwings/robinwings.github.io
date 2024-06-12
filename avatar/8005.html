@@ -1,0 +1,209 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Harmony Caelus</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
+        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
+        var formattedStat = stat;
+        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
+        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()">
+    <h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+            <h1>Harmony Caelus</h1>
+            <p>A girl/boy who boarded the Astral Express.<br>They chose to travel with the Astral Express to eliminate the dangers posed by the Stellaron.<br><br><strong>ID:</strong> 8005<br>
+            <strong>Path:</strong> Harmony<br>
+            <strong>Element:</strong> Imaginary<br>
+            <strong>Rarity:</strong> 5*</br></p>
+            <h2>Stats</h2>
+            <ul>
+                <li><strong>Max HP:</strong> 1086.62</li>
+                <li><strong>Max ATK:</strong> 446.29</li>
+                <li><strong>Max DEF:</strong> 679.14</li>
+                <li><strong>Speed:</strong> 105</li>
+                <li><strong>Taunt:</strong> 100</li>
+                <li><strong>CRIT Rate:</strong> 0.05</li>
+                <li><strong>CRIT DMG:</strong> 0.5</li>
+            </ul>
+
+            <h2>Skills</h2>
+            <ul>
+        
+                <li>
+                    <strong>Swing Dance Etiquette (Basic ATK):</strong>
+                    <select onchange="updateSkill('800501', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
+                    <div id="800501_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of the Trailblazer's ATK to a single target enemy.">Deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of the Trailblazer's ATK to a single target enemy.</div>
+                    <div id="800501_stats"></div>
+                    <div id="800501_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="8, 0, 0, 5, 0, 1" ></div>
+                </li>
+            
+                <li>
+                    <strong>Halftime to Make It Rain (Skill):</strong>
+                    <select onchange="updateSkill('800502', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="800502_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of the Trailblazer's ATK to a single target enemy and additionally deals DMG for 4 times, with each time dealing Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of the Trailblazer's ATK to a random enemy.">Deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of the Trailblazer's ATK to a single target enemy and additionally deals DMG for 4 times, with each time dealing Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of the Trailblazer's ATK to a random enemy.</div>
+                    <div id="800502_stats"></div>
+                    <div id="800502_data" style="display:none;" data-level1="0.25, 2" data-level2="0.275, 2" data-level3="0.3, 2" data-level4="0.325, 2" data-level5="0.35, 2" data-level6="0.375, 2" data-level7="0.40625, 2" data-level8="0.4375, 2" data-level9="0.46875, 2" data-level10="0.5, 2" data-level11="0.525, 2" data-level12="0.55, 2" data-level13="0.575, 2" data-level14="0.6, 2" data-level15="0.625, 2" data-levelid="8, 0, 0, 5, 0, 2" ></div>
+                </li>
+            
+                <li>
+                    <strong>All-Out Footlight Parade (Ultimate):</strong>
+                    <select onchange="updateSkill('800503', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="800503_description" data-original-description="Grants all allies the Backup Dancer effect, lasting for <unbreak>#1[i]</unbreak> turn(s). This duration reduces by 1 at the start of Trailblazer's every turn. Allies with the Backup Dancer effect have their Break Effect increased by <b><unbreak>#3[i]</unbreak></b>. And when they attack enemy targets that are in the <u>Weakness Broken state</u>, the Toughness Reduction of the attack will be converted into 1 instance of <u>Super Break DMG</u>.">Grants all allies the Backup Dancer effect, lasting for <unbreak>#1[i]</unbreak> turn(s). This duration reduces by 1 at the start of Trailblazer's every turn. Allies with the Backup Dancer effect have their Break Effect increased by <b><unbreak>#3[i]</unbreak></b>. And when they attack enemy targets that are in the <u>Weakness Broken state</u>, the Toughness Reduction of the attack will be converted into 1 instance of <u>Super Break DMG</u>.</div>
+                    <div id="800503_stats"></div>
+                    <div id="800503_data" style="display:none;" data-level1="3, 1, 0.15" data-level2="3, 1, 0.165" data-level3="3, 1, 0.18" data-level4="3, 1, 0.195" data-level5="3, 1, 0.21" data-level6="3, 1, 0.225" data-level7="3, 1, 0.24375" data-level8="3, 1, 0.2625" data-level9="3, 1, 0.28125" data-level10="3, 1, 0.3" data-level11="3, 1, 0.315" data-level12="3, 1, 0.33" data-level13="3, 1, 0.345" data-level14="3, 1, 0.36" data-level15="3, 1, 0.375" data-levelid="8, 0, 0, 5, 0, 3" ></div>
+                </li>
+            
+                <li>
+                    <strong>Full-on Aerial Dance (Talent):</strong>
+                    <select onchange="updateSkill('800504', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="800504_description" data-original-description="The Trailblazer immediately regenerates <b><unbreak>#1[f1]</unbreak></b> Energy when an enemy target's Weakness is Broken.">The Trailblazer immediately regenerates <b><unbreak>#1[f1]</unbreak></b> Energy when an enemy target's Weakness is Broken.</div>
+                    <div id="800504_stats"></div>
+                    <div id="800504_data" style="display:none;" data-level1="5" data-level2="5.5" data-level3="6" data-level4="6.5" data-level5="7" data-level6="7.5" data-level7="8.125" data-level8="8.75" data-level9="9.375" data-level10="10" data-level11="10.5" data-level12="11" data-level13="11.5" data-level14="12" data-level15="12.5" data-levelid="8, 0, 0, 5, 0, 4" ></div>
+                </li>
+            
+                <li>
+                    <strong>Attack (Unknown):</strong>
+                    <select onchange="updateSkill('800506', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="800506_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div>
+                    <div id="800506_stats"></div>
+                    <div id="800506_data" style="display:none;" data-level1="" data-levelid="8, 0, 0, 5, 0, 6" ></div>
+                </li>
+            
+                <li>
+                    <strong>Now! I'm the Band! (Technique):</strong>
+                    <select onchange="updateSkill('800507', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="800507_description" data-original-description="After the Technique is used, at the start of the next battle, all allies' Break Effect increases by <unbreak>#1[i]</unbreak>, lasting for <unbreak>#2[i]</unbreak> turn(s).">After the Technique is used, at the start of the next battle, all allies' Break Effect increases by <unbreak>#1[i]</unbreak>, lasting for <unbreak>#2[i]</unbreak> turn(s).</div>
+                    <div id="800507_stats"></div>
+                    <div id="800507_data" style="display:none;" data-level1="0.3, 2" data-levelid="8, 0, 0, 5, 0, 7" ></div>
+                </li>
+            
+            </ul>
+            <h2>Ascension Traces</h2>
+            <ul>
+        
+                            <li>
+                            <strong>Dance With the One:</strong><br>When the number of enemy targets on the field is 5 (or more)/4/3/2/1, the Super Break DMG triggered by the Backup Dancer effect increases by 20%/30%/40%/50%/60%.
+                            </li>
+                        
+                            <li>
+                            <strong>Shuffle Along:</strong><br>When using Skill, additionally increases the Toughness Reduction of the first instance of DMG by 100%.
+                            </li>
+                        
+                            <li>
+                            <strong>Hat of the Theater:</strong><br>Additionally delays the enemy target's action by 30% when allies Break enemy Weaknesses.
+                            </li>
+                        
+                            </ul>
+                            <h2>Minor Traces</h2>
+                            <ul>
+                        
+                                <li>
+                                <strong>Break Boost:</strong> 5.3%
+                                </li>
+                            
+                                <li>
+                                <strong>DMG Boost: Imaginary:</strong> 3.2%
+                                </li>
+                            
+                                <li>
+                                <strong>Break Boost:</strong> 5.3%
+                                </li>
+                            
+                                <li>
+                                <strong>Effect RES Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>Break Boost:</strong> 8.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DMG Boost: Imaginary:</strong> 4.8%
+                                </li>
+                            
+                                <li>
+                                <strong>Break Boost:</strong> 8.0%
+                                </li>
+                            
+                                <li>
+                                <strong>Effect RES Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DMG Boost: Imaginary:</strong> 6.4%
+                                </li>
+                            
+                                <li>
+                                <strong>Break Boost:</strong> 10.7%
+                                </li>
+                            
+            </ul>
+            <h2>Eidolons</h2>
+            <ul>
+        
+                <li>
+                    <strong>Best Seat in the House:</strong><br>After using Skill for the first time, immediately recovers <unbreak>1</unbreak> Skill Point(s).
+                </li>
+            
+                <li>
+                    <strong>Jailbreaking Rainbowwalk:</strong><br>When the battle starts, the Trailblazer's Energy Regeneration Rate increases by <unbreak>25%</unbreak>, lasting for <unbreak>3</unbreak> turn(s).
+                </li>
+            
+                <li>
+                    <strong>Sanatorium for Rest Notes:</strong><br>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Dove in Tophat:</strong><br>While the Trailblazer is on the field, increases the Break Effect of all teammates (excluding the Trailblazer), by an amount equal to <unbreak>15%</unbreak> of the Trailblazer's Break Effect.
+                </li>
+            
+                <li>
+                    <strong>Poem Favors Rhythms of Old:</strong><br>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Tomorrow, Rest in Spotlight:</strong><br>The number of additional DMG applications by the Skill increases by <unbreak>2</unbreak>.
+                </li>
+            
+            </ul>
+            </body>
+        </html>
+        

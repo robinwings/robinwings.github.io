@@ -1,0 +1,209 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Yukong</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
+        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
+        var formattedStat = stat;
+        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
+        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()">
+    <h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+            <h1>Yukong</h1>
+            <p>Head of the Sky-Faring Commission on the Xianzhou Luofu. Yukong was a seasoned pilot and a deadshot.<br>Since heading up the commission, she's been buried under mountains of paperwork.<br><br><strong>ID:</strong> 1207<br>
+            <strong>Path:</strong> Harmony<br>
+            <strong>Element:</strong> Imaginary<br>
+            <strong>Rarity:</strong> 4*</br></p>
+            <h2>Stats</h2>
+            <ul>
+                <li><strong>Max HP:</strong> 917.28</li>
+                <li><strong>Max ATK:</strong> 599.76</li>
+                <li><strong>Max DEF:</strong> 374.85</li>
+                <li><strong>Speed:</strong> 107</li>
+                <li><strong>Taunt:</strong> 100</li>
+                <li><strong>CRIT Rate:</strong> 0.05</li>
+                <li><strong>CRIT DMG:</strong> 0.5</li>
+            </ul>
+
+            <h2>Skills</h2>
+            <ul>
+        
+                <li>
+                    <strong>Arrowslinger (Basic ATK):</strong>
+                    <select onchange="updateSkill('120701', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
+                    <div id="120701_description" data-original-description="Deals <b><unbreak>#1[i]</unbreak></b> of Yukong's ATK as Imaginary DMG to a target enemy.">Deals <b><unbreak>#1[i]</unbreak></b> of Yukong's ATK as Imaginary DMG to a target enemy.</div>
+                    <div id="120701_stats"></div>
+                    <div id="120701_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 2, 0, 7, 0, 1" ></div>
+                </li>
+            
+                <li>
+                    <strong>Emboldening Salvo (Skill):</strong>
+                    <select onchange="updateSkill('120702', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="120702_description" data-original-description="Obtains <unbreak>#1[i]</unbreak> stack(s) of "Roaring Bowstrings" (to a maximum of 2 stacks). When "Roaring Bowstrings" is active, the ATK of all allies increases by <b><unbreak>#2[i]</unbreak></b>, and every time an ally's turn (including Yukong's) ends, Yukong loses 1 stack of "Roaring Bowstrings."<br>When it's the turn where Yukong gains "Roaring Bowstrings" by using Skill, "Roaring Bowstrings" will not be removed.">Obtains <unbreak>#1[i]</unbreak> stack(s) of "Roaring Bowstrings" (to a maximum of 2 stacks). When "Roaring Bowstrings" is active, the ATK of all allies increases by <b><unbreak>#2[i]</unbreak></b>, and every time an ally's turn (including Yukong's) ends, Yukong loses 1 stack of "Roaring Bowstrings."<br>When it's the turn where Yukong gains "Roaring Bowstrings" by using Skill, "Roaring Bowstrings" will not be removed.</div>
+                    <div id="120702_stats"></div>
+                    <div id="120702_data" style="display:none;" data-level1="2, 0.4" data-level2="2, 0.44" data-level3="2, 0.48" data-level4="2, 0.52" data-level5="2, 0.56" data-level6="2, 0.6" data-level7="2, 0.65" data-level8="2, 0.7" data-level9="2, 0.75" data-level10="2, 0.8" data-level11="2, 0.84" data-level12="2, 0.88" data-level13="2, 0.92" data-level14="2, 0.96" data-level15="2, 1" data-levelid="1, 2, 0, 7, 0, 2" ></div>
+                </li>
+            
+                <li>
+                    <strong>Diving Kestrel (Ultimate):</strong>
+                    <select onchange="updateSkill('120703', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="120703_description" data-original-description="If "Roaring Bowstrings" is active on Yukong when her Ultimate is used, additionally increases all allies' CRIT Rate by <b><unbreak>#2[f1]</unbreak></b> and CRIT DMG by <b><unbreak>#3[i]</unbreak></b>. At the same time, deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of Yukong's ATK to a single enemy.">If "Roaring Bowstrings" is active on Yukong when her Ultimate is used, additionally increases all allies' CRIT Rate by <b><unbreak>#2[f1]</unbreak></b> and CRIT DMG by <b><unbreak>#3[i]</unbreak></b>. At the same time, deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of Yukong's ATK to a single enemy.</div>
+                    <div id="120703_stats"></div>
+                    <div id="120703_data" style="display:none;" data-level1="2.28, 0.21, 0.39" data-level2="2.432, 0.217, 0.416" data-level3="2.584, 0.224, 0.442" data-level4="2.736, 0.231, 0.468" data-level5="2.888, 0.238, 0.494" data-level6="3.04, 0.245, 0.52" data-level7="3.23, 0.25375, 0.5525" data-level8="3.42, 0.2625, 0.585" data-level9="3.61, 0.27125, 0.6175" data-level10="3.8, 0.28, 0.65" data-level11="3.952, 0.287, 0.676" data-level12="4.104, 0.294, 0.702" data-level13="4.256, 0.301, 0.728" data-level14="4.408, 0.308, 0.754" data-level15="4.56, 0.315, 0.78" data-levelid="1, 2, 0, 7, 0, 3" ></div>
+                </li>
+            
+                <li>
+                    <strong>Seven Layers, One Arrow (Talent):</strong>
+                    <select onchange="updateSkill('120704', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="120704_description" data-original-description="Basic ATK additionally deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of Yukong's ATK, and increases the Toughness Reduction of this attack by <unbreak>#2[i]</unbreak>. This effect can be triggered again after <unbreak>#3[i]</unbreak> turn(s).">Basic ATK additionally deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of Yukong's ATK, and increases the Toughness Reduction of this attack by <unbreak>#2[i]</unbreak>. This effect can be triggered again after <unbreak>#3[i]</unbreak> turn(s).</div>
+                    <div id="120704_stats"></div>
+                    <div id="120704_data" style="display:none;" data-level1="0.4, 1, 1" data-level2="0.44, 1, 1" data-level3="0.48, 1, 1" data-level4="0.52, 1, 1" data-level5="0.56, 1, 1" data-level6="0.6, 1, 1" data-level7="0.65, 1, 1" data-level8="0.7, 1, 1" data-level9="0.75, 1, 1" data-level10="0.8, 1, 1" data-level11="0.84, 1, 1" data-level12="0.88, 1, 1" data-level13="0.92, 1, 1" data-level14="0.96, 1, 1" data-level15="1, 1, 1" data-levelid="1, 2, 0, 7, 0, 4" ></div>
+                </li>
+            
+                <li>
+                    <strong>Attack (Unknown):</strong>
+                    <select onchange="updateSkill('120706', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="120706_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div>
+                    <div id="120706_stats"></div>
+                    <div id="120706_data" style="display:none;" data-level1="" data-levelid="1, 2, 0, 7, 0, 6" ></div>
+                </li>
+            
+                <li>
+                    <strong>Windchaser (Technique):</strong>
+                    <select onchange="updateSkill('120707', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="120707_description" data-original-description="After using her Technique, Yukong enters Sprint mode for <unbreak>#1[i]</unbreak> seconds. In Sprint mode, her Movement SPD increases by <unbreak>#2[i]</unbreak>, and Yukong gains <unbreak>#3[i]</unbreak> stack(s) of "Roaring Bowstrings" when she enters battle by attacking enemies.">After using her Technique, Yukong enters Sprint mode for <unbreak>#1[i]</unbreak> seconds. In Sprint mode, her Movement SPD increases by <unbreak>#2[i]</unbreak>, and Yukong gains <unbreak>#3[i]</unbreak> stack(s) of "Roaring Bowstrings" when she enters battle by attacking enemies.</div>
+                    <div id="120707_stats"></div>
+                    <div id="120707_data" style="display:none;" data-level1="20, 0.35, 2" data-levelid="1, 2, 0, 7, 0, 7" ></div>
+                </li>
+            
+            </ul>
+            <h2>Ascension Traces</h2>
+            <ul>
+        
+                            <li>
+                            <strong>Archerion:</strong><br>Yukong can resist 1 debuff application for 1 time. This effect can be triggered again after 2 turn(s).
+                            </li>
+                        
+                            <li>
+                            <strong>Bowmaster:</strong><br>When Yukong is on the field, Imaginary DMG dealt by all allies increases by 12%.
+                            </li>
+                        
+                            <li>
+                            <strong>Majestas:</strong><br>When "Roaring Bowstrings" is active, Yukong regenerates 2 additional Energy every time an ally takes action.
+                            </li>
+                        
+                            </ul>
+                            <h2>Minor Traces</h2>
+                            <ul>
+                        
+                                <li>
+                                <strong>DMG Boost: Imaginary:</strong> 3.2%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DMG Boost: Imaginary:</strong> 3.2%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DMG Boost: Imaginary:</strong> 4.8%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DMG Boost: Imaginary:</strong> 4.8%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 8.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DMG Boost: Imaginary:</strong> 6.4%
+                                </li>
+                            
+            </ul>
+            <h2>Eidolons</h2>
+            <ul>
+        
+                <li>
+                    <strong>Aerial Marshal:</strong><br>At the start of battle, increases the SPD of all allies by <unbreak>10%</unbreak> for <unbreak>2</unbreak> turn(s).
+                </li>
+            
+                <li>
+                    <strong>Skyward Command:</strong><br>When any ally's current energy is equal to its energy limit, Yukong regenerates an additional <unbreak>5</unbreak> energy. This effect can only be triggered once for each ally. The trigger count is reset after Yukong uses her Ultimate.
+                </li>
+            
+                <li>
+                    <strong>Torrential Fusillade:</strong><br>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Zephyrean Echoes:</strong><br>When "Roaring Bowstrings" is active, Yukong deals <unbreak>30%</unbreak> more DMG to enemies.
+                </li>
+            
+                <li>
+                    <strong>August Deadshot:</strong><br>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Bowstring Thunderclap:</strong><br>When Yukong uses her Ultimate, she immediately gains <unbreak>1</unbreak> stack(s) of "Roaring Bowstrings."
+                </li>
+            
+            </ul>
+            </body>
+        </html>
+        

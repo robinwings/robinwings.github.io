@@ -1,0 +1,209 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Misha</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
+        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
+        var formattedStat = stat;
+        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
+        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()">
+    <h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+            <h1>Misha</h1>
+            <p>A well-behaved young man serving as a hotel bellboy in Penacony.<br>Misha has a great longing for the Nameless and dreams of one day embarking on a journey of his own.<br><br><strong>ID:</strong> 1312<br>
+            <strong>Path:</strong> Destruction<br>
+            <strong>Element:</strong> Ice<br>
+            <strong>Rarity:</strong> 4*</br></p>
+            <h2>Stats</h2>
+            <ul>
+                <li><strong>Max HP:</strong> 1270.08</li>
+                <li><strong>Max ATK:</strong> 599.76</li>
+                <li><strong>Max DEF:</strong> 396.90</li>
+                <li><strong>Speed:</strong> 96</li>
+                <li><strong>Taunt:</strong> 125</li>
+                <li><strong>CRIT Rate:</strong> 0.05</li>
+                <li><strong>CRIT DMG:</strong> 0.5</li>
+            </ul>
+
+            <h2>Skills</h2>
+            <ul>
+        
+                <li>
+                    <strong>E—Excuse Me, Please! (Basic ATK):</strong>
+                    <select onchange="updateSkill('131201', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
+                    <div id="131201_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Misha's ATK to a single target enemy.">Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Misha's ATK to a single target enemy.</div>
+                    <div id="131201_stats"></div>
+                    <div id="131201_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 3, 1, 2, 0, 1" ></div>
+                </li>
+            
+                <li>
+                    <strong>R—Room Service! (Skill):</strong>
+                    <select onchange="updateSkill('131202', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="131202_description" data-original-description="Increases the Hits Per Action for Misha's next Ultimate by <unbreak>#3[i]</unbreak> hit(s). Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Misha's ATK to a single target enemy, and Ice DMG equal to <b><unbreak>#2[i]</unbreak></b> of Misha's ATK to adjacent targets.">Increases the Hits Per Action for Misha's next Ultimate by <unbreak>#3[i]</unbreak> hit(s). Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Misha's ATK to a single target enemy, and Ice DMG equal to <b><unbreak>#2[i]</unbreak></b> of Misha's ATK to adjacent targets.</div>
+                    <div id="131202_stats"></div>
+                    <div id="131202_data" style="display:none;" data-level1="1, 0.4, 1" data-level2="1.1, 0.44, 1" data-level3="1.2, 0.48, 1" data-level4="1.3, 0.52, 1" data-level5="1.4, 0.56, 1" data-level6="1.5, 0.6, 1" data-level7="1.625, 0.65, 1" data-level8="1.75, 0.7, 1" data-level9="1.875, 0.75, 1" data-level10="2, 0.8, 1" data-level11="2.1, 0.84, 1" data-level12="2.2, 0.88, 1" data-level13="2.3, 0.92, 1" data-level14="2.4, 0.96, 1" data-level15="2.5, 1, 1" data-levelid="1, 3, 1, 2, 0, 2" ></div>
+                </li>
+            
+                <li>
+                    <strong>G—Gonna Be Late! (Ultimate):</strong>
+                    <select onchange="updateSkill('131203', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="131203_description" data-original-description="Has <unbreak>#1[i]</unbreak> Hits Per Action by default. First, uses 1 hit to deal Ice DMG equal to <b><unbreak>#2[i]</unbreak></b> of Misha's ATK to a single target enemy. Then, the rest of the hits each deals Ice DMG equal to <b><unbreak>#2[i]</unbreak></b> of Misha's ATK to a single random enemy. Just before each hit lands, there is a <b><unbreak>#3[f1]</unbreak></b> <u>base chance</u> to Freeze the target, lasting for 1 turn.<br>While Frozen, enemy targets cannot take any actions, and at the start of their turn, they receive <u>Additional Ice DMG</u> equal to <b><unbreak>#4[i]</unbreak></b> of Misha's ATK.<br>This Ultimate can possess up to <unbreak>#5[i]</unbreak> Hits Per Action. After the Ultimate is used, its Hits Per Action will be reset to the default level.">Has <unbreak>#1[i]</unbreak> Hits Per Action by default. First, uses 1 hit to deal Ice DMG equal to <b><unbreak>#2[i]</unbreak></b> of Misha's ATK to a single target enemy. Then, the rest of the hits each deals Ice DMG equal to <b><unbreak>#2[i]</unbreak></b> of Misha's ATK to a single random enemy. Just before each hit lands, there is a <b><unbreak>#3[f1]</unbreak></b> <u>base chance</u> to Freeze the target, lasting for 1 turn.<br>While Frozen, enemy targets cannot take any actions, and at the start of their turn, they receive <u>Additional Ice DMG</u> equal to <b><unbreak>#4[i]</unbreak></b> of Misha's ATK.<br>This Ultimate can possess up to <unbreak>#5[i]</unbreak> Hits Per Action. After the Ultimate is used, its Hits Per Action will be reset to the default level.</div>
+                    <div id="131203_stats"></div>
+                    <div id="131203_data" style="display:none;" data-level1="3, 0.36, 0.12, 0.18, 10" data-level2="3, 0.384, 0.128, 0.192, 10" data-level3="3, 0.408, 0.13599999, 0.204, 10" data-level4="3, 0.432, 0.144, 0.216, 10" data-level5="3, 0.456, 0.152, 0.228, 10" data-level6="3, 0.48, 0.16, 0.24, 10" data-level7="3, 0.51, 0.17, 0.255, 10" data-level8="3, 0.54, 0.18, 0.27, 10" data-level9="3, 0.57, 0.19, 0.285, 10" data-level10="3, 0.6, 0.2, 0.3, 10" data-level11="3, 0.624, 0.208, 0.312, 10" data-level12="3, 0.648, 0.216, 0.324, 10" data-level13="3, 0.672, 0.224, 0.336, 10" data-level14="3, 0.696, 0.232, 0.348, 10" data-level15="3, 0.72, 0.24, 0.36, 10" data-levelid="1, 3, 1, 2, 0, 3" ></div>
+                </li>
+            
+                <li>
+                    <strong>Horological Escapement (Talent):</strong>
+                    <select onchange="updateSkill('131204', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="131204_description" data-original-description="For every 1 Skill Point allies consume, Misha's next Ultimate delivers <unbreak>#2[i]</unbreak> more Hit(s) Per Action, and Misha regenerates <b><unbreak>#1[f1]</unbreak></b> Energy.">For every 1 Skill Point allies consume, Misha's next Ultimate delivers <unbreak>#2[i]</unbreak> more Hit(s) Per Action, and Misha regenerates <b><unbreak>#1[f1]</unbreak></b> Energy.</div>
+                    <div id="131204_stats"></div>
+                    <div id="131204_data" style="display:none;" data-level1="1, 1" data-level2="1.1, 1" data-level3="1.2, 1" data-level4="1.3, 1" data-level5="1.4, 1" data-level6="1.5, 1" data-level7="1.625, 1" data-level8="1.75, 1" data-level9="1.875, 1" data-level10="2, 1" data-level11="2.1, 1" data-level12="2.2, 1" data-level13="2.3, 1" data-level14="2.4, 1" data-level15="2.5, 1" data-levelid="1, 3, 1, 2, 0, 4" ></div>
+                </li>
+            
+                <li>
+                    <strong>Attack (Unknown):</strong>
+                    <select onchange="updateSkill('131206', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="131206_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div>
+                    <div id="131206_stats"></div>
+                    <div id="131206_data" style="display:none;" data-level1="" data-levelid="1, 3, 1, 2, 0, 6" ></div>
+                </li>
+            
+                <li>
+                    <strong>Wait, You Are So Beautiful! (Technique):</strong>
+                    <select onchange="updateSkill('131207', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="131207_description" data-original-description="After using the Technique, creates a special dimension that lasts for <unbreak>#1[i]</unbreak> seconds. Enemies caught in the special dimension are inflicted with Dream Prison and stop all their actions. Upon entering battle against enemies afflicted with Dream Prison, increases the Hits Per Action for Misha's next Ultimate by <unbreak>#2[i]</unbreak> hit(s). Only 1 dimension created by allies can exist at the same time.">After using the Technique, creates a special dimension that lasts for <unbreak>#1[i]</unbreak> seconds. Enemies caught in the special dimension are inflicted with Dream Prison and stop all their actions. Upon entering battle against enemies afflicted with Dream Prison, increases the Hits Per Action for Misha's next Ultimate by <unbreak>#2[i]</unbreak> hit(s). Only 1 dimension created by allies can exist at the same time.</div>
+                    <div id="131207_stats"></div>
+                    <div id="131207_data" style="display:none;" data-level1="15, 2" data-levelid="1, 3, 1, 2, 0, 7" ></div>
+                </li>
+            
+            </ul>
+            <h2>Ascension Traces</h2>
+            <ul>
+        
+                            <li>
+                            <strong>Release:</strong><br>Before the Ultimate's first hit lands, increases the base chance of Freezing the target by 80%.
+                            </li>
+                        
+                            <li>
+                            <strong>Interlock:</strong><br>When using the Ultimate, increases the Effect Hit Rate by 60%, lasting until the end of the current Ultimate's action.
+                            </li>
+                        
+                            <li>
+                            <strong>Transmission:</strong><br>When dealing DMG to Frozen enemies, increases CRIT DMG by 30%.
+                            </li>
+                        
+                            </ul>
+                            <h2>Minor Traces</h2>
+                            <ul>
+                        
+                                <li>
+                                <strong>DMG Boost: Ice:</strong> 3.2%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 5.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DMG Boost: Ice:</strong> 3.2%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT Rate Boost:</strong> 2.7%
+                                </li>
+                            
+                                <li>
+                                <strong>DMG Boost: Ice:</strong> 4.8%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 7.5%
+                                </li>
+                            
+                                <li>
+                                <strong>DMG Boost: Ice:</strong> 4.8%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT Rate Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 10.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DMG Boost: Ice:</strong> 6.4%
+                                </li>
+                            
+            </ul>
+            <h2>Eidolons</h2>
+            <ul>
+        
+                <li>
+                    <strong>Whimsicality of Fancy:</strong><br>When using the Ultimate, for every enemy on the field, additionally increases the Hits Per Action for the current Ultimate by <unbreak>1</unbreak> hit(s), up to a maximum increase of <unbreak>5</unbreak> hit(s).
+                </li>
+            
+                <li>
+                    <strong>Yearning of Youth:</strong><br>Before each hit of the Ultimate lands, there is a <unbreak>24%</unbreak> base chance of reducing the target's DEF by <unbreak>16%</unbreak> for <unbreak>3</unbreak> turn(s).
+                </li>
+            
+                <li>
+                    <strong>Vestige of Happiness:</strong><br>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Visage of Kinship:</strong><br>Increases the DMG multiplier for each hit of the Ultimate by <unbreak>6%</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Genesis of First Love:</strong><br>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Estrangement of Dream:</strong><br>When using the Ultimate, increases own DMG by <unbreak>30%</unbreak>, lasting until the end of the turn. In addition, the next time the Skill is used, recovers <unbreak>1</unbreak> Skill Point(s) for the team.
+                </li>
+            
+            </ul>
+            </body>
+        </html>
+        

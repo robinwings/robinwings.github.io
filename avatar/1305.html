@@ -1,0 +1,209 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Dr. Ratio</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
+        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
+        var formattedStat = stat;
+        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
+        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()">
+    <h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+            <h1>Dr. Ratio</h1>
+            <p>Member of the Intelligentsia Guild.<br>Eccentric temperament, sharp-tongued but with an elegant demeanor.<br>The face under the strange alabaster head sculpture is apparently unexpectedly handsome.<br><br><strong>ID:</strong> 1305<br>
+            <strong>Path:</strong> The Hunt<br>
+            <strong>Element:</strong> Imaginary<br>
+            <strong>Rarity:</strong> 5*</br></p>
+            <h2>Stats</h2>
+            <ul>
+                <li><strong>Max HP:</strong> 1047.82</li>
+                <li><strong>Max ATK:</strong> 776.16</li>
+                <li><strong>Max DEF:</strong> 460.85</li>
+                <li><strong>Speed:</strong> 103</li>
+                <li><strong>Taunt:</strong> 75</li>
+                <li><strong>CRIT Rate:</strong> 0.05</li>
+                <li><strong>CRIT DMG:</strong> 0.5</li>
+            </ul>
+
+            <h2>Skills</h2>
+            <ul>
+        
+                <li>
+                    <strong>Mind is Might (Basic ATK):</strong>
+                    <select onchange="updateSkill('130501', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
+                    <div id="130501_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of Dr. Ratio's ATK to a single target enemy.">Deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of Dr. Ratio's ATK to a single target enemy.</div>
+                    <div id="130501_stats"></div>
+                    <div id="130501_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 3, 0, 5, 0, 1" ></div>
+                </li>
+            
+                <li>
+                    <strong>Intellectual Midwifery (Skill):</strong>
+                    <select onchange="updateSkill('130502', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="130502_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of Dr. Ratio's ATK to a single target enemy.">Deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of Dr. Ratio's ATK to a single target enemy.</div>
+                    <div id="130502_stats"></div>
+                    <div id="130502_data" style="display:none;" data-level1="0.75" data-level2="0.825" data-level3="0.9" data-level4="0.975" data-level5="1.05" data-level6="1.125" data-level7="1.21875" data-level8="1.3125" data-level9="1.40625" data-level10="1.5" data-level11="1.575" data-level12="1.65" data-level13="1.725" data-level14="1.8" data-level15="1.875" data-levelid="1, 3, 0, 5, 0, 2" ></div>
+                </li>
+            
+                <li>
+                    <strong>Syllogistic Paradox (Ultimate):</strong>
+                    <select onchange="updateSkill('130503', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="130503_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of Dr. Ratio's ATK to a single target enemy and applies Wiseman's Folly. When Dr. Ratio's allies attack a target afflicted with Wiseman's Folly, Dr. Ratio launches his Talent's <u>follow-up attack</u> for 1 time against this target.<br>Wiseman's Folly can be triggered for up to <unbreak>#2[i]</unbreak> times and only affects the most recent target of Dr. Ratio's Ultimate. This trigger count resets after Dr. Ratio's Ultimate is used.">Deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of Dr. Ratio's ATK to a single target enemy and applies Wiseman's Folly. When Dr. Ratio's allies attack a target afflicted with Wiseman's Folly, Dr. Ratio launches his Talent's <u>follow-up attack</u> for 1 time against this target.<br>Wiseman's Folly can be triggered for up to <unbreak>#2[i]</unbreak> times and only affects the most recent target of Dr. Ratio's Ultimate. This trigger count resets after Dr. Ratio's Ultimate is used.</div>
+                    <div id="130503_stats"></div>
+                    <div id="130503_data" style="display:none;" data-level1="1.44, 2" data-level2="1.536, 2" data-level3="1.632, 2" data-level4="1.728, 2" data-level5="1.824, 2" data-level6="1.92, 2" data-level7="2.04, 2" data-level8="2.16, 2" data-level9="2.28, 2" data-level10="2.4, 2" data-level11="2.496, 2" data-level12="2.592, 2" data-level13="2.688, 2" data-level14="2.784, 2" data-level15="2.88, 2" data-levelid="1, 3, 0, 5, 0, 3" ></div>
+                </li>
+            
+                <li>
+                    <strong>Cogito, Ergo Sum (Talent):</strong>
+                    <select onchange="updateSkill('130504', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="130504_description" data-original-description="When using his Skill, Dr. Ratio has a <unbreak>#2[i]</unbreak> <u>fixed chance</u> of launching a <u>follow-up attack</u> against his target for 1 time, dealing Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of Dr. Ratio's ATK. For each debuff the target enemy has, the <u>fixed chance</u> of launching <u>follow-up attack</u> increases by <unbreak>#3[i]</unbreak>. If the target enemy is defeated before the <u>follow-up attack</u> triggers, the <u>follow-up attack</u> will be directed at a single random enemy instead.">When using his Skill, Dr. Ratio has a <unbreak>#2[i]</unbreak> <u>fixed chance</u> of launching a <u>follow-up attack</u> against his target for 1 time, dealing Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of Dr. Ratio's ATK. For each debuff the target enemy has, the <u>fixed chance</u> of launching <u>follow-up attack</u> increases by <unbreak>#3[i]</unbreak>. If the target enemy is defeated before the <u>follow-up attack</u> triggers, the <u>follow-up attack</u> will be directed at a single random enemy instead.</div>
+                    <div id="130504_stats"></div>
+                    <div id="130504_data" style="display:none;" data-level1="1.35, 0.4, 0.2" data-level2="1.485, 0.4, 0.2" data-level3="1.62, 0.4, 0.2" data-level4="1.755, 0.4, 0.2" data-level5="1.89, 0.4, 0.2" data-level6="2.025, 0.4, 0.2" data-level7="2.19375, 0.4, 0.2" data-level8="2.3625, 0.4, 0.2" data-level9="2.53125, 0.4, 0.2" data-level10="2.7, 0.4, 0.2" data-level11="2.835, 0.4, 0.2" data-level12="2.97, 0.4, 0.2" data-level13="3.105, 0.4, 0.2" data-level14="3.24, 0.4, 0.2" data-level15="3.375, 0.4, 0.2" data-levelid="1, 3, 0, 5, 0, 4" ></div>
+                </li>
+            
+                <li>
+                    <strong>Attack (Unknown):</strong>
+                    <select onchange="updateSkill('130506', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="130506_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div>
+                    <div id="130506_stats"></div>
+                    <div id="130506_data" style="display:none;" data-level1="" data-levelid="1, 3, 0, 5, 0, 6" ></div>
+                </li>
+            
+                <li>
+                    <strong>Mold of Idolatry (Technique):</strong>
+                    <select onchange="updateSkill('130507', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="130507_description" data-original-description="After using Technique, creates a special dimension that Taunts nearby enemies, lasting for <unbreak>#1[i]</unbreak> second(s). After entering battle with enemies in this special dimension, there is a <unbreak>#2[i]</unbreak> <u>base chance</u> to reduce each single enemy target's SPD by <unbreak>#3[i]</unbreak> for <unbreak>#4[i]</unbreak> turn(s). Only 1 dimension created by allies can exist at the same time.">After using Technique, creates a special dimension that Taunts nearby enemies, lasting for <unbreak>#1[i]</unbreak> second(s). After entering battle with enemies in this special dimension, there is a <unbreak>#2[i]</unbreak> <u>base chance</u> to reduce each single enemy target's SPD by <unbreak>#3[i]</unbreak> for <unbreak>#4[i]</unbreak> turn(s). Only 1 dimension created by allies can exist at the same time.</div>
+                    <div id="130507_stats"></div>
+                    <div id="130507_data" style="display:none;" data-level1="10, 1, 0.15, 2" data-levelid="1, 3, 0, 5, 0, 7" ></div>
+                </li>
+            
+            </ul>
+            <h2>Ascension Traces</h2>
+            <ul>
+        
+                            <li>
+                            <strong>Summation:</strong><br>When Dr. Ratio uses his Skill, for every debuff on the target, his CRIT Rate increases by 1[f1]% and CRIT DMG by 5%. This effect can stack up to 6 time(s).
+                            </li>
+                        
+                            <li>
+                            <strong>Inference:</strong><br>When Skill is used to attack an enemy target, there is a 100% base chance to reduce the attacked target's Effect RES by 10% for 2 turn(s).
+                            </li>
+                        
+                            <li>
+                            <strong>Deduction:</strong><br>When dealing DMG to a target that has 3 or more debuff(s), for each debuff the target has, the DMG dealt by Dr. Ratio to this target increases by 10%, up to a maximum increase of 50%.
+                            </li>
+                        
+                            </ul>
+                            <h2>Minor Traces</h2>
+                            <ul>
+                        
+                                <li>
+                                <strong>ATK Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT Rate Boost:</strong> 2.7%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 5.0%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT Rate Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 7.5%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT Rate Boost:</strong> 5.3%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 8.0%
+                                </li>
+                            
+            </ul>
+            <h2>Eidolons</h2>
+            <ul>
+        
+                <li>
+                    <strong>Pride Comes Before a Fall:</strong><br>The maximum stackable count for the Trace "Summation" increases by <unbreak>4</unbreak>. When a battle begins, immediately obtains <unbreak>4</unbreak> stacks of Summation. Needs to unlock Summation first.
+                </li>
+            
+                <li>
+                    <strong>The Divine Is in the Details:</strong><br>When his Talent's follow-up attack hits a target, for every debuff the target has, deals Imaginary Additional DMG equal to <unbreak>20%</unbreak> of Dr. Ratio's ATK. This effect can be triggered for a maximum of <unbreak>4</unbreak> time(s) during each follow-up attack.
+                </li>
+            
+                <li>
+                    <strong>Know Thyself:</strong><br>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Ignorance Is Blight:</strong><br>When triggering the Talent, additionally regenerates <unbreak>15</unbreak> Energy for Dr. Ratio.
+                </li>
+            
+                <li>
+                    <strong>Sic Itur Ad Astra:</strong><br>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Vincit Omnia Veritas:</strong><br>Additionally increases the triggerable count for Wiseman's Folly by <unbreak>1</unbreak>. The DMG dealt by the Talent's follow-up attack increases by <unbreak>50%</unbreak>.
+                </li>
+            
+            </ul>
+            </body>
+        </html>
+        

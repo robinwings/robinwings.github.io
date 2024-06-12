@@ -1,0 +1,209 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Kafka</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
+        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
+        var formattedStat = stat;
+        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
+        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()">
+    <h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+            <h1>Kafka</h1>
+            <p>A member of the Stellaron Hunters. A dashing, collected, and professional beauty.<br>Used the enchantment of Spirit Whisper to set up The Trailblazer to absorb the Stellaron.<br>Her hobby is shopping for and organizing her collection of coats.<br><br><strong>ID:</strong> 1005<br>
+            <strong>Path:</strong> Nihility<br>
+            <strong>Element:</strong> Lightning<br>
+            <strong>Rarity:</strong> 5*</br></p>
+            <h2>Stats</h2>
+            <ul>
+                <li><strong>Max HP:</strong> 1086.62</li>
+                <li><strong>Max ATK:</strong> 679.14</li>
+                <li><strong>Max DEF:</strong> 485.10</li>
+                <li><strong>Speed:</strong> 100</li>
+                <li><strong>Taunt:</strong> 100</li>
+                <li><strong>CRIT Rate:</strong> 0.05</li>
+                <li><strong>CRIT DMG:</strong> 0.5</li>
+            </ul>
+
+            <h2>Skills</h2>
+            <ul>
+        
+                <li>
+                    <strong>Midnight Tumult (Basic ATK):</strong>
+                    <select onchange="updateSkill('100501', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
+                    <div id="100501_description" data-original-description="Deals Lightning DMG equal to <b><unbreak>#1[i]</unbreak></b> of Kafka's ATK to a single enemy.">Deals Lightning DMG equal to <b><unbreak>#1[i]</unbreak></b> of Kafka's ATK to a single enemy.</div>
+                    <div id="100501_stats"></div>
+                    <div id="100501_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 0, 0, 5, 0, 1" ></div>
+                </li>
+            
+                <li>
+                    <strong>Caressing Moonlight (Skill):</strong>
+                    <select onchange="updateSkill('100502', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="100502_description" data-original-description="Deals Lightning DMG equal to <b><unbreak>#1[i]</unbreak></b> of Kafka's ATK to a target enemy and Lightning DMG equal to <b><unbreak>#3[i]</unbreak></b> of Kafka's ATK to enemies adjacent to it.<br>If the target enemy is currently receiving DoT, all DoTs currently placed on that enemy immediately produce DMG equal to <b><unbreak>#2[i]</unbreak></b> of their original DMG.">Deals Lightning DMG equal to <b><unbreak>#1[i]</unbreak></b> of Kafka's ATK to a target enemy and Lightning DMG equal to <b><unbreak>#3[i]</unbreak></b> of Kafka's ATK to enemies adjacent to it.<br>If the target enemy is currently receiving DoT, all DoTs currently placed on that enemy immediately produce DMG equal to <b><unbreak>#2[i]</unbreak></b> of their original DMG.</div>
+                    <div id="100502_stats"></div>
+                    <div id="100502_data" style="display:none;" data-level1="0.8, 0.6, 0.3" data-level2="0.88, 0.615, 0.33" data-level3="0.96, 0.63, 0.36" data-level4="1.04, 0.645, 0.39" data-level5="1.12, 0.66, 0.42" data-level6="1.2, 0.675, 0.45" data-level7="1.3, 0.69375, 0.4875" data-level8="1.4, 0.7125, 0.525" data-level9="1.5, 0.73125, 0.5625" data-level10="1.6, 0.75, 0.6" data-level11="1.68, 0.765, 0.63" data-level12="1.76, 0.78, 0.66" data-level13="1.84, 0.795, 0.69" data-level14="1.92, 0.81, 0.72" data-level15="2, 0.825, 0.75" data-levelid="1, 0, 0, 5, 0, 2" ></div>
+                </li>
+            
+                <li>
+                    <strong>Twilight Trill (Ultimate):</strong>
+                    <select onchange="updateSkill('100503', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="100503_description" data-original-description="Deals Lightning DMG equal to <b><unbreak>#1[i]</unbreak></b> of Kafka's ATK to all enemies, with a <unbreak>#2[i]</unbreak> <u>base chance</u> for enemies hit to become Shocked and immediately take DMG from their current Shock state, equal to <b><unbreak>#5[i]</unbreak></b> of its original DMG. Shock lasts for <unbreak>#3[i]</unbreak> turn(s).<br>While Shocked, enemies receive Lightning DoT equal to <b><unbreak>#4[i]</unbreak></b> of Kafka's ATK at the beginning of each turn.">Deals Lightning DMG equal to <b><unbreak>#1[i]</unbreak></b> of Kafka's ATK to all enemies, with a <unbreak>#2[i]</unbreak> <u>base chance</u> for enemies hit to become Shocked and immediately take DMG from their current Shock state, equal to <b><unbreak>#5[i]</unbreak></b> of its original DMG. Shock lasts for <unbreak>#3[i]</unbreak> turn(s).<br>While Shocked, enemies receive Lightning DoT equal to <b><unbreak>#4[i]</unbreak></b> of Kafka's ATK at the beginning of each turn.</div>
+                    <div id="100503_stats"></div>
+                    <div id="100503_data" style="display:none;" data-level1="0.48, 1, 2, 1.16, 0.8" data-level2="0.512, 1, 2, 1.26875, 0.82" data-level3="0.544, 1, 2, 1.3775, 0.84" data-level4="0.576, 1, 2, 1.48625, 0.86" data-level5="0.608, 1, 2, 1.595, 0.88" data-level6="0.64, 1, 2, 1.758125, 0.9" data-level7="0.68, 1, 2, 1.975625, 0.925" data-level8="0.72, 1, 2, 2.2475, 0.95" data-level9="0.76, 1, 2, 2.57375, 0.975" data-level10="0.8, 1, 2, 2.9, 1" data-level11="0.832, 1, 2, 3.041375, 1.02" data-level12="0.864, 1, 2, 3.18275, 1.04" data-level13="0.896, 1, 2, 3.324125, 1.06" data-level14="0.928, 1, 2, 3.4655, 1.08" data-level15="0.96, 1, 2, 3.606875, 1.1" data-levelid="1, 0, 0, 5, 0, 3" ></div>
+                </li>
+            
+                <li>
+                    <strong>Gentle but Cruel (Talent):</strong>
+                    <select onchange="updateSkill('100504', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="100504_description" data-original-description="After an ally of Kafka's uses Basic ATK on an enemy target, Kafka immediately launches 1 <u>follow-up attack</u> and deals Lightning DMG equal to <b><unbreak>#1[i]</unbreak></b> of her ATK to that target, with a <unbreak>#2[i]</unbreak> <u>base chance</u> to inflict Shock equivalent to that applied by her Ultimate to the attacked enemy target, lasting for <unbreak>#3[i]</unbreak> turns. This effect can only be triggered 1 time per turn.">After an ally of Kafka's uses Basic ATK on an enemy target, Kafka immediately launches 1 <u>follow-up attack</u> and deals Lightning DMG equal to <b><unbreak>#1[i]</unbreak></b> of her ATK to that target, with a <unbreak>#2[i]</unbreak> <u>base chance</u> to inflict Shock equivalent to that applied by her Ultimate to the attacked enemy target, lasting for <unbreak>#3[i]</unbreak> turns. This effect can only be triggered 1 time per turn.</div>
+                    <div id="100504_stats"></div>
+                    <div id="100504_data" style="display:none;" data-level1="0.42, 1, 2" data-level2="0.518, 1, 2" data-level3="0.616, 1, 2" data-level4="0.714, 1, 2" data-level5="0.812, 1, 2" data-level6="0.91, 1, 2" data-level7="1.0325, 1, 2" data-level8="1.155, 1, 2" data-level9="1.2775, 1, 2" data-level10="1.4, 1, 2" data-level11="1.498, 1, 2" data-level12="1.596, 1, 2" data-level13="1.694, 1, 2" data-level14="1.792, 1, 2" data-level15="1.89, 1, 2" data-levelid="1, 0, 0, 5, 0, 4" ></div>
+                </li>
+            
+                <li>
+                    <strong>Attack (Unknown):</strong>
+                    <select onchange="updateSkill('100506', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="100506_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div>
+                    <div id="100506_stats"></div>
+                    <div id="100506_data" style="display:none;" data-level1="" data-levelid="1, 0, 0, 5, 0, 6" ></div>
+                </li>
+            
+                <li>
+                    <strong>Mercy Is Not Forgiveness (Technique):</strong>
+                    <select onchange="updateSkill('100507', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="100507_description" data-original-description="Immediately attacks all enemies within a set range. After entering battle, deals Lightning DMG equal to <unbreak>#3[i]</unbreak> of Kafka's ATK to all enemies, with a <unbreak>#1[i]</unbreak> <u>base chance</u> to inflict Shock equivalent to that applied by her Ultimate on every enemy target for <unbreak>#2[i]</unbreak> turn(s).">Immediately attacks all enemies within a set range. After entering battle, deals Lightning DMG equal to <unbreak>#3[i]</unbreak> of Kafka's ATK to all enemies, with a <unbreak>#1[i]</unbreak> <u>base chance</u> to inflict Shock equivalent to that applied by her Ultimate on every enemy target for <unbreak>#2[i]</unbreak> turn(s).</div>
+                    <div id="100507_stats"></div>
+                    <div id="100507_data" style="display:none;" data-level1="1, 2, 0.5" data-levelid="1, 0, 0, 5, 0, 7" ></div>
+                </li>
+            
+            </ul>
+            <h2>Ascension Traces</h2>
+            <ul>
+        
+                            <li>
+                            <strong>Torture:</strong><br>When the Ultimate is used, enemy targets will now receive DMG immediately from all currently applied DoT sources instead of just receiving DMG immediately from the currently applied Shock state.
+                            </li>
+                        
+                            <li>
+                            <strong>Plunder:</strong><br>If an enemy is defeated while Shocked, Kafka additionally regenerates 5 Energy.
+                            </li>
+                        
+                            <li>
+                            <strong>Thorns:</strong><br>The base chance for target enemies to get Shocked by the Ultimate, the Technique, or the Talent-triggered follow-up attack increases by 30%.
+                            </li>
+                        
+                            </ul>
+                            <h2>Minor Traces</h2>
+                            <ul>
+                        
+                                <li>
+                                <strong>ATK Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>Effect Hit Rate Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>Effect Hit Rate Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>Effect Hit Rate Boost:</strong> 8.0%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 8.0%
+                                </li>
+                            
+            </ul>
+            <h2>Eidolons</h2>
+            <ul>
+        
+                <li>
+                    <strong>Da Capo:</strong><br>When the Talent triggers a follow-up attack, there is a <unbreak>100%</unbreak> base chance to increase the DoT received by the target by <unbreak>30%</unbreak> for <unbreak>2</unbreak> turn(s).
+                </li>
+            
+                <li>
+                    <strong>Fortississimo:</strong><br>While Kafka is on the field, DoT dealt by all allies increases by <unbreak>25%</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Capriccio:</strong><br>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Recitativo:</strong><br>When an enemy target takes DMG from the Shock status inflicted by Kafka, Kafka additionally regenerates <unbreak>2</unbreak> Energy.
+                </li>
+            
+                <li>
+                    <strong>Doloroso:</strong><br>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Leggiero:</strong><br>The Shock inflicted on the enemy target by the Ultimate, the Technique, or the Talent-triggered follow-up attack has a DMG multiplier increase of <unbreak>156%</unbreak> and lasts <unbreak>1</unbreak> turn(s) longer.
+                </li>
+            
+            </ul>
+            </body>
+        </html>
+        

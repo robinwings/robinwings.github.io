@@ -1,0 +1,78 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../dark.css">
+        <title>Darting Arrow</title>
+        
+<script>
+function updateRefinements(weaponId, level) {
+    var refinementDataElement = document.getElementById(weaponId + '_data');
+    var stats = refinementDataElement.getAttribute('data-level' + level);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    
+    var refinementsElement = document.getElementById(weaponId + '_refinements');
+    var originalDescription = refinementsElement.getAttribute('data-original-description');
+    
+    statsArray.forEach((stat, index) => {
+        var placeholder_i = `#${index + 1}[i]`;
+        var placeholder_f1 = `#${index + 1}[f1]`;
+
+        var formattedStat = stat;
+
+        originalDescription = originalDescription.replace(placeholder_i, formattedStat);
+        originalDescription = originalDescription.replace(placeholder_f1, formattedStat);
+    });
+
+    refinementsElement.innerHTML = originalDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateRefinements"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+    </head>
+    <body onload="initializeSkills()">
+<h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+<div style="margin-top:20px; margin-bottom:10px">
+  <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+        
+        <h1>Darting Arrow</h1>
+        <p><strong>ID:</strong> 20007<br>
+           <strong>Rarity:</strong> 3*<br>
+           <strong>Path:</strong> The Hunt<br></p>
+
+        <h2>Stats</h2>
+        <ul>
+            <li><strong>Max HP:</strong> 741.00</li>
+            <li><strong>Max ATK:</strong> 370.00</li>
+            <li><strong>Max DEF:</strong> 265.00</li>
+        </ul>
+
+        <h2>Ability</h2>
+        <ul>
+            <li>
+                <strong>Superimposition:</strong> 
+                <select onchange="updateRefinements('20007', this.value)">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <div id="20007_refinements" data-original-description="When the wearer defeats an enemy, increases ATK by <b><unbreak>#1[i]</unbreak></b> for <unbreak>#2[i]</unbreak> turn(s).">
+                    When the wearer defeats an enemy, increases ATK by <b><unbreak>#1[i]</unbreak></b> for <unbreak>#2[i]</unbreak> turn(s).
+                </div>
+                <div id="20007_data" style="display:none;" data-level1="0.24, 3" data-level2="0.3, 3" data-level3="0.36, 3" data-level4="0.42, 3" data-level5="0.48, 3" data-levelid="2, 0, 0, 0, 7" >
+                </div>
+            </li>
+        </ul>
+    </body>
+    </html>
+    

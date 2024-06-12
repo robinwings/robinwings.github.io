@@ -1,0 +1,209 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Bailu</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
+        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
+        var formattedStat = stat;
+        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
+        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()">
+    <h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+            <h1>Bailu</h1>
+            <p>The High Elder of the Vidyadhara, who is also known as the "Healer Lady" on the Luofu.<br>She uses her unique medical science and the medical treatment that can only be provided by the Vidyadhara dragon race to save lives.<br><br><strong>ID:</strong> 1211<br>
+            <strong>Path:</strong> Abundance<br>
+            <strong>Element:</strong> Lightning<br>
+            <strong>Rarity:</strong> 5*</br></p>
+            <h2>Stats</h2>
+            <ul>
+                <li><strong>Max HP:</strong> 1319.47</li>
+                <li><strong>Max ATK:</strong> 562.72</li>
+                <li><strong>Max DEF:</strong> 485.10</li>
+                <li><strong>Speed:</strong> 98</li>
+                <li><strong>Taunt:</strong> 100</li>
+                <li><strong>CRIT Rate:</strong> 0.05</li>
+                <li><strong>CRIT DMG:</strong> 0.5</li>
+            </ul>
+
+            <h2>Skills</h2>
+            <ul>
+        
+                <li>
+                    <strong>Diagnostic Kick (Basic ATK):</strong>
+                    <select onchange="updateSkill('121101', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
+                    <div id="121101_description" data-original-description="Deals Lightning DMG equal to <b><unbreak>#1[i]</unbreak></b> of Bailu's ATK to a single enemy.">Deals Lightning DMG equal to <b><unbreak>#1[i]</unbreak></b> of Bailu's ATK to a single enemy.</div>
+                    <div id="121101_stats"></div>
+                    <div id="121101_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 2, 1, 1, 0, 1" ></div>
+                </li>
+            
+                <li>
+                    <strong>Singing Among Clouds (Skill):</strong>
+                    <select onchange="updateSkill('121102', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="121102_description" data-original-description="Heals a single ally for <b><unbreak>#1[f1]</unbreak></b> of Bailu's Max HP plus <b><unbreak>#2[i]</unbreak></b>. Bailu then heals random allies <unbreak>#4[i]</unbreak> time(s). After each healing, HP restored from the next healing is reduced by <unbreak>#3[i]</unbreak>.">Heals a single ally for <b><unbreak>#1[f1]</unbreak></b> of Bailu's Max HP plus <b><unbreak>#2[i]</unbreak></b>. Bailu then heals random allies <unbreak>#4[i]</unbreak> time(s). After each healing, HP restored from the next healing is reduced by <unbreak>#3[i]</unbreak>.</div>
+                    <div id="121102_stats"></div>
+                    <div id="121102_data" style="display:none;" data-level1="0.078, 78, 0.15, 2" data-level2="0.082875, 124.8, 0.15, 2" data-level3="0.08775, 159.9, 0.15, 2" data-level4="0.092625, 195, 0.15, 2" data-level5="0.0975, 218.4, 0.15, 2" data-level6="0.1014, 241.8, 0.15, 2" data-level7="0.1053, 259.35, 0.15, 2" data-level8="0.1092, 276.9, 0.15, 2" data-level9="0.1131, 294.45, 0.15, 2" data-level10="0.117, 312, 0.15, 2" data-level11="0.1209, 329.55, 0.15, 2" data-level12="0.1248, 347.1, 0.15, 2" data-level13="0.1287, 364.65, 0.15, 2" data-level14="0.1326, 382.2, 0.15, 2" data-level15="0.1365, 399.75, 0.15, 2" data-levelid="1, 2, 1, 1, 0, 2" ></div>
+                </li>
+            
+                <li>
+                    <strong>Felicitous Thunderleap (Ultimate):</strong>
+                    <select onchange="updateSkill('121103', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="121103_description" data-original-description="Heals all allies for <b><unbreak>#1[f1]</unbreak></b> of Bailu's Max HP plus <b><unbreak>#2[i]</unbreak></b>.<br>Bailu applies Invigoration to allies that are not already Invigorated. For those already Invigorated, Bailu extends the duration of their Invigoration by 1 turn.<br>The effect of Invigoration can last for <unbreak>#3[i]</unbreak> turn(s). This effect cannot stack.">Heals all allies for <b><unbreak>#1[f1]</unbreak></b> of Bailu's Max HP plus <b><unbreak>#2[i]</unbreak></b>.<br>Bailu applies Invigoration to allies that are not already Invigorated. For those already Invigorated, Bailu extends the duration of their Invigoration by 1 turn.<br>The effect of Invigoration can last for <unbreak>#3[i]</unbreak> turn(s). This effect cannot stack.</div>
+                    <div id="121103_stats"></div>
+                    <div id="121103_data" style="display:none;" data-level1="0.09, 90, 2" data-level2="0.095625, 144, 2" data-level3="0.10125, 184.5, 2" data-level4="0.106875, 225, 2" data-level5="0.1125, 252, 2" data-level6="0.117, 279, 2" data-level7="0.1215, 299.25, 2" data-level8="0.126, 319.5, 2" data-level9="0.1305, 339.75, 2" data-level10="0.135, 360, 2" data-level11="0.1395, 380.25, 2" data-level12="0.144, 400.5, 2" data-level13="0.1485, 420.75, 2" data-level14="0.153, 441, 2" data-level15="0.1575, 461.25, 2" data-levelid="1, 2, 1, 1, 0, 3" ></div>
+                </li>
+            
+                <li>
+                    <strong>Gourdful of Elixir (Talent):</strong>
+                    <select onchange="updateSkill('121104', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="121104_description" data-original-description="After an ally with Invigoration is hit, restores the ally's HP for <b><unbreak>#1[f1]</unbreak></b> of Bailu's Max HP plus <b><unbreak>#2[i]</unbreak></b>. This effect can trigger <unbreak>#5[i]</unbreak> time(s).<br>When an ally receives a killing blow, they will not be <u>knocked down</u>. Bailu immediately heals the ally for <b><unbreak>#3[f1]</unbreak></b> of Bailu's Max HP plus <b><unbreak>#4[i]</unbreak></b> HP. This effect can be triggered 1 time per battle.">After an ally with Invigoration is hit, restores the ally's HP for <b><unbreak>#1[f1]</unbreak></b> of Bailu's Max HP plus <b><unbreak>#2[i]</unbreak></b>. This effect can trigger <unbreak>#5[i]</unbreak> time(s).<br>When an ally receives a killing blow, they will not be <u>knocked down</u>. Bailu immediately heals the ally for <b><unbreak>#3[f1]</unbreak></b> of Bailu's Max HP plus <b><unbreak>#4[i]</unbreak></b> HP. This effect can be triggered 1 time per battle.</div>
+                    <div id="121104_stats"></div>
+                    <div id="121104_data" style="display:none;" data-level1="0.036, 36, 0.12, 120, 2" data-level2="0.03825, 57.6, 0.1275, 192, 2" data-level3="0.0405, 73.8, 0.135, 246, 2" data-level4="0.04275, 90, 0.1425, 300, 2" data-level5="0.044999998, 100.8, 0.15, 336, 2" data-level6="0.0468, 111.6, 0.156, 372, 2" data-level7="0.0486, 119.7, 0.162, 399, 2" data-level8="0.0504, 127.8, 0.168, 426, 2" data-level9="0.0522, 135.9, 0.174, 453, 2" data-level10="0.054, 144, 0.18, 480, 2" data-level11="0.0558, 152.1, 0.186, 507, 2" data-level12="0.0576, 160.2, 0.192, 534, 2" data-level13="0.0594, 168.3, 0.198, 561, 2" data-level14="0.0612, 176.4, 0.204, 588, 2" data-level15="0.063, 184.5, 0.21, 615, 2" data-levelid="1, 2, 1, 1, 0, 4" ></div>
+                </li>
+            
+                <li>
+                    <strong>Attack (Unknown):</strong>
+                    <select onchange="updateSkill('121106', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="121106_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div>
+                    <div id="121106_stats"></div>
+                    <div id="121106_data" style="display:none;" data-level1="" data-levelid="1, 2, 1, 1, 0, 6" ></div>
+                </li>
+            
+                <li>
+                    <strong>Saunter in the Rain (Technique):</strong>
+                    <select onchange="updateSkill('121107', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="121107_description" data-original-description="After Technique is used, at the start of the next battle, all allies are granted Invigoration for <unbreak>#1[i]</unbreak> turn(s).">After Technique is used, at the start of the next battle, all allies are granted Invigoration for <unbreak>#1[i]</unbreak> turn(s).</div>
+                    <div id="121107_stats"></div>
+                    <div id="121107_data" style="display:none;" data-level1="2" data-levelid="1, 2, 1, 1, 0, 7" ></div>
+                </li>
+            
+            </ul>
+            <h2>Ascension Traces</h2>
+            <ul>
+        
+                            <li>
+                            <strong>Qihuang Analects:</strong><br>When Bailu heals a target ally above their normal Max HP, the target's Max HP increases by 10% for 2 turns.
+                            </li>
+                        
+                            <li>
+                            <strong>Vidyadhara Ichor Lines:</strong><br>Invigoration can trigger 1 more time(s).
+                            </li>
+                        
+                            <li>
+                            <strong>Aquatic Benediction:</strong><br>Characters with Invigoration receive 10% less DMG.
+                            </li>
+                        
+                            </ul>
+                            <h2>Minor Traces</h2>
+                            <ul>
+                        
+                                <li>
+                                <strong>HP Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 5.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>Effect RES Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 7.5%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>Effect RES Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 10.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 8.0%
+                                </li>
+                            
+            </ul>
+            <h2>Eidolons</h2>
+            <ul>
+        
+                <li>
+                    <strong>Ambrosial Aqua:</strong><br>If the target ally's current HP is equal to their Max HP when Invigoration ends, regenerates <unbreak>8</unbreak> extra Energy for this target.
+                </li>
+            
+                <li>
+                    <strong>Sylphic Slumber:</strong><br>After using her Ultimate, Bailu's Outgoing Healing increases by an additional <unbreak>15%</unbreak> for <unbreak>2</unbreak> turn(s).
+                </li>
+            
+                <li>
+                    <strong>Omniscient Opulence:</strong><br>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Evil Excision:</strong><br>Every healing provided by the Skill makes the recipient deal <unbreak>10%</unbreak> more DMG for <unbreak>2</unbreak> turn(s). This effect can stack up to <unbreak>3</unbreak> time(s).
+                </li>
+            
+                <li>
+                    <strong>Waning Worries:</strong><br>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Drooling Drop of Draconic Divinity:</strong><br>Bailu can heal allies who received a killing blow <unbreak>1</unbreak> more time(s) in a single battle.
+                </li>
+            
+            </ul>
+            </body>
+        </html>
+        

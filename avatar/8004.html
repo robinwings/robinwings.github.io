@@ -1,0 +1,217 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Preservation Stelle</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
+        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
+        var formattedStat = stat;
+        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
+        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()">
+    <h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+            <h1>Preservation Stelle</h1>
+            <p>A girl/boy who boarded the Astral Express.<br>She/He chose to travel with the Astral Express to eliminate the dangers posed by the Stellaron.<br><br><strong>ID:</strong> 8004<br>
+            <strong>Path:</strong> Preservation<br>
+            <strong>Element:</strong> Fire<br>
+            <strong>Rarity:</strong> 5*</br></p>
+            <h2>Stats</h2>
+            <ul>
+                <li><strong>Max HP:</strong> 1241.86</li>
+                <li><strong>Max ATK:</strong> 601.52</li>
+                <li><strong>Max DEF:</strong> 606.38</li>
+                <li><strong>Speed:</strong> 95</li>
+                <li><strong>Taunt:</strong> 150</li>
+                <li><strong>CRIT Rate:</strong> 0.05</li>
+                <li><strong>CRIT DMG:</strong> 0.5</li>
+            </ul>
+
+            <h2>Skills</h2>
+            <ul>
+        
+                <li>
+                    <strong>Ice-Breaking Light (Basic ATK):</strong>
+                    <select onchange="updateSkill('800401', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
+                    <div id="800401_description" data-original-description="Deals Fire DMG equal to <b><unbreak>#1[i]</unbreak></b> of the Trailblazer's ATK to a single enemy and gains 1 stack of Magma Will.">Deals Fire DMG equal to <b><unbreak>#1[i]</unbreak></b> of the Trailblazer's ATK to a single enemy and gains 1 stack of Magma Will.</div>
+                    <div id="800401_stats"></div>
+                    <div id="800401_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="8, 0, 0, 4, 0, 1" ></div>
+                </li>
+            
+                <li>
+                    <strong>Ever-Burning Amber (Skill):</strong>
+                    <select onchange="updateSkill('800402', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="800402_description" data-original-description="Increases the Trailblazer's DMG Reduction by <b><unbreak>#1[i]</unbreak></b> and gains 1 stack of Magma Will, with a <unbreak>#2[i]</unbreak> <u>base chance</u> to Taunt all enemies for <unbreak>#3[i]</unbreak> turn(s).">Increases the Trailblazer's DMG Reduction by <b><unbreak>#1[i]</unbreak></b> and gains 1 stack of Magma Will, with a <unbreak>#2[i]</unbreak> <u>base chance</u> to Taunt all enemies for <unbreak>#3[i]</unbreak> turn(s).</div>
+                    <div id="800402_stats"></div>
+                    <div id="800402_data" style="display:none;" data-level1="0.4, 1, 1" data-level2="0.41, 1, 1" data-level3="0.42, 1, 1" data-level4="0.43, 1, 1" data-level5="0.44, 1, 1" data-level6="0.45, 1, 1" data-level7="0.4625, 1, 1" data-level8="0.475, 1, 1" data-level9="0.4875, 1, 1" data-level10="0.5, 1, 1" data-level11="0.51, 1, 1" data-level12="0.52, 1, 1" data-level13="0.53, 1, 1" data-level14="0.54, 1, 1" data-level15="0.55, 1, 1" data-levelid="8, 0, 0, 4, 0, 2" ></div>
+                </li>
+            
+                <li>
+                    <strong>War-Flaming Lance (Ultimate):</strong>
+                    <select onchange="updateSkill('800403', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="800403_description" data-original-description="Deals Fire DMG equal to <b><unbreak>#1[i]</unbreak></b> of the Trailblazer's ATK plus <b><unbreak>#2[i]</unbreak></b> of the Trailblazer's DEF to all enemies. The next Basic ATK will be automatically enhanced and does not cost Magma Will.">Deals Fire DMG equal to <b><unbreak>#1[i]</unbreak></b> of the Trailblazer's ATK plus <b><unbreak>#2[i]</unbreak></b> of the Trailblazer's DEF to all enemies. The next Basic ATK will be automatically enhanced and does not cost Magma Will.</div>
+                    <div id="800403_stats"></div>
+                    <div id="800403_data" style="display:none;" data-level1="0.5, 0.75" data-level2="0.55, 0.825" data-level3="0.6, 0.9" data-level4="0.65, 0.975" data-level5="0.7, 1.05" data-level6="0.75, 1.125" data-level7="0.8125, 1.21875" data-level8="0.875, 1.3125" data-level9="0.9375, 1.40625" data-level10="1, 1.5" data-level11="1.05, 1.575" data-level12="1.1, 1.65" data-level13="1.15, 1.725" data-level14="1.2, 1.8" data-level15="1.25, 1.875" data-levelid="8, 0, 0, 4, 0, 3" ></div>
+                </li>
+            
+                <li>
+                    <strong>Treasure of the Architects (Talent):</strong>
+                    <select onchange="updateSkill('800404', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="800404_description" data-original-description="Each time the Trailblazer is hit, they gain 1 stack of Magma Will for a max of <unbreak>#3[i]</unbreak> stack(s).<br>When Magma Will has no fewer than 4 stacks, the Trailblazer's Basic ATK becomes enhanced, dealing DMG to a single enemy and enemies adjacent to it.<br>When the Trailblazer uses Basic ATK, Skill, or Ultimate, apply a Shield to all allies that absorbs DMG equal to <b><unbreak>#1[f1]</unbreak></b> of the Trailblazer's DEF plus <b><unbreak>#4[i]</unbreak></b>. The Shield lasts for <unbreak>#2[i]</unbreak> turn(s).">Each time the Trailblazer is hit, they gain 1 stack of Magma Will for a max of <unbreak>#3[i]</unbreak> stack(s).<br>When Magma Will has no fewer than 4 stacks, the Trailblazer's Basic ATK becomes enhanced, dealing DMG to a single enemy and enemies adjacent to it.<br>When the Trailblazer uses Basic ATK, Skill, or Ultimate, apply a Shield to all allies that absorbs DMG equal to <b><unbreak>#1[f1]</unbreak></b> of the Trailblazer's DEF plus <b><unbreak>#4[i]</unbreak></b>. The Shield lasts for <unbreak>#2[i]</unbreak> turn(s).</div>
+                    <div id="800404_stats"></div>
+                    <div id="800404_data" style="display:none;" data-level1="0.04, 2, 8, 20" data-level2="0.0425, 2, 8, 32" data-level3="0.044999998, 2, 8, 41" data-level4="0.0475, 2, 8, 50" data-level5="0.05, 2, 8, 56" data-level6="0.052, 2, 8, 62" data-level7="0.054, 2, 8, 66.5" data-level8="0.055999998, 2, 8, 71" data-level9="0.058, 2, 8, 75.5" data-level10="0.06, 2, 8, 80" data-level11="0.062, 2, 8, 84.5" data-level12="0.064, 2, 8, 89" data-level13="0.066, 2, 8, 93.5" data-level14="0.067999996, 2, 8, 98" data-level15="0.07, 2, 8, 102.5" data-levelid="8, 0, 0, 4, 0, 4" ></div>
+                </li>
+            
+                <li>
+                    <strong>Attack (Unknown):</strong>
+                    <select onchange="updateSkill('800406', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="800406_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div>
+                    <div id="800406_stats"></div>
+                    <div id="800406_data" style="display:none;" data-level1="" data-levelid="8, 0, 0, 4, 0, 6" ></div>
+                </li>
+            
+                <li>
+                    <strong>Call of the Guardian (Technique):</strong>
+                    <select onchange="updateSkill('800407', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="800407_description" data-original-description="After using Technique, at the start of the next battle, gains a Shield that absorbs DMG equal to <unbreak>#1[i]</unbreak> of the Trailblazer's DEF plus <unbreak>#2[i]</unbreak> for <unbreak>#3[i]</unbreak> turn(s).">After using Technique, at the start of the next battle, gains a Shield that absorbs DMG equal to <unbreak>#1[i]</unbreak> of the Trailblazer's DEF plus <unbreak>#2[i]</unbreak> for <unbreak>#3[i]</unbreak> turn(s).</div>
+                    <div id="800407_stats"></div>
+                    <div id="800407_data" style="display:none;" data-level1="0.3, 384, 1" data-levelid="8, 0, 0, 4, 0, 7" ></div>
+                </li>
+            
+                <li>
+                    <strong>Ice-Breaking Light (Basic ATK):</strong>
+                    <select onchange="updateSkill('800408', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
+                    <div id="800408_description" data-original-description="Consumes 4 stacks of Magma Will to enhance Basic ATK, dealing Fire DMG equal to <b><unbreak>#1[i]</unbreak></b> of the Trailblazer's ATK to a single enemy and Fire DMG to equal to <b><unbreak>#2[i]</unbreak></b> of the Trailblazer's ATK to enemies adjacent to it.">Consumes 4 stacks of Magma Will to enhance Basic ATK, dealing Fire DMG equal to <b><unbreak>#1[i]</unbreak></b> of the Trailblazer's ATK to a single enemy and Fire DMG to equal to <b><unbreak>#2[i]</unbreak></b> of the Trailblazer's ATK to enemies adjacent to it.</div>
+                    <div id="800408_stats"></div>
+                    <div id="800408_data" style="display:none;" data-level1="0.9, 0.36" data-level2="0.99, 0.396" data-level3="1.08, 0.432" data-level4="1.17, 0.468" data-level5="1.26, 0.504" data-level6="1.35, 0.54" data-level7="1.4625, 0.585" data-level8="1.575, 0.63" data-level9="1.6875, 0.675" data-levelid="8, 0, 0, 4, 0, 8" ></div>
+                </li>
+            
+            </ul>
+            <h2>Ascension Traces</h2>
+            <ul>
+        
+                            <li>
+                            <strong>The Strong Defend the Weak:</strong><br>After using the Skill, the DMG taken by all allies reduces by 15% for 1 turn(s).
+                            </li>
+                        
+                            <li>
+                            <strong>Unwavering Gallantry:</strong><br>Using Enhanced Basic ATK restores the Trailblazer's HP by 5% of their Max HP.
+                            </li>
+                        
+                            <li>
+                            <strong>Action Beats Overthinking:</strong><br>When the Trailblazer is protected by a Shield at the beginning of the turn, increases their ATK by 15% and regenerates 5 Energy until the action is over.
+                            </li>
+                        
+                            </ul>
+                            <h2>Minor Traces</h2>
+                            <ul>
+                        
+                                <li>
+                                <strong>DEF Boost:</strong> 5.0%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 5.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 7.5%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 7.5%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 8.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 10.0%
+                                </li>
+                            
+            </ul>
+            <h2>Eidolons</h2>
+            <ul>
+        
+                <li>
+                    <strong>Earth-Shaking Resonance:</strong><br>When the Trailblazer uses their Basic ATK, additionally deals Fire DMG equal to <unbreak>25%</unbreak> of the Trailblazer's DEF. When the Trailblazer uses their enhanced Basic ATK, additionally deals Fire DMG equal to <unbreak>50%</unbreak> of the Trailblazer's DEF.
+                </li>
+            
+                <li>
+                    <strong>Time-Defying Tenacity:</strong><br>The Shield applied to all allies from the Trailblazer's Talent will block extra DMG equal to <unbreak>2%</unbreak> of the Trailblazer's DEF plus <unbreak>27</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Trail-Blazing Blueprint:</strong><br>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Nation-Building Oath:</strong><br>At the start of the battle, immediately gains <unbreak>4</unbreak> stack(s) of Magma Will.
+                </li>
+            
+                <li>
+                    <strong>Spirit-Warming Flame:</strong><br>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>City-Forging Bulwarks:</strong><br>After the Trailblazer uses enhanced Basic ATK or Ultimate, their DEF increases by <unbreak>10%</unbreak>. Stacks up to <unbreak>3</unbreak> time(s).
+                </li>
+            
+            </ul>
+            </body>
+        </html>
+        

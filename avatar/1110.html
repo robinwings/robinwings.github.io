@@ -1,0 +1,209 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Lynx</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
+        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
+        var formattedStat = stat;
+        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
+        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()">
+    <h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+            <h1>Lynx</h1>
+            <p>A Belobogian Snow Plains Explorer, and the youngest of the Landau siblings.<br>Calm and collected, with a strong drive for action. Often embarks on solo adventures to explore the snowy wilderness.<br><br><strong>ID:</strong> 1110<br>
+            <strong>Path:</strong> Abundance<br>
+            <strong>Element:</strong> Quantum<br>
+            <strong>Rarity:</strong> 4*</br></p>
+            <h2>Stats</h2>
+            <ul>
+                <li><strong>Max HP:</strong> 1058.40</li>
+                <li><strong>Max ATK:</strong> 493.92</li>
+                <li><strong>Max DEF:</strong> 551.25</li>
+                <li><strong>Speed:</strong> 100</li>
+                <li><strong>Taunt:</strong> 100</li>
+                <li><strong>CRIT Rate:</strong> 0.05</li>
+                <li><strong>CRIT DMG:</strong> 0.5</li>
+            </ul>
+
+            <h2>Skills</h2>
+            <ul>
+        
+                <li>
+                    <strong>Ice Crampon Technique (Basic ATK):</strong>
+                    <select onchange="updateSkill('111001', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
+                    <div id="111001_description" data-original-description="Deals Quantum DMG equal to <b><unbreak>#1[i]</unbreak></b> of this character's Max HP to a single enemy.">Deals Quantum DMG equal to <b><unbreak>#1[i]</unbreak></b> of this character's Max HP to a single enemy.</div>
+                    <div id="111001_stats"></div>
+                    <div id="111001_data" style="display:none;" data-level1="0.25" data-level2="0.3" data-level3="0.35" data-level4="0.4" data-level5="0.45" data-level6="0.5" data-level7="0.55" data-level8="0.6" data-level9="0.65" data-levelid="1, 1, 1, 0, 0, 1" ></div>
+                </li>
+            
+                <li>
+                    <strong>Salted Camping Cans (Skill):</strong>
+                    <select onchange="updateSkill('111002', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="111002_description" data-original-description="Applies "Survival Response" to a single target ally and increases their Max HP by <b><unbreak>#1[f1]</unbreak></b> of Lynx's Max HP plus <b><unbreak>#2[i]</unbreak></b>. If the target ally is a character on the Path of Destruction or Preservation, the chance of them being attacked by enemies will greatly increase. "Survival Response" lasts for <unbreak>#3[i]</unbreak> turn(s).<br>Restores the target's HP by <b><unbreak>#4[f1]</unbreak></b> of Lynx's Max HP plus <b><unbreak>#5[i]</unbreak></b>.">Applies "Survival Response" to a single target ally and increases their Max HP by <b><unbreak>#1[f1]</unbreak></b> of Lynx's Max HP plus <b><unbreak>#2[i]</unbreak></b>. If the target ally is a character on the Path of Destruction or Preservation, the chance of them being attacked by enemies will greatly increase. "Survival Response" lasts for <unbreak>#3[i]</unbreak> turn(s).<br>Restores the target's HP by <b><unbreak>#4[f1]</unbreak></b> of Lynx's Max HP plus <b><unbreak>#5[i]</unbreak></b>.</div>
+                    <div id="111002_stats"></div>
+                    <div id="111002_data" style="display:none;" data-level1="0.05, 50, 2, 0.08, 80, 5" data-level2="0.052500002, 80, 2, 0.085, 128, 5" data-level3="0.055, 102.5, 2, 0.09, 164, 5" data-level4="0.0575, 125, 2, 0.095, 200, 5" data-level5="0.06, 140, 2, 0.1, 224, 5" data-level6="0.0625, 155, 2, 0.104, 248, 5" data-level7="0.065625, 166.25, 2, 0.108, 266, 5" data-level8="0.06875, 177.5, 2, 0.112, 284, 5" data-level9="0.071875, 188.75, 2, 0.116, 302, 5" data-level10="0.075, 200, 2, 0.12, 320, 5" data-level11="0.0775, 211.25, 2, 0.124, 338, 5" data-level12="0.08, 222.5, 2, 0.128, 356, 5" data-level13="0.0825, 233.75, 2, 0.132, 374, 5" data-level14="0.085, 245, 2, 0.13599999, 392, 5" data-level15="0.0875, 256.25, 2, 0.14, 410, 5" data-levelid="1, 1, 1, 0, 0, 2" ></div>
+                </li>
+            
+                <li>
+                    <strong>Snowfield First Aid (Ultimate):</strong>
+                    <select onchange="updateSkill('111003', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="111003_description" data-original-description="Dispels <unbreak>#1[i]</unbreak> <u>debuff(s)</u> from all allies and immediately restores their respective HP by an amount equal to <b><unbreak>#2[f1]</unbreak></b> of Lynx's Max HP plus <b><unbreak>#3[i]</unbreak></b>.">Dispels <unbreak>#1[i]</unbreak> <u>debuff(s)</u> from all allies and immediately restores their respective HP by an amount equal to <b><unbreak>#2[f1]</unbreak></b> of Lynx's Max HP plus <b><unbreak>#3[i]</unbreak></b>.</div>
+                    <div id="111003_stats"></div>
+                    <div id="111003_data" style="display:none;" data-level1="1, 0.09, 90" data-level2="1, 0.095625, 144" data-level3="1, 0.10125, 184.5" data-level4="1, 0.106875, 225" data-level5="1, 0.1125, 252" data-level6="1, 0.117, 279" data-level7="1, 0.1215, 299.25" data-level8="1, 0.126, 319.5" data-level9="1, 0.1305, 339.75" data-level10="1, 0.135, 360" data-level11="1, 0.1395, 380.25" data-level12="1, 0.144, 400.5" data-level13="1, 0.1485, 420.75" data-level14="1, 0.153, 441" data-level15="1, 0.1575, 461.25" data-levelid="1, 1, 1, 0, 0, 3" ></div>
+                </li>
+            
+                <li>
+                    <strong>Outdoor Survival Experience (Talent):</strong>
+                    <select onchange="updateSkill('111004', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="111004_description" data-original-description="When using Lynx's Skill or Ultimate, applies continuous healing to the target ally for <unbreak>#1[i]</unbreak> turn(s), restoring the target ally's HP by an amount equal to <b><unbreak>#2[f1]</unbreak></b> of Lynx's Max HP plus <b><unbreak>#3[i]</unbreak></b> at the start of each turn. If the target has "Survival Response," the continuous healing effect additionally restores HP by an amount equal to <b><unbreak>#4[f1]</unbreak></b> of Lynx's Max HP plus <b><unbreak>#5[i]</unbreak></b>.">When using Lynx's Skill or Ultimate, applies continuous healing to the target ally for <unbreak>#1[i]</unbreak> turn(s), restoring the target ally's HP by an amount equal to <b><unbreak>#2[f1]</unbreak></b> of Lynx's Max HP plus <b><unbreak>#3[i]</unbreak></b> at the start of each turn. If the target has "Survival Response," the continuous healing effect additionally restores HP by an amount equal to <b><unbreak>#4[f1]</unbreak></b> of Lynx's Max HP plus <b><unbreak>#5[i]</unbreak></b>.</div>
+                    <div id="111004_stats"></div>
+                    <div id="111004_data" style="display:none;" data-level1="2, 0.024, 24, 0.03, 30" data-level2="2, 0.0255, 38.4, 0.031875, 48" data-level3="2, 0.026999999, 49.2, 0.03375, 61.5" data-level4="2, 0.0285, 60, 0.035625, 75" data-level5="2, 0.03, 67.2, 0.0375, 84" data-level6="2, 0.0312, 74.4, 0.039, 93" data-level7="2, 0.0324, 79.8, 0.0405, 99.75" data-level8="2, 0.0336, 85.2, 0.042, 106.5" data-level9="2, 0.0348, 90.6, 0.0435, 113.25" data-level10="2, 0.036, 96, 0.044999998, 120" data-level11="2, 0.0372, 101.4, 0.0465, 126.75" data-level12="2, 0.038399998, 106.8, 0.048, 133.5" data-level13="2, 0.0396, 112.2, 0.0495, 140.25" data-level14="2, 0.0408, 117.6, 0.051, 147" data-level15="2, 0.042, 123, 0.052500002, 153.75" data-levelid="1, 1, 1, 0, 0, 4" ></div>
+                </li>
+            
+                <li>
+                    <strong>Attack (Unknown):</strong>
+                    <select onchange="updateSkill('111006', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="111006_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div>
+                    <div id="111006_stats"></div>
+                    <div id="111006_data" style="display:none;" data-level1="" data-levelid="1, 1, 1, 0, 0, 6" ></div>
+                </li>
+            
+                <li>
+                    <strong>Chocolate Energy Bar (Technique):</strong>
+                    <select onchange="updateSkill('111007', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="111007_description" data-original-description="After Lynx uses her Technique, at the start of the next battle, all allies are granted her Talent's continuous healing effect, lasting for <unbreak>#1[i]</unbreak> turn(s).">After Lynx uses her Technique, at the start of the next battle, all allies are granted her Talent's continuous healing effect, lasting for <unbreak>#1[i]</unbreak> turn(s).</div>
+                    <div id="111007_stats"></div>
+                    <div id="111007_data" style="display:none;" data-level1="2" data-levelid="1, 1, 1, 0, 0, 7" ></div>
+                </li>
+            
+            </ul>
+            <h2>Ascension Traces</h2>
+            <ul>
+        
+                            <li>
+                            <strong>Advance Surveying:</strong><br>After a target with "Survival Response" is hit, Lynx regenerates 2 Energy immediately.
+                            </li>
+                        
+                            <li>
+                            <strong>Exploration Techniques:</strong><br>Increases the chance to resist Crowd Control debuffs by 35%.
+                            </li>
+                        
+                            <li>
+                            <strong>Survival in the Extreme:</strong><br>Extends the duration of the continuous healing effect granted by Talent for 1 turn(s).
+                            </li>
+                        
+                            </ul>
+                            <h2>Minor Traces</h2>
+                            <ul>
+                        
+                                <li>
+                                <strong>HP Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 5.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>Effect RES Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 7.5%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>Effect RES Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 10.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 8.0%
+                                </li>
+                            
+            </ul>
+            <h2>Eidolons</h2>
+            <ul>
+        
+                <li>
+                    <strong>Morning of Snow Hike:</strong><br>When healing allies with HP equal to or lower than <unbreak>50%</unbreak>, Lynx's Outgoing Healing increases by <unbreak>20%</unbreak>. This effect also works on continuous healing.
+                </li>
+            
+                <li>
+                    <strong>Noon of Portable Furnace:</strong><br>A target with "Survival Response" can resist debuff application for <unbreak>1</unbreak> time(s).
+                </li>
+            
+                <li>
+                    <strong>Afternoon of Avalanche Beacon:</strong><br>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Dusk of Warm Campfire:</strong><br>When "Survival Response" is gained, increases the target's ATK by an amount equal to <unbreak>3%</unbreak> of Lynx's Max HP for <unbreak>1</unbreak> turn(s).
+                </li>
+            
+                <li>
+                    <strong>Night of Aurora Tea:</strong><br>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Dawn of Explorers' Chart:</strong><br>Additionally boosts the Max HP increasing effect of "Survival Response" by an amount equal to <unbreak>6%</unbreak> of Lynx's Max HP and increases Effect RES by <unbreak>30%</unbreak>.
+                </li>
+            
+            </ul>
+            </body>
+        </html>
+        

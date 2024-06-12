@@ -1,0 +1,209 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Sparkle</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
+        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
+        var formattedStat = stat;
+        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
+        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()">
+    <h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+            <h1>Sparkle</h1>
+            <p>A member of the Masked Fools. Inscrutable and unscrupulous.<br>A dangerous maestro of theatrics, utterly engrossed in the art of performance. Adorned with innumerable masks, she is the hero with a thousand faces.<br>Wealth, status, power... None of those matters to Sparkle. The only thing that can get her attention is "amusement."<br><br><strong>ID:</strong> 1306<br>
+            <strong>Path:</strong> Harmony<br>
+            <strong>Element:</strong> Quantum<br>
+            <strong>Rarity:</strong> 5*</br></p>
+            <h2>Stats</h2>
+            <ul>
+                <li><strong>Max HP:</strong> 1397.09</li>
+                <li><strong>Max ATK:</strong> 523.91</li>
+                <li><strong>Max DEF:</strong> 485.10</li>
+                <li><strong>Speed:</strong> 101</li>
+                <li><strong>Taunt:</strong> 100</li>
+                <li><strong>CRIT Rate:</strong> 0.05</li>
+                <li><strong>CRIT DMG:</strong> 0.5</li>
+            </ul>
+
+            <h2>Skills</h2>
+            <ul>
+        
+                <li>
+                    <strong>Monodrama (Basic ATK):</strong>
+                    <select onchange="updateSkill('130601', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
+                    <div id="130601_description" data-original-description="Deals Quantum DMG equal to <b><unbreak>#1[i]</unbreak></b> of Sparkle's ATK to a single target enemy.">Deals Quantum DMG equal to <b><unbreak>#1[i]</unbreak></b> of Sparkle's ATK to a single target enemy.</div>
+                    <div id="130601_stats"></div>
+                    <div id="130601_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 3, 0, 6, 0, 1" ></div>
+                </li>
+            
+                <li>
+                    <strong>Dreamdiver (Skill):</strong>
+                    <select onchange="updateSkill('130602', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="130602_description" data-original-description="Increases the CRIT DMG of a single target ally by <b><unbreak>#1[f1]</unbreak></b> of Sparkle's CRIT DMG plus <b><unbreak>#2[f1]</unbreak></b>, lasting for <unbreak>#3[i]</unbreak> turn(s). And at the same time, Advances Forward this ally's action by <unbreak>#4[i]</unbreak>.<br>When Sparkle uses this ability on herself, the Action Advance effect will not trigger.">Increases the CRIT DMG of a single target ally by <b><unbreak>#1[f1]</unbreak></b> of Sparkle's CRIT DMG plus <b><unbreak>#2[f1]</unbreak></b>, lasting for <unbreak>#3[i]</unbreak> turn(s). And at the same time, Advances Forward this ally's action by <unbreak>#4[i]</unbreak>.<br>When Sparkle uses this ability on herself, the Action Advance effect will not trigger.</div>
+                    <div id="130602_stats"></div>
+                    <div id="130602_data" style="display:none;" data-level1="0.12, 0.27, 1, 0.5" data-level2="0.132, 0.288, 1, 0.5" data-level3="0.144, 0.306, 1, 0.5" data-level4="0.156, 0.324, 1, 0.5" data-level5="0.168, 0.342, 1, 0.5" data-level6="0.18, 0.36, 1, 0.5" data-level7="0.195, 0.3825, 1, 0.5" data-level8="0.21, 0.405, 1, 0.5" data-level9="0.225, 0.4275, 1, 0.5" data-level10="0.24, 0.45, 1, 0.5" data-level11="0.252, 0.468, 1, 0.5" data-level12="0.264, 0.486, 1, 0.5" data-level13="0.276, 0.504, 1, 0.5" data-level14="0.288, 0.522, 1, 0.5" data-level15="0.3, 0.54, 1, 0.5" data-levelid="1, 3, 0, 6, 0, 2" ></div>
+                </li>
+            
+                <li>
+                    <strong>The Hero with a Thousand Faces (Ultimate):</strong>
+                    <select onchange="updateSkill('130603', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="130603_description" data-original-description="Recovers <unbreak>#2[i]</unbreak> Skill Points for the team and grants all allies Cipher. For allies with Cipher, each stack of the DMG Boost effect provided by Sparkle's Talent additionally increases by <b><unbreak>#3[f1]</unbreak></b>, lasting for <unbreak>#4[i]</unbreak> turns.">Recovers <unbreak>#2[i]</unbreak> Skill Points for the team and grants all allies Cipher. For allies with Cipher, each stack of the DMG Boost effect provided by Sparkle's Talent additionally increases by <b><unbreak>#3[f1]</unbreak></b>, lasting for <unbreak>#4[i]</unbreak> turns.</div>
+                    <div id="130603_stats"></div>
+                    <div id="130603_data" style="display:none;" data-level1="2, 4, 0.06, 2" data-level2="2, 4, 0.064, 2" data-level3="2, 4, 0.067999996, 2" data-level4="2, 4, 0.072, 2" data-level5="2, 4, 0.076, 2" data-level6="2, 4, 0.08, 2" data-level7="2, 4, 0.085, 2" data-level8="2, 4, 0.09, 2" data-level9="2, 4, 0.095, 2" data-level10="2, 4, 0.1, 2" data-level11="2, 4, 0.104, 2" data-level12="2, 4, 0.108, 2" data-level13="2, 4, 0.112, 2" data-level14="2, 4, 0.116, 2" data-level15="2, 4, 0.12, 2" data-levelid="1, 3, 0, 6, 0, 3" ></div>
+                </li>
+            
+                <li>
+                    <strong>Red Herring (Talent):</strong>
+                    <select onchange="updateSkill('130604', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="130604_description" data-original-description="While Sparkle is on the battlefield, additionally increases the max number of Skill Points by <unbreak>#3[i]</unbreak>. Whenever an ally consumes 1 Skill Point, all allies' DMG dealt increases by <b><unbreak>#2[f1]</unbreak></b>. This effect lasts for <unbreak>#1[i]</unbreak> turn(s) and can stack up to <unbreak>#4[i]</unbreak> time(s).">While Sparkle is on the battlefield, additionally increases the max number of Skill Points by <unbreak>#3[i]</unbreak>. Whenever an ally consumes 1 Skill Point, all allies' DMG dealt increases by <b><unbreak>#2[f1]</unbreak></b>. This effect lasts for <unbreak>#1[i]</unbreak> turn(s) and can stack up to <unbreak>#4[i]</unbreak> time(s).</div>
+                    <div id="130604_stats"></div>
+                    <div id="130604_data" style="display:none;" data-level1="2, 0.03, 2, 3" data-level2="2, 0.033, 2, 3" data-level3="2, 0.036, 2, 3" data-level4="2, 0.039, 2, 3" data-level5="2, 0.042, 2, 3" data-level6="2, 0.044999998, 2, 3" data-level7="2, 0.048750002, 2, 3" data-level8="2, 0.052500002, 2, 3" data-level9="2, 0.05625, 2, 3" data-level10="2, 0.06, 2, 3" data-level11="2, 0.063, 2, 3" data-level12="2, 0.066, 2, 3" data-level13="2, 0.069, 2, 3" data-level14="2, 0.072, 2, 3" data-level15="2, 0.075, 2, 3" data-levelid="1, 3, 0, 6, 0, 4" ></div>
+                </li>
+            
+                <li>
+                    <strong>Attack (Unknown):</strong>
+                    <select onchange="updateSkill('130606', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="130606_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div>
+                    <div id="130606_stats"></div>
+                    <div id="130606_data" style="display:none;" data-level1="" data-levelid="1, 3, 0, 6, 0, 6" ></div>
+                </li>
+            
+                <li>
+                    <strong>Unreliable Narrator (Technique):</strong>
+                    <select onchange="updateSkill('130607', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="130607_description" data-original-description="Using the Technique grants all allies Misdirect for <unbreak>#2[i]</unbreak> seconds. Characters with Misdirect will not be detected by enemies, and entering battle in the Misdirect state recovers <unbreak>#1[i]</unbreak> Skill Point(s) for the team.">Using the Technique grants all allies Misdirect for <unbreak>#2[i]</unbreak> seconds. Characters with Misdirect will not be detected by enemies, and entering battle in the Misdirect state recovers <unbreak>#1[i]</unbreak> Skill Point(s) for the team.</div>
+                    <div id="130607_stats"></div>
+                    <div id="130607_data" style="display:none;" data-level1="3, 20" data-levelid="1, 3, 0, 6, 0, 7" ></div>
+                </li>
+            
+            </ul>
+            <h2>Ascension Traces</h2>
+            <ul>
+        
+                            <li>
+                            <strong>Almanac:</strong><br>When using Basic ATK, additionally regenerates 10 Energy.
+                            </li>
+                        
+                            <li>
+                            <strong>Artificial Flower:</strong><br>The CRIT DMG Boost effect provided by the Skill will be extended until the start of the target's next turn.
+                            </li>
+                        
+                            <li>
+                            <strong>Nocturne:</strong><br>Increases all allies' ATK by 15%. When there are 1/2/3 Quantum-Type allies in the team, additionally increases Quantum-Type allies' ATK by 5%/15%/30%.
+                            </li>
+                        
+                            </ul>
+                            <h2>Minor Traces</h2>
+                            <ul>
+                        
+                                <li>
+                                <strong>HP Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT DMG Boost:</strong> 5.3%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>Effect RES Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT DMG Boost:</strong> 8.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>Effect RES Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT DMG Boost:</strong> 10.7%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 8.0%
+                                </li>
+                            
+            </ul>
+            <h2>Eidolons</h2>
+            <ul>
+        
+                <li>
+                    <strong>Suspension of Disbelief:</strong><br>The Cipher effect granted by the Ultimate lasts for 1 extra turn. All allies with Cipher have their ATK increased by <unbreak>40%</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Purely Fictitious:</strong><br>Every stack of the Talent's effect allows allies to additionally ignore <unbreak>8%</unbreak> of the target's DEF when dealing DMG.
+                </li>
+            
+                <li>
+                    <strong>Pipedream:</strong><br>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Life Is a Gamble:</strong><br>The Ultimate recovers 1 more Skill Point. The Talent additionally increases the Max Skill Points by 1.
+                </li>
+            
+                <li>
+                    <strong>Parallax Truth:</strong><br>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Narrative Polysemy:</strong><br>The CRIT DMG Boost effect provided by the Skill additionally increases by an amount equal to <unbreak>30%</unbreak> of Sparkle's CRIT DMG. When Sparkle uses Skill, her Skill's CRIT DMG Boost effect will apply to all allies with Cipher. When Sparkle uses her Ultimate, any single ally who benefits from her Skill's CRIT DMG Boost will spread that effect to allies with Cipher.
+                </li>
+            
+            </ul>
+            </body>
+        </html>
+        

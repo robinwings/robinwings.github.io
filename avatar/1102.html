@@ -1,0 +1,209 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Seele</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
+        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
+        var formattedStat = stat;
+        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
+        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()">
+    <h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+            <h1>Seele</h1>
+            <p>A resident of the Underworld and the backbone of Wildfire. She goes by the alias "Babochka."<br>She has a frank personality, but there is a delicate and sensitive hidden side to her deep in her heart.<br><br><strong>ID:</strong> 1102<br>
+            <strong>Path:</strong> The Hunt<br>
+            <strong>Element:</strong> Quantum<br>
+            <strong>Rarity:</strong> 5*</br></p>
+            <h2>Stats</h2>
+            <ul>
+                <li><strong>Max HP:</strong> 931.39</li>
+                <li><strong>Max ATK:</strong> 640.33</li>
+                <li><strong>Max DEF:</strong> 363.83</li>
+                <li><strong>Speed:</strong> 115</li>
+                <li><strong>Taunt:</strong> 75</li>
+                <li><strong>CRIT Rate:</strong> 0.05</li>
+                <li><strong>CRIT DMG:</strong> 0.5</li>
+            </ul>
+
+            <h2>Skills</h2>
+            <ul>
+        
+                <li>
+                    <strong>Thwack (Basic ATK):</strong>
+                    <select onchange="updateSkill('110201', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
+                    <div id="110201_description" data-original-description="Deals Quantum DMG equal to <b><unbreak>#1[i]</unbreak></b> of Seele's ATK to a single enemy.">Deals Quantum DMG equal to <b><unbreak>#1[i]</unbreak></b> of Seele's ATK to a single enemy.</div>
+                    <div id="110201_stats"></div>
+                    <div id="110201_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 1, 0, 2, 0, 1" ></div>
+                </li>
+            
+                <li>
+                    <strong>Sheathed Blade (Skill):</strong>
+                    <select onchange="updateSkill('110202', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="110202_description" data-original-description="Increases Seele's SPD by <unbreak>#2[i]</unbreak> for <unbreak>#3[i]</unbreak> turn(s) and deals Quantum DMG equal to <b><unbreak>#1[i]</unbreak></b> of Seele's ATK to a single enemy.">Increases Seele's SPD by <unbreak>#2[i]</unbreak> for <unbreak>#3[i]</unbreak> turn(s) and deals Quantum DMG equal to <b><unbreak>#1[i]</unbreak></b> of Seele's ATK to a single enemy.</div>
+                    <div id="110202_stats"></div>
+                    <div id="110202_data" style="display:none;" data-level1="1.1, 0.25, 2" data-level2="1.21, 0.25, 2" data-level3="1.32, 0.25, 2" data-level4="1.43, 0.25, 2" data-level5="1.54, 0.25, 2" data-level6="1.65, 0.25, 2" data-level7="1.7875, 0.25, 2" data-level8="1.925, 0.25, 2" data-level9="2.0625, 0.25, 2" data-level10="2.2, 0.25, 2" data-level11="2.31, 0.25, 2" data-level12="2.42, 0.25, 2" data-level13="2.53, 0.25, 2" data-level14="2.64, 0.25, 2" data-level15="2.75, 0.25, 2" data-levelid="1, 1, 0, 2, 0, 2" ></div>
+                </li>
+            
+                <li>
+                    <strong>Butterfly Flurry (Ultimate):</strong>
+                    <select onchange="updateSkill('110203', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="110203_description" data-original-description="Seele enters the buffed state and deals Quantum DMG equal to <b><unbreak>#1[i]</unbreak></b> of her ATK to a single enemy.">Seele enters the buffed state and deals Quantum DMG equal to <b><unbreak>#1[i]</unbreak></b> of her ATK to a single enemy.</div>
+                    <div id="110203_stats"></div>
+                    <div id="110203_data" style="display:none;" data-level1="2.55" data-level2="2.72" data-level3="2.89" data-level4="3.06" data-level5="3.23" data-level6="3.4" data-level7="3.6125" data-level8="3.825" data-level9="4.0375" data-level10="4.25" data-level11="4.42" data-level12="4.59" data-level13="4.76" data-level14="4.93" data-level15="5.1" data-levelid="1, 1, 0, 2, 0, 3" ></div>
+                </li>
+            
+                <li>
+                    <strong>Resurgence (Talent):</strong>
+                    <select onchange="updateSkill('110204', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="110204_description" data-original-description="Enters the buffed state upon defeating an enemy with Basic ATK, Skill, or Ultimate, and receives an <u>extra turn</u>. While in the buffed state, the DMG of Seele's attacks increases by <b><unbreak>#1[i]</unbreak></b> for <unbreak>#2[i]</unbreak> turn(s).<br>Enemies defeated in the <u>extra turn</u> provided by "Resurgence" will not trigger another "Resurgence."">Enters the buffed state upon defeating an enemy with Basic ATK, Skill, or Ultimate, and receives an <u>extra turn</u>. While in the buffed state, the DMG of Seele's attacks increases by <b><unbreak>#1[i]</unbreak></b> for <unbreak>#2[i]</unbreak> turn(s).<br>Enemies defeated in the <u>extra turn</u> provided by "Resurgence" will not trigger another "Resurgence."</div>
+                    <div id="110204_stats"></div>
+                    <div id="110204_data" style="display:none;" data-level1="0.4, 1" data-level2="0.44, 1" data-level3="0.48, 1" data-level4="0.52, 1" data-level5="0.56, 1" data-level6="0.6, 1" data-level7="0.65, 1" data-level8="0.7, 1" data-level9="0.75, 1" data-level10="0.8, 1" data-level11="0.84, 1" data-level12="0.88, 1" data-level13="0.92, 1" data-level14="0.96, 1" data-level15="1, 1" data-levelid="1, 1, 0, 2, 0, 4" ></div>
+                </li>
+            
+                <li>
+                    <strong>Attack (Unknown):</strong>
+                    <select onchange="updateSkill('110206', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="110206_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div>
+                    <div id="110206_stats"></div>
+                    <div id="110206_data" style="display:none;" data-level1="" data-levelid="1, 1, 0, 2, 0, 6" ></div>
+                </li>
+            
+                <li>
+                    <strong>Phantom Illusion (Technique):</strong>
+                    <select onchange="updateSkill('110207', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="110207_description" data-original-description="After using her Technique, Seele gains Stealth for <unbreak>#1[i]</unbreak> second(s). While Stealth is active, Seele cannot be detected by enemies. And when entering battle by attacking enemies, Seele will immediately enter the buffed state.">After using her Technique, Seele gains Stealth for <unbreak>#1[i]</unbreak> second(s). While Stealth is active, Seele cannot be detected by enemies. And when entering battle by attacking enemies, Seele will immediately enter the buffed state.</div>
+                    <div id="110207_stats"></div>
+                    <div id="110207_data" style="display:none;" data-level1="20" data-levelid="1, 1, 0, 2, 0, 7" ></div>
+                </li>
+            
+            </ul>
+            <h2>Ascension Traces</h2>
+            <ul>
+        
+                            <li>
+                            <strong>Nightshade:</strong><br>When current HP percentage is 50% or lower, reduces the chance of being attacked by enemies.
+                            </li>
+                        
+                            <li>
+                            <strong>Lacerate:</strong><br>While Seele is in the buffed state, her Quantum RES PEN increases by 20%.
+                            </li>
+                        
+                            <li>
+                            <strong>Rippling Waves:</strong><br>After using a Basic ATK, Seele's next action will be Advanced Forward by 20%.
+                            </li>
+                        
+                            </ul>
+                            <h2>Minor Traces</h2>
+                            <ul>
+                        
+                                <li>
+                                <strong>ATK Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT DMG Boost:</strong> 5.3%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 5.0%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT DMG Boost:</strong> 8.0%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 7.5%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT DMG Boost:</strong> 10.7%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 8.0%
+                                </li>
+                            
+            </ul>
+            <h2>Eidolons</h2>
+            <ul>
+        
+                <li>
+                    <strong>Extirpating Slash:</strong><br>When dealing DMG to an enemy whose HP percentage is <unbreak>80%</unbreak> or lower, CRIT Rate increases by <unbreak>15%</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Dancing Butterfly:</strong><br>The SPD Boost effect of Seele's Skill can stack up to <unbreak>2</unbreak> time(s).
+                </li>
+            
+                <li>
+                    <strong>Dazzling Tumult:</strong><br>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Flitting Phantasm:</strong><br>Seele regenerates <unbreak>15</unbreak> Energy when she defeats an enemy.
+                </li>
+            
+                <li>
+                    <strong>Piercing Shards:</strong><br>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Shattering Shambles:</strong><br>After Seele uses her Ultimate, inflict the target enemy with Butterfly Flurry for <unbreak>1</unbreak> turn(s). Enemies suffering from Butterfly Flurry will take Additional Quantum DMG equal to <unbreak>15%</unbreak> of Seele's Ultimate DMG every time they are attacked. If the target enemy is defeated by the Butterfly Flurry DMG triggered by other allies' attacks, Seele's Talent will not be triggered.<br>When Seele is knocked down, the Butterfly Flurry inflicted on the enemies will be removed.
+                </li>
+            
+            </ul>
+            </body>
+        </html>
+        

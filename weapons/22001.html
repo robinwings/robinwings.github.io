@@ -6,36 +6,36 @@
     <link rel="stylesheet" href="../dark.css">
         <title>Hey, Over Here</title>
         
-<script>
-function updateRefinements(weaponId, level) {
-    var refinementDataElement = document.getElementById(weaponId + '_data');
-    var stats = refinementDataElement.getAttribute('data-level' + level);
-    
-    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
-    
-    var refinementsElement = document.getElementById(weaponId + '_refinements');
-    var originalDescription = refinementsElement.getAttribute('data-original-description');
-    
-    statsArray.forEach((stat, index) => {
-        var placeholder_i = `#${index + 1}[i]`;
-        var placeholder_f1 = `#${index + 1}[f1]`;
+    <script>
+    function updateRefinements(weaponId, level) {
+        var refinementDataElement = document.getElementById(weaponId + '_data');
+        var stats = refinementDataElement.getAttribute('data-level' + level);
+        
+        var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+        
+        var refinementsElement = document.getElementById(weaponId + '_refinements');
+        var originalDescription = refinementsElement.getAttribute('data-original-description');
+        
+        statsArray.forEach((stat, index) => {
+            var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
+            var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
 
-        var formattedStat = stat;
+            var formattedStat = stat;
 
-        originalDescription = originalDescription.replace(placeholder_i, formattedStat);
-        originalDescription = originalDescription.replace(placeholder_f1, formattedStat);
-    });
+            originalDescription = originalDescription.replace(placeholder_i, formattedStat);
+            originalDescription = originalDescription.replace(placeholder_f1, formattedStat);
+        });
 
-    refinementsElement.innerHTML = originalDescription;
-}
-function initializeSkills() {
-    var dropdowns = document.querySelectorAll('select[onchange^="updateRefinements"]');
-    dropdowns.forEach(dropdown => {
-        dropdown.value = 1;
-        dropdown.dispatchEvent(new Event('change'));
-    });
-}
-</script>
+        refinementsElement.innerHTML = originalDescription;
+    }
+    function initializeSkills() {
+        var dropdowns = document.querySelectorAll('select[onchange^="updateRefinements"]');
+        dropdowns.forEach(dropdown => {
+            dropdown.value = 1;
+            dropdown.dispatchEvent(new Event('change'));
+        });
+    }
+    </script>
 
     </head>
     <body onload="initializeSkills()">

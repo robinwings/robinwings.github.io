@@ -25,7 +25,7 @@ I am sorry but this website cannot function normally without it :)
 </noscript>
 <h1 style="margin-bottom:0px">robinwings</h1><small>Click ID to see the data :)</small><hr>
 <div style="margin-top:20px; margin-bottom:10px">
-  <button onclick="window.location.href='#'">Character</button>  <button onclick="window.location.href='weapons.html'">Lightcone</button>  <button onclick="window.location.href='relics.html'">Relic Set</button>  </div>
+  <a class="button-link" style="text-decoration: none;" href='#'">Character</a>  <a class="button-link" style="text-decoration: none;" href='weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='relics.html'">Relic Set</a>  </div>
   <input style="margin-bottom: 20px; margin-top:10px" type="text" id="myInput" onkeyup="myFunction()"placeholder="Search for character"><div style="margin-bottom:20px;">
   <!-- Fire Icon -->
 <img src="ico/Fire.png" class="filter-icon" id="fire-icon" data-element="fire" onclick="toggleFilter(this, 'element')" />
@@ -88,9 +88,10 @@ function reloadCSS() {
     var e = document.querySelector('link[href*="dark.css"]');
     if (e) {
         var t = e.getAttribute("href").split("?")[0] + "?v=" + new Date().getTime();
-        e.setAttribute("href", t)
+        e.setAttribute("href", t);
     }
 }
+
 let filters = {
     element: [],
     path: [],
@@ -101,46 +102,45 @@ function toggleFilter(e, t) {
     e.classList.toggle("selected");
     let l = e.getAttribute(`data-${t}`),
         r = filters[t].indexOf(l);
-    r > -1 ? filters[t].splice(r, 1) : filters[t].push(l), applyFilter()
+    r > -1 ? filters[t].splice(r, 1) : filters[t].push(l);
+    applyFilter();
 }
 
 function applyFilter() {
-    let e = document.getElementById("myTable"),
-        t = e.getElementsByTagName("tr"),
-        l = 0;
+    let input = document.getElementById("myInput").value.toUpperCase();
+    let table = document.getElementById("myTable");
+    let rows = table.getElementsByTagName("tr");
+    let count = 0;
 
-    for (let r = 1; r < t.length; r++) {
-        let n = t[r],
-            s = n.cells[2].innerText.toLowerCase(),
-            i = n.cells[1].innerText.toLowerCase(),
-            a = n.cells[3].innerText,
-            o = 0 === filters.element.length || filters.element.includes(s),
-            g = 0 === filters.path.length || filters.path.includes(i),
-            f = 0 === filters.rarity.length || filters.rarity.includes(a);
+    for (let i = 1; i < rows.length; i++) {
+        let row = rows[i];
+        let cell0 = row.cells[0];
+        let cell1 = row.cells[1];
+        let cell2 = row.cells[2];
+        let cell3 = row.cells[3];
+        if (cell0 && cell1 && cell2 && cell3) {
+            let text0 = cell0.innerText.toUpperCase();
+            let text1 = cell1.innerText.toLowerCase();
+            let text2 = cell2.innerText.toLowerCase();
+            let text3 = cell3.innerText;
 
-        o && g && f ? (n.style.display = "", l++ % 2 == 0 ? n.style.backgroundColor = "var(--table-bg-alt)" : n.style.backgroundColor = "var(--table-bg)") : n.style.display = "none"
+            let matchesSearch = text0.indexOf(input) > -1;
+            let matchesElement = filters.element.length === 0 || filters.element.includes(text2);
+            let matchesPath = filters.path.length === 0 || filters.path.includes(text1);
+            let matchesRarity = filters.rarity.length === 0 || filters.rarity.includes(text3);
+
+            if (matchesSearch && matchesElement && matchesPath && matchesRarity) {
+                row.style.display = "";
+                count++ % 2 === 0 ? row.style.backgroundColor = "var(--table-bg-alt)" : row.style.backgroundColor = "var(--table-bg)";
+            } else {
+                row.style.display = "none";
+            }
+        }
     }
 }
 
 function myFunction() {
-    var e, t, l, r, n;
-    t = (e = document.getElementById("myInput")).value.toUpperCase(), r = (l = document.getElementById("myTable")).getElementsByTagName("tr");
-    let s = 0;
-    for (let i = 1; i < r.length; i++) {
-        let a = r[i],
-            o = a.cells[0],
-            g = a.cells[2].innerText.toLowerCase(),
-            f = a.cells[1].innerText.toLowerCase(),
-            y = a.cells[3].innerText;
-        if (o) {
-            n = o.textContent || o.innerText;
-            let c = n.toUpperCase().indexOf(t) > -1,
-                d = 0 === filters.element.length || filters.element.includes(g),
-                u = 0 === filters.path.length || filters.path.includes(f),
-                p = 0 === filters.rarity.length || filters.rarity.includes(y);
-            c && d && u && p ? (a.style.display = "", s++ % 2 == 0 ? a.style.backgroundColor = "var(--table-bg-alt)" : a.style.backgroundColor = "var(--table-bg)") : a.style.display = "none"
-        }
-    }
+    applyFilter();
 }
 </script>
 </body>

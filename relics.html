@@ -24,7 +24,7 @@
         </noscript>
     <h1 style="margin-bottom:0px">robinwings</h1><small>Click ID to see the data :)</small><hr>
 <div style="margin-top:20px; margin-bottom:10px">
-  <button onclick="window.location.href='avatar.html'">Character</button>  <button onclick="window.location.href='weapons.html'">Lightcone</button>  <button onclick="window.location.href='#'">Relic Set</button>  </div>
+  <a class="button-link" style="text-decoration: none;" href='avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='#'">Relic Set</a>  </div>
   <input style="margin-bottom: 20px; margin-top:10px" type="text" id="myInput" onkeyup="myFunction()"placeholder="Search for relic set"><div style="margin-bottom:20px;">
 <img src="ico/planar.webp" class="filter-icon" id="planar-icon" data-type="Planar" onclick="toggleFilter(this, 'type')" />
 
@@ -39,7 +39,69 @@
   </table>
 
   <script>
-  let filters={type:[],rarity:[]};function toggleFilter(e,t){e.classList.toggle("selected");let l=e.getAttribute(`data-${t}`),r=filters[t].indexOf(l);r>-1?filters[t].splice(r,1):filters[t].push(l.toLowerCase()),0===filters.type.length&&0===filters.rarity.length?showAllRows():applyFilter()}function showAllRows(){let e=document.getElementById("myTable").getElementsByTagName("tr");for(let t=1;t<e.length;t++)e[t].style.display="";applyZebraStripes(e)}function myFunction(){let e=document.getElementById("myInput").value.toUpperCase(),t=document.getElementById("myTable").getElementsByTagName("tr"),l=0;for(let r=1;r<t.length;r++){let a=t[r],s=a.cells[0],n=a.cells[1],o=a.cells[2];if(s&&n&&o){let i=s.innerText.toLowerCase(),y=n.innerText.toLowerCase(),g=o.innerText.trim(),p=i.toUpperCase().indexOf(e)>-1,b=0===filters.type.length||filters.type.includes(y),d=0===filters.rarity.length||filters.rarity.includes(g);p&&b&&d?(a.style.display="",l++%2==0?a.style.backgroundColor="var(--table-bg-alt)":a.style.backgroundColor="var(--table-bg)"):a.style.display="none"}}}function applyFilter(){let e=document.getElementById("myTable").getElementsByTagName("tr"),t=0;for(let l=1;l<e.length;l++){let r=e[l];"planar"===r.cells[1].innerText.toLowerCase()?(r.style.display="",t++%2==0?r.style.backgroundColor="var(--table-bg-alt)":r.style.backgroundColor="var(--table-bg)"):r.style.display="none"}}function applyZebraStripes(e){let t=0;for(let l=1;l<e.length;l++){let r=e[l];"none"!==r.style.display&&(t++%2==0?r.style.backgroundColor="var(--table-bg-alt)":r.style.backgroundColor="var(--table-bg)")}}
+
+let filters = { type: [], rarity: [] };
+
+function toggleFilter(element, filterType) {
+    element.classList.toggle("selected");
+    let value = element.getAttribute(`data-${filterType}`).toLowerCase();
+    let index = filters[filterType].indexOf(value);
+    if (index > -1) {
+        filters[filterType].splice(index, 1);
+    } else {
+        filters[filterType].push(value);
+    }
+    myFunction();
+}
+
+function showAllRows() {
+    let rows = document.getElementById("myTable").getElementsByTagName("tr");
+    for (let i = 1; i < rows.length; i++) {
+        rows[i].style.display = "";
+    }
+    applyZebraStripes(rows);
+}
+
+function myFunction() {
+    let input = document.getElementById("myInput").value.toUpperCase();
+    let rows = document.getElementById("myTable").getElementsByTagName("tr");
+    let count = 0;
+    for (let i = 1; i < rows.length; i++) {
+        let row = rows[i];
+        let cell0 = row.cells[0];
+        let cell1 = row.cells[1];
+        let cell2 = row.cells[2];
+        if (cell0 && cell1 && cell2) {
+            let text0 = cell0.innerText.toLowerCase();
+            let text1 = cell1.innerText.toLowerCase();
+            let text2 = cell2.innerText.trim();
+            let matchesSearch = text0.toUpperCase().indexOf(input) > -1;
+            let matchesType = filters.type.length === 0 || filters.type.includes(text1);
+            let matchesRarity = filters.rarity.length === 0 || filters.rarity.includes(text2);
+            if (matchesSearch && matchesType && matchesRarity) {
+                row.style.display = "";
+                count++ % 2 === 0 ? row.style.backgroundColor = "var(--table-bg-alt)" : row.style.backgroundColor = "var(--table-bg)";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
+    applyZebraStripes(rows);
+}
+
+function applyZebraStripes(rows) {
+    let count = 0;
+    for (let i = 1; i < rows.length; i++) {
+        let row = rows[i];
+        if (row.style.display !== "none") {
+            count++ % 2 === 0 ? row.style.backgroundColor = "var(--table-bg-alt)" : row.style.backgroundColor = "var(--table-bg)";
+        } else {
+            row.style.backgroundColor = "";  // Clear the background color if the row is hidden
+        }
+    }
+}
+
+
   </script>
 </body>
 </html>

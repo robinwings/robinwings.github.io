@@ -24,7 +24,7 @@
         </noscript>
     <h1 style="margin-bottom:0px">robinwings</h1><small>Click ID to see the data :)</small><hr>
 <div style="margin-top:20px; margin-bottom:10px">
-  <button onclick="window.location.href='avatar.html'">Character</button>  <button onclick="window.location.href='#'">Lightcone</button>  <button onclick="window.location.href='relics.html'">Relic Set</button>  </div>
+  <a class="button-link" style="text-decoration: none;" href='avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='#'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='relics.html'">Relic Set</a>  </div>
   <input style="margin-bottom: 20px; margin-top:10px" type="text" id="myInput" onkeyup="myFunction()"placeholder="Search for lightcone"><div style="margin-bottom:20px;">
 <!-- Preservation Icon -->
 <img src="ico/Preservation.png" class="filter-icon" id="preservation-icon" data-path="preservation" onclick="toggleFilter(this, 'path')" />
@@ -274,7 +274,57 @@
         <a class='button-link' style='text-decoration: none;' href='weapons/24004.html'>24004</button></td>
     </tr></table>
   <script>
-    let filters={element:[],path:[],rarity:[]};function toggleFilter(e,t){e.classList.toggle("selected");let l=e.getAttribute(`data-${t}`),r=filters[t].indexOf(l);r>-1?filters[t].splice(r,1):filters[t].push(l),applyFilter()}function myFunction(){var e,t,l,r,n;t=(e=document.getElementById("myInput")).value.toUpperCase(),r=(l=document.getElementById("myTable")).getElementsByTagName("tr");let s=0;for(let i=1;i<r.length;i++){let a=r[i],o=a.cells[0],y=a.cells[2].innerText.toLowerCase(),p=a.cells[1].innerText.toLowerCase(),g=a.cells[3].innerText;if(o){let f=(n=o.textContent||o.innerText).toUpperCase().indexOf(t)>-1,c=0===filters.element.length||filters.element.includes(g),d=0===filters.path.length||filters.path.includes(p),b=0===filters.rarity.length||filters.rarity.includes(y);f&&c&&d&&b?(a.style.display="",s%2==0?a.style.backgroundColor="var(--table-bg)":a.style.backgroundColor="var(--table-bg-alt)",s++):a.style.display="none"}}applyZebraStripes(r)}function applyFilter(){let e=document.getElementById("myTable").getElementsByTagName("tr"),t=0;for(let l=1;l<e.length;l++){let r=e[l],n=r.cells[2].innerText.trim(),s=r.cells[1].innerText.trim().toLowerCase(),i=0===filters.rarity.length||filters.rarity.includes(n),a=0===filters.path.length||filters.path.includes(s);i&&a?(r.style.display="",t++):r.style.display="none"}applyZebraStripes(e)}function applyZebraStripes(e){let t=0;for(let l=1;l<e.length;l++){let r=e[l];"none"!==r.style.display&&(t++%2==0?r.style.backgroundColor="var(--table-bg-alt)":r.style.backgroundColor="var(--table-bg)")}}
+
+let filters = { element: [], path: [], rarity: [] };
+
+function toggleFilter(e, t) {
+    e.classList.toggle("selected");
+    let l = e.getAttribute(`data-${t}`),
+        r = filters[t].indexOf(l);
+    r > -1 ? filters[t].splice(r, 1) : filters[t].push(l);
+    applyFilter();
+}
+
+function myFunction() {
+    applyFilter();
+}
+
+function applyFilter() {
+    let e = document.getElementById("myInput").value.toUpperCase(),
+        t = document.getElementById("myTable").getElementsByTagName("tr"),
+        s = 0;
+
+    for (let l = 1; l < t.length; l++) {
+        let r = t[l],
+            n = r.cells[0],
+            o = r.cells[2].innerText.toLowerCase(),
+            y = r.cells[1].innerText.toLowerCase(),
+            p = r.cells[3].innerText;
+
+        if (n) {
+            let f = (n.textContent || n.innerText).toUpperCase().indexOf(e) > -1,
+                c = filters.element.length === 0 || filters.element.includes(p),
+                d = filters.path.length === 0 || filters.path.includes(y),
+                b = filters.rarity.length === 0 || filters.rarity.includes(o);
+
+            f && c && d && b ? (
+                r.style.display = "",
+                s % 2 == 0 ? r.style.backgroundColor = "var(--table-bg)" : r.style.backgroundColor = "var(--table-bg-alt)",
+                s++
+            ) : r.style.display = "none";
+        }
+    }
+    applyZebraStripes(t);
+}
+
+function applyZebraStripes(e) {
+    let t = 0;
+    for (let l = 1; l < e.length; l++) {
+        let r = e[l];
+        r.style.display !== "none" && (t++ % 2 === 0 ? r.style.backgroundColor = "var(--table-bg-alt)" : r.style.backgroundColor = "var(--table-bg)");
+    }
+}
+
   </script>
 </body>
 </html>

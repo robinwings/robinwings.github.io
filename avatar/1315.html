@@ -24,11 +24,22 @@ function updateSkill(skillId, level) {
     
     var updatedDescription = originalDescription;
     statsArray.forEach((stat, index) => {
-        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
-        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
-        var formattedStat = stat;
-        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
-        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
     });
     
     console.log('Updated description:', updatedDescription);
@@ -53,6 +64,94 @@ function initializeSkills() {
             <strong>Path:</strong> The Hunt<br>
             <strong>Element:</strong> Physical<br>
             <strong>Rarity:</strong> 5*</br></p>
+            <h2>Ascension Material</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110191.png' />
+                        Meteoric Bullet
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110192.png' />
+                        Destined Expiration
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110193.png' />
+                        Countertemporal Shot
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110421.png' />
+                        IPC Work Permit
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110505.png' />
+                        Lost Echo of the Shared Wish
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114011.png' />
+                        Tatters of Thought
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114012.png' />
+                        Fragments of Impression
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114013.png' />
+                        Shards of Desires
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table>
             <h2>Stats</h2>
             <ul>
                 <li><strong>Max HP:</strong> 1203.05</li>
@@ -63,14 +162,13 @@ function initializeSkills() {
                 <li><strong>CRIT Rate:</strong> 0.05</li>
                 <li><strong>CRIT DMG:</strong> 0.5</li>
             </ul>
-
             <h2>Skills</h2>
             <ul>
         
                 <li>
                     <strong>Skullcrush Spurs (Basic ATK):</strong>
                     <select onchange="updateSkill('131501', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
-                    <div id="131501_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Boothill's ATK to a single target enemy.">Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Boothill's ATK to a single target enemy.</div>
+                    <div id="131501_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Boothill's ATK to a single target enemy.">Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Boothill's ATK to a single target enemy.</div>
                     <div id="131501_stats"></div>
                     <div id="131501_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 3, 1, 5, 0, 1" ></div>
                 </li>
@@ -78,7 +176,7 @@ function initializeSkills() {
                 <li>
                     <strong>Sizzlin' Tango (Skill):</strong>
                     <select onchange="updateSkill('131502', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="131502_description" data-original-description="Forces Boothill and a single target enemy into the Standoff state. Boothill's Basic ATK gets Enhanced, and he cannot use his Skill, lasting for <unbreak>#3[i]</unbreak> turn(s). This duration reduces by 1 at the start of Boothill's every turn.<br>The enemy target in the Standoff becomes Taunted. When this enemy target/Boothill gets attacked by the other party in the Standoff, the DMG they receive increases by <b><unbreak>#1[i]</unbreak></b>/<unbreak>#2[i]</unbreak>.<br>After this target is defeated or becomes Weakness Broken, Boothill gains 1 stack of Pocket Trickshot, then dispels the Standoff.<br>This Skill cannot regenerate Energy. After using this Skill, the current turn does not end.">Forces Boothill and a single target enemy into the Standoff state. Boothill's Basic ATK gets Enhanced, and he cannot use his Skill, lasting for <unbreak>#3[i]</unbreak> turn(s). This duration reduces by 1 at the start of Boothill's every turn.<br>The enemy target in the Standoff becomes Taunted. When this enemy target/Boothill gets attacked by the other party in the Standoff, the DMG they receive increases by <b><unbreak>#1[i]</unbreak></b>/<unbreak>#2[i]</unbreak>.<br>After this target is defeated or becomes Weakness Broken, Boothill gains 1 stack of Pocket Trickshot, then dispels the Standoff.<br>This Skill cannot regenerate Energy. After using this Skill, the current turn does not end.</div>
+                    <div id="131502_description" data-original-description="Forces Boothill and a single target enemy into the Standoff state. Boothill's Basic ATK gets Enhanced, and he cannot use his Skill, lasting for <unbreak>#3[i]</unbreak> turn(s). This duration reduces by 1 at the start of Boothill's every turn.<br>The enemy target in the Standoff becomes Taunted. When this enemy target/Boothill gets attacked by the other party in the Standoff, the DMG they receive increases by <b><unbreak>#1[i]%</unbreak></b>/<unbreak>#2[i]%</unbreak>.<br>After this target is defeated or becomes Weakness Broken, Boothill gains 1 stack of Pocket Trickshot, then dispels the Standoff.<br>This Skill cannot regenerate Energy. After using this Skill, the current turn does not end.">Forces Boothill and a single target enemy into the Standoff state. Boothill's Basic ATK gets Enhanced, and he cannot use his Skill, lasting for <unbreak>#3[i]</unbreak> turn(s). This duration reduces by 1 at the start of Boothill's every turn.<br>The enemy target in the Standoff becomes Taunted. When this enemy target/Boothill gets attacked by the other party in the Standoff, the DMG they receive increases by <b><unbreak>#1[i]%</unbreak></b>/<unbreak>#2[i]%</unbreak>.<br>After this target is defeated or becomes Weakness Broken, Boothill gains 1 stack of Pocket Trickshot, then dispels the Standoff.<br>This Skill cannot regenerate Energy. After using this Skill, the current turn does not end.</div>
                     <div id="131502_stats"></div>
                     <div id="131502_data" style="display:none;" data-level1="0.15, 0.15, 2" data-level2="0.165, 0.15, 2" data-level3="0.18, 0.15, 2" data-level4="0.195, 0.15, 2" data-level5="0.21, 0.15, 2" data-level6="0.225, 0.15, 2" data-level7="0.24375, 0.15, 2" data-level8="0.2625, 0.15, 2" data-level9="0.28125, 0.15, 2" data-level10="0.3, 0.15, 2" data-level11="0.315, 0.15, 2" data-level12="0.33, 0.15, 2" data-level13="0.345, 0.15, 2" data-level14="0.36, 0.15, 2" data-level15="0.375, 0.15, 2" data-levelid="1, 3, 1, 5, 0, 2" ></div>
                 </li>
@@ -86,7 +184,7 @@ function initializeSkills() {
                 <li>
                     <strong>Dust Devil's Sunset Rodeo (Ultimate):</strong>
                     <select onchange="updateSkill('131503', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="131503_description" data-original-description="Applies Physical Weakness to a single target enemy, lasting for <unbreak>#3[i]</unbreak> turn(s).<br>Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Boothill's ATK to the target and <u>delays their action</u> by <b><unbreak>#2[i]</unbreak></b>.">Applies Physical Weakness to a single target enemy, lasting for <unbreak>#3[i]</unbreak> turn(s).<br>Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Boothill's ATK to the target and <u>delays their action</u> by <b><unbreak>#2[i]</unbreak></b>.</div>
+                    <div id="131503_description" data-original-description="Applies Physical Weakness to a single target enemy, lasting for <unbreak>#3[i]</unbreak> turn(s).<br>Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Boothill's ATK to the target and <u>delays their action</u> by <b><unbreak>#2[i]%</unbreak></b>.">Applies Physical Weakness to a single target enemy, lasting for <unbreak>#3[i]</unbreak> turn(s).<br>Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Boothill's ATK to the target and <u>delays their action</u> by <b><unbreak>#2[i]%</unbreak></b>.</div>
                     <div id="131503_stats"></div>
                     <div id="131503_data" style="display:none;" data-level1="2.4, 0.3, 2" data-level2="2.56, 0.31, 2" data-level3="2.72, 0.32, 2" data-level4="2.88, 0.33, 2" data-level5="3.04, 0.34, 2" data-level6="3.2, 0.35, 2" data-level7="3.4, 0.3625, 2" data-level8="3.6, 0.375, 2" data-level9="3.8, 0.3875, 2" data-level10="4, 0.4, 2" data-level11="4.16, 0.41, 2" data-level12="4.32, 0.42, 2" data-level13="4.48, 0.43, 2" data-level14="4.64, 0.44, 2" data-level15="4.8, 0.45, 2" data-levelid="1, 3, 1, 5, 0, 3" ></div>
                 </li>
@@ -94,7 +192,7 @@ function initializeSkills() {
                 <li>
                     <strong>Five Peas in a Pod (Talent):</strong>
                     <select onchange="updateSkill('131504', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="131504_description" data-original-description="Each stack of Pocket Trickshot increases the Enhanced Basic Attack's Toughness Reduction by <unbreak>#4[i]</unbreak>, stacking up to <unbreak>#5[i]</unbreak> time(s).<br>If the target is <u>Weakness Broken</u> while the Enhanced Basic ATK is being used, based on the number of Pocket Trickshot stacks, deals <u>Break DMG</u> to this target equal to <b><unbreak>#1[i]</unbreak></b>/<b><unbreak>#2[i]</unbreak></b>/<b><unbreak>#3[i]</unbreak></b> of Boothill's Physical Break DMG. The max Toughness taken into account for this DMG cannot exceed <unbreak>#6[i]</unbreak> times the base Toughness Reduction of the Basic Attack "Skullcrush Spurs."<br>After winning the battle, Boothill can retain Pocket Trickshot for the next battle.">Each stack of Pocket Trickshot increases the Enhanced Basic Attack's Toughness Reduction by <unbreak>#4[i]</unbreak>, stacking up to <unbreak>#5[i]</unbreak> time(s).<br>If the target is <u>Weakness Broken</u> while the Enhanced Basic ATK is being used, based on the number of Pocket Trickshot stacks, deals <u>Break DMG</u> to this target equal to <b><unbreak>#1[i]</unbreak></b>/<b><unbreak>#2[i]</unbreak></b>/<b><unbreak>#3[i]</unbreak></b> of Boothill's Physical Break DMG. The max Toughness taken into account for this DMG cannot exceed <unbreak>#6[i]</unbreak> times the base Toughness Reduction of the Basic Attack "Skullcrush Spurs."<br>After winning the battle, Boothill can retain Pocket Trickshot for the next battle.</div>
+                    <div id="131504_description" data-original-description="Each stack of Pocket Trickshot increases the Enhanced Basic Attack's Toughness Reduction by <unbreak>#4[i]%</unbreak>, stacking up to <unbreak>#5[i]</unbreak> time(s).<br>If the target is <u>Weakness Broken</u> while the Enhanced Basic ATK is being used, based on the number of Pocket Trickshot stacks, deals <u>Break DMG</u> to this target equal to <b><unbreak>#1[i]%</unbreak></b>/<b><unbreak>#2[i]%</unbreak></b>/<b><unbreak>#3[i]%</unbreak></b> of Boothill's Physical Break DMG. The max Toughness taken into account for this DMG cannot exceed <unbreak>#6[i]</unbreak> times the base Toughness Reduction of the Basic Attack "Skullcrush Spurs."<br>After winning the battle, Boothill can retain Pocket Trickshot for the next battle.">Each stack of Pocket Trickshot increases the Enhanced Basic Attack's Toughness Reduction by <unbreak>#4[i]%</unbreak>, stacking up to <unbreak>#5[i]</unbreak> time(s).<br>If the target is <u>Weakness Broken</u> while the Enhanced Basic ATK is being used, based on the number of Pocket Trickshot stacks, deals <u>Break DMG</u> to this target equal to <b><unbreak>#1[i]%</unbreak></b>/<b><unbreak>#2[i]%</unbreak></b>/<b><unbreak>#3[i]%</unbreak></b> of Boothill's Physical Break DMG. The max Toughness taken into account for this DMG cannot exceed <unbreak>#6[i]</unbreak> times the base Toughness Reduction of the Basic Attack "Skullcrush Spurs."<br>After winning the battle, Boothill can retain Pocket Trickshot for the next battle.</div>
                     <div id="131504_stats"></div>
                     <div id="131504_data" style="display:none;" data-level1="0.35, 0.6, 0.85, 0.5, 3, 16" data-level2="0.385, 0.66, 0.935, 0.5, 3, 16" data-level3="0.42, 0.72, 1.02, 0.5, 3, 16" data-level4="0.455, 0.78, 1.105, 0.5, 3, 16" data-level5="0.49, 0.84, 1.19, 0.5, 3, 16" data-level6="0.525, 0.9, 1.275, 0.5, 3, 16" data-level7="0.56875, 0.975, 1.38125, 0.5, 3, 16" data-level8="0.6125, 1.05, 1.4875, 0.5, 3, 16" data-level9="0.65625, 1.125, 1.59375, 0.5, 3, 16" data-level10="0.7, 1.2, 1.7, 0.5, 3, 16" data-level11="0.735, 1.26, 1.785, 0.5, 3, 16" data-level12="0.77, 1.32, 1.87, 0.5, 3, 16" data-level13="0.805, 1.38, 1.955, 0.5, 3, 16" data-level14="0.84, 1.44, 2.04, 0.5, 3, 16" data-level15="0.875, 1.5, 2.125, 0.5, 3, 16" data-levelid="1, 3, 1, 5, 0, 4" ></div>
                 </li>
@@ -118,7 +216,7 @@ function initializeSkills() {
                 <li>
                     <strong>Fanning the Hammer (Basic ATK):</strong>
                     <select onchange="updateSkill('131508', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
-                    <div id="131508_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Boothill's ATK to a single target enemy.<br>The Enhanced Basic Attack cannot recover Skill Points and can only target the enemy that is in the Standoff.">Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Boothill's ATK to a single target enemy.<br>The Enhanced Basic Attack cannot recover Skill Points and can only target the enemy that is in the Standoff.</div>
+                    <div id="131508_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Boothill's ATK to a single target enemy.<br>The Enhanced Basic Attack cannot recover Skill Points and can only target the enemy that is in the Standoff.">Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Boothill's ATK to a single target enemy.<br>The Enhanced Basic Attack cannot recover Skill Points and can only target the enemy that is in the Standoff.</div>
                     <div id="131508_stats"></div>
                     <div id="131508_data" style="display:none;" data-level1="1.1" data-level2="1.32" data-level3="1.54" data-level4="1.76" data-level5="1.98" data-level6="2.2" data-level7="2.42" data-level8="2.64" data-level9="2.86" data-levelid="1, 3, 1, 5, 0, 8" ></div>
                 </li>

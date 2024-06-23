@@ -24,11 +24,22 @@ function updateSkill(skillId, level) {
     
     var updatedDescription = originalDescription;
     statsArray.forEach((stat, index) => {
-        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
-        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
-        var formattedStat = stat;
-        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
-        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
     });
     
     console.log('Updated description:', updatedDescription);
@@ -53,6 +64,94 @@ function initializeSkills() {
             <strong>Path:</strong> Nihility<br>
             <strong>Element:</strong> Wind<br>
             <strong>Rarity:</strong> 5*</br></p>
+            <h2>Ascension Material</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110221.png' />
+                        Fiery Spirit
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110222.png' />
+                        Starfire Essence
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110223.png' />
+                        Heaven Incinerator
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110415.png' />
+                        Ascendant Debris
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110504.png' />
+                        Past Evils of the Borehole Planet Disaster
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111001.png' />
+                        Extinguished Core
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111002.png' />
+                        Glimmering Core
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111003.png' />
+                        Squirming Core
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table>
             <h2>Stats</h2>
             <ul>
                 <li><strong>Max HP:</strong> 1086.62</li>
@@ -63,14 +162,13 @@ function initializeSkills() {
                 <li><strong>CRIT Rate:</strong> 0.05</li>
                 <li><strong>CRIT DMG:</strong> 0.5</li>
             </ul>
-
             <h2>Skills</h2>
             <ul>
         
                 <li>
                     <strong>Percipience, Silent Dawn (Basic ATK):</strong>
                     <select onchange="updateSkill('130701', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
-                    <div id="130701_description" data-original-description="Deals Wind DMG equal to <b><unbreak>#1[i]</unbreak></b> of Black Swan's ATK to a single target enemy, with a <b><unbreak>#2[i]</unbreak></b> <u>base chance</u> of inflicting 1 stack of <u>Arcana</u> on the target. Additionally, when attacking a target that suffers Wind Shear, Bleed, Burn, or Shock, there is respectively a <b><unbreak>#3[i]</unbreak></b> <u>base chance</u> of inflicting 1 extra stack of <u>Arcana</u> on the target.">Deals Wind DMG equal to <b><unbreak>#1[i]</unbreak></b> of Black Swan's ATK to a single target enemy, with a <b><unbreak>#2[i]</unbreak></b> <u>base chance</u> of inflicting 1 stack of <u>Arcana</u> on the target. Additionally, when attacking a target that suffers Wind Shear, Bleed, Burn, or Shock, there is respectively a <b><unbreak>#3[i]</unbreak></b> <u>base chance</u> of inflicting 1 extra stack of <u>Arcana</u> on the target.</div>
+                    <div id="130701_description" data-original-description="Deals Wind DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Black Swan's ATK to a single target enemy, with a <b><unbreak>#2[i]%</unbreak></b> <u>base chance</u> of inflicting 1 stack of <u>Arcana</u> on the target. Additionally, when attacking a target that suffers Wind Shear, Bleed, Burn, or Shock, there is respectively a <b><unbreak>#3[i]%</unbreak></b> <u>base chance</u> of inflicting 1 extra stack of <u>Arcana</u> on the target.">Deals Wind DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Black Swan's ATK to a single target enemy, with a <b><unbreak>#2[i]%</unbreak></b> <u>base chance</u> of inflicting 1 stack of <u>Arcana</u> on the target. Additionally, when attacking a target that suffers Wind Shear, Bleed, Burn, or Shock, there is respectively a <b><unbreak>#3[i]%</unbreak></b> <u>base chance</u> of inflicting 1 extra stack of <u>Arcana</u> on the target.</div>
                     <div id="130701_stats"></div>
                     <div id="130701_data" style="display:none;" data-level1="0.3, 0.5, 0.5" data-level2="0.36, 0.53, 0.53" data-level3="0.42, 0.56, 0.56" data-level4="0.48, 0.59, 0.59" data-level5="0.54, 0.62, 0.62" data-level6="0.6, 0.65, 0.65" data-level7="0.66, 0.68, 0.68" data-level8="0.72, 0.71, 0.71" data-level9="0.78, 0.74, 0.74" data-levelid="1, 3, 0, 7, 0, 1" ></div>
                 </li>
@@ -78,7 +176,7 @@ function initializeSkills() {
                 <li>
                     <strong>Decadence, False Twilight (Skill):</strong>
                     <select onchange="updateSkill('130702', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="130702_description" data-original-description="Deals Wind DMG equal to <b><unbreak>#1[i]</unbreak></b> of Black Swan's ATK to a single target enemy and any adjacent targets. At the same time, there is a <unbreak>#2[i]</unbreak> <u>base chance</u> of inflicting 1 stack of <u>Arcana</u> on the target enemy and the adjacent targets. Additionally, there is a <unbreak>#3[i]</unbreak> <u>base chance</u> of reducing the DEF of the target enemy and the adjacent targets by <b><unbreak>#4[f1]</unbreak></b>, lasting for <unbreak>#5[i]</unbreak> turn(s).">Deals Wind DMG equal to <b><unbreak>#1[i]</unbreak></b> of Black Swan's ATK to a single target enemy and any adjacent targets. At the same time, there is a <unbreak>#2[i]</unbreak> <u>base chance</u> of inflicting 1 stack of <u>Arcana</u> on the target enemy and the adjacent targets. Additionally, there is a <unbreak>#3[i]</unbreak> <u>base chance</u> of reducing the DEF of the target enemy and the adjacent targets by <b><unbreak>#4[f1]</unbreak></b>, lasting for <unbreak>#5[i]</unbreak> turn(s).</div>
+                    <div id="130702_description" data-original-description="Deals Wind DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Black Swan's ATK to a single target enemy and any adjacent targets. At the same time, there is a <unbreak>#2[i]%</unbreak> <u>base chance</u> of inflicting 1 stack of <u>Arcana</u> on the target enemy and the adjacent targets. Additionally, there is a <unbreak>#3[i]%</unbreak> <u>base chance</u> of reducing the DEF of the target enemy and the adjacent targets by <b><unbreak>#4[f1]%</unbreak></b>, lasting for <unbreak>#5[i]</unbreak> turn(s).">Deals Wind DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Black Swan's ATK to a single target enemy and any adjacent targets. At the same time, there is a <unbreak>#2[i]%</unbreak> <u>base chance</u> of inflicting 1 stack of <u>Arcana</u> on the target enemy and the adjacent targets. Additionally, there is a <unbreak>#3[i]%</unbreak> <u>base chance</u> of reducing the DEF of the target enemy and the adjacent targets by <b><unbreak>#4[f1]%</unbreak></b>, lasting for <unbreak>#5[i]</unbreak> turn(s).</div>
                     <div id="130702_stats"></div>
                     <div id="130702_data" style="display:none;" data-level1="0.45, 1, 1, 0.148, 3" data-level2="0.495, 1, 1, 0.154, 3" data-level3="0.54, 1, 1, 0.16, 3" data-level4="0.585, 1, 1, 0.166, 3" data-level5="0.63, 1, 1, 0.172, 3" data-level6="0.675, 1, 1, 0.178, 3" data-level7="0.73125, 1, 1, 0.1855, 3" data-level8="0.7875, 1, 1, 0.193, 3" data-level9="0.84375, 1, 1, 0.2005, 3" data-level10="0.9, 1, 1, 0.208, 3" data-level11="0.945, 1, 1, 0.214, 3" data-level12="0.99, 1, 1, 0.22, 3" data-level13="1.035, 1, 1, 0.226, 3" data-level14="1.08, 1, 1, 0.232, 3" data-level15="1.125, 1, 1, 0.238, 3" data-levelid="1, 3, 0, 7, 0, 2" ></div>
                 </li>
@@ -86,7 +184,7 @@ function initializeSkills() {
                 <li>
                     <strong>Bliss of Otherworld's Embrace (Ultimate):</strong>
                     <select onchange="updateSkill('130703', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="130703_description" data-original-description="Inflicts Epiphany on all enemies for <unbreak>#2[i]</unbreak> turn(s).<br>While afflicted with Epiphany, enemies take <b><unbreak>#3[i]</unbreak></b> increased DMG in their turn. Additionally, if enemies are also inflicted with <u>Arcana</u>, they are considered to be simultaneously afflicted with Wind Shear, Bleed, Burn, and Shock. After <u>Arcana</u> causes DMG at the start of each turn, its stacks are not reset. This non-reset effect of <u>Arcana</u> stacks can be triggered up to <unbreak>#4[i]</unbreak> time(s) for the duration of Epiphany. And the trigger count resets when Epiphany is applied again.<br>Deals Wind DMG equal to <b><unbreak>#1[i]</unbreak></b> of Black Swan's ATK to all enemies.">Inflicts Epiphany on all enemies for <unbreak>#2[i]</unbreak> turn(s).<br>While afflicted with Epiphany, enemies take <b><unbreak>#3[i]</unbreak></b> increased DMG in their turn. Additionally, if enemies are also inflicted with <u>Arcana</u>, they are considered to be simultaneously afflicted with Wind Shear, Bleed, Burn, and Shock. After <u>Arcana</u> causes DMG at the start of each turn, its stacks are not reset. This non-reset effect of <u>Arcana</u> stacks can be triggered up to <unbreak>#4[i]</unbreak> time(s) for the duration of Epiphany. And the trigger count resets when Epiphany is applied again.<br>Deals Wind DMG equal to <b><unbreak>#1[i]</unbreak></b> of Black Swan's ATK to all enemies.</div>
+                    <div id="130703_description" data-original-description="Inflicts Epiphany on all enemies for <unbreak>#2[i]</unbreak> turn(s).<br>While afflicted with Epiphany, enemies take <b><unbreak>#3[i]%</unbreak></b> increased DMG in their turn. Additionally, if enemies are also inflicted with <u>Arcana</u>, they are considered to be simultaneously afflicted with Wind Shear, Bleed, Burn, and Shock. After <u>Arcana</u> causes DMG at the start of each turn, its stacks are not reset. This non-reset effect of <u>Arcana</u> stacks can be triggered up to <unbreak>#4[i]</unbreak> time(s) for the duration of Epiphany. And the trigger count resets when Epiphany is applied again.<br>Deals Wind DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Black Swan's ATK to all enemies.">Inflicts Epiphany on all enemies for <unbreak>#2[i]</unbreak> turn(s).<br>While afflicted with Epiphany, enemies take <b><unbreak>#3[i]%</unbreak></b> increased DMG in their turn. Additionally, if enemies are also inflicted with <u>Arcana</u>, they are considered to be simultaneously afflicted with Wind Shear, Bleed, Burn, and Shock. After <u>Arcana</u> causes DMG at the start of each turn, its stacks are not reset. This non-reset effect of <u>Arcana</u> stacks can be triggered up to <unbreak>#4[i]</unbreak> time(s) for the duration of Epiphany. And the trigger count resets when Epiphany is applied again.<br>Deals Wind DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Black Swan's ATK to all enemies.</div>
                     <div id="130703_stats"></div>
                     <div id="130703_data" style="display:none;" data-level1="0.72, 2, 0.15, 1" data-level2="0.768, 2, 0.16, 1" data-level3="0.816, 2, 0.17, 1" data-level4="0.864, 2, 0.18, 1" data-level5="0.912, 2, 0.19, 1" data-level6="0.96, 2, 0.2, 1" data-level7="1.02, 2, 0.2125, 1" data-level8="1.08, 2, 0.225, 1" data-level9="1.14, 2, 0.2375, 1" data-level10="1.2, 2, 0.25, 1" data-level11="1.248, 2, 0.26, 1" data-level12="1.296, 2, 0.27, 1" data-level13="1.344, 2, 0.28, 1" data-level14="1.392, 2, 0.29, 1" data-level15="1.44, 2, 0.3, 1" data-levelid="1, 3, 0, 7, 0, 3" ></div>
                 </li>
@@ -94,7 +192,7 @@ function initializeSkills() {
                 <li>
                     <strong>Loom of Fate's Caprice (Talent):</strong>
                     <select onchange="updateSkill('130704', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="130704_description" data-original-description="Every time an enemy target receives DoT at the start of each turn, there is a <b><unbreak>#2[i]</unbreak></b> <u>base chance</u> for it to be inflicted with 1 stack of <u>Arcana</u>.<br>While afflicted with <u>Arcana</u>, enemy targets receive Wind DoT equal to <b><unbreak>#1[i]</unbreak></b> of Black Swan's ATK at the start of each turn. Each stack of <u>Arcana</u> increases this DMG multiplier by <b><unbreak>#3[f1]</unbreak></b>. Then <u>Arcana</u> resets to 1 stack. <u>Arcana</u> can stack up to <unbreak>#8[i]</unbreak> times.<br>Only when <u>Arcana</u> causes DMG at the start of an enemy target's turn, Black Swan triggers additional effects based on the number of <u>Arcana</u> stacks inflicted on the target:<br>When there are <unbreak>#4[i]</unbreak> or more <u>Arcana</u> stacks, deals Wind DoT equal to <b><unbreak>#5[i]</unbreak></b> of Black Swan's ATK to adjacent targets, with a <b><unbreak>#2[i]</unbreak></b> <u>base chance</u> of inflicting 1 stack of <u>Arcana</u> on adjacent targets.<br>When there are <unbreak>#6[i]</unbreak> or more <u>Arcana</u> stacks, enables the current DoT dealt this time to ignore <unbreak>#7[i]</unbreak> of the target's and adjacent targets' DEF.">Every time an enemy target receives DoT at the start of each turn, there is a <b><unbreak>#2[i]</unbreak></b> <u>base chance</u> for it to be inflicted with 1 stack of <u>Arcana</u>.<br>While afflicted with <u>Arcana</u>, enemy targets receive Wind DoT equal to <b><unbreak>#1[i]</unbreak></b> of Black Swan's ATK at the start of each turn. Each stack of <u>Arcana</u> increases this DMG multiplier by <b><unbreak>#3[f1]</unbreak></b>. Then <u>Arcana</u> resets to 1 stack. <u>Arcana</u> can stack up to <unbreak>#8[i]</unbreak> times.<br>Only when <u>Arcana</u> causes DMG at the start of an enemy target's turn, Black Swan triggers additional effects based on the number of <u>Arcana</u> stacks inflicted on the target:<br>When there are <unbreak>#4[i]</unbreak> or more <u>Arcana</u> stacks, deals Wind DoT equal to <b><unbreak>#5[i]</unbreak></b> of Black Swan's ATK to adjacent targets, with a <b><unbreak>#2[i]</unbreak></b> <u>base chance</u> of inflicting 1 stack of <u>Arcana</u> on adjacent targets.<br>When there are <unbreak>#6[i]</unbreak> or more <u>Arcana</u> stacks, enables the current DoT dealt this time to ignore <unbreak>#7[i]</unbreak> of the target's and adjacent targets' DEF.</div>
+                    <div id="130704_description" data-original-description="Every time an enemy target receives DoT at the start of each turn, there is a <b><unbreak>#2[i]%</unbreak></b> <u>base chance</u> for it to be inflicted with 1 stack of <u>Arcana</u>.<br>While afflicted with <u>Arcana</u>, enemy targets receive Wind DoT equal to <b><unbreak>#1[i]%</unbreak></b> of Black Swan's ATK at the start of each turn. Each stack of <u>Arcana</u> increases this DMG multiplier by <b><unbreak>#3[f1]%</unbreak></b>. Then <u>Arcana</u> resets to 1 stack. <u>Arcana</u> can stack up to <unbreak>#8[i]</unbreak> times.<br>Only when <u>Arcana</u> causes DMG at the start of an enemy target's turn, Black Swan triggers additional effects based on the number of <u>Arcana</u> stacks inflicted on the target:<br>When there are <unbreak>#4[i]</unbreak> or more <u>Arcana</u> stacks, deals Wind DoT equal to <b><unbreak>#5[i]%</unbreak></b> of Black Swan's ATK to adjacent targets, with a <b><unbreak>#2[i]%</unbreak></b> <u>base chance</u> of inflicting 1 stack of <u>Arcana</u> on adjacent targets.<br>When there are <unbreak>#6[i]</unbreak> or more <u>Arcana</u> stacks, enables the current DoT dealt this time to ignore <unbreak>#7[i]%</unbreak> of the target's and adjacent targets' DEF.">Every time an enemy target receives DoT at the start of each turn, there is a <b><unbreak>#2[i]%</unbreak></b> <u>base chance</u> for it to be inflicted with 1 stack of <u>Arcana</u>.<br>While afflicted with <u>Arcana</u>, enemy targets receive Wind DoT equal to <b><unbreak>#1[i]%</unbreak></b> of Black Swan's ATK at the start of each turn. Each stack of <u>Arcana</u> increases this DMG multiplier by <b><unbreak>#3[f1]%</unbreak></b>. Then <u>Arcana</u> resets to 1 stack. <u>Arcana</u> can stack up to <unbreak>#8[i]</unbreak> times.<br>Only when <u>Arcana</u> causes DMG at the start of an enemy target's turn, Black Swan triggers additional effects based on the number of <u>Arcana</u> stacks inflicted on the target:<br>When there are <unbreak>#4[i]</unbreak> or more <u>Arcana</u> stacks, deals Wind DoT equal to <b><unbreak>#5[i]%</unbreak></b> of Black Swan's ATK to adjacent targets, with a <b><unbreak>#2[i]%</unbreak></b> <u>base chance</u> of inflicting 1 stack of <u>Arcana</u> on adjacent targets.<br>When there are <unbreak>#6[i]</unbreak> or more <u>Arcana</u> stacks, enables the current DoT dealt this time to ignore <unbreak>#7[i]%</unbreak> of the target's and adjacent targets' DEF.</div>
                     <div id="130704_stats"></div>
                     <div id="130704_data" style="display:none;" data-level1="0.96, 0.5, 0.048, 3, 0.72, 7, 0.2, 50" data-level2="1.1184, 0.515, 0.05592, 3, 0.8388, 7, 0.2, 50" data-level3="1.2768, 0.53, 0.06384, 3, 0.9576, 7, 0.2, 50" data-level4="1.4352, 0.545, 0.07176, 3, 1.0764, 7, 0.2, 50" data-level5="1.5936, 0.56, 0.07968, 3, 1.1952, 7, 0.2, 50" data-level6="1.752, 0.575, 0.0876, 3, 1.314, 7, 0.2, 50" data-level7="1.896, 0.59375, 0.0948, 3, 1.422, 7, 0.2, 50" data-level8="2.04, 0.6125, 0.102, 3, 1.53, 7, 0.2, 50" data-level9="2.22, 0.63125, 0.111, 3, 1.665, 7, 0.2, 50" data-level10="2.4, 0.65, 0.12, 3, 1.8, 7, 0.2, 50" data-level11="2.52, 0.665, 0.126, 3, 1.89, 7, 0.2, 50" data-level12="2.64, 0.68, 0.132, 3, 1.98, 7, 0.2, 50" data-level13="2.76, 0.695, 0.138, 3, 2.07, 7, 0.2, 50" data-level14="2.88, 0.71, 0.144, 3, 2.16, 7, 0.2, 50" data-level15="3, 0.725, 0.15, 3, 2.25, 7, 0.2, 50" data-levelid="1, 3, 0, 7, 0, 4" ></div>
                 </li>
@@ -110,7 +208,7 @@ function initializeSkills() {
                 <li>
                     <strong>From Façade to Vérité (Technique):</strong>
                     <select onchange="updateSkill('130707', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
-                    <div id="130707_description" data-original-description="After this Technique is used, there is a <unbreak>#1[i]</unbreak> <u>base chance</u> for each enemy to be inflicted with 1 stack of <u>Arcana</u> at the start of the next battle. For each successful application of <u>Arcana</u> on a target, inflicts another stack of <u>Arcana</u> on the same target. This process repeats until <u>Arcana</u> fails to be inflicted on this target. For each successive application of <u>Arcana</u> on a target, its <u>base chance</u> of success is equal to <unbreak>#2[i]</unbreak> of the <u>base chance</u> of the previous successful infliction of <u>Arcana</u> on that target.">After this Technique is used, there is a <unbreak>#1[i]</unbreak> <u>base chance</u> for each enemy to be inflicted with 1 stack of <u>Arcana</u> at the start of the next battle. For each successful application of <u>Arcana</u> on a target, inflicts another stack of <u>Arcana</u> on the same target. This process repeats until <u>Arcana</u> fails to be inflicted on this target. For each successive application of <u>Arcana</u> on a target, its <u>base chance</u> of success is equal to <unbreak>#2[i]</unbreak> of the <u>base chance</u> of the previous successful infliction of <u>Arcana</u> on that target.</div>
+                    <div id="130707_description" data-original-description="After this Technique is used, there is a <unbreak>#1[i]%</unbreak> <u>base chance</u> for each enemy to be inflicted with 1 stack of <u>Arcana</u> at the start of the next battle. For each successful application of <u>Arcana</u> on a target, inflicts another stack of <u>Arcana</u> on the same target. This process repeats until <u>Arcana</u> fails to be inflicted on this target. For each successive application of <u>Arcana</u> on a target, its <u>base chance</u> of success is equal to <unbreak>#2[i]%</unbreak> of the <u>base chance</u> of the previous successful infliction of <u>Arcana</u> on that target.">After this Technique is used, there is a <unbreak>#1[i]%</unbreak> <u>base chance</u> for each enemy to be inflicted with 1 stack of <u>Arcana</u> at the start of the next battle. For each successful application of <u>Arcana</u> on a target, inflicts another stack of <u>Arcana</u> on the same target. This process repeats until <u>Arcana</u> fails to be inflicted on this target. For each successive application of <u>Arcana</u> on a target, its <u>base chance</u> of success is equal to <unbreak>#2[i]%</unbreak> of the <u>base chance</u> of the previous successful infliction of <u>Arcana</u> on that target.</div>
                     <div id="130707_stats"></div>
                     <div id="130707_data" style="display:none;" data-level1="1.5, 0.5" data-levelid="1, 3, 0, 7, 0, 7" ></div>
                 </li>

@@ -1,0 +1,307 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Yunli</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()">
+    <h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+            <h1>Yunli</h1>
+            <p>A sword hunter from the Xianzhou Zhuming and "the Flaming Heart" General Huaiyan's darling granddaughter. Frank and straightforward.<br>She practiced swordsmanship and forging from Huaiyan since young, and thus is the second-youngest prodigy swordmaster of the Flamewheel Octet.<br>Fueled by an intense loathing for the cursed swords that emerged from the Zhuming, she vowed to "hunt down and wipe out all cursed swords."<br><br><strong>ID:</strong> 1221<br>
+            <strong>Path:</strong> Destruction<br>
+            <strong>Element:</strong> Physical<br>
+            <strong>Rarity:</strong> 5*</br></p>
+            <h2>Ascension Material</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110181.png' />
+                        Borisin Teeth
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110182.png' />
+                        Lupitoxin Sawteeth
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110183.png' />
+                        Moon Rage Fang
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110421.png' />
+                        IPC Work Permit
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110505.png' />
+                        Lost Echo of the Shared Wish
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114001.png' />
+                        Dream Collection Component
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114002.png' />
+                        Dream Flow Valve
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114003.png' />
+                        Dream Making Engine
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table>
+            <h2>Stats</h2>
+            <ul>
+                <li><strong>Max HP:</strong> 1358.28</li>
+                <li><strong>Max ATK:</strong> 679.14</li>
+                <li><strong>Max DEF:</strong> 460.85</li>
+                <li><strong>Speed:</strong> 94</li>
+                <li><strong>Taunt:</strong> 125</li>
+                <li><strong>CRIT Rate:</strong> 0.05</li>
+                <li><strong>CRIT DMG:</strong> 0.5</li>
+            </ul>
+            <h2>Skills</h2>
+            <ul>
+        
+                <li>
+                    <strong>Galespin Summersault (Basic ATK):</strong>
+                    <select onchange="updateSkill('122101', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
+                    <div id="122101_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Yunli's ATK to a single enemy.">Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Yunli's ATK to a single enemy.</div>
+                    <div id="122101_stats"></div>
+                    <div id="122101_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 2, 2, 1, 0, 1" ></div>
+                </li>
+            
+                <li>
+                    <strong>Bladeborne Quake (Skill):</strong>
+                    <select onchange="updateSkill('122102', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="122102_description" data-original-description="Restores HP equal to <b><unbreak>#3[f1]%</unbreak></b> of Yunli's ATK plus <b><unbreak>#4[i]</unbreak></b>, and deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Yunli's ATK to a single enemy target and Physical DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Yunli's ATK to adjacent targets.">Restores HP equal to <b><unbreak>#3[f1]%</unbreak></b> of Yunli's ATK plus <b><unbreak>#4[i]</unbreak></b>, and deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Yunli's ATK to a single enemy target and Physical DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Yunli's ATK to adjacent targets.</div>
+                    <div id="122102_stats"></div>
+                    <div id="122102_data" style="display:none;" data-level1="0.6, 0.3, 0.2, 50" data-level2="0.66, 0.33, 0.2125, 80" data-level3="0.72, 0.36, 0.225, 102.5" data-level4="0.78, 0.39, 0.2375, 125" data-level5="0.84, 0.42, 0.25, 140" data-level6="0.9, 0.45, 0.26, 155" data-level7="0.975, 0.4875, 0.27, 166.25" data-level8="1.05, 0.525, 0.28, 177.5" data-level9="1.125, 0.5625, 0.29, 188.75" data-level10="1.2, 0.6, 0.3, 200" data-level11="1.26, 0.63, 0.31, 211.25" data-level12="1.32, 0.66, 0.32, 222.5" data-level13="1.38, 0.69, 0.33, 233.75" data-level14="1.44, 0.72, 0.34, 245" data-level15="1.5, 0.75, 0.35, 256.25" data-levelid="1, 2, 2, 1, 0, 2" ></div>
+                </li>
+            
+                <li>
+                    <strong>Earthbind, Etherbreak (Ultimate):</strong>
+                    <select onchange="updateSkill('122103', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="122103_description" data-original-description="Consumes <unbreak>#8[i]</unbreak> Energy. Yunli gains Block and Taunts all enemies, lasting until the end of the next turn of an allied or enemy unit. While Block is active, Yunli's CRIT DMG increases by <b><unbreak>#2[i]%</unbreak></b>. When the Counter Talent effect is triggered while Block is active, it will be switched to a <u>Counter</u> Intuit: Cull effect and also dispel Block. If no Counters are triggered while Block is active, when the effect ends, Yunli will immediately launch a <u>Counter</u> Intuit: Slash effect on a random enemy target. When an Intuit: Slash is inflicted, it will cause the next Intuit: Slash to become an Intuit: Cull.<br>Intuit: Slash: Deals Physical DMG to the target equal to <b><unbreak>#1[i]%</unbreak></b> of Yunli's ATK, and deals Physical DMG to adjacent targets equal to <b><unbreak>#6[i]%</unbreak></b> of Yunli's ATK.<br>Intuit: Cull: Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Yunli's ATK to the target, and deals Physical DMG equal to <b><unbreak>#6[i]%</unbreak></b> of Yunli's ATK to adjacent targets. Then, additionally deals <unbreak>#4[i]</unbreak> instance(s) of DMG, with each instance dealing Physical DMG equal to <b><unbreak>#7[i]%</unbreak></b> of Yunli's ATK to a random single enemy target. When Yunli deals DMG through this ability, it will be viewed as Ultimate DMG.">Consumes <unbreak>#8[i]</unbreak> Energy. Yunli gains Block and Taunts all enemies, lasting until the end of the next turn of an allied or enemy unit. While Block is active, Yunli's CRIT DMG increases by <b><unbreak>#2[i]%</unbreak></b>. When the Counter Talent effect is triggered while Block is active, it will be switched to a <u>Counter</u> Intuit: Cull effect and also dispel Block. If no Counters are triggered while Block is active, when the effect ends, Yunli will immediately launch a <u>Counter</u> Intuit: Slash effect on a random enemy target. When an Intuit: Slash is inflicted, it will cause the next Intuit: Slash to become an Intuit: Cull.<br>Intuit: Slash: Deals Physical DMG to the target equal to <b><unbreak>#1[i]%</unbreak></b> of Yunli's ATK, and deals Physical DMG to adjacent targets equal to <b><unbreak>#6[i]%</unbreak></b> of Yunli's ATK.<br>Intuit: Cull: Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Yunli's ATK to the target, and deals Physical DMG equal to <b><unbreak>#6[i]%</unbreak></b> of Yunli's ATK to adjacent targets. Then, additionally deals <unbreak>#4[i]</unbreak> instance(s) of DMG, with each instance dealing Physical DMG equal to <b><unbreak>#7[i]%</unbreak></b> of Yunli's ATK to a random single enemy target. When Yunli deals DMG through this ability, it will be viewed as Ultimate DMG.</div>
+                    <div id="122103_stats"></div>
+                    <div id="122103_data" style="display:none;" data-level1="1.44, 0.6, 0, 6, 0, 0.72, 0.48, 120" data-level2="1.536, 0.64, 0, 6, 0, 0.768, 0.512, 120" data-level3="1.632, 0.68, 0, 6, 0, 0.816, 0.544, 120" data-level4="1.728, 0.72, 0, 6, 0, 0.864, 0.576, 120" data-level5="1.824, 0.76, 0, 6, 0, 0.912, 0.608, 120" data-level6="1.92, 0.8, 0, 6, 0, 0.96, 0.64, 120" data-level7="2.04, 0.85, 0, 6, 0, 1.02, 0.68, 120" data-level8="2.16, 0.9, 0, 6, 0, 1.08, 0.72, 120" data-level9="2.28, 0.95, 0, 6, 0, 1.14, 0.76, 120" data-level10="2.4, 1, 0, 6, 0, 1.2, 0.8, 120" data-level11="2.496, 1.04, 0, 6, 0, 1.248, 0.832, 120" data-level12="2.592, 1.08, 0, 6, 0, 1.296, 0.864, 120" data-level13="2.688, 1.12, 0, 6, 0, 1.344, 0.896, 120" data-level14="2.784, 1.16, 0, 6, 0, 1.392, 0.928, 120" data-level15="2.88, 1.2, 0, 6, 0, 1.44, 0.96, 120" data-levelid="1, 2, 2, 1, 0, 3" ></div>
+                </li>
+            
+                <li>
+                    <strong>Flashforge (Talent):</strong>
+                    <select onchange="updateSkill('122104', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="122104_description" data-original-description="When Yunli is attacked by an enemy target, immediately launches a <u>Counter</u> on the attacker, dealing Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Yunli's ATK, and Physical DMG to adjacent targets equal to <b><unbreak>#2[i]%</unbreak></b> of Yunli's ATK.">When Yunli is attacked by an enemy target, immediately launches a <u>Counter</u> on the attacker, dealing Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Yunli's ATK, and Physical DMG to adjacent targets equal to <b><unbreak>#2[i]%</unbreak></b> of Yunli's ATK.</div>
+                    <div id="122104_stats"></div>
+                    <div id="122104_data" style="display:none;" data-level1="0.6, 0.3" data-level2="0.66, 0.33" data-level3="0.72, 0.36" data-level4="0.78, 0.39" data-level5="0.84, 0.42" data-level6="0.9, 0.45" data-level7="0.975, 0.4875" data-level8="1.05, 0.525" data-level9="1.125, 0.5625" data-level10="1.2, 0.6" data-level11="1.26, 0.63" data-level12="1.32, 0.66" data-level13="1.38, 0.69" data-level14="1.44, 0.72" data-level15="1.5, 0.75" data-levelid="1, 2, 2, 1, 0, 4" ></div>
+                </li>
+            
+                <li>
+                    <strong>Attack (Unknown):</strong>
+                    <select onchange="updateSkill('122106', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="122106_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div>
+                    <div id="122106_stats"></div>
+                    <div id="122106_data" style="display:none;" data-level1="" data-levelid="1, 2, 2, 1, 0, 6" ></div>
+                </li>
+            
+                <li>
+                    <strong>Posterior Precedence (Technique):</strong>
+                    <select onchange="updateSkill('122107', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="122107_description" data-original-description="Gains the Ward effect for <unbreak>15</unbreak> seconds. When entering combat by attacking enemies or receiving an attack, immediately inflicts Intuit: Cull on a random enemy target, and increases this attack's DMG by <unbreak>#1[i]%</unbreak>.">Gains the Ward effect for <unbreak>15</unbreak> seconds. When entering combat by attacking enemies or receiving an attack, immediately inflicts Intuit: Cull on a random enemy target, and increases this attack's DMG by <unbreak>#1[i]%</unbreak>.</div>
+                    <div id="122107_stats"></div>
+                    <div id="122107_data" style="display:none;" data-level1="0.8" data-levelid="1, 2, 2, 1, 0, 7" ></div>
+                </li>
+            
+            </ul>
+            <h2>Ascension Traces</h2>
+            <ul>
+        
+                            <li>
+                            <strong>Fiery Wheel:</strong><br>Upon being attacked, Yunli additionaly regenerates 15 extra Energy.
+                            </li>
+                        
+                            <li>
+                            <strong>Demon Quell:</strong><br>While in the Block state, resists the Crowd Control debuff received and reduces DMG received by 20%.
+                            </li>
+                        
+                            <li>
+                            <strong>True Sunder:</strong><br>When using a Counter, increases Yunli's ATK by 30% for 1 turn.
+                            </li>
+                        
+                            </ul>
+                            <h2>Minor Traces</h2>
+                            <ul>
+                        
+                                <li>
+                                <strong>ATK Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT Rate Boost:</strong> 2.7%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT Rate Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>HP Boost:</strong> 8.0%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 8.0%
+                                </li>
+                            
+            </ul>
+            <h2>Eidolons</h2>
+            <ul>
+        
+                <li>
+                    <strong>Weathered Blade Does Not Sully:</strong><br>DMG from Intuit: Slash and Intuit: Cull increases by <unbreak>20%</unbreak>, and Intuit: Cull's extra DMG Hits increases by <unbreak>3</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>First Luster Breaks Dawn:</strong><br>Yunli increases her own CRIT Rate by <unbreak>18%</unbreak> at the end of the turn, lasting until the beginning of the next turn.
+                </li>
+            
+                <li>
+                    <strong>Mastlength Twirls Mountweight:</strong><br>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Artisan's Ironsong:</strong><br>When Yunli deals DMG via launching a Counter, ignores <unbreak>20%</unbreak> of the target's DEF.
+                </li>
+            
+                <li>
+                    <strong>Blade of Old Outlasts All:</strong><br>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Walk in Blade, Talk in Zither:</strong><br>After using Ultimate, if the next unit to act is an enemy unit, Intuit: Cull will be triggered regardless of whether it is targeting Yunli, and the Block effect provided by the Ultimate will not be dispelled and will last until the end of the next turn. This effect can only be triggered <unbreak>1</unbreak> per turn.
+                </li>
+            
+            </ul>
+            </body>
+        </html>
+        

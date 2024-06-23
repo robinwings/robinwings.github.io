@@ -17,13 +17,22 @@
         var originalDescription = refinementsElement.getAttribute('data-original-description');
         
         statsArray.forEach((stat, index) => {
-            var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
-            var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
+            var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
 
-            var formattedStat = stat;
-
-            originalDescription = originalDescription.replace(placeholder_i, formattedStat);
-            originalDescription = originalDescription.replace(placeholder_f1, formattedStat);
+            originalDescription = originalDescription.replace(placeholderRegExp, (match, p1, p2) => {
+                var formattedStat = stat;
+                console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+                if (p2 === '%') {
+                    formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+                } else {
+                    if (stat % 1 !== 0) {
+                        formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                    }
+                }
+                console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+                return formattedStat;
+            });
         });
 
         refinementsElement.innerHTML = originalDescription;
@@ -66,13 +75,68 @@
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-                <div id="23016_refinements" data-original-description="Increase the wearer's CRIT Rate by <b><unbreak>#1[i]</unbreak></b> and their follow-up attacks' DMG by <b><unbreak>#2[i]</unbreak></b>. After the wearer uses a follow-up attack, apply the Tame state to the target, stacking up to <unbreak>#4[i]</unbreak> stacks. When allies hit enemy targets under the Tame state, every Tame stack increases the CRIT DMG dealt by <b><unbreak>#3[i]</unbreak></b>.">
-                    Increase the wearer's CRIT Rate by <b><unbreak>#1[i]</unbreak></b> and their follow-up attacks' DMG by <b><unbreak>#2[i]</unbreak></b>. After the wearer uses a follow-up attack, apply the Tame state to the target, stacking up to <unbreak>#4[i]</unbreak> stacks. When allies hit enemy targets under the Tame state, every Tame stack increases the CRIT DMG dealt by <b><unbreak>#3[i]</unbreak></b>.
+                <div id="23016_refinements" data-original-description="Increase the wearer's CRIT Rate by <b><unbreak>#1[i]%</unbreak></b> and their follow-up attacks' DMG by <b><unbreak>#2[i]%</unbreak></b>. After the wearer uses a follow-up attack, apply the Tame state to the target, stacking up to <unbreak>#4[i]</unbreak> stacks. When allies hit enemy targets under the Tame state, every Tame stack increases the CRIT DMG dealt by <b><unbreak>#3[i]%</unbreak></b>.">
+                    Increase the wearer's CRIT Rate by <b><unbreak>#1[i]%</unbreak></b> and their follow-up attacks' DMG by <b><unbreak>#2[i]%</unbreak></b>. After the wearer uses a follow-up attack, apply the Tame state to the target, stacking up to <unbreak>#4[i]</unbreak> stacks. When allies hit enemy targets under the Tame state, every Tame stack increases the CRIT DMG dealt by <b><unbreak>#3[i]%</unbreak></b>.
                 </div>
                 <div id="23016_data" style="display:none;" data-level1="0.18, 0.3, 0.12, 2" data-level2="0.21, 0.35, 0.14, 2" data-level3="0.24, 0.4, 0.16, 2" data-level4="0.27, 0.45, 0.18, 2" data-level5="0.3, 0.5, 0.2, 2" data-levelid="2, 3, 0, 1, 6" >
                 </div>
             </li>
         </ul>
+        <h2>Ascension Materials</h2>
+        <table>
+            <tr>
+                <th>Material</th>
+                <th>Amount</th>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                    Credit
+                </td>
+                <td>385000</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110121.png' />
+                    Arrow of the Beast Hunter
+                </td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110122.png' />
+                    Arrow of the Demon Slayer
+                </td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110123.png' />
+                    Arrow of the Starchaser
+                </td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112001.png' />
+                    Silvermane Badge
+                </td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112002.png' />
+                    Silvermane Insignia
+                </td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112003.png' />
+                    Silvermane Medal
+                </td>
+                <td>14</td>
+            </tr>
     </body>
     </html>
     

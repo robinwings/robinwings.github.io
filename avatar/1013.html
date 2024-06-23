@@ -24,11 +24,22 @@ function updateSkill(skillId, level) {
     
     var updatedDescription = originalDescription;
     statsArray.forEach((stat, index) => {
-        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
-        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
-        var formattedStat = stat;
-        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
-        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
     });
     
     console.log('Updated description:', updatedDescription);
@@ -53,6 +64,94 @@ function initializeSkills() {
             <strong>Path:</strong> Erudition<br>
             <strong>Element:</strong> Ice<br>
             <strong>Rarity:</strong> 4*</br></p>
+            <h2>Ascension Material</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>2646400</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>5</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110131.png' />
+                        Key of Inspiration
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110132.png' />
+                        Key of Knowledge
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110133.png' />
+                        Key of Wisdom
+                    </td>
+                    <td>105</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110403.png' />
+                        Horn of Snow
+                    </td>
+                    <td>50</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110501.png' />
+                        Destroyer's Final Road
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111001.png' />
+                        Extinguished Core
+                    </td>
+                    <td>40</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111002.png' />
+                        Glimmering Core
+                    </td>
+                    <td>55</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111003.png' />
+                        Squirming Core
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+            </table>
             <h2>Stats</h2>
             <ul>
                 <li><strong>Max HP:</strong> 952.56</li>
@@ -63,14 +162,13 @@ function initializeSkills() {
                 <li><strong>CRIT Rate:</strong> 0.05</li>
                 <li><strong>CRIT DMG:</strong> 0.5</li>
             </ul>
-
             <h2>Skills</h2>
             <ul>
         
                 <li>
                     <strong>What Are You Looking At? (Basic ATK):</strong>
                     <select onchange="updateSkill('101301', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
-                    <div id="101301_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Herta's ATK to a single enemy.">Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Herta's ATK to a single enemy.</div>
+                    <div id="101301_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Herta's ATK to a single enemy.">Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Herta's ATK to a single enemy.</div>
                     <div id="101301_stats"></div>
                     <div id="101301_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 0, 1, 3, 0, 1" ></div>
                 </li>
@@ -78,7 +176,7 @@ function initializeSkills() {
                 <li>
                     <strong>One-Time Offer (Skill):</strong>
                     <select onchange="updateSkill('101302', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="101302_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Herta's ATK to all enemies. If the enemy's HP percentage is <unbreak>#2[i]</unbreak> or higher, DMG dealt to this target increases by <unbreak>#3[i]</unbreak>.">Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Herta's ATK to all enemies. If the enemy's HP percentage is <unbreak>#2[i]</unbreak> or higher, DMG dealt to this target increases by <unbreak>#3[i]</unbreak>.</div>
+                    <div id="101302_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Herta's ATK to all enemies. If the enemy's HP percentage is <unbreak>#2[i]%</unbreak> or higher, DMG dealt to this target increases by <unbreak>#3[i]%</unbreak>.">Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Herta's ATK to all enemies. If the enemy's HP percentage is <unbreak>#2[i]%</unbreak> or higher, DMG dealt to this target increases by <unbreak>#3[i]%</unbreak>.</div>
                     <div id="101302_stats"></div>
                     <div id="101302_data" style="display:none;" data-level1="0.5, 0.5, 0.2" data-level2="0.55, 0.5, 0.2" data-level3="0.6, 0.5, 0.2" data-level4="0.65, 0.5, 0.2" data-level5="0.7, 0.5, 0.2" data-level6="0.75, 0.5, 0.2" data-level7="0.8125, 0.5, 0.2" data-level8="0.875, 0.5, 0.2" data-level9="0.9375, 0.5, 0.2" data-level10="1, 0.5, 0.2" data-level11="1.05, 0.5, 0.2" data-level12="1.1, 0.5, 0.2" data-level13="1.15, 0.5, 0.2" data-level14="1.2, 0.5, 0.2" data-level15="1.25, 0.5, 0.2" data-levelid="1, 0, 1, 3, 0, 2" ></div>
                 </li>
@@ -86,7 +184,7 @@ function initializeSkills() {
                 <li>
                     <strong>It's Magic, I Added Some Magic (Ultimate):</strong>
                     <select onchange="updateSkill('101303', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="101303_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Herta's ATK to all enemies.">Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Herta's ATK to all enemies.</div>
+                    <div id="101303_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Herta's ATK to all enemies.">Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Herta's ATK to all enemies.</div>
                     <div id="101303_stats"></div>
                     <div id="101303_data" style="display:none;" data-level1="1.2" data-level2="1.28" data-level3="1.36" data-level4="1.44" data-level5="1.52" data-level6="1.6" data-level7="1.7" data-level8="1.8" data-level9="1.9" data-level10="2" data-level11="2.08" data-level12="2.16" data-level13="2.24" data-level14="2.32" data-level15="2.4" data-levelid="1, 0, 1, 3, 0, 3" ></div>
                 </li>
@@ -94,7 +192,7 @@ function initializeSkills() {
                 <li>
                     <strong>Fine, I'll Do It Myself (Talent):</strong>
                     <select onchange="updateSkill('101304', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="101304_description" data-original-description="When an ally's attack causes an enemy's HP percentage to fall to <unbreak>#1[i]</unbreak> or lower, Herta will launch a <u>follow-up attack</u>, dealing Ice DMG equal to <b><unbreak>#2[i]</unbreak></b> of Herta's ATK to all enemies.">When an ally's attack causes an enemy's HP percentage to fall to <unbreak>#1[i]</unbreak> or lower, Herta will launch a <u>follow-up attack</u>, dealing Ice DMG equal to <b><unbreak>#2[i]</unbreak></b> of Herta's ATK to all enemies.</div>
+                    <div id="101304_description" data-original-description="When an ally's attack causes an enemy's HP percentage to fall to <unbreak>#1[i]%</unbreak> or lower, Herta will launch a <u>follow-up attack</u>, dealing Ice DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Herta's ATK to all enemies.">When an ally's attack causes an enemy's HP percentage to fall to <unbreak>#1[i]%</unbreak> or lower, Herta will launch a <u>follow-up attack</u>, dealing Ice DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Herta's ATK to all enemies.</div>
                     <div id="101304_stats"></div>
                     <div id="101304_data" style="display:none;" data-level1="0.5, 0.25" data-level2="0.5, 0.265" data-level3="0.5, 0.28" data-level4="0.5, 0.295" data-level5="0.5, 0.31" data-level6="0.5, 0.325" data-level7="0.5, 0.34375" data-level8="0.5, 0.3625" data-level9="0.5, 0.38125" data-level10="0.5, 0.4" data-level11="0.5, 0.415" data-level12="0.5, 0.43" data-level13="0.5, 0.445" data-level14="0.5, 0.46" data-level15="0.5, 0.475" data-levelid="1, 0, 1, 3, 0, 4" ></div>
                 </li>
@@ -110,7 +208,7 @@ function initializeSkills() {
                 <li>
                     <strong>It Can Still Be Optimized (Technique):</strong>
                     <select onchange="updateSkill('101307', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
-                    <div id="101307_description" data-original-description="After using her Technique, Herta's ATK increases by <unbreak>#1[i]</unbreak> for <unbreak>#2[i]</unbreak> turn(s) at the beginning of the next battle.">After using her Technique, Herta's ATK increases by <unbreak>#1[i]</unbreak> for <unbreak>#2[i]</unbreak> turn(s) at the beginning of the next battle.</div>
+                    <div id="101307_description" data-original-description="After using her Technique, Herta's ATK increases by <unbreak>#1[i]%</unbreak> for <unbreak>#2[i]</unbreak> turn(s) at the beginning of the next battle.">After using her Technique, Herta's ATK increases by <unbreak>#1[i]%</unbreak> for <unbreak>#2[i]</unbreak> turn(s) at the beginning of the next battle.</div>
                     <div id="101307_stats"></div>
                     <div id="101307_data" style="display:none;" data-level1="0.4, 3" data-levelid="1, 0, 1, 3, 0, 7" ></div>
                 </li>

@@ -1,0 +1,315 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>March 7th</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()">
+    <h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <button onclick="window.location.href='../avatar.html'">Character</button>  <button onclick="window.location.href='../weapons.html'">Lightcone</button>  <button onclick="window.location.href='../relics.html'">Relic Set</button>  </div>
+            <h1>March 7th</h1>
+            <p>March 7th in a Xianzhou-styled outfit. A sword-wielding female martial artist.<br>Learning swordsmanship from both Yunli and Yanqing, she is eager to create more beautiful memories on the Xianzhou.<br><br><strong>ID:</strong> 1224<br>
+            <strong>Path:</strong> The Hunt<br>
+            <strong>Element:</strong> Imaginary<br>
+            <strong>Rarity:</strong> 4*</br></p>
+            <h2>Ascension Material</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>2646400</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>5</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110191.png' />
+                        Meteoric Bullet
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110192.png' />
+                        Destined Expiration
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110193.png' />
+                        Countertemporal Shot
+                    </td>
+                    <td>105</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110403.png' />
+                        Horn of Snow
+                    </td>
+                    <td>50</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110501.png' />
+                        Destroyer's Final Road
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111011.png' />
+                        Thief's Instinct
+                    </td>
+                    <td>40</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111012.png' />
+                        Usurper's Scheme
+                    </td>
+                    <td>55</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111013.png' />
+                        Conqueror's Will
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+            </table>
+            <h2>Stats</h2>
+            <ul>
+                <li><strong>Max HP:</strong> 917.28</li>
+                <li><strong>Max ATK:</strong> 564.48</li>
+                <li><strong>Max DEF:</strong> 418.95</li>
+                <li><strong>Speed:</strong> 107</li>
+                <li><strong>Taunt:</strong> 75</li>
+                <li><strong>CRIT Rate:</strong> 0.05</li>
+                <li><strong>CRIT DMG:</strong> 0.5</li>
+            </ul>
+            <h2>Skills</h2>
+            <ul>
+        
+                <li>
+                    <strong>My Sword Zaps Demons (Basic ATK):</strong>
+                    <select onchange="updateSkill('122401', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
+                    <div id="122401_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of March 7th's ATK to a single enemy and gains <unbreak>#2[i]</unbreak> Charge(s).">Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of March 7th's ATK to a single enemy and gains <unbreak>#2[i]</unbreak> Charge(s).</div>
+                    <div id="122401_stats"></div>
+                    <div id="122401_data" style="display:none;" data-level1="0.5, 1" data-level2="0.6, 1" data-level3="0.7, 1" data-level4="0.8, 1" data-level5="0.9, 1" data-level6="1, 1" data-level7="1.1, 1" data-level8="1.2, 1" data-level9="1.3, 1" data-levelid="1, 2, 2, 4, 0, 1" ></div>
+                </li>
+            
+                <li>
+                    <strong>Master, It's Tea Time! (Skill):</strong>
+                    <select onchange="updateSkill('122402', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="122402_description" data-original-description="Designates a single ally (excluding this character) as the Master and increases Master's SPD by <b><unbreak>#1[f1]%</unbreak></b>. Only the latest target of March 7th's Skill will be regarded as her "Master."<br>When using Basic ATK or dealing DMG from 1 hit of her Enhanced Basic ATK, triggers the following effects based on the specific Path of the Master:<br>Erudition, Destruction, The Hunt: Additionally deals <u>Additional DMG</u> (Combat Type based on the Master's Combat Type) equal to <b><unbreak>#2[i]%</unbreak></b> of March 7th's ATK.<br>Harmony, Nihility, Preservation, Abundance: The Toughness Reduction for this DMG increases by <unbreak>#3[i]%</unbreak>.">Designates a single ally (excluding this character) as the Master and increases Master's SPD by <b><unbreak>#1[f1]%</unbreak></b>. Only the latest target of March 7th's Skill will be regarded as her "Master."<br>When using Basic ATK or dealing DMG from 1 hit of her Enhanced Basic ATK, triggers the following effects based on the specific Path of the Master:<br>Erudition, Destruction, The Hunt: Additionally deals <u>Additional DMG</u> (Combat Type based on the Master's Combat Type) equal to <b><unbreak>#2[i]%</unbreak></b> of March 7th's ATK.<br>Harmony, Nihility, Preservation, Abundance: The Toughness Reduction for this DMG increases by <unbreak>#3[i]%</unbreak>.</div>
+                    <div id="122402_stats"></div>
+                    <div id="122402_data" style="display:none;" data-level1="0.06, 0.1, 1" data-level2="0.064, 0.11, 1" data-level3="0.067999996, 0.12, 1" data-level4="0.072, 0.13, 1" data-level5="0.076, 0.14, 1" data-level6="0.08, 0.15, 1" data-level7="0.085, 0.1625, 1" data-level8="0.09, 0.175, 1" data-level9="0.095, 0.1875, 1" data-level10="0.1, 0.2, 1" data-level11="0.104, 0.21, 1" data-level12="0.108, 0.22, 1" data-level13="0.112, 0.23, 1" data-level14="0.116, 0.24, 1" data-level15="0.12, 0.25, 1" data-levelid="1, 2, 2, 4, 0, 2" ></div>
+                </li>
+            
+                <li>
+                    <strong>March 7th, the Apex Heroine (Ultimate):</strong>
+                    <select onchange="updateSkill('122403', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="122403_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of March 7th's ATK to a single target enemy.<br>Increases the initial Hits Per Action of the next Enhanced Basic ATK by <unbreak>#2[i]</unbreak> hits and increase the <u>fixed chance </u>of additionally dealing DMG by <unbreak>#3[i]%</unbreak>.">Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of March 7th's ATK to a single target enemy.<br>Increases the initial Hits Per Action of the next Enhanced Basic ATK by <unbreak>#2[i]</unbreak> hits and increase the <u>fixed chance </u>of additionally dealing DMG by <unbreak>#3[i]%</unbreak>.</div>
+                    <div id="122403_stats"></div>
+                    <div id="122403_data" style="display:none;" data-level1="1.44, 2, 0.2" data-level2="1.536, 2, 0.2" data-level3="1.632, 2, 0.2" data-level4="1.728, 2, 0.2" data-level5="1.824, 2, 0.2" data-level6="1.92, 2, 0.2" data-level7="2.04, 2, 0.2" data-level8="2.16, 2, 0.2" data-level9="2.28, 2, 0.2" data-level10="2.4, 2, 0.2" data-level11="2.496, 2, 0.2" data-level12="2.592, 2, 0.2" data-level13="2.688, 2, 0.2" data-level14="2.784, 2, 0.2" data-level15="2.88, 2, 0.2" data-levelid="1, 2, 2, 4, 0, 3" ></div>
+                </li>
+            
+                <li>
+                    <strong>Master, I've Ascended! (Talent):</strong>
+                    <select onchange="updateSkill('122404', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
+                    <div id="122404_description" data-original-description="After the Master uses an attack or Ultimate, March 7th gains up to 1 Charge each time.<br>When the Charge is at <unbreak>#1[i]</unbreak> or more, March 7th immediately takes action again, and increases the DMG she deals by <b><unbreak>#2[i]%</unbreak></b>. Her Basic ATK is Enhanced, and only her Enhanced Basic ATK can be used. After using Enhanced Basic ATK, consumes <unbreak>#1[i]</unbreak> Charge.">After the Master uses an attack or Ultimate, March 7th gains up to 1 Charge each time.<br>When the Charge is at <unbreak>#1[i]</unbreak> or more, March 7th immediately takes action again, and increases the DMG she deals by <b><unbreak>#2[i]%</unbreak></b>. Her Basic ATK is Enhanced, and only her Enhanced Basic ATK can be used. After using Enhanced Basic ATK, consumes <unbreak>#1[i]</unbreak> Charge.</div>
+                    <div id="122404_stats"></div>
+                    <div id="122404_data" style="display:none;" data-level1="7, 0.4" data-level2="7, 0.44" data-level3="7, 0.48" data-level4="7, 0.52" data-level5="7, 0.56" data-level6="7, 0.6" data-level7="7, 0.65" data-level8="7, 0.7" data-level9="7, 0.75" data-level10="7, 0.8" data-level11="7, 0.84" data-level12="7, 0.88" data-level13="7, 0.92" data-level14="7, 0.96" data-level15="7, 1" data-levelid="1, 2, 2, 4, 0, 4" ></div>
+                </li>
+            
+                <li>
+                    <strong>Attack (Unknown):</strong>
+                    <select onchange="updateSkill('122406', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="122406_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div>
+                    <div id="122406_stats"></div>
+                    <div id="122406_data" style="display:none;" data-level1="" data-levelid="1, 2, 2, 4, 0, 6" ></div>
+                </li>
+            
+                <li>
+                    <strong>Feast in One Go (Technique):</strong>
+                    <select onchange="updateSkill('122407', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
+                    <div id="122407_description" data-original-description="If March 7th is in the team, every time an ally uses Technique, March 7th gains a Charge upon entering the next battle, up to <unbreak>#1[i]</unbreak> Charge(s).<br>After using her Technique, March 7th regenerates <unbreak>#2[i]</unbreak> Energy upon entering the next battle.">If March 7th is in the team, every time an ally uses Technique, March 7th gains a Charge upon entering the next battle, up to <unbreak>#1[i]</unbreak> Charge(s).<br>After using her Technique, March 7th regenerates <unbreak>#2[i]</unbreak> Energy upon entering the next battle.</div>
+                    <div id="122407_stats"></div>
+                    <div id="122407_data" style="display:none;" data-level1="3, 30" data-levelid="1, 2, 2, 4, 0, 7" ></div>
+                </li>
+            
+                <li>
+                    <strong>Brows Be Smitten, Heart Be Bitten (Basic ATK):</strong>
+                    <select onchange="updateSkill('122408', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
+                    <div id="122408_description" data-original-description="This attack deals <unbreak>#4[i]</unbreak> Hits Per Action initially. Each hit against the target enemy deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of March 7th's ATK. After dealing the final hit, there is a <unbreak>#2[i]%</unbreak> <u>fixed chance</u> to deal 1 extra hit, up to <unbreak>#3[i]</unbreak> extra hit(s). Energy regenerated from using Enhanced Basic ATK does not increase with the number of Hits Per Action.<br>Enhanced Basic ATK cannot recover Skill Points.">This attack deals <unbreak>#4[i]</unbreak> Hits Per Action initially. Each hit against the target enemy deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of March 7th's ATK. After dealing the final hit, there is a <unbreak>#2[i]%</unbreak> <u>fixed chance</u> to deal 1 extra hit, up to <unbreak>#3[i]</unbreak> extra hit(s). Energy regenerated from using Enhanced Basic ATK does not increase with the number of Hits Per Action.<br>Enhanced Basic ATK cannot recover Skill Points.</div>
+                    <div id="122408_stats"></div>
+                    <div id="122408_data" style="display:none;" data-level1="0.5, 0.6, 3, 3" data-level2="0.6, 0.6, 3, 3" data-level3="0.7, 0.6, 3, 3" data-level4="0.8, 0.6, 3, 3" data-level5="0.9, 0.6, 3, 3" data-level6="1, 0.6, 3, 3" data-level7="1.1, 0.6, 3, 3" data-level8="1.2, 0.6, 3, 3" data-level9="1.3, 0.6, 3, 3" data-levelid="1, 2, 2, 4, 0, 8" ></div>
+                </li>
+            
+            </ul>
+            <h2>Ascension Traces</h2>
+            <ul>
+        
+                            <li>
+                            <strong>Soaring Swan:</strong><br>When the battle starts, March 7th's action is Advanced Forward by 25%.
+                            </li>
+                        
+                            <li>
+                            <strong>Acute Smarts:</strong><br>March 7th can reduce the Toughness of enemies with Weakness of Master's Type. When inflicting Weakness Break, also triggers the Imaginary Weakness Break effect.
+                            </li>
+                        
+                            <li>
+                            <strong>Gliding Waves:</strong><br>When Master is on the field, increases March 7th's SPD by 10%.
+                            </li>
+                        
+                            </ul>
+                            <h2>Minor Traces</h2>
+                            <ul>
+                        
+                                <li>
+                                <strong>ATK Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT Rate Boost:</strong> 2.7%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 5.0%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT Rate Boost:</strong> 4.0%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 6.0%
+                                </li>
+                            
+                                <li>
+                                <strong>DEF Boost:</strong> 7.5%
+                                </li>
+                            
+                                <li>
+                                <strong>CRIT Rate Boost:</strong> 5.3%
+                                </li>
+                            
+                                <li>
+                                <strong>ATK Boost:</strong> 8.0%
+                                </li>
+                            
+            </ul>
+            <h2>Eidolons</h2>
+            <ul>
+        
+                <li>
+                    <strong>My Sword Stirs Starlight:</strong><br>After using Ultimate, increases the CRIT DMG of the next Enhanced Basic ATK by <unbreak>36%</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Blade Dances on Waves' Fight:</strong><br>After the Master uses their Basic ATK or Skill to attack an enemy, March 7th immediately launches a follow-up attack and deals Imaginary DMG equal to <unbreak>60%</unbreak> of March 7th's ATK to the target enemy. Additionally, triggers an effect corresponding to Master's Path and gains <unbreak>1</unbreak> Charge(s). If there is no target enemy that can be attacked, March 7th attacks a random enemy. This effect can only be triggered once per turn.
+                </li>
+            
+                <li>
+                    <strong>Sharp Wit in Martial Might:</strong><br>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Being Fabulous Never Frights:</strong><br>At the start of the turn, regenerates <unbreak>5</unbreak> Energy.
+                </li>
+            
+                <li>
+                    <strong>Sword Delights, Sugar Blights:</strong><br>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.
+                </li>
+            
+                <li>
+                    <strong>Me, the Best Girl on Sight:</strong><br>After using Enhanced Basic ATK, increases the Master's CRIT DMG by <unbreak>60%</unbreak> and Break Effect by <unbreak>36%</unbreak>, lasting for <unbreak>2</unbreak> turn(s).
+                </li>
+            
+            </ul>
+            </body>
+        </html>
+        

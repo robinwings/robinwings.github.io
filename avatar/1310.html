@@ -24,11 +24,22 @@ function updateSkill(skillId, level) {
     
     var updatedDescription = originalDescription;
     statsArray.forEach((stat, index) => {
-        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
-        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
-        var formattedStat = stat;
-        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
-        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
     });
     
     console.log('Updated description:', updatedDescription);
@@ -53,6 +64,94 @@ function initializeSkills() {
             <strong>Path:</strong> Destruction<br>
             <strong>Element:</strong> Fire<br>
             <strong>Rarity:</strong> 5*</br></p>
+            <h2>Ascension Material</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110181.png' />
+                        Borisin Teeth
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110182.png' />
+                        Lupitoxin Sawteeth
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110183.png' />
+                        Moon Rage Fang
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110422.png' />
+                        Raging Heart
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110505.png' />
+                        Lost Echo of the Shared Wish
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114011.png' />
+                        Tatters of Thought
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114012.png' />
+                        Fragments of Impression
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114013.png' />
+                        Shards of Desires
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table>
             <h2>Stats</h2>
             <ul>
                 <li><strong>Max HP:</strong> 814.97</li>
@@ -63,14 +162,13 @@ function initializeSkills() {
                 <li><strong>CRIT Rate:</strong> 0.05</li>
                 <li><strong>CRIT DMG:</strong> 0.5</li>
             </ul>
-
             <h2>Skills</h2>
             <ul>
         
                 <li>
                     <strong>Order: Flare Propulsion (Basic ATK):</strong>
                     <select onchange="updateSkill('131001', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
-                    <div id="131001_description" data-original-description="Deals Fire DMG equal to <b><unbreak>#1[i]</unbreak></b> of SAM's ATK to a single target enemy.">Deals Fire DMG equal to <b><unbreak>#1[i]</unbreak></b> of SAM's ATK to a single target enemy.</div>
+                    <div id="131001_description" data-original-description="Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of SAM's ATK to a single target enemy.">Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of SAM's ATK to a single target enemy.</div>
                     <div id="131001_stats"></div>
                     <div id="131001_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 3, 1, 0, 0, 1" ></div>
                 </li>
@@ -78,7 +176,7 @@ function initializeSkills() {
                 <li>
                     <strong>Order: Aerial Bombardment (Skill):</strong>
                     <select onchange="updateSkill('131002', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="131002_description" data-original-description="Consumes SAM's HP equal to <unbreak>#2[i]</unbreak> of SAM's Max HP and regenerates a fixed amount of Energy equal to <unbreak>#3[i]</unbreak> of SAM's Max Energy. Deals Fire DMG equal to <b><unbreak>#1[i]</unbreak></b> of SAM's ATK to a single target enemy. If the current HP is not sufficient, then SAM's HP is reduced to 1 when using this Skill. Enables this unit's next <u>Action to be Advanced</u> by <unbreak>#4[i]</unbreak>.">Consumes SAM's HP equal to <unbreak>#2[i]</unbreak> of SAM's Max HP and regenerates a fixed amount of Energy equal to <unbreak>#3[i]</unbreak> of SAM's Max Energy. Deals Fire DMG equal to <b><unbreak>#1[i]</unbreak></b> of SAM's ATK to a single target enemy. If the current HP is not sufficient, then SAM's HP is reduced to 1 when using this Skill. Enables this unit's next <u>Action to be Advanced</u> by <unbreak>#4[i]</unbreak>.</div>
+                    <div id="131002_description" data-original-description="Consumes HP equal to <unbreak>#2[i]%</unbreak> of this unit's Max HP and regenerates a fixed amount of Energy equal to <b><unbreak>#3[i]%</unbreak></b> of this unit's Max Energy. Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of SAM's ATK to a single target enemy. If the current HP is not sufficient, reduces SAM's HP to 1 when using this Skill. <u>Advances</u> this unit's next Action by <unbreak>#4[i]%</unbreak>.">Consumes HP equal to <unbreak>#2[i]%</unbreak> of this unit's Max HP and regenerates a fixed amount of Energy equal to <b><unbreak>#3[i]%</unbreak></b> of this unit's Max Energy. Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of SAM's ATK to a single target enemy. If the current HP is not sufficient, reduces SAM's HP to 1 when using this Skill. <u>Advances</u> this unit's next Action by <unbreak>#4[i]%</unbreak>.</div>
                     <div id="131002_stats"></div>
                     <div id="131002_data" style="display:none;" data-level1="1, 0.4, 0.5, 0.25" data-level2="1.1, 0.4, 0.51, 0.25" data-level3="1.2, 0.4, 0.52, 0.25" data-level4="1.3, 0.4, 0.53, 0.25" data-level5="1.4, 0.4, 0.54, 0.25" data-level6="1.5, 0.4, 0.55, 0.25" data-level7="1.625, 0.4, 0.5625, 0.25" data-level8="1.75, 0.4, 0.575, 0.25" data-level9="1.875, 0.4, 0.5875, 0.25" data-level10="2, 0.4, 0.6, 0.25" data-level11="2.1, 0.4, 0.61, 0.25" data-level12="2.2, 0.4, 0.62, 0.25" data-level13="2.3, 0.4, 0.63, 0.25" data-level14="2.4, 0.4, 0.64, 0.25" data-level15="2.5, 0.4, 0.65, 0.25" data-levelid="1, 3, 1, 0, 0, 2" ></div>
                 </li>
@@ -86,7 +184,7 @@ function initializeSkills() {
                 <li>
                     <strong>Fyrefly Type-IV: Complete Combustion (Ultimate):</strong>
                     <select onchange="updateSkill('131003', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="131003_description" data-original-description="Upon entering the Complete Combustion state, Advances SAM's Action by <unbreak>100</unbreak> and gains Enhanced Basic ATK and Enhanced Skill. While in Complete Combustion, increases SPD by <b><unbreak>#3[i]</unbreak></b>, and when using the Enhanced Basic ATK or Enhanced Skill, increases this unit's Weakness Break efficiency by <unbreak>#2[i]</unbreak> and the Break DMG received by the enemy targets by <b><unbreak>#1[f1]</unbreak></b>, lasting until the current attack ends.<br>A countdown timer for the Complete Combustion state appears on the Action Order. When the countdown turn starts, SAM exits the Complete Combustion state. The countdown has a fixed SPD of <unbreak>#4[i]</unbreak>.<br>SAM cannot use Ultimate while in Complete Combustion.">Upon entering the Complete Combustion state, Advances SAM's Action by <unbreak>100</unbreak> and gains Enhanced Basic ATK and Enhanced Skill. While in Complete Combustion, increases SPD by <b><unbreak>#3[i]</unbreak></b>, and when using the Enhanced Basic ATK or Enhanced Skill, increases this unit's Weakness Break efficiency by <unbreak>#2[i]</unbreak> and the Break DMG received by the enemy targets by <b><unbreak>#1[f1]</unbreak></b>, lasting until the current attack ends.<br>A countdown timer for the Complete Combustion state appears on the Action Order. When the countdown turn starts, SAM exits the Complete Combustion state. The countdown has a fixed SPD of <unbreak>#4[i]</unbreak>.<br>SAM cannot use Ultimate while in Complete Combustion.</div>
+                    <div id="131003_description" data-original-description="Enters the Complete Combustion state, advances this unit's Action by <unbreak>100%</unbreak>, and gains Enhanced Basic ATK and Enhanced Skill. While in Complete Combustion, increases SPD by <b><unbreak>#3[i]</unbreak></b>, and when using the Enhanced Basic ATK or Enhanced Skill, increases this unit's Weakness Break efficiency by <unbreak>#2[i]%</unbreak> and the Break DMG dealt by SAM to the enemy targets by <b><unbreak>#1[f1]%</unbreak></b>, lasting until this current attack ends.<br>A countdown timer for the Complete Combustion state appears on the Action Order. When the countdown timer's turn starts, SAM exits the Complete Combustion state. The countdown timer has a fixed SPD of <unbreak>#4[i]</unbreak>.<br>SAM cannot use Ultimate while in Complete Combustion.">Enters the Complete Combustion state, advances this unit's Action by <unbreak>100%</unbreak>, and gains Enhanced Basic ATK and Enhanced Skill. While in Complete Combustion, increases SPD by <b><unbreak>#3[i]</unbreak></b>, and when using the Enhanced Basic ATK or Enhanced Skill, increases this unit's Weakness Break efficiency by <unbreak>#2[i]%</unbreak> and the Break DMG dealt by SAM to the enemy targets by <b><unbreak>#1[f1]%</unbreak></b>, lasting until this current attack ends.<br>A countdown timer for the Complete Combustion state appears on the Action Order. When the countdown timer's turn starts, SAM exits the Complete Combustion state. The countdown timer has a fixed SPD of <unbreak>#4[i]</unbreak>.<br>SAM cannot use Ultimate while in Complete Combustion.</div>
                     <div id="131003_stats"></div>
                     <div id="131003_data" style="display:none;" data-level1="0.1, 0.5, 30, 70" data-level2="0.11, 0.5, 33, 70" data-level3="0.12, 0.5, 36, 70" data-level4="0.13, 0.5, 39, 70" data-level5="0.14, 0.5, 42, 70" data-level6="0.15, 0.5, 45, 70" data-level7="0.1625, 0.5, 48.75, 70" data-level8="0.175, 0.5, 52.5, 70" data-level9="0.1875, 0.5, 56.25, 70" data-level10="0.2, 0.5, 60, 70" data-level11="0.21, 0.5, 63, 70" data-level12="0.22, 0.5, 66, 70" data-level13="0.23, 0.5, 69, 70" data-level14="0.24, 0.5, 72, 70" data-level15="0.25, 0.5, 75, 70" data-levelid="1, 3, 1, 0, 0, 3" ></div>
                 </li>
@@ -94,7 +192,7 @@ function initializeSkills() {
                 <li>
                     <strong>Chrysalid Pyronexus (Talent):</strong>
                     <select onchange="updateSkill('131004', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="131004_description" data-original-description="The lower the HP, the less DMG received. When HP is <unbreak>#3[i]</unbreak> or lower, the DMG Reduction reaches its maximum effect, reducing up to <b><unbreak>#1[i]</unbreak></b>. During the Complete Combustion, the DMG Reduction remains at its maximum effect, and the Effect RES increases by <b><unbreak>#4[i]</unbreak></b>.<br>If Energy is lower than <unbreak>#2[i]</unbreak> when the battle starts, regenerates Energy to <unbreak>#2[i]</unbreak>. Once Energy is regenerated to its maximum, dispels all <u>debuffs</u> on this unit.">The lower the HP, the less DMG received. When HP is <unbreak>#3[i]</unbreak> or lower, the DMG Reduction reaches its maximum effect, reducing up to <b><unbreak>#1[i]</unbreak></b>. During the Complete Combustion, the DMG Reduction remains at its maximum effect, and the Effect RES increases by <b><unbreak>#4[i]</unbreak></b>.<br>If Energy is lower than <unbreak>#2[i]</unbreak> when the battle starts, regenerates Energy to <unbreak>#2[i]</unbreak>. Once Energy is regenerated to its maximum, dispels all <u>debuffs</u> on this unit.</div>
+                    <div id="131004_description" data-original-description="The lower the HP, the less DMG received. When HP is <unbreak>#3[i]%</unbreak> or lower, the DMG Reduction reaches its maximum effect, reducing up to <b><unbreak>#1[i]%</unbreak></b>. During the Complete Combustion, the DMG Reduction remains at its maximum effect, and the Effect RES increases by <b><unbreak>#4[i]%</unbreak></b>.<br>If Energy is lower than <unbreak>#2[i]%</unbreak> when the battle starts, regenerates Energy to <unbreak>#2[i]%</unbreak>. Once Energy is regenerated to its maximum, dispels all <u>debuffs</u> on this unit.">The lower the HP, the less DMG received. When HP is <unbreak>#3[i]%</unbreak> or lower, the DMG Reduction reaches its maximum effect, reducing up to <b><unbreak>#1[i]%</unbreak></b>. During the Complete Combustion, the DMG Reduction remains at its maximum effect, and the Effect RES increases by <b><unbreak>#4[i]%</unbreak></b>.<br>If Energy is lower than <unbreak>#2[i]%</unbreak> when the battle starts, regenerates Energy to <unbreak>#2[i]%</unbreak>. Once Energy is regenerated to its maximum, dispels all <u>debuffs</u> on this unit.</div>
                     <div id="131004_stats"></div>
                     <div id="131004_data" style="display:none;" data-level1="0.2, 0.5, 0.2, 0.1" data-level2="0.22, 0.5, 0.2, 0.12" data-level3="0.24, 0.5, 0.2, 0.14" data-level4="0.26, 0.5, 0.2, 0.16" data-level5="0.28, 0.5, 0.2, 0.18" data-level6="0.3, 0.5, 0.2, 0.2" data-level7="0.325, 0.5, 0.2, 0.225" data-level8="0.35, 0.5, 0.2, 0.25" data-level9="0.375, 0.5, 0.2, 0.275" data-level10="0.4, 0.5, 0.2, 0.3" data-level11="0.42, 0.5, 0.2, 0.32" data-level12="0.44, 0.5, 0.2, 0.34" data-level13="0.46, 0.5, 0.2, 0.36" data-level14="0.48, 0.5, 0.2, 0.38" data-level15="0.5, 0.5, 0.2, 0.4" data-levelid="1, 3, 1, 0, 0, 4" ></div>
                 </li>
@@ -110,7 +208,7 @@ function initializeSkills() {
                 <li>
                     <strong>Δ Order: Meteoric Incineration (Technique):</strong>
                     <select onchange="updateSkill('131007', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
-                    <div id="131007_description" data-original-description="Leaps into the air and moves about freely for <unbreak>#1[i]</unbreak> seconds, which can be ended early by launching a plunging attack. When the duration ends, plunges and immediately attacks all enemies within a set area. At the start of each wave, applies a Fire Weakness to all enemies, lasting for <unbreak>#3[i]</unbreak> turn(s). Then, deals Fire DMG equal to <unbreak>#2[i]</unbreak> of SAM's ATK to all enemies.">Leaps into the air and moves about freely for <unbreak>#1[i]</unbreak> seconds, which can be ended early by launching a plunging attack. When the duration ends, plunges and immediately attacks all enemies within a set area. At the start of each wave, applies a Fire Weakness to all enemies, lasting for <unbreak>#3[i]</unbreak> turn(s). Then, deals Fire DMG equal to <unbreak>#2[i]</unbreak> of SAM's ATK to all enemies.</div>
+                    <div id="131007_description" data-original-description="Leaps into the air and moves about freely for <unbreak>#1[i]</unbreak> seconds, which can be ended early by launching a plunging attack. When the duration ends, plunges and immediately attacks all enemies within a set area. At the start of each wave, applies a Fire Weakness to all enemies, lasting for <unbreak>#3[i]</unbreak> turn(s). Then, deals Fire DMG equal to <unbreak>#2[i]%</unbreak> of SAM's ATK to all enemies.">Leaps into the air and moves about freely for <unbreak>#1[i]</unbreak> seconds, which can be ended early by launching a plunging attack. When the duration ends, plunges and immediately attacks all enemies within a set area. At the start of each wave, applies a Fire Weakness to all enemies, lasting for <unbreak>#3[i]</unbreak> turn(s). Then, deals Fire DMG equal to <unbreak>#2[i]%</unbreak> of SAM's ATK to all enemies.</div>
                     <div id="131007_stats"></div>
                     <div id="131007_data" style="display:none;" data-level1="5, 2, 2" data-levelid="1, 3, 1, 0, 0, 7" ></div>
                 </li>
@@ -118,7 +216,7 @@ function initializeSkills() {
                 <li>
                     <strong>Fyrefly Type-IV: Pyrogenic Decimation (Basic ATK):</strong>
                     <select onchange="updateSkill('131008', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
-                    <div id="131008_description" data-original-description="Restores HP by an amount equal to <unbreak>#2[i]</unbreak> of this unit's Max HP. Deals Fire DMG equal to <b><unbreak>#1[i]</unbreak></b> of SAM's ATK to a single target enemy.">Restores HP by an amount equal to <unbreak>#2[i]</unbreak> of this unit's Max HP. Deals Fire DMG equal to <b><unbreak>#1[i]</unbreak></b> of SAM's ATK to a single target enemy.</div>
+                    <div id="131008_description" data-original-description="Restores HP by an amount equal to <unbreak>#2[i]%</unbreak> of this unit's Max HP. Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of SAM's ATK to a single target enemy.">Restores HP by an amount equal to <unbreak>#2[i]%</unbreak> of this unit's Max HP. Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of SAM's ATK to a single target enemy.</div>
                     <div id="131008_stats"></div>
                     <div id="131008_data" style="display:none;" data-level1="1, 0.2" data-level2="1.2, 0.2" data-level3="1.4, 0.2" data-level4="1.6, 0.2" data-level5="1.8, 0.2" data-level6="2, 0.2" data-level7="2.2, 0.2" data-level8="2.4, 0.2" data-level9="2.6, 0.2" data-levelid="1, 3, 1, 0, 0, 8" ></div>
                 </li>
@@ -126,7 +224,7 @@ function initializeSkills() {
                 <li>
                     <strong>Fyrefly Type-IV: Deathstar Overload (Skill):</strong>
                     <select onchange="updateSkill('131009', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="131009_description" data-original-description="Restores HP by an amount equal to <unbreak>#3[i]</unbreak> of this unit's Max HP. Applies Fire Weakness to a single target enemy, lasting for <unbreak>#4[i]</unbreak> turn(s). Deals Fire DMG equal to (<unbreak>#5[f1]</unbreak> × Break Effect + <b><unbreak>#1[f1]</unbreak></b>) of SAM's ATK to this target. At the same time, deals Fire DMG equal to (<unbreak>0.1</unbreak> × Break Effect + <b><unbreak>#2[f1]</unbreak></b>) of SAM's ATK to adjacent targets. The Break Effect taken into the calculation is capped at <unbreak>#7[i]</unbreak>.">Restores HP by an amount equal to <unbreak>#3[i]</unbreak> of this unit's Max HP. Applies Fire Weakness to a single target enemy, lasting for <unbreak>#4[i]</unbreak> turn(s). Deals Fire DMG equal to (<unbreak>#5[f1]</unbreak> × Break Effect + <b><unbreak>#1[f1]</unbreak></b>) of SAM's ATK to this target. At the same time, deals Fire DMG equal to (<unbreak>#6[f2]</unbreak> × Break Effect + <b><unbreak>#2[f1]</unbreak></b>) of SAM's ATK to adjacent targets. The Break Effect taken into the calculation is capped at <unbreak>#7[i]</unbreak>.</div>
+                    <div id="131009_description" data-original-description="Restores HP by an amount equal to <unbreak>#3[i]%</unbreak> of this unit's Max HP. Applies Fire Weakness to a single target enemy, lasting for <unbreak>#4[i]</unbreak> turn(s). Deals Fire DMG equal to (<unbreak>#5[f1]</unbreak> × Break Effect + <b><unbreak>#1[f1]%</unbreak></b>) of SAM's ATK to this target. At the same time, deals Fire DMG equal to (<unbreak>#6[f1]</unbreak> × Break Effect + <b><unbreak>#2[f1]%</unbreak></b>) of SAM's ATK to adjacent targets. The Break Effect taken into the calculation is capped at <unbreak>#7[i]%</unbreak>.">Restores HP by an amount equal to <unbreak>#3[i]%</unbreak> of this unit's Max HP. Applies Fire Weakness to a single target enemy, lasting for <unbreak>#4[i]</unbreak> turn(s). Deals Fire DMG equal to (<unbreak>#5[f1]</unbreak> × Break Effect + <b><unbreak>#1[f1]%</unbreak></b>) of SAM's ATK to this target. At the same time, deals Fire DMG equal to (<unbreak>#6[f1]</unbreak> × Break Effect + <b><unbreak>#2[f1]%</unbreak></b>) of SAM's ATK to adjacent targets. The Break Effect taken into the calculation is capped at <unbreak>#7[i]%</unbreak>.</div>
                     <div id="131009_stats"></div>
                     <div id="131009_data" style="display:none;" data-level1="1, 0.5, 0.25, 2, 0.2, 0.1, 3.6" data-level2="1.1, 0.55, 0.25, 2, 0.2, 0.1, 3.6" data-level3="1.2, 0.6, 0.25, 2, 0.2, 0.1, 3.6" data-level4="1.3, 0.65, 0.25, 2, 0.2, 0.1, 3.6" data-level5="1.4, 0.7, 0.25, 2, 0.2, 0.1, 3.6" data-level6="1.5, 0.75, 0.25, 2, 0.2, 0.1, 3.6" data-level7="1.625, 0.8125, 0.25, 2, 0.2, 0.1, 3.6" data-level8="1.75, 0.875, 0.25, 2, 0.2, 0.1, 3.6" data-level9="1.875, 0.9375, 0.25, 2, 0.2, 0.1, 3.6" data-level10="2, 1, 0.25, 2, 0.2, 0.1, 3.6" data-level11="2.1, 1.05, 0.25, 2, 0.2, 0.1, 3.6" data-level12="2.2, 1.1, 0.25, 2, 0.2, 0.1, 3.6" data-level13="2.3, 1.15, 0.25, 2, 0.2, 0.1, 3.6" data-level14="2.4, 1.2, 0.25, 2, 0.2, 0.1, 3.6" data-level15="2.5, 1.25, 0.25, 2, 0.2, 0.1, 3.6" data-levelid="1, 3, 1, 0, 0, 9" ></div>
                 </li>
@@ -144,7 +242,7 @@ function initializeSkills() {
                             </li>
                         
                             <li>
-                            <strong>Module γ: Core Overload:</strong><br>For every 10 of SAM's ATK that exceeds 1800, increases SAM's Break Effect by 0.8%.
+                            <strong>Module γ: Core Overload:</strong><br>For every 10 point(s) of SAM's ATK that exceeds 1800, increases this unit's Break Effect by 0.8%.
                             </li>
                         
                             </ul>
@@ -196,11 +294,11 @@ function initializeSkills() {
             <ul>
         
                 <li>
-                    <strong>In Reddened Chrysalis, I Once Rest:</strong><br>When using the Enhanced Skill, ignores <unbreak>15%</unbreak> of the target's DEF. And the Enhanced Skill does not consume Skill Points.
+                    <strong>In Reddened Chrysalis, I Once Rest:</strong><br>When using the Enhanced Skill, ignores <unbreak>15%</unbreak> of the target's DEF. The Enhanced Skill does not consume Skill Points.
                 </li>
             
                 <li>
-                    <strong>From Shattered Sky, I Free Fall:</strong><br>When using the Enhanced Basic ATK or the Enhanced Skill in Complete Combustion state to defeat an enemy target or cause them to be Weakness Broken, SAM immediately gains 1 extra turn. This effect can trigger again after <unbreak>1</unbreak> turn(s).
+                    <strong>From Shattered Sky, I Free Fall:</strong><br>While in Complete Combustion, using the Enhanced Basic ATK or the Enhanced Skill to defeat an enemy target or to break their Weakness allows SAM to immediately gain 1 extra turn. This effect can trigger again after <unbreak>1</unbreak> turn(s).
                 </li>
             
                 <li>

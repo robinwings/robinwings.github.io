@@ -24,11 +24,22 @@ function updateSkill(skillId, level) {
     
     var updatedDescription = originalDescription;
     statsArray.forEach((stat, index) => {
-        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
-        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
-        var formattedStat = stat;
-        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
-        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
     });
     
     console.log('Updated description:', updatedDescription);
@@ -53,6 +64,94 @@ function initializeSkills() {
             <strong>Path:</strong> Destruction<br>
             <strong>Element:</strong> Physical<br>
             <strong>Rarity:</strong> 5*</br></p>
+            <h2>Ascension Material</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110111.png' />
+                        Shattered Blade
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110112.png' />
+                        Lifeless Blade
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110113.png' />
+                        Worldbreaker Blade
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110401.png' />
+                        Broken Teeth of Iron Wolf
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110502.png' />
+                        Guardian's Lament
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112011.png' />
+                        Ancient Part
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112012.png' />
+                        Ancient Spindle
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112013.png' />
+                        Ancient Engine
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table>
             <h2>Stats</h2>
             <ul>
                 <li><strong>Max HP:</strong> 1241.86</li>
@@ -63,14 +162,13 @@ function initializeSkills() {
                 <li><strong>CRIT Rate:</strong> 0.05</li>
                 <li><strong>CRIT DMG:</strong> 0.5</li>
             </ul>
-
             <h2>Skills</h2>
             <ul>
         
                 <li>
                     <strong>I Want to Help (Basic ATK):</strong>
                     <select onchange="updateSkill('110701', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
-                    <div id="110701_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Clara's ATK to a single enemy.">Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Clara's ATK to a single enemy.</div>
+                    <div id="110701_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Clara's ATK to a single enemy.">Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Clara's ATK to a single enemy.</div>
                     <div id="110701_stats"></div>
                     <div id="110701_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 1, 0, 7, 0, 1" ></div>
                 </li>
@@ -78,7 +176,7 @@ function initializeSkills() {
                 <li>
                     <strong>Svarog Watches Over You (Skill):</strong>
                     <select onchange="updateSkill('110702', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="110702_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Clara's ATK to all enemies, and additionally deals Physical DMG equal to <b><unbreak>#2[i]</unbreak></b> of Clara's ATK to enemies marked by Svarog with a Mark of Counter.<br>All Marks of Counter will be removed after this Skill is used.">Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Clara's ATK to all enemies, and additionally deals Physical DMG equal to <b><unbreak>#2[i]</unbreak></b> of Clara's ATK to enemies marked by Svarog with a Mark of Counter.<br>All Marks of Counter will be removed after this Skill is used.</div>
+                    <div id="110702_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Clara's ATK to all enemies, and additionally deals Physical DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Clara's ATK to enemies marked by Svarog with a Mark of Counter.<br>All Marks of Counter will be removed after this Skill is used.">Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Clara's ATK to all enemies, and additionally deals Physical DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Clara's ATK to enemies marked by Svarog with a Mark of Counter.<br>All Marks of Counter will be removed after this Skill is used.</div>
                     <div id="110702_stats"></div>
                     <div id="110702_data" style="display:none;" data-level1="0.6, 0.6" data-level2="0.66, 0.66" data-level3="0.72, 0.72" data-level4="0.78, 0.78" data-level5="0.84, 0.84" data-level6="0.9, 0.9" data-level7="0.975, 0.975" data-level8="1.05, 1.05" data-level9="1.125, 1.125" data-level10="1.2, 1.2" data-level11="1.26, 1.26" data-level12="1.32, 1.32" data-level13="1.38, 1.38" data-level14="1.44, 1.44" data-level15="1.5, 1.5" data-levelid="1, 1, 0, 7, 0, 2" ></div>
                 </li>
@@ -86,7 +184,7 @@ function initializeSkills() {
                 <li>
                     <strong>Promise, Not Command (Ultimate):</strong>
                     <select onchange="updateSkill('110703', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="110703_description" data-original-description="After Clara uses Ultimate, DMG dealt to her is reduced by an extra <b><unbreak>#4[i]</unbreak></b>, and she has greatly increased chances of being attacked by enemies for <unbreak>#3[i]</unbreak> turn(s).<br>In addition, Svarog's <u>Counter</u> is enhanced. When an ally is attacked, Svarog immediately launches a <u>Counter</u>, and its DMG multiplier against the enemy increases by <b><unbreak>#2[i]</unbreak></b>. Enemies adjacent to it take <unbreak>50</unbreak> of the DMG dealt to the target enemy. Enhanced <u>Counter(s)</u> can take effect <unbreak>#5[i]</unbreak> time(s).">After Clara uses Ultimate, DMG dealt to her is reduced by an extra <b><unbreak>#4[i]</unbreak></b>, and she has greatly increased chances of being attacked by enemies for <unbreak>#3[i]</unbreak> turn(s).<br>In addition, Svarog's <u>Counter</u> is enhanced. When an ally is attacked, Svarog immediately launches a <u>Counter</u>, and its DMG multiplier against the enemy increases by <b><unbreak>#2[i]</unbreak></b>. Enemies adjacent to it take <unbreak>50</unbreak> of the DMG dealt to the target enemy. Enhanced <u>Counter(s)</u> can take effect <unbreak>#5[i]</unbreak> time(s).</div>
+                    <div id="110703_description" data-original-description="After Clara uses Ultimate, DMG dealt to her is reduced by an extra <b><unbreak>#4[i]%</unbreak></b>, and she has greatly increased chances of being attacked by enemies for <unbreak>#3[i]</unbreak> turn(s).<br>In addition, Svarog's <u>Counter</u> is enhanced. When an ally is attacked, Svarog immediately launches a <u>Counter</u>, and its DMG multiplier against the enemy increases by <b><unbreak>#2[i]%</unbreak></b>. Enemies adjacent to it take <unbreak>50%</unbreak> of the DMG dealt to the target enemy. Enhanced <u>Counter(s)</u> can take effect <unbreak>#5[i]</unbreak> time(s).">After Clara uses Ultimate, DMG dealt to her is reduced by an extra <b><unbreak>#4[i]%</unbreak></b>, and she has greatly increased chances of being attacked by enemies for <unbreak>#3[i]</unbreak> turn(s).<br>In addition, Svarog's <u>Counter</u> is enhanced. When an ally is attacked, Svarog immediately launches a <u>Counter</u>, and its DMG multiplier against the enemy increases by <b><unbreak>#2[i]%</unbreak></b>. Enemies adjacent to it take <unbreak>50%</unbreak> of the DMG dealt to the target enemy. Enhanced <u>Counter(s)</u> can take effect <unbreak>#5[i]</unbreak> time(s).</div>
                     <div id="110703_stats"></div>
                     <div id="110703_data" style="display:none;" data-level1="5, 0.96, 2, 0.15, 2" data-level2="5, 1.024, 2, 0.16, 2" data-level3="5, 1.088, 2, 0.17, 2" data-level4="5, 1.152, 2, 0.18, 2" data-level5="5, 1.216, 2, 0.19, 2" data-level6="5, 1.28, 2, 0.2, 2" data-level7="5, 1.36, 2, 0.2125, 2" data-level8="5, 1.44, 2, 0.225, 2" data-level9="5, 1.52, 2, 0.2375, 2" data-level10="5, 1.6, 2, 0.25, 2" data-level11="5, 1.664, 2, 0.26, 2" data-level12="5, 1.728, 2, 0.27, 2" data-level13="5, 1.792, 2, 0.28, 2" data-level14="5, 1.856, 2, 0.29, 2" data-level15="5, 1.92, 2, 0.3, 2" data-levelid="1, 1, 0, 7, 0, 3" ></div>
                 </li>
@@ -94,7 +192,7 @@ function initializeSkills() {
                 <li>
                     <strong>Because We're Family (Talent):</strong>
                     <select onchange="updateSkill('110704', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="110704_description" data-original-description="Under the protection of Svarog, DMG taken by Clara when hit by enemy attacks is reduced by <unbreak>#3[i]</unbreak>. Svarog will mark enemies who attack Clara with his Mark of Counter and retaliate with a <u>Counter</u>, dealing Physical DMG equal to <b><unbreak>#2[i]</unbreak></b> of Clara's ATK.">Under the protection of Svarog, DMG taken by Clara when hit by enemy attacks is reduced by <unbreak>#3[i]</unbreak>. Svarog will mark enemies who attack Clara with his Mark of Counter and retaliate with a <u>Counter</u>, dealing Physical DMG equal to <b><unbreak>#2[i]</unbreak></b> of Clara's ATK.</div>
+                    <div id="110704_description" data-original-description="Under the protection of Svarog, DMG taken by Clara when hit by enemy attacks is reduced by <unbreak>#3[i]%</unbreak>. Svarog will mark enemies who attack Clara with his Mark of Counter and retaliate with a <u>Counter</u>, dealing Physical DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Clara's ATK.">Under the protection of Svarog, DMG taken by Clara when hit by enemy attacks is reduced by <unbreak>#3[i]%</unbreak>. Svarog will mark enemies who attack Clara with his Mark of Counter and retaliate with a <u>Counter</u>, dealing Physical DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Clara's ATK.</div>
                     <div id="110704_stats"></div>
                     <div id="110704_data" style="display:none;" data-level1="1, 0.8, 0.1" data-level2="1, 0.88, 0.1" data-level3="1, 0.96, 0.1" data-level4="1, 1.04, 0.1" data-level5="1, 1.12, 0.1" data-level6="1, 1.2, 0.1" data-level7="1, 1.3, 0.1" data-level8="1, 1.4, 0.1" data-level9="1, 1.5, 0.1" data-level10="1, 1.6, 0.1" data-level11="1, 1.68, 0.1" data-level12="1, 1.76, 0.1" data-level13="1, 1.84, 0.1" data-level14="1, 1.92, 0.1" data-level15="1, 2, 0.1" data-levelid="1, 1, 0, 7, 0, 4" ></div>
                 </li>

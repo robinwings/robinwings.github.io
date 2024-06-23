@@ -24,11 +24,22 @@ function updateSkill(skillId, level) {
     
     var updatedDescription = originalDescription;
     statsArray.forEach((stat, index) => {
-        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
-        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
-        var formattedStat = stat;
-        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
-        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
     });
     
     console.log('Updated description:', updatedDescription);
@@ -53,6 +64,94 @@ function initializeSkills() {
             <strong>Path:</strong> Preservation<br>
             <strong>Element:</strong> Ice<br>
             <strong>Rarity:</strong> 5*</br></p>
+            <h2>Ascension Material</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110141.png' />
+                        Endurance of Bronze
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110142.png' />
+                        Oath of Steel
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110143.png' />
+                        Safeguard of Amber
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110403.png' />
+                        Horn of Snow
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110502.png' />
+                        Guardian's Lament
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112001.png' />
+                        Silvermane Badge
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112002.png' />
+                        Silvermane Insignia
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112003.png' />
+                        Silvermane Medal
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table>
             <h2>Stats</h2>
             <ul>
                 <li><strong>Max HP:</strong> 1397.09</li>
@@ -63,14 +162,13 @@ function initializeSkills() {
                 <li><strong>CRIT Rate:</strong> 0.05</li>
                 <li><strong>CRIT DMG:</strong> 0.5</li>
             </ul>
-
             <h2>Skills</h2>
             <ul>
         
                 <li>
                     <strong>Fist of Conviction (Basic ATK):</strong>
                     <select onchange="updateSkill('110401', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
-                    <div id="110401_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Gepard's ATK to a single enemy.">Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Gepard's ATK to a single enemy.</div>
+                    <div id="110401_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Gepard's ATK to a single enemy.">Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Gepard's ATK to a single enemy.</div>
                     <div id="110401_stats"></div>
                     <div id="110401_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 1, 0, 4, 0, 1" ></div>
                 </li>
@@ -78,7 +176,7 @@ function initializeSkills() {
                 <li>
                     <strong>Daunting Smite (Skill):</strong>
                     <select onchange="updateSkill('110402', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="110402_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Gepard's ATK to a single enemy, with a <unbreak>#2[i]</unbreak> <u>base chance</u> to Freeze the enemy for <unbreak>#3[i]</unbreak> turn(s).<br>While Frozen, the enemy cannot take action and will take <u>Additional</u> Ice DMG equal to <b><unbreak>#4[i]</unbreak></b> of Gepard's ATK at the beginning of each turn.">Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Gepard's ATK to a single enemy, with a <unbreak>#2[i]</unbreak> <u>base chance</u> to Freeze the enemy for <unbreak>#3[i]</unbreak> turn(s).<br>While Frozen, the enemy cannot take action and will take <u>Additional</u> Ice DMG equal to <b><unbreak>#4[i]</unbreak></b> of Gepard's ATK at the beginning of each turn.</div>
+                    <div id="110402_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Gepard's ATK to a single enemy, with a <unbreak>#2[i]%</unbreak> <u>base chance</u> to Freeze the enemy for <unbreak>#3[i]</unbreak> turn(s).<br>While Frozen, the enemy cannot take action and will take <u>Additional</u> Ice DMG equal to <b><unbreak>#4[i]%</unbreak></b> of Gepard's ATK at the beginning of each turn.">Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Gepard's ATK to a single enemy, with a <unbreak>#2[i]%</unbreak> <u>base chance</u> to Freeze the enemy for <unbreak>#3[i]</unbreak> turn(s).<br>While Frozen, the enemy cannot take action and will take <u>Additional</u> Ice DMG equal to <b><unbreak>#4[i]%</unbreak></b> of Gepard's ATK at the beginning of each turn.</div>
                     <div id="110402_stats"></div>
                     <div id="110402_data" style="display:none;" data-level1="1, 0.65, 1, 0.3" data-level2="1.1, 0.65, 1, 0.33" data-level3="1.2, 0.65, 1, 0.36" data-level4="1.3, 0.65, 1, 0.39" data-level5="1.4, 0.65, 1, 0.42" data-level6="1.5, 0.65, 1, 0.45" data-level7="1.625, 0.65, 1, 0.4875" data-level8="1.75, 0.65, 1, 0.525" data-level9="1.875, 0.65, 1, 0.5625" data-level10="2, 0.65, 1, 0.6" data-level11="2.1, 0.65, 1, 0.63" data-level12="2.2, 0.65, 1, 0.66" data-level13="2.3, 0.65, 1, 0.69" data-level14="2.4, 0.65, 1, 0.72" data-level15="2.5, 0.65, 1, 0.75" data-levelid="1, 1, 0, 4, 0, 2" ></div>
                 </li>
@@ -86,7 +184,7 @@ function initializeSkills() {
                 <li>
                     <strong>Enduring Bulwark (Ultimate):</strong>
                     <select onchange="updateSkill('110403', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="110403_description" data-original-description="Applies a Shield to all allies, absorbing DMG equal to <b><unbreak>#1[i]</unbreak></b> of Gepard's DEF plus <b><unbreak>#3[i]</unbreak></b> for <unbreak>#2[i]</unbreak> turn(s).">Applies a Shield to all allies, absorbing DMG equal to <b><unbreak>#1[i]</unbreak></b> of Gepard's DEF plus <b><unbreak>#3[i]</unbreak></b> for <unbreak>#2[i]</unbreak> turn(s).</div>
+                    <div id="110403_description" data-original-description="Applies a Shield to all allies, absorbing DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Gepard's DEF plus <b><unbreak>#3[i]</unbreak></b> for <unbreak>#2[i]</unbreak> turn(s).">Applies a Shield to all allies, absorbing DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Gepard's DEF plus <b><unbreak>#3[i]</unbreak></b> for <unbreak>#2[i]</unbreak> turn(s).</div>
                     <div id="110403_stats"></div>
                     <div id="110403_data" style="display:none;" data-level1="0.3, 3, 150" data-level2="0.31875, 3, 240" data-level3="0.3375, 3, 307.5" data-level4="0.35625, 3, 375" data-level5="0.375, 3, 420" data-level6="0.39, 3, 465" data-level7="0.405, 3, 498.75" data-level8="0.42, 3, 532.5" data-level9="0.435, 3, 566.25" data-level10="0.45, 3, 600" data-level11="0.465, 3, 633.75" data-level12="0.48, 3, 667.5" data-level13="0.495, 3, 701.25" data-level14="0.51, 3, 735" data-level15="0.525, 3, 768.75" data-levelid="1, 1, 0, 4, 0, 3" ></div>
                 </li>
@@ -94,7 +192,7 @@ function initializeSkills() {
                 <li>
                     <strong>Unyielding Will (Talent):</strong>
                     <select onchange="updateSkill('110404', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="110404_description" data-original-description="When struck with a killing blow, instead of becoming <u>knocked down</u>, Gepard's HP immediately restores to <b><unbreak>#1[i]</unbreak></b> of his Max HP. This effect can only trigger once per battle.">When struck with a killing blow, instead of becoming <u>knocked down</u>, Gepard's HP immediately restores to <b><unbreak>#1[i]</unbreak></b> of his Max HP. This effect can only trigger once per battle.</div>
+                    <div id="110404_description" data-original-description="When struck with a killing blow, instead of becoming <u>knocked down</u>, Gepard's HP immediately restores to <b><unbreak>#1[i]%</unbreak></b> of his Max HP. This effect can only trigger once per battle.">When struck with a killing blow, instead of becoming <u>knocked down</u>, Gepard's HP immediately restores to <b><unbreak>#1[i]%</unbreak></b> of his Max HP. This effect can only trigger once per battle.</div>
                     <div id="110404_stats"></div>
                     <div id="110404_data" style="display:none;" data-level1="0.25" data-level2="0.275" data-level3="0.3" data-level4="0.325" data-level5="0.35" data-level6="0.375" data-level7="0.40625" data-level8="0.4375" data-level9="0.46875" data-level10="0.5" data-level11="0.525" data-level12="0.55" data-level13="0.575" data-level14="0.6" data-level15="0.625" data-levelid="1, 1, 0, 4, 0, 4" ></div>
                 </li>
@@ -110,7 +208,7 @@ function initializeSkills() {
                 <li>
                     <strong>Comradery (Technique):</strong>
                     <select onchange="updateSkill('110407', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
-                    <div id="110407_description" data-original-description="After Gepard uses his Technique, when the next battle begins, a Shield will be applied to all allies, absorbing DMG equal to <unbreak>#1[i]</unbreak> of Gepard's DEF plus <unbreak>#3[i]</unbreak> for <unbreak>#2[i]</unbreak> turn(s).">After Gepard uses his Technique, when the next battle begins, a Shield will be applied to all allies, absorbing DMG equal to <unbreak>#1[i]</unbreak> of Gepard's DEF plus <unbreak>#3[i]</unbreak> for <unbreak>#2[i]</unbreak> turn(s).</div>
+                    <div id="110407_description" data-original-description="After Gepard uses his Technique, when the next battle begins, a Shield will be applied to all allies, absorbing DMG equal to <unbreak>#1[i]%</unbreak> of Gepard's DEF plus <unbreak>#3[i]</unbreak> for <unbreak>#2[i]</unbreak> turn(s).">After Gepard uses his Technique, when the next battle begins, a Shield will be applied to all allies, absorbing DMG equal to <unbreak>#1[i]%</unbreak> of Gepard's DEF plus <unbreak>#3[i]</unbreak> for <unbreak>#2[i]</unbreak> turn(s).</div>
                     <div id="110407_stats"></div>
                     <div id="110407_data" style="display:none;" data-level1="0.24, 2, 150" data-levelid="1, 1, 0, 4, 0, 7" ></div>
                 </li>

@@ -17,13 +17,22 @@
         var originalDescription = refinementsElement.getAttribute('data-original-description');
         
         statsArray.forEach((stat, index) => {
-            var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
-            var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
+            var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
 
-            var formattedStat = stat;
-
-            originalDescription = originalDescription.replace(placeholder_i, formattedStat);
-            originalDescription = originalDescription.replace(placeholder_f1, formattedStat);
+            originalDescription = originalDescription.replace(placeholderRegExp, (match, p1, p2) => {
+                var formattedStat = stat;
+                console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+                if (p2 === '%') {
+                    formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+                } else {
+                    if (stat % 1 !== 0) {
+                        formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                    }
+                }
+                console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+                return formattedStat;
+            });
         });
 
         refinementsElement.innerHTML = originalDescription;
@@ -66,13 +75,68 @@
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-                <div id="23005_refinements" data-original-description="Increases the wearer's DEF by <b><unbreak>#2[i]</unbreak></b> and Effect Hit Rate by <b><unbreak>#4[i]</unbreak></b>. Increases the chance for the wearer to be attacked by enemies. When the wearer is attacked, increase their DEF by an extra <b><unbreak>#3[i]</unbreak></b> until the end of the wearer's turn.">
-                    Increases the wearer's DEF by <b><unbreak>#2[i]</unbreak></b> and Effect Hit Rate by <b><unbreak>#4[i]</unbreak></b>. Increases the chance for the wearer to be attacked by enemies. When the wearer is attacked, increase their DEF by an extra <b><unbreak>#3[i]</unbreak></b> until the end of the wearer's turn.
+                <div id="23005_refinements" data-original-description="Increases the wearer's DEF by <b><unbreak>#2[i]%</unbreak></b> and Effect Hit Rate by <b><unbreak>#4[i]%</unbreak></b>. Increases the chance for the wearer to be attacked by enemies. When the wearer is attacked, increase their DEF by an extra <b><unbreak>#3[i]%</unbreak></b> until the end of the wearer's turn.">
+                    Increases the wearer's DEF by <b><unbreak>#2[i]%</unbreak></b> and Effect Hit Rate by <b><unbreak>#4[i]%</unbreak></b>. Increases the chance for the wearer to be attacked by enemies. When the wearer is attacked, increase their DEF by an extra <b><unbreak>#3[i]%</unbreak></b> until the end of the wearer's turn.
                 </div>
                 <div id="23005_data" style="display:none;" data-level1="2, 0.24, 0.24, 0.24" data-level2="2, 0.28, 0.28, 0.28" data-level3="2, 0.32, 0.32, 0.32" data-level4="2, 0.36, 0.36, 0.36" data-level5="2, 0.4, 0.4, 0.4" data-levelid="2, 3, 0, 0, 5" >
                 </div>
             </li>
         </ul>
+        <h2>Ascension Materials</h2>
+        <table>
+            <tr>
+                <th>Material</th>
+                <th>Amount</th>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                    Credit
+                </td>
+                <td>385000</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110141.png' />
+                    Endurance of Bronze
+                </td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110142.png' />
+                    Oath of Steel
+                </td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110143.png' />
+                    Safeguard of Amber
+                </td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112001.png' />
+                    Silvermane Badge
+                </td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112002.png' />
+                    Silvermane Insignia
+                </td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112003.png' />
+                    Silvermane Medal
+                </td>
+                <td>14</td>
+            </tr>
     </body>
     </html>
     

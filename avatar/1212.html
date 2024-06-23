@@ -24,11 +24,22 @@ function updateSkill(skillId, level) {
     
     var updatedDescription = originalDescription;
     statsArray.forEach((stat, index) => {
-        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
-        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
-        var formattedStat = stat;
-        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
-        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
     });
     
     console.log('Updated description:', updatedDescription);
@@ -53,6 +64,94 @@ function initializeSkills() {
             <strong>Path:</strong> Destruction<br>
             <strong>Element:</strong> Ice<br>
             <strong>Rarity:</strong> 5*</br></p>
+            <h2>Ascension Material</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110111.png' />
+                        Shattered Blade
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110112.png' />
+                        Lifeless Blade
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110113.png' />
+                        Worldbreaker Blade
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110413.png' />
+                        Gelid Chitin
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110503.png' />
+                        Regret of Infinite Ochema
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113001.png' />
+                        Immortal Scionette
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113002.png' />
+                        Immortal Aeroblossom
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113003.png' />
+                        Immortal Lumintwig
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table>
             <h2>Stats</h2>
             <ul>
                 <li><strong>Max HP:</strong> 1435.90</li>
@@ -63,14 +162,13 @@ function initializeSkills() {
                 <li><strong>CRIT Rate:</strong> 0.05</li>
                 <li><strong>CRIT DMG:</strong> 0.5</li>
             </ul>
-
             <h2>Skills</h2>
             <ul>
         
                 <li>
                     <strong>Lucent Moonglow (Basic ATK):</strong>
                     <select onchange="updateSkill('121201', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
-                    <div id="121201_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Jingliu's ATK to a single enemy.">Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Jingliu's ATK to a single enemy.</div>
+                    <div id="121201_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Jingliu's ATK to a single enemy.">Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Jingliu's ATK to a single enemy.</div>
                     <div id="121201_stats"></div>
                     <div id="121201_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 2, 1, 2, 0, 1" ></div>
                 </li>
@@ -78,7 +176,7 @@ function initializeSkills() {
                 <li>
                     <strong>Transcendent Flash (Skill):</strong>
                     <select onchange="updateSkill('121202', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="121202_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Jingliu's ATK to a single enemy and obtains <unbreak>#2[i]</unbreak> stack(s) of Syzygy.">Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Jingliu's ATK to a single enemy and obtains <unbreak>#2[i]</unbreak> stack(s) of Syzygy.</div>
+                    <div id="121202_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Jingliu's ATK to a single enemy and obtains <unbreak>#2[i]</unbreak> stack(s) of Syzygy.">Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Jingliu's ATK to a single enemy and obtains <unbreak>#2[i]</unbreak> stack(s) of Syzygy.</div>
                     <div id="121202_stats"></div>
                     <div id="121202_data" style="display:none;" data-level1="1, 1" data-level2="1.1, 1" data-level3="1.2, 1" data-level4="1.3, 1" data-level5="1.4, 1" data-level6="1.5, 1" data-level7="1.625, 1" data-level8="1.75, 1" data-level9="1.875, 1" data-level10="2, 1" data-level11="2.1, 1" data-level12="2.2, 1" data-level13="2.3, 1" data-level14="2.4, 1" data-level15="2.5, 1" data-levelid="1, 2, 1, 2, 0, 2" ></div>
                 </li>
@@ -86,7 +184,7 @@ function initializeSkills() {
                 <li>
                     <strong>Florephemeral Dreamflux (Ultimate):</strong>
                     <select onchange="updateSkill('121203', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="121203_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Jingliu's ATK to a single enemy, and deals Ice DMG equal to <b><unbreak>#3[i]</unbreak></b> of Jingliu's ATK to any adjacent enemies. Gains <unbreak>#2[i]</unbreak> stack(s) of Syzygy after attack ends.">Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Jingliu's ATK to a single enemy, and deals Ice DMG equal to <b><unbreak>#3[i]</unbreak></b> of Jingliu's ATK to any adjacent enemies. Gains <unbreak>#2[i]</unbreak> stack(s) of Syzygy after attack ends.</div>
+                    <div id="121203_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Jingliu's ATK to a single enemy, and deals Ice DMG equal to <b><unbreak>#3[i]%</unbreak></b> of Jingliu's ATK to any adjacent enemies. Gains <unbreak>#2[i]</unbreak> stack(s) of Syzygy after attack ends.">Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Jingliu's ATK to a single enemy, and deals Ice DMG equal to <b><unbreak>#3[i]%</unbreak></b> of Jingliu's ATK to any adjacent enemies. Gains <unbreak>#2[i]</unbreak> stack(s) of Syzygy after attack ends.</div>
                     <div id="121203_stats"></div>
                     <div id="121203_data" style="display:none;" data-level1="1.8, 1, 0.9, 1" data-level2="1.92, 1, 0.96, 1" data-level3="2.04, 1, 1.02, 1" data-level4="2.16, 1, 1.08, 1" data-level5="2.28, 1, 1.14, 1" data-level6="2.4, 1, 1.2, 1" data-level7="2.55, 1, 1.275, 1" data-level8="2.7, 1, 1.35, 1" data-level9="2.85, 1, 1.425, 1" data-level10="3, 1, 1.5, 1" data-level11="3.12, 1, 1.56, 1" data-level12="3.24, 1, 1.62, 1" data-level13="3.36, 1, 1.68, 1" data-level14="3.48, 1, 1.74, 1" data-level15="3.6, 1, 1.8, 1" data-levelid="1, 2, 1, 2, 0, 3" ></div>
                 </li>
@@ -94,7 +192,7 @@ function initializeSkills() {
                 <li>
                     <strong>Crescent Transmigration (Talent):</strong>
                     <select onchange="updateSkill('121204', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="121204_description" data-original-description="When Jingliu has <unbreak>#5[i]</unbreak> stack(s) of Syzygy, she enters the Spectral Transmigration state with her Action Advanced by <unbreak>#6[i]</unbreak> and her CRIT Rate increases by <b><unbreak>#7[i]</unbreak></b>. Then, Jingliu's Skill "Transcendent Flash" is enhanced to "Moon On Glacial River," and only this enhanced Skill is available for use in battle. When Jingliu uses an attack in the Spectral Transmigration state, she consumes HP from all other allies equal to <unbreak>#2[i]</unbreak> of their respective Max HP (this cannot reduce allies' HP to lower than 1). Jingliu's ATK increases by <unbreak>#3[i]</unbreak> of the total HP consumed from all allies in this attack, capped at <b><unbreak>#4[i]</unbreak></b> of her base ATK, lasting until the current attack ends. Jingliu cannot enter the Spectral Transmigration state again until the current Spectral Transmigration state ends. Syzygy can stack up to 3 times. When Syzygy stacks become 0, Jingliu will exit the Spectral Transmigration state.">When Jingliu has <unbreak>#5[i]</unbreak> stack(s) of Syzygy, she enters the Spectral Transmigration state with her Action Advanced by <unbreak>#6[i]</unbreak> and her CRIT Rate increases by <b><unbreak>#7[i]</unbreak></b>. Then, Jingliu's Skill "Transcendent Flash" is enhanced to "Moon On Glacial River," and only this enhanced Skill is available for use in battle. When Jingliu uses an attack in the Spectral Transmigration state, she consumes HP from all other allies equal to <unbreak>#2[i]</unbreak> of their respective Max HP (this cannot reduce allies' HP to lower than 1). Jingliu's ATK increases by <unbreak>#3[i]</unbreak> of the total HP consumed from all allies in this attack, capped at <b><unbreak>#4[i]</unbreak></b> of her base ATK, lasting until the current attack ends. Jingliu cannot enter the Spectral Transmigration state again until the current Spectral Transmigration state ends. Syzygy can stack up to 3 times. When Syzygy stacks become 0, Jingliu will exit the Spectral Transmigration state.</div>
+                    <div id="121204_description" data-original-description="When Jingliu has <unbreak>#5[i]</unbreak> stack(s) of Syzygy, she enters the Spectral Transmigration state with her Action Advanced by <unbreak>#6[i]%</unbreak> and her CRIT Rate increases by <b><unbreak>#7[i]%</unbreak></b>. Then, Jingliu's Skill "Transcendent Flash" is enhanced to "Moon On Glacial River," and only this enhanced Skill is available for use in battle. When Jingliu uses an attack in the Spectral Transmigration state, she consumes HP from all other allies equal to <unbreak>#2[i]%</unbreak> of their respective Max HP (this cannot reduce allies' HP to lower than 1). Jingliu's ATK increases by <unbreak>#3[i]%</unbreak> of the total HP consumed from all allies in this attack, capped at <b><unbreak>#4[i]%</unbreak></b> of her base ATK, lasting until the current attack ends. Jingliu cannot enter the Spectral Transmigration state again until the current Spectral Transmigration state ends. Syzygy can stack up to 3 times. When Syzygy stacks become 0, Jingliu will exit the Spectral Transmigration state.">When Jingliu has <unbreak>#5[i]</unbreak> stack(s) of Syzygy, she enters the Spectral Transmigration state with her Action Advanced by <unbreak>#6[i]%</unbreak> and her CRIT Rate increases by <b><unbreak>#7[i]%</unbreak></b>. Then, Jingliu's Skill "Transcendent Flash" is enhanced to "Moon On Glacial River," and only this enhanced Skill is available for use in battle. When Jingliu uses an attack in the Spectral Transmigration state, she consumes HP from all other allies equal to <unbreak>#2[i]%</unbreak> of their respective Max HP (this cannot reduce allies' HP to lower than 1). Jingliu's ATK increases by <unbreak>#3[i]%</unbreak> of the total HP consumed from all allies in this attack, capped at <b><unbreak>#4[i]%</unbreak></b> of her base ATK, lasting until the current attack ends. Jingliu cannot enter the Spectral Transmigration state again until the current Spectral Transmigration state ends. Syzygy can stack up to 3 times. When Syzygy stacks become 0, Jingliu will exit the Spectral Transmigration state.</div>
                     <div id="121204_stats"></div>
                     <div id="121204_data" style="display:none;" data-level1="0.3, 0.04, 5.4, 0.9, 2, 1, 0.4" data-level2="0.3, 0.04, 5.4, 0.99, 2, 1, 0.41" data-level3="0.3, 0.04, 5.4, 1.08, 2, 1, 0.42" data-level4="0.3, 0.04, 5.4, 1.17, 2, 1, 0.43" data-level5="0.3, 0.04, 5.4, 1.26, 2, 1, 0.44" data-level6="0.3, 0.04, 5.4, 1.35, 2, 1, 0.45" data-level7="0.3, 0.04, 5.4, 1.4625, 2, 1, 0.4625" data-level8="0.3, 0.04, 5.4, 1.575, 2, 1, 0.475" data-level9="0.3, 0.04, 5.4, 1.6875, 2, 1, 0.4875" data-level10="0.3, 0.04, 5.4, 1.8, 2, 1, 0.5" data-level11="0.3, 0.04, 5.4, 1.89, 2, 1, 0.51" data-level12="0.3, 0.04, 5.4, 1.98, 2, 1, 0.52" data-level13="0.3, 0.04, 5.4, 2.07, 2, 1, 0.53" data-level14="0.3, 0.04, 5.4, 2.16, 2, 1, 0.54" data-level15="0.3, 0.04, 5.4, 2.25, 2, 1, 0.55" data-levelid="1, 2, 1, 2, 0, 4" ></div>
                 </li>
@@ -110,7 +208,7 @@ function initializeSkills() {
                 <li>
                     <strong>Shine of Truth (Technique):</strong>
                     <select onchange="updateSkill('121207', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
-                    <div id="121207_description" data-original-description="After using this Technique, creates a special dimension around Jingliu that lasts for <unbreak>#3[i]</unbreak> seconds, and all enemies in this special dimension will become Frozen. After entering combat with enemies in the special dimension, Jingliu immediately regenerates <unbreak>#6[i]</unbreak> Energy and obtains <unbreak>#1[i]</unbreak> stack(s) of Syzygy, with a <unbreak>#2[i]</unbreak> <u>base chance</u> of Freezing enemy targets for <unbreak>#4[i]</unbreak> turn(s). While Frozen, enemy targets cannot take action, and receive Ice <u>Additional DMG</u> equal to <unbreak>#5[i]</unbreak> of Jingliu's ATK at the start of every turn. Only 1 dimension created by allies can exist at the same time.">After using this Technique, creates a special dimension around Jingliu that lasts for <unbreak>#3[i]</unbreak> seconds, and all enemies in this special dimension will become Frozen. After entering combat with enemies in the special dimension, Jingliu immediately regenerates <unbreak>#6[i]</unbreak> Energy and obtains <unbreak>#1[i]</unbreak> stack(s) of Syzygy, with a <unbreak>#2[i]</unbreak> <u>base chance</u> of Freezing enemy targets for <unbreak>#4[i]</unbreak> turn(s). While Frozen, enemy targets cannot take action, and receive Ice <u>Additional DMG</u> equal to <unbreak>#5[i]</unbreak> of Jingliu's ATK at the start of every turn. Only 1 dimension created by allies can exist at the same time.</div>
+                    <div id="121207_description" data-original-description="After using this Technique, creates a special dimension around Jingliu that lasts for <unbreak>#3[i]</unbreak> seconds, and all enemies in this special dimension will become Frozen. After entering combat with enemies in the special dimension, Jingliu immediately regenerates <unbreak>#6[i]</unbreak> Energy and obtains <unbreak>#1[i]</unbreak> stack(s) of Syzygy, with a <unbreak>#2[i]%</unbreak> <u>base chance</u> of Freezing enemy targets for <unbreak>#4[i]</unbreak> turn(s). While Frozen, enemy targets cannot take action, and receive Ice <u>Additional DMG</u> equal to <unbreak>#5[i]%</unbreak> of Jingliu's ATK at the start of every turn. Only 1 dimension created by allies can exist at the same time.">After using this Technique, creates a special dimension around Jingliu that lasts for <unbreak>#3[i]</unbreak> seconds, and all enemies in this special dimension will become Frozen. After entering combat with enemies in the special dimension, Jingliu immediately regenerates <unbreak>#6[i]</unbreak> Energy and obtains <unbreak>#1[i]</unbreak> stack(s) of Syzygy, with a <unbreak>#2[i]%</unbreak> <u>base chance</u> of Freezing enemy targets for <unbreak>#4[i]</unbreak> turn(s). While Frozen, enemy targets cannot take action, and receive Ice <u>Additional DMG</u> equal to <unbreak>#5[i]%</unbreak> of Jingliu's ATK at the start of every turn. Only 1 dimension created by allies can exist at the same time.</div>
                     <div id="121207_stats"></div>
                     <div id="121207_data" style="display:none;" data-level1="1, 1, 20, 1, 0.8, 15" data-levelid="1, 2, 1, 2, 0, 7" ></div>
                 </li>
@@ -118,7 +216,7 @@ function initializeSkills() {
                 <li>
                     <strong>Moon On Glacial River (Skill):</strong>
                     <select onchange="updateSkill('121209', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="121209_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Jingliu's ATK to a single enemy, and deals Ice DMG equal to <b><unbreak>#3[i]</unbreak></b> of Jingliu's ATK to adjacent enemies. Consumes <unbreak>#2[i]</unbreak> stack(s) of Syzygy. Using this ability does not consume Skill Points.">Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of Jingliu's ATK to a single enemy, and deals Ice DMG equal to <b><unbreak>#3[i]</unbreak></b> of Jingliu's ATK to adjacent enemies. Consumes <unbreak>#2[i]</unbreak> stack(s) of Syzygy. Using this ability does not consume Skill Points.</div>
+                    <div id="121209_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Jingliu's ATK to a single enemy, and deals Ice DMG equal to <b><unbreak>#3[i]%</unbreak></b> of Jingliu's ATK to adjacent enemies. Consumes <unbreak>#2[i]</unbreak> stack(s) of Syzygy. Using this ability does not consume Skill Points.">Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Jingliu's ATK to a single enemy, and deals Ice DMG equal to <b><unbreak>#3[i]%</unbreak></b> of Jingliu's ATK to adjacent enemies. Consumes <unbreak>#2[i]</unbreak> stack(s) of Syzygy. Using this ability does not consume Skill Points.</div>
                     <div id="121209_stats"></div>
                     <div id="121209_data" style="display:none;" data-level1="1.25, 1, 0.625" data-level2="1.375, 1, 0.6875" data-level3="1.5, 1, 0.75" data-level4="1.625, 1, 0.8125" data-level5="1.75, 1, 0.875" data-level6="1.875, 1, 0.9375" data-level7="2.03125, 1, 1.015625" data-level8="2.1875, 1, 1.09375" data-level9="2.34375, 1, 1.171875" data-level10="2.5, 1, 1.25" data-level11="2.625, 1, 1.3125" data-level12="2.75, 1, 1.375" data-level13="2.875, 1, 1.4375" data-level14="3, 1, 1.5" data-level15="3.125, 1, 1.5625" data-levelid="1, 2, 1, 2, 0, 9" ></div>
                 </li>

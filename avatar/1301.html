@@ -24,11 +24,22 @@ function updateSkill(skillId, level) {
     
     var updatedDescription = originalDescription;
     statsArray.forEach((stat, index) => {
-        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
-        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
-        var formattedStat = stat;
-        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
-        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
     });
     
     console.log('Updated description:', updatedDescription);
@@ -53,6 +64,94 @@ function initializeSkills() {
             <strong>Path:</strong> Abundance<br>
             <strong>Element:</strong> Fire<br>
             <strong>Rarity:</strong> 4*</br></p>
+            <h2>Ascension Material</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>2646400</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>5</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110241.png' />
+                        Alien Tree Seed
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110242.png' />
+                        Nourishing Honey
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110243.png' />
+                        Myriad Fruit
+                    </td>
+                    <td>105</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110422.png' />
+                        Raging Heart
+                    </td>
+                    <td>50</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110504.png' />
+                        Past Evils of the Borehole Planet Disaster
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114001.png' />
+                        Dream Collection Component
+                    </td>
+                    <td>40</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114002.png' />
+                        Dream Flow Valve
+                    </td>
+                    <td>55</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114003.png' />
+                        Dream Making Engine
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+            </table>
             <h2>Stats</h2>
             <ul>
                 <li><strong>Max HP:</strong> 1305.36</li>
@@ -63,14 +162,13 @@ function initializeSkills() {
                 <li><strong>CRIT Rate:</strong> 0.05</li>
                 <li><strong>CRIT DMG:</strong> 0.5</li>
             </ul>
-
             <h2>Skills</h2>
             <ul>
         
                 <li>
                     <strong>Corkage Fee (Basic ATK):</strong>
                     <select onchange="updateSkill('130101', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
-                    <div id="130101_description" data-original-description="Deals Fire DMG equal to <b><unbreak>#1[i]</unbreak></b> of Gallagher's ATK to a single target enemy.">Deals Fire DMG equal to <b><unbreak>#1[i]</unbreak></b> of Gallagher's ATK to a single target enemy.</div>
+                    <div id="130101_description" data-original-description="Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Gallagher's ATK to a single target enemy.">Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Gallagher's ATK to a single target enemy.</div>
                     <div id="130101_stats"></div>
                     <div id="130101_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 3, 0, 1, 0, 1" ></div>
                 </li>
@@ -86,7 +184,7 @@ function initializeSkills() {
                 <li>
                     <strong>Champagne Etiquette (Ultimate):</strong>
                     <select onchange="updateSkill('130103', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="130103_description" data-original-description="Inflicts Besotted on all enemies, lasting for <unbreak>#2[i]</unbreak> turn(s). At the same time, deals Fire DMG equal to <b><unbreak>#1[i]</unbreak></b> of Gallagher's ATK to all enemies, and enhances his next Basic ATK to Nectar Blitz.">Inflicts Besotted on all enemies, lasting for <unbreak>#2[i]</unbreak> turn(s). At the same time, deals Fire DMG equal to <b><unbreak>#1[i]</unbreak></b> of Gallagher's ATK to all enemies, and enhances his next Basic ATK to Nectar Blitz.</div>
+                    <div id="130103_description" data-original-description="Inflicts Besotted on all enemies, lasting for <unbreak>#2[i]</unbreak> turn(s). At the same time, deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Gallagher's ATK to all enemies, and enhances his next Basic ATK to Nectar Blitz.">Inflicts Besotted on all enemies, lasting for <unbreak>#2[i]</unbreak> turn(s). At the same time, deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Gallagher's ATK to all enemies, and enhances his next Basic ATK to Nectar Blitz.</div>
                     <div id="130103_stats"></div>
                     <div id="130103_data" style="display:none;" data-level1="0.75, 2" data-level2="0.825, 2" data-level3="0.9, 2" data-level4="0.975, 2" data-level5="1.05, 2" data-level6="1.125, 2" data-level7="1.21875, 2" data-level8="1.3125, 2" data-level9="1.40625, 2" data-level10="1.5, 2" data-level11="1.575, 2" data-level12="1.65, 2" data-level13="1.725, 2" data-level14="1.8, 2" data-level15="1.875, 2" data-levelid="1, 3, 0, 1, 0, 3" ></div>
                 </li>
@@ -94,7 +192,7 @@ function initializeSkills() {
                 <li>
                     <strong>Tipsy Tussle (Talent):</strong>
                     <select onchange="updateSkill('130104', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="130104_description" data-original-description="The Besotted state makes targets receive <b><unbreak>#1[f1]</unbreak></b> more <u>Break DMG</u>. Every time a Besotted target gets attacked by an ally, the attacking ally's HP is restored by <b><unbreak>#2[i]</unbreak></b>.">The Besotted state makes targets receive <b><unbreak>#1[f1]</unbreak></b> more <u>Break DMG</u>. Every time a Besotted target gets attacked by an ally, the attacking ally's HP is restored by <b><unbreak>#2[i]</unbreak></b>.</div>
+                    <div id="130104_description" data-original-description="The Besotted state makes targets receive <b><unbreak>#1[f1]%</unbreak></b> more <u>Break DMG</u>. Every time a Besotted target gets attacked by an ally, the attacking ally's HP is restored by <b><unbreak>#2[i]</unbreak></b>.">The Besotted state makes targets receive <b><unbreak>#1[f1]%</unbreak></b> more <u>Break DMG</u>. Every time a Besotted target gets attacked by an ally, the attacking ally's HP is restored by <b><unbreak>#2[i]</unbreak></b>.</div>
                     <div id="130104_stats"></div>
                     <div id="130104_data" style="display:none;" data-level1="0.06, 80" data-level2="0.066, 136" data-level3="0.072, 192" data-level4="0.078, 270.4" data-level5="0.084, 332" data-level6="0.09, 393.6" data-level7="0.0975, 455.2" data-level8="0.105, 516.8" data-level9="0.1125, 578.4" data-level10="0.12, 640" data-level11="0.126, 673.6" data-level12="0.132, 707.2" data-level13="0.138, 740.8" data-level14="0.144, 774.4" data-level15="0.15, 808" data-levelid="1, 3, 0, 1, 0, 4" ></div>
                 </li>
@@ -110,7 +208,7 @@ function initializeSkills() {
                 <li>
                     <strong>Artisan Elixir (Technique):</strong>
                     <select onchange="updateSkill('130107', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
-                    <div id="130107_description" data-original-description="Immediately attacks the enemy. Upon entering battle, inflicts Besotted on all enemies, lasting for <unbreak>#1[i]</unbreak> turn(s). And deals Fire DMG equal to <unbreak>#2[i]</unbreak> of Gallagher's ATK to all enemies.">Immediately attacks the enemy. Upon entering battle, inflicts Besotted on all enemies, lasting for <unbreak>#1[i]</unbreak> turn(s). And deals Fire DMG equal to <unbreak>#2[i]</unbreak> of Gallagher's ATK to all enemies.</div>
+                    <div id="130107_description" data-original-description="Immediately attacks the enemy. Upon entering battle, inflicts Besotted on all enemies, lasting for <unbreak>#1[i]</unbreak> turn(s). And deals Fire DMG equal to <unbreak>#2[i]%</unbreak> of Gallagher's ATK to all enemies.">Immediately attacks the enemy. Upon entering battle, inflicts Besotted on all enemies, lasting for <unbreak>#1[i]</unbreak> turn(s). And deals Fire DMG equal to <unbreak>#2[i]%</unbreak> of Gallagher's ATK to all enemies.</div>
                     <div id="130107_stats"></div>
                     <div id="130107_data" style="display:none;" data-level1="2, 0.5" data-levelid="1, 3, 0, 1, 0, 7" ></div>
                 </li>
@@ -118,7 +216,7 @@ function initializeSkills() {
                 <li>
                     <strong>Nectar Blitz (Basic ATK):</strong>
                     <select onchange="updateSkill('130108', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
-                    <div id="130108_description" data-original-description="Deals Fire DMG equal to <b><unbreak>#1[i]</unbreak></b> of Gallagher's ATK to a single target enemy. Reduces the target's ATK by <b><unbreak>#2[f1]</unbreak></b>, lasting for <unbreak>#3[i]</unbreak> turn(s).">Deals Fire DMG equal to <b><unbreak>#1[i]</unbreak></b> of Gallagher's ATK to a single target enemy. Reduces the target's ATK by <b><unbreak>#2[f1]</unbreak></b>, lasting for <unbreak>#3[i]</unbreak> turn(s).</div>
+                    <div id="130108_description" data-original-description="Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Gallagher's ATK to a single target enemy. Reduces the target's ATK by <b><unbreak>#2[f1]%</unbreak></b>, lasting for <unbreak>#3[i]</unbreak> turn(s).">Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Gallagher's ATK to a single target enemy. Reduces the target's ATK by <b><unbreak>#2[f1]%</unbreak></b>, lasting for <unbreak>#3[i]</unbreak> turn(s).</div>
                     <div id="130108_stats"></div>
                     <div id="130108_data" style="display:none;" data-level1="1.25, 0.1, 2" data-level2="1.5, 0.11, 2" data-level3="1.75, 0.12, 2" data-level4="2, 0.13, 2" data-level5="2.25, 0.14, 2" data-level6="2.5, 0.15, 2" data-level7="2.75, 0.16, 2" data-level8="3, 0.17, 2" data-level9="3.25, 0.18, 2" data-levelid="1, 3, 0, 1, 0, 8" ></div>
                 </li>

@@ -24,11 +24,22 @@ function updateSkill(skillId, level) {
     
     var updatedDescription = originalDescription;
     statsArray.forEach((stat, index) => {
-        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
-        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
-        var formattedStat = stat;
-        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
-        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
     });
     
     console.log('Updated description:', updatedDescription);
@@ -53,6 +64,94 @@ function initializeSkills() {
             <strong>Path:</strong> Preservation<br>
             <strong>Element:</strong> Ice<br>
             <strong>Rarity:</strong> 4*</br></p>
+            <h2>Ascension Material</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>2646400</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>5</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110141.png' />
+                        Endurance of Bronze
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110142.png' />
+                        Oath of Steel
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110143.png' />
+                        Safeguard of Amber
+                    </td>
+                    <td>105</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110403.png' />
+                        Horn of Snow
+                    </td>
+                    <td>50</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110501.png' />
+                        Destroyer's Final Road
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111011.png' />
+                        Thief's Instinct
+                    </td>
+                    <td>40</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111012.png' />
+                        Usurper's Scheme
+                    </td>
+                    <td>55</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111013.png' />
+                        Conqueror's Will
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+            </table>
             <h2>Stats</h2>
             <ul>
                 <li><strong>Max HP:</strong> 1058.40</li>
@@ -63,14 +162,13 @@ function initializeSkills() {
                 <li><strong>CRIT Rate:</strong> 0.05</li>
                 <li><strong>CRIT DMG:</strong> 0.5</li>
             </ul>
-
             <h2>Skills</h2>
             <ul>
         
                 <li>
                     <strong>Frigid Cold Arrow (Basic ATK):</strong>
                     <select onchange="updateSkill('100101', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
-                    <div id="100101_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of March 7th's ATK to a single enemy.">Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of March 7th's ATK to a single enemy.</div>
+                    <div id="100101_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of March 7th's ATK to a single enemy.">Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of March 7th's ATK to a single enemy.</div>
                     <div id="100101_stats"></div>
                     <div id="100101_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 0, 0, 1, 0, 1" ></div>
                 </li>
@@ -78,7 +176,7 @@ function initializeSkills() {
                 <li>
                     <strong>The Power of Cuteness (Skill):</strong>
                     <select onchange="updateSkill('100102', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="100102_description" data-original-description="Provides a single ally with a Shield that can absorb DMG equal to <b><unbreak>#1[i]</unbreak></b> of March 7th's DEF plus <b><unbreak>#4[i]</unbreak></b> for <unbreak>#2[i]</unbreak> turn(s).<br>If the ally's current HP percentage is <unbreak>#3[i]</unbreak> or higher, greatly increases the chance of enemies attacking that ally.">Provides a single ally with a Shield that can absorb DMG equal to <b><unbreak>#1[i]</unbreak></b> of March 7th's DEF plus <b><unbreak>#4[i]</unbreak></b> for <unbreak>#2[i]</unbreak> turn(s).<br>If the ally's current HP percentage is <unbreak>#3[i]</unbreak> or higher, greatly increases the chance of enemies attacking that ally.</div>
+                    <div id="100102_description" data-original-description="Provides a single ally with a Shield that can absorb DMG equal to <b><unbreak>#1[i]%</unbreak></b> of March 7th's DEF plus <b><unbreak>#4[i]</unbreak></b> for <unbreak>#2[i]</unbreak> turn(s).<br>If the ally's current HP percentage is <unbreak>#3[i]%</unbreak> or higher, greatly increases the chance of enemies attacking that ally.">Provides a single ally with a Shield that can absorb DMG equal to <b><unbreak>#1[i]%</unbreak></b> of March 7th's DEF plus <b><unbreak>#4[i]</unbreak></b> for <unbreak>#2[i]</unbreak> turn(s).<br>If the ally's current HP percentage is <unbreak>#3[i]%</unbreak> or higher, greatly increases the chance of enemies attacking that ally.</div>
                     <div id="100102_stats"></div>
                     <div id="100102_data" style="display:none;" data-level1="0.38, 3, 0.3, 190, 5" data-level2="0.40375, 3, 0.3, 304, 5" data-level3="0.4275, 3, 0.3, 389.5, 5" data-level4="0.45125, 3, 0.3, 475, 5" data-level5="0.475, 3, 0.3, 532, 5" data-level6="0.494, 3, 0.3, 589, 5" data-level7="0.513, 3, 0.3, 631.75, 5" data-level8="0.532, 3, 0.3, 674.5, 5" data-level9="0.551, 3, 0.3, 717.25, 5" data-level10="0.57, 3, 0.3, 760, 5" data-level11="0.589, 3, 0.3, 802.75, 5" data-level12="0.608, 3, 0.3, 845.5, 5" data-level13="0.627, 3, 0.3, 888.25, 5" data-level14="0.646, 3, 0.3, 931, 5" data-level15="0.665, 3, 0.3, 973.75, 5" data-levelid="1, 0, 0, 1, 0, 2" ></div>
                 </li>
@@ -86,7 +184,7 @@ function initializeSkills() {
                 <li>
                     <strong>Glacial Cascade (Ultimate):</strong>
                     <select onchange="updateSkill('100103', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="100103_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of March 7th's ATK to all enemies. Hit enemies have a <unbreak>#2[i]</unbreak> <u>base chance</u> to be Frozen for <unbreak>#3[i]</unbreak> turn(s).<br>While Frozen, enemies cannot take action and will receive <u>Additional</u> Ice DMG equal to <b><unbreak>#4[i]</unbreak></b> of March 7th's ATK at the beginning of each turn.">Deals Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of March 7th's ATK to all enemies. Hit enemies have a <unbreak>#2[i]</unbreak> <u>base chance</u> to be Frozen for <unbreak>#3[i]</unbreak> turn(s).<br>While Frozen, enemies cannot take action and will receive <u>Additional</u> Ice DMG equal to <b><unbreak>#4[i]</unbreak></b> of March 7th's ATK at the beginning of each turn.</div>
+                    <div id="100103_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of March 7th's ATK to all enemies. Hit enemies have a <unbreak>#2[i]%</unbreak> <u>base chance</u> to be Frozen for <unbreak>#3[i]</unbreak> turn(s).<br>While Frozen, enemies cannot take action and will receive <u>Additional</u> Ice DMG equal to <b><unbreak>#4[i]%</unbreak></b> of March 7th's ATK at the beginning of each turn.">Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of March 7th's ATK to all enemies. Hit enemies have a <unbreak>#2[i]%</unbreak> <u>base chance</u> to be Frozen for <unbreak>#3[i]</unbreak> turn(s).<br>While Frozen, enemies cannot take action and will receive <u>Additional</u> Ice DMG equal to <b><unbreak>#4[i]%</unbreak></b> of March 7th's ATK at the beginning of each turn.</div>
                     <div id="100103_stats"></div>
                     <div id="100103_data" style="display:none;" data-level1="0.9, 0.5, 1, 0.3" data-level2="0.96, 0.5, 1, 0.33" data-level3="1.02, 0.5, 1, 0.36" data-level4="1.08, 0.5, 1, 0.39" data-level5="1.14, 0.5, 1, 0.42" data-level6="1.2, 0.5, 1, 0.45" data-level7="1.275, 0.5, 1, 0.4875" data-level8="1.35, 0.5, 1, 0.525" data-level9="1.425, 0.5, 1, 0.5625" data-level10="1.5, 0.5, 1, 0.6" data-level11="1.56, 0.5, 1, 0.63" data-level12="1.62, 0.5, 1, 0.66" data-level13="1.68, 0.5, 1, 0.69" data-level14="1.74, 0.5, 1, 0.72" data-level15="1.8, 0.5, 1, 0.75" data-levelid="1, 0, 0, 1, 0, 3" ></div>
                 </li>
@@ -94,7 +192,7 @@ function initializeSkills() {
                 <li>
                     <strong>Girl Power (Talent):</strong>
                     <select onchange="updateSkill('100104', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="100104_description" data-original-description="After a Shielded ally is attacked by an enemy, March 7th immediately <u>Counters</u>, dealing Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of her ATK. This effect can be triggered <unbreak>#2[i]</unbreak> time(s) each turn.">After a Shielded ally is attacked by an enemy, March 7th immediately <u>Counters</u>, dealing Ice DMG equal to <b><unbreak>#1[i]</unbreak></b> of her ATK. This effect can be triggered <unbreak>#2[i]</unbreak> time(s) each turn.</div>
+                    <div id="100104_description" data-original-description="After a Shielded ally is attacked by an enemy, March 7th immediately <u>Counters</u>, dealing Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of her ATK. This effect can be triggered <unbreak>#2[i]</unbreak> time(s) each turn.">After a Shielded ally is attacked by an enemy, March 7th immediately <u>Counters</u>, dealing Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of her ATK. This effect can be triggered <unbreak>#2[i]</unbreak> time(s) each turn.</div>
                     <div id="100104_stats"></div>
                     <div id="100104_data" style="display:none;" data-level1="0.5, 2" data-level2="0.55, 2" data-level3="0.6, 2" data-level4="0.65, 2" data-level5="0.7, 2" data-level6="0.75, 2" data-level7="0.8125, 2" data-level8="0.875, 2" data-level9="0.9375, 2" data-level10="1, 2" data-level11="1.05, 2" data-level12="1.1, 2" data-level13="1.15, 2" data-level14="1.2, 2" data-level15="1.25, 2" data-levelid="1, 0, 0, 1, 0, 4" ></div>
                 </li>
@@ -110,7 +208,7 @@ function initializeSkills() {
                 <li>
                     <strong>Freezing Beauty (Technique):</strong>
                     <select onchange="updateSkill('100107', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
-                    <div id="100107_description" data-original-description="Immediately attacks the enemy. After entering battle, there is a <unbreak>#1[i]</unbreak> <u>base chance</u> to Freeze a random enemy for <unbreak>#2[i]</unbreak> turn(s).<br>While Frozen, the enemy cannot take action and will take <u>Additional</u> Ice DMG equal to <unbreak>#3[i]</unbreak> of March 7th's ATK at the beginning of each turn.">Immediately attacks the enemy. After entering battle, there is a <unbreak>#1[i]</unbreak> <u>base chance</u> to Freeze a random enemy for <unbreak>#2[i]</unbreak> turn(s).<br>While Frozen, the enemy cannot take action and will take <u>Additional</u> Ice DMG equal to <unbreak>#3[i]</unbreak> of March 7th's ATK at the beginning of each turn.</div>
+                    <div id="100107_description" data-original-description="Immediately attacks the enemy. After entering battle, there is a <unbreak>#1[i]%</unbreak> <u>base chance</u> to Freeze a random enemy for <unbreak>#2[i]</unbreak> turn(s).<br>While Frozen, the enemy cannot take action and will take <u>Additional</u> Ice DMG equal to <unbreak>#3[i]%</unbreak> of March 7th's ATK at the beginning of each turn.">Immediately attacks the enemy. After entering battle, there is a <unbreak>#1[i]%</unbreak> <u>base chance</u> to Freeze a random enemy for <unbreak>#2[i]</unbreak> turn(s).<br>While Frozen, the enemy cannot take action and will take <u>Additional</u> Ice DMG equal to <unbreak>#3[i]%</unbreak> of March 7th's ATK at the beginning of each turn.</div>
                     <div id="100107_stats"></div>
                     <div id="100107_data" style="display:none;" data-level1="1, 1, 0.5" data-levelid="1, 0, 0, 1, 0, 7" ></div>
                 </li>

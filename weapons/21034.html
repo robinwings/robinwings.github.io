@@ -17,13 +17,22 @@
         var originalDescription = refinementsElement.getAttribute('data-original-description');
         
         statsArray.forEach((stat, index) => {
-            var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
-            var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
+            var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
 
-            var formattedStat = stat;
-
-            originalDescription = originalDescription.replace(placeholder_i, formattedStat);
-            originalDescription = originalDescription.replace(placeholder_f1, formattedStat);
+            originalDescription = originalDescription.replace(placeholderRegExp, (match, p1, p2) => {
+                var formattedStat = stat;
+                console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+                if (p2 === '%') {
+                    formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+                } else {
+                    if (stat % 1 !== 0) {
+                        formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                    }
+                }
+                console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+                return formattedStat;
+            });
         });
 
         refinementsElement.innerHTML = originalDescription;
@@ -66,13 +75,68 @@
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-                <div id="21034_refinements" data-original-description="After entering battle, increases the wearer's DMG based on their Max Energy. DMG increases by <b><unbreak>#1[f2]</unbreak></b> per point of Energy, up to <unbreak>#2[i]</unbreak> Energy.">
-                    After entering battle, increases the wearer's DMG based on their Max Energy. DMG increases by <b><unbreak>#1[f2]</unbreak></b> per point of Energy, up to <unbreak>#2[i]</unbreak> Energy.
+                <div id="21034_refinements" data-original-description="After entering battle, increases the wearer's DMG based on their Max Energy. DMG increases by <b><unbreak>#1[f2]%</unbreak></b> per point of Energy, up to <unbreak>#2[i]</unbreak> Energy.">
+                    After entering battle, increases the wearer's DMG based on their Max Energy. DMG increases by <b><unbreak>#1[f2]%</unbreak></b> per point of Energy, up to <unbreak>#2[i]</unbreak> Energy.
                 </div>
                 <div id="21034_data" style="display:none;" data-level1="0.0019999999, 160" data-level2="0.0025000002, 160" data-level3="0.0029999998, 160" data-level4="0.0035, 160" data-level5="0.0039999997, 160" data-levelid="2, 1, 0, 3, 4" >
                 </div>
             </li>
         </ul>
+        <h2>Ascension Materials</h2>
+        <table>
+            <tr>
+                <th>Material</th>
+                <th>Amount</th>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                    Credit
+                </td>
+                <td>308000</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110131.png' />
+                    Key of Inspiration
+                </td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110132.png' />
+                    Key of Knowledge
+                </td>
+                <td>9</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110133.png' />
+                    Key of Wisdom
+                </td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113001.png' />
+                    Immortal Scionette
+                </td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113002.png' />
+                    Immortal Aeroblossom
+                </td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113003.png' />
+                    Immortal Lumintwig
+                </td>
+                <td>12</td>
+            </tr>
     </body>
     </html>
     

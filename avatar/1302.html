@@ -24,11 +24,22 @@ function updateSkill(skillId, level) {
     
     var updatedDescription = originalDescription;
     statsArray.forEach((stat, index) => {
-        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
-        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
-        var formattedStat = stat;
-        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
-        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
     });
     
     console.log('Updated description:', updatedDescription);
@@ -53,6 +64,94 @@ function initializeSkills() {
             <strong>Path:</strong> Erudition<br>
             <strong>Element:</strong> Physical<br>
             <strong>Rarity:</strong> 5*</br></p>
+            <h2>Ascension Material</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110131.png' />
+                        Key of Inspiration
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110132.png' />
+                        Key of Knowledge
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110133.png' />
+                        Key of Wisdom
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110411.png' />
+                        Netherworld Token
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110503.png' />
+                        Regret of Infinite Ochema
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111001.png' />
+                        Extinguished Core
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111002.png' />
+                        Glimmering Core
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111003.png' />
+                        Squirming Core
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table>
             <h2>Stats</h2>
             <ul>
                 <li><strong>Max HP:</strong> 1047.82</li>
@@ -63,14 +162,13 @@ function initializeSkills() {
                 <li><strong>CRIT Rate:</strong> 0.05</li>
                 <li><strong>CRIT DMG:</strong> 0.5</li>
             </ul>
-
             <h2>Skills</h2>
             <ul>
         
                 <li>
                     <strong>Fleeting Fragrance (Basic ATK):</strong>
                     <select onchange="updateSkill('130201', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
-                    <div id="130201_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Argenti's ATK to a single target enemy.">Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Argenti's ATK to a single target enemy.</div>
+                    <div id="130201_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Argenti's ATK to a single target enemy.">Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Argenti's ATK to a single target enemy.</div>
                     <div id="130201_stats"></div>
                     <div id="130201_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 3, 0, 2, 0, 1" ></div>
                 </li>
@@ -78,7 +176,7 @@ function initializeSkills() {
                 <li>
                     <strong>Justice, Hereby Blooms (Skill):</strong>
                     <select onchange="updateSkill('130202', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="130202_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Argenti's ATK to all enemies.">Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Argenti's ATK to all enemies.</div>
+                    <div id="130202_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Argenti's ATK to all enemies.">Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Argenti's ATK to all enemies.</div>
                     <div id="130202_stats"></div>
                     <div id="130202_data" style="display:none;" data-level1="0.6" data-level2="0.66" data-level3="0.72" data-level4="0.78" data-level5="0.84" data-level6="0.9" data-level7="0.975" data-level8="1.05" data-level9="1.125" data-level10="1.2" data-level11="1.26" data-level12="1.32" data-level13="1.38" data-level14="1.44" data-level15="1.5" data-levelid="1, 3, 0, 2, 0, 2" ></div>
                 </li>
@@ -86,7 +184,7 @@ function initializeSkills() {
                 <li>
                     <strong>For In This Garden, Supreme Beauty Bestows (Ultimate):</strong>
                     <select onchange="updateSkill('130203', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="130203_description" data-original-description="Consumes <unbreak>#2[i]</unbreak> Energy and deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Argenti's ATK to all enemies.">Consumes <unbreak>#2[i]</unbreak> Energy and deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Argenti's ATK to all enemies.</div>
+                    <div id="130203_description" data-original-description="Consumes <unbreak>#2[i]</unbreak> Energy and deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Argenti's ATK to all enemies.">Consumes <unbreak>#2[i]</unbreak> Energy and deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Argenti's ATK to all enemies.</div>
                     <div id="130203_stats"></div>
                     <div id="130203_data" style="display:none;" data-level1="0.96, 90" data-level2="1.024, 90" data-level3="1.088, 90" data-level4="1.152, 90" data-level5="1.216, 90" data-level6="1.28, 90" data-level7="1.36, 90" data-level8="1.44, 90" data-level9="1.52, 90" data-level10="1.6, 90" data-level11="1.664, 90" data-level12="1.728, 90" data-level13="1.792, 90" data-level14="1.856, 90" data-level15="1.92, 90" data-levelid="1, 3, 0, 2, 0, 3" ></div>
                 </li>
@@ -94,7 +192,7 @@ function initializeSkills() {
                 <li>
                     <strong>Sublime Object (Talent):</strong>
                     <select onchange="updateSkill('130204', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="130204_description" data-original-description="For every enemy hit when Argenti uses his Basic Attack, Skill, or Ultimate, regenerates Argenti's Energy by <unbreak>#1[i]</unbreak>, and grants him a stack of Apotheosis, increasing his CRIT Rate by <b><unbreak>#2[f1]</unbreak></b>. This effect can stack up to <unbreak>#3[i]</unbreak> time(s).">For every enemy hit when Argenti uses his Basic Attack, Skill, or Ultimate, regenerates Argenti's Energy by <unbreak>#1[i]</unbreak>, and grants him a stack of Apotheosis, increasing his CRIT Rate by <b><unbreak>#2[f1]</unbreak></b>. This effect can stack up to <unbreak>#3[i]</unbreak> time(s).</div>
+                    <div id="130204_description" data-original-description="For every enemy hit when Argenti uses his Basic Attack, Skill, or Ultimate, regenerates Argenti's Energy by <unbreak>#1[i]</unbreak>, and grants him a stack of Apotheosis, increasing his CRIT Rate by <b><unbreak>#2[f1]%</unbreak></b>. This effect can stack up to <unbreak>#3[i]</unbreak> time(s).">For every enemy hit when Argenti uses his Basic Attack, Skill, or Ultimate, regenerates Argenti's Energy by <unbreak>#1[i]</unbreak>, and grants him a stack of Apotheosis, increasing his CRIT Rate by <b><unbreak>#2[f1]%</unbreak></b>. This effect can stack up to <unbreak>#3[i]</unbreak> time(s).</div>
                     <div id="130204_stats"></div>
                     <div id="130204_data" style="display:none;" data-level1="3, 0.01, 10" data-level2="3, 0.0115, 10" data-level3="3, 0.013, 10" data-level4="3, 0.0145, 10" data-level5="3, 0.015999999, 10" data-level6="3, 0.0175, 10" data-level7="3, 0.019375, 10" data-level8="3, 0.02125, 10" data-level9="3, 0.023125, 10" data-level10="3, 0.025, 10" data-level11="3, 0.0265, 10" data-level12="3, 0.027999999, 10" data-level13="3, 0.0295, 10" data-level14="3, 0.031, 10" data-level15="3, 0.0325, 10" data-levelid="1, 3, 0, 2, 0, 4" ></div>
                 </li>
@@ -110,7 +208,7 @@ function initializeSkills() {
                 <li>
                     <strong>Manifesto of Purest Virtue (Technique):</strong>
                     <select onchange="updateSkill('130207', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
-                    <div id="130207_description" data-original-description="After using the Technique, enemies in a set area are inflicted with Daze for <unbreak>#1[i]</unbreak> second(s). Dazed enemies will not actively attack the team.<br>When attacking a Dazed enemy to enter combat, deals Physical DMG to all enemies equal to <unbreak>#2[i]</unbreak> of Argenti's ATK and regenerates his Energy by <unbreak>#3[i]</unbreak>.">After using the Technique, enemies in a set area are inflicted with Daze for <unbreak>#1[i]</unbreak> second(s). Dazed enemies will not actively attack the team.<br>When attacking a Dazed enemy to enter combat, deals Physical DMG to all enemies equal to <unbreak>#2[i]</unbreak> of Argenti's ATK and regenerates his Energy by <unbreak>#3[i]</unbreak>.</div>
+                    <div id="130207_description" data-original-description="After using the Technique, enemies in a set area are inflicted with Daze for <unbreak>#1[i]</unbreak> second(s). Dazed enemies will not actively attack the team.<br>When attacking a Dazed enemy to enter combat, deals Physical DMG to all enemies equal to <unbreak>#2[i]%</unbreak> of Argenti's ATK and regenerates his Energy by <unbreak>#3[i]</unbreak>.">After using the Technique, enemies in a set area are inflicted with Daze for <unbreak>#1[i]</unbreak> second(s). Dazed enemies will not actively attack the team.<br>When attacking a Dazed enemy to enter combat, deals Physical DMG to all enemies equal to <unbreak>#2[i]%</unbreak> of Argenti's ATK and regenerates his Energy by <unbreak>#3[i]</unbreak>.</div>
                     <div id="130207_stats"></div>
                     <div id="130207_data" style="display:none;" data-level1="10, 0.8, 15" data-levelid="1, 3, 0, 2, 0, 7" ></div>
                 </li>
@@ -118,7 +216,7 @@ function initializeSkills() {
                 <li>
                     <strong>Merit Bestowed in "My" Garden (Ultimate):</strong>
                     <select onchange="updateSkill('130214', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="130214_description" data-original-description="Consumes <unbreak>#4[i]</unbreak> Energy and deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Argenti's ATK to all enemies. And further deals DMG for <unbreak>#2[i]</unbreak> extra time(s), with each time dealing Physical DMG equal to <b><unbreak>#3[i]</unbreak></b> of Argenti's ATK to a random enemy.">Consumes <unbreak>#4[i]</unbreak> Energy and deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Argenti's ATK to all enemies. And further deals DMG for <unbreak>#2[i]</unbreak> extra time(s), with each time dealing Physical DMG equal to <b><unbreak>#3[i]</unbreak></b> of Argenti's ATK to a random enemy.</div>
+                    <div id="130214_description" data-original-description="Consumes <unbreak>#4[i]</unbreak> Energy and deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Argenti's ATK to all enemies. And further deals DMG for <unbreak>#2[i]</unbreak> extra time(s), with each time dealing Physical DMG equal to <b><unbreak>#3[i]%</unbreak></b> of Argenti's ATK to a random enemy.">Consumes <unbreak>#4[i]</unbreak> Energy and deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Argenti's ATK to all enemies. And further deals DMG for <unbreak>#2[i]</unbreak> extra time(s), with each time dealing Physical DMG equal to <b><unbreak>#3[i]%</unbreak></b> of Argenti's ATK to a random enemy.</div>
                     <div id="130214_stats"></div>
                     <div id="130214_data" style="display:none;" data-level1="1.68, 6, 0.57, 180" data-level2="1.792, 6, 0.608, 180" data-level3="1.904, 6, 0.646, 180" data-level4="2.016, 6, 0.684, 180" data-level5="2.128, 6, 0.722, 180" data-level6="2.24, 6, 0.76, 180" data-level7="2.38, 6, 0.8075, 180" data-level8="2.52, 6, 0.855, 180" data-level9="2.66, 6, 0.9025, 180" data-level10="2.8, 6, 0.95, 180" data-level11="2.912, 6, 0.988, 180" data-level12="3.024, 6, 1.026, 180" data-level13="3.136, 6, 1.064, 180" data-level14="3.248, 6, 1.102, 180" data-level15="3.36, 6, 1.14, 180" data-levelid="1, 3, 0, 2, 1, 4" ></div>
                 </li>

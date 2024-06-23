@@ -24,11 +24,22 @@ function updateSkill(skillId, level) {
     
     var updatedDescription = originalDescription;
     statsArray.forEach((stat, index) => {
-        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
-        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
-        var formattedStat = stat;
-        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
-        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
     });
     
     console.log('Updated description:', updatedDescription);
@@ -53,6 +64,94 @@ function initializeSkills() {
             <strong>Path:</strong> Harmony<br>
             <strong>Element:</strong> Imaginary<br>
             <strong>Rarity:</strong> 5*</br></p>
+            <h2>Ascension Material</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>2646400</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>5</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110231.png' />
+                        Firmament Note
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110232.png' />
+                        Celestial Section
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110233.png' />
+                        Heavenly Melody
+                    </td>
+                    <td>105</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110400.png' />
+                        Enigmatic Ectostella
+                    </td>
+                    <td>28</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110504.png' />
+                        Past Evils of the Borehole Planet Disaster
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111011.png' />
+                        Thief's Instinct
+                    </td>
+                    <td>40</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111012.png' />
+                        Usurper's Scheme
+                    </td>
+                    <td>55</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111013.png' />
+                        Conqueror's Will
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+            </table>
             <h2>Stats</h2>
             <ul>
                 <li><strong>Max HP:</strong> 1086.62</li>
@@ -63,14 +162,13 @@ function initializeSkills() {
                 <li><strong>CRIT Rate:</strong> 0.05</li>
                 <li><strong>CRIT DMG:</strong> 0.5</li>
             </ul>
-
             <h2>Skills</h2>
             <ul>
         
                 <li>
                     <strong>Swing Dance Etiquette (Basic ATK):</strong>
                     <select onchange="updateSkill('800601', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
-                    <div id="800601_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of the Trailblazer's ATK to a single enemy.">Deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of the Trailblazer's ATK to a single enemy.</div>
+                    <div id="800601_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of the Trailblazer's ATK to a single enemy.">Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of the Trailblazer's ATK to a single enemy.</div>
                     <div id="800601_stats"></div>
                     <div id="800601_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="8, 0, 0, 6, 0, 1" ></div>
                 </li>
@@ -78,7 +176,7 @@ function initializeSkills() {
                 <li>
                     <strong>Halftime to Make It Rain (Skill):</strong>
                     <select onchange="updateSkill('800602', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="800602_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of the Trailblazer's ATK to a single target enemy and additionally deals DMG for 4 times, with each time dealing Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of the Trailblazer's ATK to a random enemy.">Deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of the Trailblazer's ATK to a single target enemy and additionally deals DMG for 4 times, with each time dealing Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of the Trailblazer's ATK to a random enemy.</div>
+                    <div id="800602_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of the Trailblazer's ATK to a single target enemy and additionally deals DMG for 4 times, with each time dealing Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of the Trailblazer's ATK to a random enemy.">Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of the Trailblazer's ATK to a single target enemy and additionally deals DMG for 4 times, with each time dealing Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of the Trailblazer's ATK to a random enemy.</div>
                     <div id="800602_stats"></div>
                     <div id="800602_data" style="display:none;" data-level1="0.25, 2" data-level2="0.275, 2" data-level3="0.3, 2" data-level4="0.325, 2" data-level5="0.35, 2" data-level6="0.375, 2" data-level7="0.40625, 2" data-level8="0.4375, 2" data-level9="0.46875, 2" data-level10="0.5, 2" data-level11="0.525, 2" data-level12="0.55, 2" data-level13="0.575, 2" data-level14="0.6, 2" data-level15="0.625, 2" data-levelid="8, 0, 0, 6, 0, 2" ></div>
                 </li>
@@ -86,7 +184,7 @@ function initializeSkills() {
                 <li>
                     <strong>All-Out Footlight Parade (Ultimate):</strong>
                     <select onchange="updateSkill('800603', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="800603_description" data-original-description="Grants all allies the Backup Dancer effect, lasting for <unbreak>#1[i]</unbreak> turn(s). This duration reduces by 1 at the start of Trailblazer's every turn. Allies with the Backup Dancer effect have their Break Effect increased by <b><unbreak>#3[i]</unbreak></b>. And when they attack enemy targets that are in the <u>Weakness Broken state</u>, the Toughness Reduction of the attack will be converted into 1 instance of <u>Super Break DMG</u>.">Grants all allies the Backup Dancer effect, lasting for <unbreak>#1[i]</unbreak> turn(s). This duration reduces by 1 at the start of Trailblazer's every turn. Allies with the Backup Dancer effect have their Break Effect increased by <b><unbreak>#3[i]</unbreak></b>. And when they attack enemy targets that are in the <u>Weakness Broken state</u>, the Toughness Reduction of the attack will be converted into 1 instance of <u>Super Break DMG</u>.</div>
+                    <div id="800603_description" data-original-description="Grants all allies the Backup Dancer effect, lasting for <unbreak>#1[i]</unbreak> turn(s). This duration reduces by 1 at the start of Trailblazer's every turn. Allies with the Backup Dancer effect have their Break Effect increased by <b><unbreak>#3[i]%</unbreak></b>. And when they attack enemy targets that are in the <u>Weakness Broken state</u>, the Toughness Reduction of the attack will be converted into 1 instance of <u>Super Break DMG</u>.">Grants all allies the Backup Dancer effect, lasting for <unbreak>#1[i]</unbreak> turn(s). This duration reduces by 1 at the start of Trailblazer's every turn. Allies with the Backup Dancer effect have their Break Effect increased by <b><unbreak>#3[i]%</unbreak></b>. And when they attack enemy targets that are in the <u>Weakness Broken state</u>, the Toughness Reduction of the attack will be converted into 1 instance of <u>Super Break DMG</u>.</div>
                     <div id="800603_stats"></div>
                     <div id="800603_data" style="display:none;" data-level1="3, 1, 0.15" data-level2="3, 1, 0.165" data-level3="3, 1, 0.18" data-level4="3, 1, 0.195" data-level5="3, 1, 0.21" data-level6="3, 1, 0.225" data-level7="3, 1, 0.24375" data-level8="3, 1, 0.2625" data-level9="3, 1, 0.28125" data-level10="3, 1, 0.3" data-level11="3, 1, 0.315" data-level12="3, 1, 0.33" data-level13="3, 1, 0.345" data-level14="3, 1, 0.36" data-level15="3, 1, 0.375" data-levelid="8, 0, 0, 6, 0, 3" ></div>
                 </li>
@@ -110,7 +208,7 @@ function initializeSkills() {
                 <li>
                     <strong>Now! I'm the Band! (Technique):</strong>
                     <select onchange="updateSkill('800607', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
-                    <div id="800607_description" data-original-description="After the Technique is used, at the start of the next battle, all allies' Break Effect increases by <unbreak>#1[i]</unbreak>, lasting for <unbreak>#2[i]</unbreak> turn(s).">After the Technique is used, at the start of the next battle, all allies' Break Effect increases by <unbreak>#1[i]</unbreak>, lasting for <unbreak>#2[i]</unbreak> turn(s).</div>
+                    <div id="800607_description" data-original-description="After the Technique is used, at the start of the next battle, all allies' Break Effect increases by <unbreak>#1[i]%</unbreak>, lasting for <unbreak>#2[i]</unbreak> turn(s).">After the Technique is used, at the start of the next battle, all allies' Break Effect increases by <unbreak>#1[i]%</unbreak>, lasting for <unbreak>#2[i]</unbreak> turn(s).</div>
                     <div id="800607_stats"></div>
                     <div id="800607_data" style="display:none;" data-level1="0.3, 2" data-levelid="8, 0, 0, 6, 0, 7" ></div>
                 </li>

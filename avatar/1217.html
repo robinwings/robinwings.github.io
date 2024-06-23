@@ -24,11 +24,22 @@ function updateSkill(skillId, level) {
     
     var updatedDescription = originalDescription;
     statsArray.forEach((stat, index) => {
-        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
-        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
-        var formattedStat = stat;
-        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
-        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
     });
     
     console.log('Updated description:', updatedDescription);
@@ -53,6 +64,94 @@ function initializeSkills() {
             <strong>Path:</strong> Abundance<br>
             <strong>Element:</strong> Wind<br>
             <strong>Rarity:</strong> 5*</br></p>
+            <h2>Ascension Material</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110171.png' />
+                        Seed of Abundance
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110172.png' />
+                        Sprout of Life
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110173.png' />
+                        Flower of Eternity
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110415.png' />
+                        Ascendant Debris
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110503.png' />
+                        Regret of Infinite Ochema
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113001.png' />
+                        Immortal Scionette
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113002.png' />
+                        Immortal Aeroblossom
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113003.png' />
+                        Immortal Lumintwig
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table>
             <h2>Stats</h2>
             <ul>
                 <li><strong>Max HP:</strong> 1358.28</li>
@@ -63,14 +162,13 @@ function initializeSkills() {
                 <li><strong>CRIT Rate:</strong> 0.05</li>
                 <li><strong>CRIT DMG:</strong> 0.5</li>
             </ul>
-
             <h2>Skills</h2>
             <ul>
         
                 <li>
                     <strong>Banner: Stormcaller (Basic ATK):</strong>
                     <select onchange="updateSkill('121701', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
-                    <div id="121701_description" data-original-description="Deals Wind DMG equal to <b><unbreak>#1[i]</unbreak></b> of Huohuo's Max HP to a target enemy.">Deals Wind DMG equal to <b><unbreak>#1[i]</unbreak></b> of Huohuo's Max HP to a target enemy.</div>
+                    <div id="121701_description" data-original-description="Deals Wind DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Huohuo's Max HP to a target enemy.">Deals Wind DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Huohuo's Max HP to a target enemy.</div>
                     <div id="121701_stats"></div>
                     <div id="121701_data" style="display:none;" data-level1="0.25" data-level2="0.3" data-level3="0.35" data-level4="0.4" data-level5="0.45" data-level6="0.5" data-level7="0.55" data-level8="0.6" data-level9="0.65" data-levelid="1, 2, 1, 7, 0, 1" ></div>
                 </li>
@@ -78,7 +176,7 @@ function initializeSkills() {
                 <li>
                     <strong>Talisman: Protection (Skill):</strong>
                     <select onchange="updateSkill('121702', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="121702_description" data-original-description="Dispels <unbreak>#5[i]</unbreak> <u>debuff(s)</u> from a single target ally and immediately restores this ally's HP by an amount equal to <b><unbreak>#1[f1]</unbreak></b> of Huohuo's Max HP plus <b><unbreak>#2[i]</unbreak></b>. At the same time, restores HP for allies that are adjacent to this target ally by an amount equal to <b><unbreak>#3[f1]</unbreak></b> of Huohuo's Max HP plus <b><unbreak>#4[i]</unbreak></b>.">Dispels <unbreak>#5[i]</unbreak> <u>debuff(s)</u> from a single target ally and immediately restores this ally's HP by an amount equal to <b><unbreak>#1[f1]</unbreak></b> of Huohuo's Max HP plus <b><unbreak>#2[i]</unbreak></b>. At the same time, restores HP for allies that are adjacent to this target ally by an amount equal to <b><unbreak>#3[f1]</unbreak></b> of Huohuo's Max HP plus <b><unbreak>#4[i]</unbreak></b>.</div>
+                    <div id="121702_description" data-original-description="Dispels <unbreak>#5[i]</unbreak> <u>debuff(s)</u> from a single target ally and immediately restores this ally's HP by an amount equal to <b><unbreak>#1[f1]%</unbreak></b> of Huohuo's Max HP plus <b><unbreak>#2[i]</unbreak></b>. At the same time, restores HP for allies that are adjacent to this target ally by an amount equal to <b><unbreak>#3[f1]%</unbreak></b> of Huohuo's Max HP plus <b><unbreak>#4[i]</unbreak></b>.">Dispels <unbreak>#5[i]</unbreak> <u>debuff(s)</u> from a single target ally and immediately restores this ally's HP by an amount equal to <b><unbreak>#1[f1]%</unbreak></b> of Huohuo's Max HP plus <b><unbreak>#2[i]</unbreak></b>. At the same time, restores HP for allies that are adjacent to this target ally by an amount equal to <b><unbreak>#3[f1]%</unbreak></b> of Huohuo's Max HP plus <b><unbreak>#4[i]</unbreak></b>.</div>
                     <div id="121702_stats"></div>
                     <div id="121702_data" style="display:none;" data-level1="0.14, 140, 0.112, 112, 1" data-level2="0.14875, 224, 0.119, 179.2, 1" data-level3="0.1575, 287, 0.126, 229.6, 1" data-level4="0.16625, 350, 0.133, 280, 1" data-level5="0.175, 392, 0.14, 313.6, 1" data-level6="0.182, 434, 0.1456, 347.2, 1" data-level7="0.189, 465.5, 0.1512, 372.4, 1" data-level8="0.196, 497, 0.1568, 397.6, 1" data-level9="0.203, 528.5, 0.1624, 422.8, 1" data-level10="0.21, 560, 0.168, 448, 1" data-level11="0.217, 591.5, 0.1736, 473.2, 1" data-level12="0.224, 623, 0.1792, 498.4, 1" data-level13="0.231, 654.5, 0.1848, 523.6, 1" data-level14="0.238, 686, 0.1904, 548.8, 1" data-level15="0.245, 717.5, 0.196, 574, 1" data-levelid="1, 2, 1, 7, 0, 2" ></div>
                 </li>
@@ -86,7 +184,7 @@ function initializeSkills() {
                 <li>
                     <strong>Tail: Spiritual Domination (Ultimate):</strong>
                     <select onchange="updateSkill('121703', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="121703_description" data-original-description="Regenerates Energy for all allies (excluding this character) by an amount equal to <b><unbreak>#1[f1]</unbreak></b> of their respective Max Energy. At the same time, increases their ATK by <b><unbreak>#2[f1]</unbreak></b> for <unbreak>#3[i]</unbreak> turn(s).">Regenerates Energy for all allies (excluding this character) by an amount equal to <b><unbreak>#1[f1]</unbreak></b> of their respective Max Energy. At the same time, increases their ATK by <b><unbreak>#2[f1]</unbreak></b> for <unbreak>#3[i]</unbreak> turn(s).</div>
+                    <div id="121703_description" data-original-description="Regenerates Energy for all allies (excluding this character) by an amount equal to <b><unbreak>#1[f1]%</unbreak></b> of their respective Max Energy. At the same time, increases their ATK by <b><unbreak>#2[f1]%</unbreak></b> for <unbreak>#3[i]</unbreak> turn(s).">Regenerates Energy for all allies (excluding this character) by an amount equal to <b><unbreak>#1[f1]%</unbreak></b> of their respective Max Energy. At the same time, increases their ATK by <b><unbreak>#2[f1]%</unbreak></b> for <unbreak>#3[i]</unbreak> turn(s).</div>
                     <div id="121703_stats"></div>
                     <div id="121703_data" style="display:none;" data-level1="0.15, 0.24, 2" data-level2="0.155, 0.256, 2" data-level3="0.16, 0.272, 2" data-level4="0.165, 0.288, 2" data-level5="0.17, 0.304, 2" data-level6="0.175, 0.32, 2" data-level7="0.18125, 0.34, 2" data-level8="0.1875, 0.36, 2" data-level9="0.19375, 0.38, 2" data-level10="0.2, 0.4, 2" data-level11="0.205, 0.416, 2" data-level12="0.21, 0.432, 2" data-level13="0.215, 0.448, 2" data-level14="0.22, 0.464, 2" data-level15="0.225, 0.48, 2" data-levelid="1, 2, 1, 7, 0, 3" ></div>
                 </li>
@@ -94,7 +192,7 @@ function initializeSkills() {
                 <li>
                     <strong>Possession: Ethereal Metaflow (Talent):</strong>
                     <select onchange="updateSkill('121704', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="121704_description" data-original-description="After using her Skill, Huohuo gains Divine Provision, lasting for <unbreak>#1[i]</unbreak> turn(s). This duration reduces by 1 turn at the start of Huohuo's every turn. If Huohuo has Divine Provision when an ally's turn starts or when an ally uses their Ultimate, restores HP for that ally by an amount equal to <b><unbreak>#3[f1]</unbreak></b> of Huohuo's Max HP plus <b><unbreak>#5[i]</unbreak></b>. At the same time, every ally with <unbreak>#6[i]</unbreak> HP or lower receives healing once.<br>When Divine Provision is triggered to heal an ally, dispel <unbreak>#2[i]</unbreak> <u>debuff(s)</u> from that ally. This effect can be triggered up to <unbreak>#7[i]</unbreak> time(s). Using the skill again resets the effect's trigger count.">After using her Skill, Huohuo gains Divine Provision, lasting for <unbreak>#1[i]</unbreak> turn(s). This duration reduces by 1 turn at the start of Huohuo's every turn. If Huohuo has Divine Provision when an ally's turn starts or when an ally uses their Ultimate, restores HP for that ally by an amount equal to <b><unbreak>#3[f1]</unbreak></b> of Huohuo's Max HP plus <b><unbreak>#5[i]</unbreak></b>. At the same time, every ally with <unbreak>#6[i]</unbreak> HP or lower receives healing once.<br>When Divine Provision is triggered to heal an ally, dispel <unbreak>#2[i]</unbreak> <u>debuff(s)</u> from that ally. This effect can be triggered up to <unbreak>#7[i]</unbreak> time(s). Using the skill again resets the effect's trigger count.</div>
+                    <div id="121704_description" data-original-description="After using her Skill, Huohuo gains Divine Provision, lasting for <unbreak>#1[i]</unbreak> turn(s). This duration reduces by 1 turn at the start of Huohuo's every turn. If Huohuo has Divine Provision when an ally's turn starts or when an ally uses their Ultimate, restores HP for that ally by an amount equal to <b><unbreak>#3[f1]%</unbreak></b> of Huohuo's Max HP plus <b><unbreak>#5[i]</unbreak></b>. At the same time, every ally with <unbreak>#6[i]%</unbreak> HP or lower receives healing once.<br>When Divine Provision is triggered to heal an ally, dispel <unbreak>#2[i]</unbreak> <u>debuff(s)</u> from that ally. This effect can be triggered up to <unbreak>#7[i]</unbreak> time(s). Using the skill again resets the effect's trigger count.">After using her Skill, Huohuo gains Divine Provision, lasting for <unbreak>#1[i]</unbreak> turn(s). This duration reduces by 1 turn at the start of Huohuo's every turn. If Huohuo has Divine Provision when an ally's turn starts or when an ally uses their Ultimate, restores HP for that ally by an amount equal to <b><unbreak>#3[f1]%</unbreak></b> of Huohuo's Max HP plus <b><unbreak>#5[i]</unbreak></b>. At the same time, every ally with <unbreak>#6[i]%</unbreak> HP or lower receives healing once.<br>When Divine Provision is triggered to heal an ally, dispel <unbreak>#2[i]</unbreak> <u>debuff(s)</u> from that ally. This effect can be triggered up to <unbreak>#7[i]</unbreak> time(s). Using the skill again resets the effect's trigger count.</div>
                     <div id="121704_stats"></div>
                     <div id="121704_data" style="display:none;" data-level1="2, 1, 0.03, 0, 30, 0.5, 6" data-level2="2, 1, 0.031875, 0, 48, 0.5, 6" data-level3="2, 1, 0.03375, 0, 61.5, 0.5, 6" data-level4="2, 1, 0.035625, 0, 75, 0.5, 6" data-level5="2, 1, 0.0375, 0, 84, 0.5, 6" data-level6="2, 1, 0.039, 0, 93, 0.5, 6" data-level7="2, 1, 0.0405, 0, 99.75, 0.5, 6" data-level8="2, 1, 0.042, 0, 106.5, 0.5, 6" data-level9="2, 1, 0.0435, 0, 113.25, 0.5, 6" data-level10="2, 1, 0.044999998, 0, 120, 0.5, 6" data-level11="2, 1, 0.0465, 0, 126.75, 0.5, 6" data-level12="2, 1, 0.048, 0, 133.5, 0.5, 6" data-level13="2, 1, 0.0495, 0, 140.25, 0.5, 6" data-level14="2, 1, 0.051, 0, 147, 0.5, 6" data-level15="2, 1, 0.052500002, 0, 153.75, 0.5, 6" data-levelid="1, 2, 1, 7, 0, 4" ></div>
                 </li>
@@ -110,7 +208,7 @@ function initializeSkills() {
                 <li>
                     <strong>Fiend: Impeachment of Evil (Technique):</strong>
                     <select onchange="updateSkill('121707', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
-                    <div id="121707_description" data-original-description="Huohuo terrorizes surrounding enemies, afflicting Horror-Struck on them. Enemies in Horror-Struck will flee away from Huohuo for <unbreak>#4[i]</unbreak> second(s). When entering battle with enemies in Horror-Struck, there is a <unbreak>#1[i]</unbreak> <u>base chance</u> of reducing every single enemy's ATK by <unbreak>#2[i]</unbreak> for <unbreak>#3[i]</unbreak> turn(s).">Huohuo terrorizes surrounding enemies, afflicting Horror-Struck on them. Enemies in Horror-Struck will flee away from Huohuo for <unbreak>#4[i]</unbreak> second(s). When entering battle with enemies in Horror-Struck, there is a <unbreak>#1[i]</unbreak> <u>base chance</u> of reducing every single enemy's ATK by <unbreak>#2[i]</unbreak> for <unbreak>#3[i]</unbreak> turn(s).</div>
+                    <div id="121707_description" data-original-description="Huohuo terrorizes surrounding enemies, afflicting Horror-Struck on them. Enemies in Horror-Struck will flee away from Huohuo for <unbreak>#4[i]</unbreak> second(s). When entering battle with enemies in Horror-Struck, there is a <unbreak>#1[i]%</unbreak> <u>base chance</u> of reducing every single enemy's ATK by <unbreak>#2[i]%</unbreak> for <unbreak>#3[i]</unbreak> turn(s).">Huohuo terrorizes surrounding enemies, afflicting Horror-Struck on them. Enemies in Horror-Struck will flee away from Huohuo for <unbreak>#4[i]</unbreak> second(s). When entering battle with enemies in Horror-Struck, there is a <unbreak>#1[i]%</unbreak> <u>base chance</u> of reducing every single enemy's ATK by <unbreak>#2[i]%</unbreak> for <unbreak>#3[i]</unbreak> turn(s).</div>
                     <div id="121707_stats"></div>
                     <div id="121707_data" style="display:none;" data-level1="1, 0.25, 2, 10" data-levelid="1, 2, 1, 7, 0, 7" ></div>
                 </li>

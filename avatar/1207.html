@@ -24,11 +24,22 @@ function updateSkill(skillId, level) {
     
     var updatedDescription = originalDescription;
     statsArray.forEach((stat, index) => {
-        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
-        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
-        var formattedStat = stat;
-        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
-        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
     });
     
     console.log('Updated description:', updatedDescription);
@@ -53,6 +64,94 @@ function initializeSkills() {
             <strong>Path:</strong> Harmony<br>
             <strong>Element:</strong> Imaginary<br>
             <strong>Rarity:</strong> 4*</br></p>
+            <h2>Ascension Material</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>2646400</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>5</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110161.png' />
+                        Harmonic Tune
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110162.png' />
+                        Ancestral Hymn
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110163.png' />
+                        Stellaris Symphony
+                    </td>
+                    <td>105</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110407.png' />
+                        Golden Crown of the Past Shadow
+                    </td>
+                    <td>50</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110501.png' />
+                        Destroyer's Final Road
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113011.png' />
+                        Artifex's Module
+                    </td>
+                    <td>40</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113012.png' />
+                        Artifex's Cogwheel
+                    </td>
+                    <td>55</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113013.png' />
+                        Artifex's Gyreheart
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+            </table>
             <h2>Stats</h2>
             <ul>
                 <li><strong>Max HP:</strong> 917.28</li>
@@ -63,14 +162,13 @@ function initializeSkills() {
                 <li><strong>CRIT Rate:</strong> 0.05</li>
                 <li><strong>CRIT DMG:</strong> 0.5</li>
             </ul>
-
             <h2>Skills</h2>
             <ul>
         
                 <li>
                     <strong>Arrowslinger (Basic ATK):</strong>
                     <select onchange="updateSkill('120701', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
-                    <div id="120701_description" data-original-description="Deals <b><unbreak>#1[i]</unbreak></b> of Yukong's ATK as Imaginary DMG to a target enemy.">Deals <b><unbreak>#1[i]</unbreak></b> of Yukong's ATK as Imaginary DMG to a target enemy.</div>
+                    <div id="120701_description" data-original-description="Deals <b><unbreak>#1[i]%</unbreak></b> of Yukong's ATK as Imaginary DMG to a target enemy.">Deals <b><unbreak>#1[i]%</unbreak></b> of Yukong's ATK as Imaginary DMG to a target enemy.</div>
                     <div id="120701_stats"></div>
                     <div id="120701_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 2, 0, 7, 0, 1" ></div>
                 </li>
@@ -78,7 +176,7 @@ function initializeSkills() {
                 <li>
                     <strong>Emboldening Salvo (Skill):</strong>
                     <select onchange="updateSkill('120702', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="120702_description" data-original-description="Obtains <unbreak>#1[i]</unbreak> stack(s) of "Roaring Bowstrings" (to a maximum of 2 stacks). When "Roaring Bowstrings" is active, the ATK of all allies increases by <b><unbreak>#2[i]</unbreak></b>, and every time an ally's turn (including Yukong's) ends, Yukong loses 1 stack of "Roaring Bowstrings."<br>When it's the turn where Yukong gains "Roaring Bowstrings" by using Skill, "Roaring Bowstrings" will not be removed.">Obtains <unbreak>#1[i]</unbreak> stack(s) of "Roaring Bowstrings" (to a maximum of 2 stacks). When "Roaring Bowstrings" is active, the ATK of all allies increases by <b><unbreak>#2[i]</unbreak></b>, and every time an ally's turn (including Yukong's) ends, Yukong loses 1 stack of "Roaring Bowstrings."<br>When it's the turn where Yukong gains "Roaring Bowstrings" by using Skill, "Roaring Bowstrings" will not be removed.</div>
+                    <div id="120702_description" data-original-description="Obtains <unbreak>#1[i]</unbreak> stack(s) of "Roaring Bowstrings" (to a maximum of 2 stacks). When "Roaring Bowstrings" is active, the ATK of all allies increases by <b><unbreak>#2[i]%</unbreak></b>, and every time an ally's turn (including Yukong's) ends, Yukong loses 1 stack of "Roaring Bowstrings."<br>When it's the turn where Yukong gains "Roaring Bowstrings" by using Skill, "Roaring Bowstrings" will not be removed.">Obtains <unbreak>#1[i]</unbreak> stack(s) of "Roaring Bowstrings" (to a maximum of 2 stacks). When "Roaring Bowstrings" is active, the ATK of all allies increases by <b><unbreak>#2[i]%</unbreak></b>, and every time an ally's turn (including Yukong's) ends, Yukong loses 1 stack of "Roaring Bowstrings."<br>When it's the turn where Yukong gains "Roaring Bowstrings" by using Skill, "Roaring Bowstrings" will not be removed.</div>
                     <div id="120702_stats"></div>
                     <div id="120702_data" style="display:none;" data-level1="2, 0.4" data-level2="2, 0.44" data-level3="2, 0.48" data-level4="2, 0.52" data-level5="2, 0.56" data-level6="2, 0.6" data-level7="2, 0.65" data-level8="2, 0.7" data-level9="2, 0.75" data-level10="2, 0.8" data-level11="2, 0.84" data-level12="2, 0.88" data-level13="2, 0.92" data-level14="2, 0.96" data-level15="2, 1" data-levelid="1, 2, 0, 7, 0, 2" ></div>
                 </li>
@@ -86,7 +184,7 @@ function initializeSkills() {
                 <li>
                     <strong>Diving Kestrel (Ultimate):</strong>
                     <select onchange="updateSkill('120703', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="120703_description" data-original-description="If "Roaring Bowstrings" is active on Yukong when her Ultimate is used, additionally increases all allies' CRIT Rate by <b><unbreak>#2[f1]</unbreak></b> and CRIT DMG by <b><unbreak>#3[i]</unbreak></b>. At the same time, deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of Yukong's ATK to a single enemy.">If "Roaring Bowstrings" is active on Yukong when her Ultimate is used, additionally increases all allies' CRIT Rate by <b><unbreak>#2[f1]</unbreak></b> and CRIT DMG by <b><unbreak>#3[i]</unbreak></b>. At the same time, deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of Yukong's ATK to a single enemy.</div>
+                    <div id="120703_description" data-original-description="If "Roaring Bowstrings" is active on Yukong when her Ultimate is used, additionally increases all allies' CRIT Rate by <b><unbreak>#2[f1]%</unbreak></b> and CRIT DMG by <b><unbreak>#3[i]%</unbreak></b>. At the same time, deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Yukong's ATK to a single enemy.">If "Roaring Bowstrings" is active on Yukong when her Ultimate is used, additionally increases all allies' CRIT Rate by <b><unbreak>#2[f1]%</unbreak></b> and CRIT DMG by <b><unbreak>#3[i]%</unbreak></b>. At the same time, deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Yukong's ATK to a single enemy.</div>
                     <div id="120703_stats"></div>
                     <div id="120703_data" style="display:none;" data-level1="2.28, 0.21, 0.39" data-level2="2.432, 0.217, 0.416" data-level3="2.584, 0.224, 0.442" data-level4="2.736, 0.231, 0.468" data-level5="2.888, 0.238, 0.494" data-level6="3.04, 0.245, 0.52" data-level7="3.23, 0.25375, 0.5525" data-level8="3.42, 0.2625, 0.585" data-level9="3.61, 0.27125, 0.6175" data-level10="3.8, 0.28, 0.65" data-level11="3.952, 0.287, 0.676" data-level12="4.104, 0.294, 0.702" data-level13="4.256, 0.301, 0.728" data-level14="4.408, 0.308, 0.754" data-level15="4.56, 0.315, 0.78" data-levelid="1, 2, 0, 7, 0, 3" ></div>
                 </li>
@@ -94,7 +192,7 @@ function initializeSkills() {
                 <li>
                     <strong>Seven Layers, One Arrow (Talent):</strong>
                     <select onchange="updateSkill('120704', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="120704_description" data-original-description="Basic ATK additionally deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of Yukong's ATK, and increases the Toughness Reduction of this attack by <unbreak>#2[i]</unbreak>. This effect can be triggered again after <unbreak>#3[i]</unbreak> turn(s).">Basic ATK additionally deals Imaginary DMG equal to <b><unbreak>#1[i]</unbreak></b> of Yukong's ATK, and increases the Toughness Reduction of this attack by <unbreak>#2[i]</unbreak>. This effect can be triggered again after <unbreak>#3[i]</unbreak> turn(s).</div>
+                    <div id="120704_description" data-original-description="Basic ATK additionally deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Yukong's ATK, and increases the Toughness Reduction of this attack by <unbreak>#2[i]%</unbreak>. This effect can be triggered again after <unbreak>#3[i]</unbreak> turn(s).">Basic ATK additionally deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Yukong's ATK, and increases the Toughness Reduction of this attack by <unbreak>#2[i]%</unbreak>. This effect can be triggered again after <unbreak>#3[i]</unbreak> turn(s).</div>
                     <div id="120704_stats"></div>
                     <div id="120704_data" style="display:none;" data-level1="0.4, 1, 1" data-level2="0.44, 1, 1" data-level3="0.48, 1, 1" data-level4="0.52, 1, 1" data-level5="0.56, 1, 1" data-level6="0.6, 1, 1" data-level7="0.65, 1, 1" data-level8="0.7, 1, 1" data-level9="0.75, 1, 1" data-level10="0.8, 1, 1" data-level11="0.84, 1, 1" data-level12="0.88, 1, 1" data-level13="0.92, 1, 1" data-level14="0.96, 1, 1" data-level15="1, 1, 1" data-levelid="1, 2, 0, 7, 0, 4" ></div>
                 </li>
@@ -110,7 +208,7 @@ function initializeSkills() {
                 <li>
                     <strong>Windchaser (Technique):</strong>
                     <select onchange="updateSkill('120707', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
-                    <div id="120707_description" data-original-description="After using her Technique, Yukong enters Sprint mode for <unbreak>#1[i]</unbreak> seconds. In Sprint mode, her Movement SPD increases by <unbreak>#2[i]</unbreak>, and Yukong gains <unbreak>#3[i]</unbreak> stack(s) of "Roaring Bowstrings" when she enters battle by attacking enemies.">After using her Technique, Yukong enters Sprint mode for <unbreak>#1[i]</unbreak> seconds. In Sprint mode, her Movement SPD increases by <unbreak>#2[i]</unbreak>, and Yukong gains <unbreak>#3[i]</unbreak> stack(s) of "Roaring Bowstrings" when she enters battle by attacking enemies.</div>
+                    <div id="120707_description" data-original-description="After using her Technique, Yukong enters Sprint mode for <unbreak>#1[i]</unbreak> seconds. In Sprint mode, her Movement SPD increases by <unbreak>#2[i]%</unbreak>, and Yukong gains <unbreak>#3[i]</unbreak> stack(s) of "Roaring Bowstrings" when she enters battle by attacking enemies.">After using her Technique, Yukong enters Sprint mode for <unbreak>#1[i]</unbreak> seconds. In Sprint mode, her Movement SPD increases by <unbreak>#2[i]%</unbreak>, and Yukong gains <unbreak>#3[i]</unbreak> stack(s) of "Roaring Bowstrings" when she enters battle by attacking enemies.</div>
                     <div id="120707_stats"></div>
                     <div id="120707_data" style="display:none;" data-level1="20, 0.35, 2" data-levelid="1, 2, 0, 7, 0, 7" ></div>
                 </li>

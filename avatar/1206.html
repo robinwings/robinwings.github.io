@@ -24,11 +24,22 @@ function updateSkill(skillId, level) {
     
     var updatedDescription = originalDescription;
     statsArray.forEach((stat, index) => {
-        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
-        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
-        var formattedStat = stat;
-        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
-        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
     });
     
     console.log('Updated description:', updatedDescription);
@@ -53,6 +64,94 @@ function initializeSkills() {
             <strong>Path:</strong> The Hunt<br>
             <strong>Element:</strong> Physical<br>
             <strong>Rarity:</strong> 4*</br></p>
+            <h2>Ascension Material</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>2646400</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>5</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110121.png' />
+                        Arrow of the Beast Hunter
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110122.png' />
+                        Arrow of the Demon Slayer
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110123.png' />
+                        Arrow of the Starchaser
+                    </td>
+                    <td>105</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110401.png' />
+                        Broken Teeth of Iron Wolf
+                    </td>
+                    <td>50</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110502.png' />
+                        Guardian's Lament
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113011.png' />
+                        Artifex's Module
+                    </td>
+                    <td>40</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113012.png' />
+                        Artifex's Cogwheel
+                    </td>
+                    <td>55</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113013.png' />
+                        Artifex's Gyreheart
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+            </table>
             <h2>Stats</h2>
             <ul>
                 <li><strong>Max HP:</strong> 917.28</li>
@@ -63,14 +162,13 @@ function initializeSkills() {
                 <li><strong>CRIT Rate:</strong> 0.05</li>
                 <li><strong>CRIT DMG:</strong> 0.5</li>
             </ul>
-
             <h2>Skills</h2>
             <ul>
         
                 <li>
                     <strong>Cloudfencer Art: Starshine (Basic ATK):</strong>
                     <select onchange="updateSkill('120601', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
-                    <div id="120601_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Sushang's ATK to a single enemy.">Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Sushang's ATK to a single enemy.</div>
+                    <div id="120601_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Sushang's ATK to a single enemy.">Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Sushang's ATK to a single enemy.</div>
                     <div id="120601_stats"></div>
                     <div id="120601_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 2, 0, 6, 0, 1" ></div>
                 </li>
@@ -78,7 +176,7 @@ function initializeSkills() {
                 <li>
                     <strong>Cloudfencer Art: Mountainfall (Skill):</strong>
                     <select onchange="updateSkill('120602', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="120602_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Sushang's ATK to a single enemy. In addition, there is a <unbreak>#3[i]</unbreak> chance to trigger Sword Stance on the final hit, dealing <u>Additional</u> Physical DMG equal to <b><unbreak>#2[i]</unbreak></b> of Sushang's ATK to the enemy.<br>If the enemy is inflicted with <u>Weakness Break</u>, Sword Stance is guaranteed to trigger.">Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Sushang's ATK to a single enemy. In addition, there is a <unbreak>#3[i]</unbreak> chance to trigger Sword Stance on the final hit, dealing <u>Additional</u> Physical DMG equal to <b><unbreak>#2[i]</unbreak></b> of Sushang's ATK to the enemy.<br>If the enemy is inflicted with <u>Weakness Break</u>, Sword Stance is guaranteed to trigger.</div>
+                    <div id="120602_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Sushang's ATK to a single enemy. In addition, there is a <unbreak>#3[i]%</unbreak> chance to trigger Sword Stance on the final hit, dealing <u>Additional</u> Physical DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Sushang's ATK to the enemy.<br>If the enemy is inflicted with <u>Weakness Break</u>, Sword Stance is guaranteed to trigger.">Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Sushang's ATK to a single enemy. In addition, there is a <unbreak>#3[i]%</unbreak> chance to trigger Sword Stance on the final hit, dealing <u>Additional</u> Physical DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Sushang's ATK to the enemy.<br>If the enemy is inflicted with <u>Weakness Break</u>, Sword Stance is guaranteed to trigger.</div>
                     <div id="120602_stats"></div>
                     <div id="120602_data" style="display:none;" data-level1="1.05, 0.5, 0.33" data-level2="1.155, 0.55, 0.33" data-level3="1.26, 0.6, 0.33" data-level4="1.365, 0.65, 0.33" data-level5="1.47, 0.7, 0.33" data-level6="1.575, 0.75, 0.33" data-level7="1.70625, 0.8125, 0.33" data-level8="1.8375, 0.875, 0.33" data-level9="1.96875, 0.9375, 0.33" data-level10="2.1, 1, 0.33" data-level11="2.205, 1.05, 0.33" data-level12="2.31, 1.1, 0.33" data-level13="2.415, 1.15, 0.33" data-level14="2.52, 1.2, 0.33" data-level15="2.625, 1.25, 0.33" data-levelid="1, 2, 0, 6, 0, 2" ></div>
                 </li>
@@ -86,7 +184,7 @@ function initializeSkills() {
                 <li>
                     <strong>Shape of Taixu: Dawn Herald (Ultimate):</strong>
                     <select onchange="updateSkill('120603', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="120603_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Sushang's ATK to a single enemy target, and she immediately takes action again. In addition, Sushang's ATK increases by <b><unbreak>#4[i]</unbreak></b> and using her Skill has 2 extra chances to trigger Sword Stance for <unbreak>#2[i]</unbreak> turn(s).<br>Sword Stance triggered from the extra chances deals <unbreak>#3[i]</unbreak> of the original DMG.">Deals Physical DMG equal to <b><unbreak>#1[i]</unbreak></b> of Sushang's ATK to a single enemy target, and she immediately takes action again. In addition, Sushang's ATK increases by <b><unbreak>#4[i]</unbreak></b> and using her Skill has 2 extra chances to trigger Sword Stance for <unbreak>#2[i]</unbreak> turn(s).<br>Sword Stance triggered from the extra chances deals <unbreak>#3[i]</unbreak> of the original DMG.</div>
+                    <div id="120603_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Sushang's ATK to a single enemy target, and she immediately takes action again. In addition, Sushang's ATK increases by <b><unbreak>#4[i]%</unbreak></b> and using her Skill has 2 extra chances to trigger Sword Stance for <unbreak>#2[i]</unbreak> turn(s).<br>Sword Stance triggered from the extra chances deals <unbreak>#3[i]%</unbreak> of the original DMG.">Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Sushang's ATK to a single enemy target, and she immediately takes action again. In addition, Sushang's ATK increases by <b><unbreak>#4[i]%</unbreak></b> and using her Skill has 2 extra chances to trigger Sword Stance for <unbreak>#2[i]</unbreak> turn(s).<br>Sword Stance triggered from the extra chances deals <unbreak>#3[i]%</unbreak> of the original DMG.</div>
                     <div id="120603_stats"></div>
                     <div id="120603_data" style="display:none;" data-level1="1.92, 2, 0.5, 0.18" data-level2="2.048, 2, 0.5, 0.192" data-level3="2.176, 2, 0.5, 0.204" data-level4="2.304, 2, 0.5, 0.216" data-level5="2.432, 2, 0.5, 0.228" data-level6="2.56, 2, 0.5, 0.24" data-level7="2.72, 2, 0.5, 0.255" data-level8="2.88, 2, 0.5, 0.27" data-level9="3.04, 2, 0.5, 0.285" data-level10="3.2, 2, 0.5, 0.3" data-level11="3.328, 2, 0.5, 0.312" data-level12="3.456, 2, 0.5, 0.324" data-level13="3.584, 2, 0.5, 0.336" data-level14="3.712, 2, 0.5, 0.348" data-level15="3.84, 2, 0.5, 0.36" data-levelid="1, 2, 0, 6, 0, 3" ></div>
                 </li>
@@ -94,7 +192,7 @@ function initializeSkills() {
                 <li>
                     <strong>Dancing Blade (Talent):</strong>
                     <select onchange="updateSkill('120604', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="120604_description" data-original-description="When an enemy has their Weakness Broken on the field, Sushang's SPD increases by <b><unbreak>#1[f2]</unbreak></b> for <unbreak>#2[i]</unbreak> turn(s).">When an enemy has their Weakness Broken on the field, Sushang's SPD increases by <b><unbreak>#1[f2]</unbreak></b> for <unbreak>#2[i]</unbreak> turn(s).</div>
+                    <div id="120604_description" data-original-description="When an enemy has their Weakness Broken on the field, Sushang's SPD increases by <b><unbreak>#1[f2]%</unbreak></b> for <unbreak>#2[i]</unbreak> turn(s).">When an enemy has their Weakness Broken on the field, Sushang's SPD increases by <b><unbreak>#1[f2]%</unbreak></b> for <unbreak>#2[i]</unbreak> turn(s).</div>
                     <div id="120604_stats"></div>
                     <div id="120604_data" style="display:none;" data-level1="0.15, 2" data-level2="0.155, 2" data-level3="0.16, 2" data-level4="0.165, 2" data-level5="0.17, 2" data-level6="0.175, 2" data-level7="0.18125, 2" data-level8="0.1875, 2" data-level9="0.19375, 2" data-level10="0.2, 2" data-level11="0.205, 2" data-level12="0.21, 2" data-level13="0.215, 2" data-level14="0.22, 2" data-level15="0.225, 2" data-levelid="1, 2, 0, 6, 0, 4" ></div>
                 </li>
@@ -110,7 +208,7 @@ function initializeSkills() {
                 <li>
                     <strong>Cloudfencer Art: Warcry (Technique):</strong>
                     <select onchange="updateSkill('120607', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
-                    <div id="120607_description" data-original-description="Immediately attacks the enemy. Upon entering battle, Sushang deals Physical DMG equal to <unbreak>#1[i]</unbreak> of her ATK to all enemies.">Immediately attacks the enemy. Upon entering battle, Sushang deals Physical DMG equal to <unbreak>#1[i]</unbreak> of her ATK to all enemies.</div>
+                    <div id="120607_description" data-original-description="Immediately attacks the enemy. Upon entering battle, Sushang deals Physical DMG equal to <unbreak>#1[i]%</unbreak> of her ATK to all enemies.">Immediately attacks the enemy. Upon entering battle, Sushang deals Physical DMG equal to <unbreak>#1[i]%</unbreak> of her ATK to all enemies.</div>
                     <div id="120607_stats"></div>
                     <div id="120607_data" style="display:none;" data-level1="0.8" data-levelid="1, 2, 0, 6, 0, 7" ></div>
                 </li>

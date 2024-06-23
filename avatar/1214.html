@@ -24,11 +24,22 @@ function updateSkill(skillId, level) {
     
     var updatedDescription = originalDescription;
     statsArray.forEach((stat, index) => {
-        var placeholder_f1 = new RegExp(`#${index + 1}\\[f1\\]`, 'g');
-        var placeholder_i = new RegExp(`#${index + 1}\\[i\\]`, 'g');
-        var formattedStat = stat;
-        console.log('Replacing placeholder:', placeholder_f1, 'and', placeholder_i, 'with formatted stat:', formattedStat);
-        updatedDescription = updatedDescription.replace(placeholder_f1, formattedStat).replace(placeholder_i, formattedStat);
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
     });
     
     console.log('Updated description:', updatedDescription);
@@ -53,6 +64,94 @@ function initializeSkills() {
             <strong>Path:</strong> Destruction<br>
             <strong>Element:</strong> Quantum<br>
             <strong>Rarity:</strong> 4*</br></p>
+            <h2>Ascension Material</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>2646400</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>5</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110111.png' />
+                        Shattered Blade
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110112.png' />
+                        Lifeless Blade
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110113.png' />
+                        Worldbreaker Blade
+                    </td>
+                    <td>105</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110416.png' />
+                        Nail of the Ape
+                    </td>
+                    <td>50</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110504.png' />
+                        Past Evils of the Borehole Planet Disaster
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111001.png' />
+                        Extinguished Core
+                    </td>
+                    <td>40</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111002.png' />
+                        Glimmering Core
+                    </td>
+                    <td>55</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111003.png' />
+                        Squirming Core
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+            </table>
             <h2>Stats</h2>
             <ul>
                 <li><strong>Max HP:</strong> 1058.40</li>
@@ -63,14 +162,13 @@ function initializeSkills() {
                 <li><strong>CRIT Rate:</strong> 0.05</li>
                 <li><strong>CRIT DMG:</strong> 0.5</li>
             </ul>
-
             <h2>Skills</h2>
             <ul>
         
                 <li>
                     <strong>Mara-Sunder Awl (Basic ATK):</strong>
                     <select onchange="updateSkill('121401', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select>
-                    <div id="121401_description" data-original-description="Deals <b><unbreak>#1[i]</unbreak></b> of Xueyi's ATK as Quantum DMG to a single target enemy.">Deals <b><unbreak>#1[i]</unbreak></b> of Xueyi's ATK as Quantum DMG to a single target enemy.</div>
+                    <div id="121401_description" data-original-description="Deals <b><unbreak>#1[i]%</unbreak></b> of Xueyi's ATK as Quantum DMG to a single target enemy.">Deals <b><unbreak>#1[i]%</unbreak></b> of Xueyi's ATK as Quantum DMG to a single target enemy.</div>
                     <div id="121401_stats"></div>
                     <div id="121401_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 2, 1, 4, 0, 1" ></div>
                 </li>
@@ -78,7 +176,7 @@ function initializeSkills() {
                 <li>
                     <strong>Iniquity Obliteration (Skill):</strong>
                     <select onchange="updateSkill('121402', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="121402_description" data-original-description="Deals Quantum DMG equal to <b><unbreak>#1[i]</unbreak></b> of Xueyi's ATK to a single enemy, and Quantum DMG equal to <b><unbreak>#2[i]</unbreak></b> of Xueyi's ATK to any adjacent enemies.">Deals Quantum DMG equal to <b><unbreak>#1[i]</unbreak></b> of Xueyi's ATK to a single enemy, and Quantum DMG equal to <b><unbreak>#2[i]</unbreak></b> of Xueyi's ATK to any adjacent enemies.</div>
+                    <div id="121402_description" data-original-description="Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Xueyi's ATK to a single enemy, and Quantum DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Xueyi's ATK to any adjacent enemies.">Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Xueyi's ATK to a single enemy, and Quantum DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Xueyi's ATK to any adjacent enemies.</div>
                     <div id="121402_stats"></div>
                     <div id="121402_data" style="display:none;" data-level1="0.7, 0.35" data-level2="0.77, 0.385" data-level3="0.84, 0.42" data-level4="0.91, 0.455" data-level5="0.98, 0.49" data-level6="1.05, 0.525" data-level7="1.1375, 0.56875" data-level8="1.225, 0.6125" data-level9="1.3125, 0.65625" data-level10="1.4, 0.7" data-level11="1.47, 0.735" data-level12="1.54, 0.77" data-level13="1.61, 0.805" data-level14="1.68, 0.84" data-level15="1.75, 0.875" data-levelid="1, 2, 1, 4, 0, 2" ></div>
                 </li>
@@ -86,7 +184,7 @@ function initializeSkills() {
                 <li>
                     <strong>Divine Castigation (Ultimate):</strong>
                     <select onchange="updateSkill('121403', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="121403_description" data-original-description="Deals Quantum DMG equal to <b><unbreak>#1[i]</unbreak></b> of Xueyi's ATK to a single target enemy. This attack ignores Weakness Types and reduces the enemy's Toughness. When the enemy's Weakness is Broken, the Quantum Weakness Break effect is triggered.<br>In this attack, the more Toughness is reduced, the higher the DMG will be dealt, up to a max of <b><unbreak>#3[f1]</unbreak></b> increase.">Deals Quantum DMG equal to <b><unbreak>#1[i]</unbreak></b> of Xueyi's ATK to a single target enemy. This attack ignores Weakness Types and reduces the enemy's Toughness. When the enemy's Weakness is Broken, the Quantum Weakness Break effect is triggered.<br>In this attack, the more Toughness is reduced, the higher the DMG will be dealt, up to a max of <b><unbreak>#3[f1]</unbreak></b> increase.</div>
+                    <div id="121403_description" data-original-description="Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Xueyi's ATK to a single target enemy. This attack ignores Weakness Types and reduces the enemy's Toughness. When the enemy's Weakness is Broken, the Quantum Weakness Break effect is triggered.<br>In this attack, the more Toughness is reduced, the higher the DMG will be dealt, up to a max of <b><unbreak>#3[f1]%</unbreak></b> increase.">Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Xueyi's ATK to a single target enemy. This attack ignores Weakness Types and reduces the enemy's Toughness. When the enemy's Weakness is Broken, the Quantum Weakness Break effect is triggered.<br>In this attack, the more Toughness is reduced, the higher the DMG will be dealt, up to a max of <b><unbreak>#3[f1]%</unbreak></b> increase.</div>
                     <div id="121403_stats"></div>
                     <div id="121403_data" style="display:none;" data-level1="1.5, 0.09, 0.36" data-level2="1.6, 0.096, 0.384" data-level3="1.7, 0.102, 0.408" data-level4="1.8, 0.108, 0.432" data-level5="1.9, 0.114, 0.456" data-level6="2, 0.12, 0.48" data-level7="2.125, 0.1275, 0.51" data-level8="2.25, 0.135, 0.54" data-level9="2.375, 0.1425, 0.57" data-level10="2.5, 0.15, 0.6" data-level11="2.6, 0.156, 0.624" data-level12="2.7, 0.162, 0.648" data-level13="2.8, 0.168, 0.672" data-level14="2.9, 0.174, 0.696" data-level15="3, 0.18, 0.72" data-levelid="1, 2, 1, 4, 0, 3" ></div>
                 </li>
@@ -94,7 +192,7 @@ function initializeSkills() {
                 <li>
                     <strong>Karmic Perpetuation (Talent):</strong>
                     <select onchange="updateSkill('121404', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select>
-                    <div id="121404_description" data-original-description="When Xueyi reduces enemy Toughness with attacks, Karma will be stacked. The more Toughness is reduced, the more stacks of Karma are added, up to <unbreak>#1[i]</unbreak> stacks.<br>When Xueyi's allies reduce enemy Toughness with attacks, Xueyi gains <unbreak>#3[i]</unbreak> stack(s) of Karma.<br>When Karma reaches the max number of stacks, consumes all current Karma stacks and immediately launches a <u>follow-up attack</u> against an enemy target, dealing DMG for 3 times, with each time dealing Quantum DMG equal to <b><unbreak>#2[i]</unbreak></b> of Xueyi's ATK to a single random enemy. This follow-up attack will not add Karma stacks.">When Xueyi reduces enemy Toughness with attacks, Karma will be stacked. The more Toughness is reduced, the more stacks of Karma are added, up to <unbreak>#1[i]</unbreak> stacks.<br>When Xueyi's allies reduce enemy Toughness with attacks, Xueyi gains <unbreak>#3[i]</unbreak> stack(s) of Karma.<br>When Karma reaches the max number of stacks, consumes all current Karma stacks and immediately launches a <u>follow-up attack</u> against an enemy target, dealing DMG for 3 times, with each time dealing Quantum DMG equal to <b><unbreak>#2[i]</unbreak></b> of Xueyi's ATK to a single random enemy. This follow-up attack will not add Karma stacks.</div>
+                    <div id="121404_description" data-original-description="When Xueyi reduces enemy Toughness with attacks, Karma will be stacked. The more Toughness is reduced, the more stacks of Karma are added, up to <unbreak>#1[i]</unbreak> stacks.<br>When Xueyi's allies reduce enemy Toughness with attacks, Xueyi gains <unbreak>#3[i]</unbreak> stack(s) of Karma.<br>When Karma reaches the max number of stacks, consumes all current Karma stacks and immediately launches a <u>follow-up attack</u> against an enemy target, dealing DMG for 3 times, with each time dealing Quantum DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Xueyi's ATK to a single random enemy. This follow-up attack will not add Karma stacks.">When Xueyi reduces enemy Toughness with attacks, Karma will be stacked. The more Toughness is reduced, the more stacks of Karma are added, up to <unbreak>#1[i]</unbreak> stacks.<br>When Xueyi's allies reduce enemy Toughness with attacks, Xueyi gains <unbreak>#3[i]</unbreak> stack(s) of Karma.<br>When Karma reaches the max number of stacks, consumes all current Karma stacks and immediately launches a <u>follow-up attack</u> against an enemy target, dealing DMG for 3 times, with each time dealing Quantum DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Xueyi's ATK to a single random enemy. This follow-up attack will not add Karma stacks.</div>
                     <div id="121404_stats"></div>
                     <div id="121404_data" style="display:none;" data-level1="8, 0.45, 1" data-level2="8, 0.495, 1" data-level3="8, 0.54, 1" data-level4="8, 0.585, 1" data-level5="8, 0.63, 1" data-level6="8, 0.675, 1" data-level7="8, 0.73125, 1" data-level8="8, 0.7875, 1" data-level9="8, 0.84375, 1" data-level10="8, 0.9, 1" data-level11="8, 0.945, 1" data-level12="8, 0.99, 1" data-level13="8, 1.035, 1" data-level14="8, 1.08, 1" data-level15="8, 1.125, 1" data-levelid="1, 2, 1, 4, 0, 4" ></div>
                 </li>
@@ -110,7 +208,7 @@ function initializeSkills() {
                 <li>
                     <strong>Summary Execution (Technique):</strong>
                     <select onchange="updateSkill('121407', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select>
-                    <div id="121407_description" data-original-description="Immediately attacks the enemy. After entering combat, deals <unbreak>#1[i]</unbreak> of Xueyi's ATK as Quantum DMG to all enemies.">Immediately attacks the enemy. After entering combat, deals <unbreak>#1[i]</unbreak> of Xueyi's ATK as Quantum DMG to all enemies.</div>
+                    <div id="121407_description" data-original-description="Immediately attacks the enemy. After entering combat, deals <unbreak>#1[i]%</unbreak> of Xueyi's ATK as Quantum DMG to all enemies.">Immediately attacks the enemy. After entering combat, deals <unbreak>#1[i]%</unbreak> of Xueyi's ATK as Quantum DMG to all enemies.</div>
                     <div id="121407_stats"></div>
                     <div id="121407_data" style="display:none;" data-level1="0.8" data-levelid="1, 2, 1, 4, 0, 7" ></div>
                 </li>

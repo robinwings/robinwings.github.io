@@ -1,0 +1,350 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Harmony Caelus</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Harmony Caelus</h1>
+            <p>A boy who boarded the Astral Express.<br>They chose to travel with the Astral Express to eliminate the dangers posed by the Stellaron.<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>8005</td>
+        <td>Harmony</td><td>Imaginary</td><td>5*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>1086.62</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>679.14</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>446.29</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>105</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>2646400</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>5</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110231.png' />
+                        Firmament Note
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110232.png' />
+                        Celestial Section
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110233.png' />
+                        Heavenly Melody
+                    </td>
+                    <td>105</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110400.png' />
+                        Enigmatic Ectostella
+                    </td>
+                    <td>28</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110504.png' />
+                        Past Evils of the Borehole Planet Disaster
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111011.png' />
+                        Thief's Instinct
+                    </td>
+                    <td>40</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111012.png' />
+                        Usurper's Scheme
+                    </td>
+                    <td>55</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111013.png' />
+                        Conqueror's Will
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">Swing Dance Etiquette (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="800501_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of the Trailblazer's ATK to a single target enemy.">Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of the Trailblazer's ATK to a single target enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('800501', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="800501_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="800501_stats"></div><div id="800501_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="8, 0, 0, 5, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Halftime to Make It Rain (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="800502_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of the Trailblazer's ATK to a single target enemy and additionally deals DMG for 4 times, with each time dealing Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of the Trailblazer's ATK to a random enemy.">Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of the Trailblazer's ATK to a single target enemy and additionally deals DMG for 4 times, with each time dealing Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of the Trailblazer's ATK to a random enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('800502', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="800502_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="800502_stats"></div><div id="800502_data" style="display:none;" data-level1="0.25, 2" data-level2="0.275, 2" data-level3="0.3, 2" data-level4="0.325, 2" data-level5="0.35, 2" data-level6="0.375, 2" data-level7="0.40625, 2" data-level8="0.4375, 2" data-level9="0.46875, 2" data-level10="0.5, 2" data-level11="0.525, 2" data-level12="0.55, 2" data-level13="0.575, 2" data-level14="0.6, 2" data-level15="0.625, 2" data-levelid="8, 0, 0, 5, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2"><unbreak>All-Out</unbreak> <unbreak>Footlight Parade</unbreak> (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="800503_description" data-original-description="Grants all allies the Backup Dancer effect, lasting for <unbreak>#1[i]</unbreak> turn(s). This duration decreases by 1 at the start of Trailblazer's every turn. Allies with the Backup Dancer effect have their Break Effect increased by <b><unbreak>#3[i]%</unbreak></b>. And when they attack enemy targets that are in the <u>Weakness Broken state</u>, the Toughness Reduction of the attack will be converted into 1 instance of <u>Super Break DMG</u>.">Grants all allies the Backup Dancer effect, lasting for <unbreak>#1[i]</unbreak> turn(s). This duration decreases by 1 at the start of Trailblazer's every turn. Allies with the Backup Dancer effect have their Break Effect increased by <b><unbreak>#3[i]%</unbreak></b>. And when they attack enemy targets that are in the <u>Weakness Broken state</u>, the Toughness Reduction of the attack will be converted into 1 instance of <u>Super Break DMG</u>.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('800503', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="800503_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="800503_stats"></div><div id="800503_data" style="display:none;" data-level1="3, 1, 0.15" data-level2="3, 1, 0.165" data-level3="3, 1, 0.18" data-level4="3, 1, 0.195" data-level5="3, 1, 0.21" data-level6="3, 1, 0.225" data-level7="3, 1, 0.24375" data-level8="3, 1, 0.2625" data-level9="3, 1, 0.28125" data-level10="3, 1, 0.3" data-level11="3, 1, 0.315" data-level12="3, 1, 0.33" data-level13="3, 1, 0.345" data-level14="3, 1, 0.36" data-level15="3, 1, 0.375" data-levelid="8, 0, 0, 5, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Full-on Aerial Dance (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="800504_description" data-original-description="The Trailblazer immediately regenerates <b><unbreak>#1[f1]</unbreak></b> Energy when an enemy target's Weakness is Broken.">The Trailblazer immediately regenerates <b><unbreak>#1[f1]</unbreak></b> Energy when an enemy target's Weakness is Broken.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('800504', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="800504_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="800504_stats"></div><div id="800504_data" style="display:none;" data-level1="5" data-level2="5.5" data-level3="6" data-level4="6.5" data-level5="7" data-level6="7.5" data-level7="8.125" data-level8="8.75" data-level9="9.375" data-level10="10" data-level11="10.5" data-level12="11" data-level13="11.5" data-level14="12" data-level15="12.5" data-levelid="8, 0, 0, 5, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="800506_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('800506', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="800506_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="800506_stats"></div><div id="800506_data" style="display:none;" data-level1="" data-levelid="8, 0, 0, 5, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Now! I'm the Band! (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="800507_description" data-original-description="After the Technique is used, at the start of the next battle, all allies' Break Effect increases by <unbreak>#1[i]%</unbreak>, lasting for <unbreak>#2[i]</unbreak> turn(s).">After the Technique is used, at the start of the next battle, all allies' Break Effect increases by <unbreak>#1[i]%</unbreak>, lasting for <unbreak>#2[i]</unbreak> turn(s).</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('800507', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="800507_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="800507_stats"></div><div id="800507_data" style="display:none;" data-level1="0.3, 2" data-levelid="8, 0, 0, 5, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Dance With the One<th></tr><td>When the number of enemy targets on the field is 5 (or more)/4/3/2/1, the Super Break DMG triggered by the Backup Dancer effect increases by 20%/30%/40%/50%/60%.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Shuffle Along<th></tr><td>When using Skill, additionally increases the Toughness Reduction of the first instance of DMG by 100%.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Hat of the Theater<th></tr><td>Additionally delays the enemy target's action by 30% when allies Break enemy Weaknesses.</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>Break Boost</th><th>DMG Boost: Imaginary</th><th>Effect RES Boost</th></tr><tr><td>37.3%</td><td>14.4%</td><td>10.0%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Best Seat in the House<th></tr><td>After using Skill for the first time, immediately recovers <unbreak>1</unbreak> Skill Point(s).</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Jailbreaking Rainbowwalk<th></tr><td>When the battle starts, the Trailblazer's Energy Regeneration Rate increases by <unbreak>25%</unbreak>, lasting for <unbreak>3</unbreak> turn(s).</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Sanatorium for Rest Notes<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Dove in Tophat<th></tr><td>While the Trailblazer is on the field, increases the Break Effect of all teammates (excluding the Trailblazer), by an amount equal to <unbreak>15%</unbreak> of the Trailblazer's Break Effect.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Poem Favors Rhythms of Old<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Tomorrow, Rest in Spotlight<th></tr><td>The number of additional DMG applications by the Skill increases by <unbreak>2</unbreak>.</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

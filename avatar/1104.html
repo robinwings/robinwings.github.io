@@ -1,0 +1,350 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Gepard</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Gepard</h1>
+            <p>A captain in the Silvermane Guards and an outstanding warrior of Belobog.<br>He is meticulous and vigilant to the core and is always true to himself.<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1104</td>
+        <td>Preservation</td><td>Ice</td><td>5*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>1397.09</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>654.88</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>543.31</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>92</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>150</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110141.png' />
+                        Endurance of Bronze
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110142.png' />
+                        Oath of Steel
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110143.png' />
+                        Safeguard of Amber
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110403.png' />
+                        Horn of Snow
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110502.png' />
+                        Guardian's Lament
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112001.png' />
+                        Silvermane Badge
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112002.png' />
+                        Silvermane Insignia
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112003.png' />
+                        Silvermane Medal
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">Fist of Conviction (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="110401_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Gepard's ATK to a single enemy.">Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Gepard's ATK to a single enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('110401', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="110401_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="110401_stats"></div><div id="110401_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 1, 0, 4, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Daunting Smite (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="110402_description" data-original-description="Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Gepard's ATK to a single enemy, with a <unbreak>#2[i]%</unbreak> <u>base chance</u> to Freeze the enemy for <unbreak>#3[i]</unbreak> turn(s).<br>While Frozen, the enemy cannot take action and will take Ice <u>Additional DMG</u> equal to <b><unbreak>#4[i]%</unbreak></b> of Gepard's ATK at the beginning of each turn.">Deals Ice DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Gepard's ATK to a single enemy, with a <unbreak>#2[i]%</unbreak> <u>base chance</u> to Freeze the enemy for <unbreak>#3[i]</unbreak> turn(s).<br>While Frozen, the enemy cannot take action and will take Ice <u>Additional DMG</u> equal to <b><unbreak>#4[i]%</unbreak></b> of Gepard's ATK at the beginning of each turn.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('110402', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="110402_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="110402_stats"></div><div id="110402_data" style="display:none;" data-level1="1, 0.65, 1, 0.3" data-level2="1.1, 0.65, 1, 0.33" data-level3="1.2, 0.65, 1, 0.36" data-level4="1.3, 0.65, 1, 0.39" data-level5="1.4, 0.65, 1, 0.42" data-level6="1.5, 0.65, 1, 0.45" data-level7="1.625, 0.65, 1, 0.4875" data-level8="1.75, 0.65, 1, 0.525" data-level9="1.875, 0.65, 1, 0.5625" data-level10="2, 0.65, 1, 0.6" data-level11="2.1, 0.65, 1, 0.63" data-level12="2.2, 0.65, 1, 0.66" data-level13="2.3, 0.65, 1, 0.69" data-level14="2.4, 0.65, 1, 0.72" data-level15="2.5, 0.65, 1, 0.75" data-levelid="1, 1, 0, 4, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Enduring Bulwark (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="110403_description" data-original-description="Applies a Shield to all allies, absorbing DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Gepard's DEF plus <b><unbreak>#3[i]</unbreak></b> for <unbreak>#2[i]</unbreak> turn(s).">Applies a Shield to all allies, absorbing DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Gepard's DEF plus <b><unbreak>#3[i]</unbreak></b> for <unbreak>#2[i]</unbreak> turn(s).</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('110403', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="110403_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="110403_stats"></div><div id="110403_data" style="display:none;" data-level1="0.3, 3, 150" data-level2="0.31875, 3, 240" data-level3="0.3375, 3, 307.5" data-level4="0.35625, 3, 375" data-level5="0.375, 3, 420" data-level6="0.39, 3, 465" data-level7="0.405, 3, 498.75" data-level8="0.42, 3, 532.5" data-level9="0.435, 3, 566.25" data-level10="0.45, 3, 600" data-level11="0.465, 3, 633.75" data-level12="0.48, 3, 667.5" data-level13="0.495, 3, 701.25" data-level14="0.51, 3, 735" data-level15="0.525, 3, 768.75" data-levelid="1, 1, 0, 4, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Unyielding Will (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="110404_description" data-original-description="When struck with a killing blow, instead of becoming <u>knocked down</u>, Gepard's HP immediately restores to <b><unbreak>#1[i]%</unbreak></b> of his Max HP. This effect can only trigger once per battle.">When struck with a killing blow, instead of becoming <u>knocked down</u>, Gepard's HP immediately restores to <b><unbreak>#1[i]%</unbreak></b> of his Max HP. This effect can only trigger once per battle.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('110404', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="110404_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="110404_stats"></div><div id="110404_data" style="display:none;" data-level1="0.25" data-level2="0.275" data-level3="0.3" data-level4="0.325" data-level5="0.35" data-level6="0.375" data-level7="0.40625" data-level8="0.4375" data-level9="0.46875" data-level10="0.5" data-level11="0.525" data-level12="0.55" data-level13="0.575" data-level14="0.6" data-level15="0.625" data-levelid="1, 1, 0, 4, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="110406_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('110406', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="110406_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="110406_stats"></div><div id="110406_data" style="display:none;" data-level1="" data-levelid="1, 1, 0, 4, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Comradery (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="110407_description" data-original-description="After Gepard uses his Technique, when the next battle begins, a Shield will be applied to all allies, absorbing DMG equal to <unbreak>#1[i]%</unbreak> of Gepard's DEF plus <unbreak>#3[i]</unbreak> for <unbreak>#2[i]</unbreak> turn(s).">After Gepard uses his Technique, when the next battle begins, a Shield will be applied to all allies, absorbing DMG equal to <unbreak>#1[i]%</unbreak> of Gepard's DEF plus <unbreak>#3[i]</unbreak> for <unbreak>#2[i]</unbreak> turn(s).</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('110407', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="110407_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="110407_stats"></div><div id="110407_data" style="display:none;" data-level1="0.24, 2, 150" data-levelid="1, 1, 0, 4, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Integrity<th></tr><td>Gepard has a higher chance to be attacked by enemies.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Commander<th></tr><td>When "Unyielding Will" is triggered, Gepard's Energy will be restored to 100%.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Grit<th></tr><td>Gepard's ATK increases by 35% of his current DEF. This effect will refresh at the start of each turn.</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>DMG Boost: Ice</th><th>Effect RES Boost</th><th>DEF Boost</th></tr><tr><td>22.4%</td><td>18.0%</td><td>12.5%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Due Diligence<th></tr><td>When using Skill, increases the base chance to Freeze target enemy by <unbreak>35%</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Lingering Cold<th></tr><td>After an enemy Frozen by Skill is unfrozen, their SPD is reduced by <unbreak>20%</unbreak> for <unbreak>1</unbreak> turn(s).</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Never Surrender<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Faith Moves Mountains<th></tr><td>When Gepard is in battle, all allies' Effect RES increases by <unbreak>20%</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Cold Iron Fist<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Unyielding Resolve<th></tr><td>When his Talent is triggered, Gepard immediately takes action and restores extra HP equal to <unbreak>50%</unbreak> of his Max HP.</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

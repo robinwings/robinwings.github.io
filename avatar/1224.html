@@ -1,0 +1,367 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>March 7th (Imaginary)</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>March 7th (Imaginary)</h1>
+            <p>March 7th in a Xianzhou-styled outfit. A sword-wielding female martial artist.<br>Learning swordplay from both Yunli and Yanqing, she is eager to create more beautiful memories on the Xianzhou.<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1224</td>
+        <td>The Hunt</td><td>Imaginary</td><td>4*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>1058.40</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>441.00</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>564.48</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>102</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>75</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>2646400</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>5</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110191.png' />
+                        Meteoric Bullet
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110192.png' />
+                        Destined Expiration
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110193.png' />
+                        Countertemporal Shot
+                    </td>
+                    <td>105</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110403.png' />
+                        Horn of Snow
+                    </td>
+                    <td>50</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110501.png' />
+                        Destroyer's Final Road
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111011.png' />
+                        Thief's Instinct
+                    </td>
+                    <td>40</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111012.png' />
+                        Usurper's Scheme
+                    </td>
+                    <td>55</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111013.png' />
+                        Conqueror's Will
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">My Sword Zaps Demons (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="122401_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of March 7th's ATK to a single target enemy and gains <unbreak>#2[i]</unbreak> point(s) of Charge.">Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of March 7th's ATK to a single target enemy and gains <unbreak>#2[i]</unbreak> point(s) of Charge.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('122401', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="122401_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="122401_stats"></div><div id="122401_data" style="display:none;" data-level1="0.5, 1" data-level2="0.6, 1" data-level3="0.7, 1" data-level4="0.8, 1" data-level5="0.9, 1" data-level6="1, 1" data-level7="1.1, 1" data-level8="1.2, 1" data-level9="1.3, 1" data-levelid="1, 2, 2, 4, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Master, It's Tea Time! (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="122402_description" data-original-description="Designates a single ally (excluding this unit) as Shifu and increases Shifu's SPD by <b><unbreak>#1[f1]%</unbreak></b>. Only the most recent target of March 7th's Skill is considered as Shifu.<br><br><br>Whenever using Basic ATK or dealing 1 hit of Enhanced Basic ATK's DMG, triggers the corresponding effect if Shifu with the specified Path is present on the field:<br><br>Erudition, Destruction, The Hunt: Deals <u>Additional DMG</u> (DMG Type based on Shifu's Combat Type) equal to <b><unbreak>#2[i]%</unbreak></b> of March 7th's ATK.<br><br>Harmony, Nihility, Preservation, Abundance: Increases the Toughness Reduction of this instance of DMG by <unbreak>#3[i]%</unbreak>.">Designates a single ally (excluding this unit) as Shifu and increases Shifu's SPD by <b><unbreak>#1[f1]%</unbreak></b>. Only the most recent target of March 7th's Skill is considered as Shifu.<br><br><br>Whenever using Basic ATK or dealing 1 hit of Enhanced Basic ATK's DMG, triggers the corresponding effect if Shifu with the specified Path is present on the field:<br><br>Erudition, Destruction, The Hunt: Deals <u>Additional DMG</u> (DMG Type based on Shifu's Combat Type) equal to <b><unbreak>#2[i]%</unbreak></b> of March 7th's ATK.<br><br>Harmony, Nihility, Preservation, Abundance: Increases the Toughness Reduction of this instance of DMG by <unbreak>#3[i]%</unbreak>.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('122402', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="122402_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="122402_stats"></div><div id="122402_data" style="display:none;" data-level1="0.06, 0.1, 1" data-level2="0.064, 0.11, 1" data-level3="0.067999996, 0.12, 1" data-level4="0.072, 0.13, 1" data-level5="0.076, 0.14, 1" data-level6="0.08, 0.15, 1" data-level7="0.085, 0.1625, 1" data-level8="0.09, 0.175, 1" data-level9="0.095, 0.1875, 1" data-level10="0.1, 0.2, 1" data-level11="0.104, 0.21, 1" data-level12="0.108, 0.22, 1" data-level13="0.112, 0.23, 1" data-level14="0.116, 0.24, 1" data-level15="0.12, 0.25, 1" data-levelid="1, 2, 2, 4, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2"><unbreak>March 7th,</unbreak> <unbreak>the Apex Heroine</unbreak> (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="122403_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of March 7th's ATK to a single target enemy.<br>Increases the initial Hits Per Action of the next Enhanced Basic ATK by <unbreak>#2[i]</unbreak> hits and increase the <u>fixed chance </u>of additionally dealing DMG by <unbreak>#3[i]%</unbreak>.">Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of March 7th's ATK to a single target enemy.<br>Increases the initial Hits Per Action of the next Enhanced Basic ATK by <unbreak>#2[i]</unbreak> hits and increase the <u>fixed chance </u>of additionally dealing DMG by <unbreak>#3[i]%</unbreak>.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('122403', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="122403_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="122403_stats"></div><div id="122403_data" style="display:none;" data-level1="1.44, 2, 0.2" data-level2="1.536, 2, 0.2" data-level3="1.632, 2, 0.2" data-level4="1.728, 2, 0.2" data-level5="1.824, 2, 0.2" data-level6="1.92, 2, 0.2" data-level7="2.04, 2, 0.2" data-level8="2.16, 2, 0.2" data-level9="2.28, 2, 0.2" data-level10="2.4, 2, 0.2" data-level11="2.496, 2, 0.2" data-level12="2.592, 2, 0.2" data-level13="2.688, 2, 0.2" data-level14="2.784, 2, 0.2" data-level15="2.88, 2, 0.2" data-levelid="1, 2, 2, 4, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Master, I've Ascended! (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="122404_description" data-original-description="After Shifu uses an attack or Ultimate, March 7th gains up to 1 point of Charge each time.<br>Upon reaching <unbreak>#1[i]</unbreak> or more points of Charge, March 7th immediately takes action and increases the DMG she deals by <b><unbreak>#2[i]%</unbreak></b>. Her Basic ATK gets Enhanced, and her Skill cannot be used. After using Enhanced Basic ATK, consumes <unbreak>#1[i]</unbreak> point(s) of Charge. Charge is capped at <unbreak>#3[i]</unbreak> points.">After Shifu uses an attack or Ultimate, March 7th gains up to 1 point of Charge each time.<br>Upon reaching <unbreak>#1[i]</unbreak> or more points of Charge, March 7th immediately takes action and increases the DMG she deals by <b><unbreak>#2[i]%</unbreak></b>. Her Basic ATK gets Enhanced, and her Skill cannot be used. After using Enhanced Basic ATK, consumes <unbreak>#1[i]</unbreak> point(s) of Charge. Charge is capped at <unbreak>#3[i]</unbreak> points.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('122404', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="122404_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="122404_stats"></div><div id="122404_data" style="display:none;" data-level1="7, 0.4, 10" data-level2="7, 0.44, 10" data-level3="7, 0.48, 10" data-level4="7, 0.52, 10" data-level5="7, 0.56, 10" data-level6="7, 0.6, 10" data-level7="7, 0.65, 10" data-level8="7, 0.7, 10" data-level9="7, 0.75, 10" data-level10="7, 0.8, 10" data-level11="7, 0.84, 10" data-level12="7, 0.88, 10" data-level13="7, 0.92, 10" data-level14="7, 0.96, 10" data-level15="7, 1, 10" data-levelid="1, 2, 2, 4, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="122406_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('122406', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="122406_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="122406_stats"></div><div id="122406_data" style="display:none;" data-level1="" data-levelid="1, 2, 2, 4, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Feast in One Go (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="122407_description" data-original-description="If March 7th is on the team, she gains 1 point of Charge at the start of the next battle whenever a teammate uses Technique, up to a max of <unbreak>#1[i]</unbreak> point(s).<br>After using Technique, March 7th regenerates <unbreak>#2[i]</unbreak> Energy when the next battle starts.">If March 7th is on the team, she gains 1 point of Charge at the start of the next battle whenever a teammate uses Technique, up to a max of <unbreak>#1[i]</unbreak> point(s).<br>After using Technique, March 7th regenerates <unbreak>#2[i]</unbreak> Energy when the next battle starts.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('122407', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="122407_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="122407_stats"></div><div id="122407_data" style="display:none;" data-level1="3, 30" data-levelid="1, 2, 2, 4, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Brows Be Smitten, Heart Be Bitten (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="122408_description" data-original-description="Initially, deals <unbreak>#4[i]</unbreak> hits, each causing Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of March 7th's ATK to a single target enemy. Whenever dealing the final hit, there is a <unbreak>#2[i]%</unbreak> <u>fixed chance</u> to deal 1 additional hit of DMG, up to a max of <unbreak>#3[i]</unbreak> additional hit(s). Energy regenerated from using Enhanced Basic ATK does not increase with the number of hits.<br>Enhanced Basic ATK cannot recover Skill Points.">Initially, deals <unbreak>#4[i]</unbreak> hits, each causing Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of March 7th's ATK to a single target enemy. Whenever dealing the final hit, there is a <unbreak>#2[i]%</unbreak> <u>fixed chance</u> to deal 1 additional hit of DMG, up to a max of <unbreak>#3[i]</unbreak> additional hit(s). Energy regenerated from using Enhanced Basic ATK does not increase with the number of hits.<br>Enhanced Basic ATK cannot recover Skill Points.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('122408', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="122408_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="122408_stats"></div><div id="122408_data" style="display:none;" data-level1="0.4, 0.6, 3, 3" data-level2="0.48, 0.6, 3, 3" data-level3="0.56, 0.6, 3, 3" data-level4="0.64, 0.6, 3, 3" data-level5="0.72, 0.6, 3, 3" data-level6="0.8, 0.6, 3, 3" data-level7="0.88, 0.6, 3, 3" data-level8="0.96, 0.6, 3, 3" data-level9="1.04, 0.6, 3, 3" data-levelid="1, 2, 2, 4, 0, 8" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Swan Soar<th></tr><td>When the battle starts, March 7th's action is Advanced Forward by 25%.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Filigree<th></tr><td>March 7th can reduce the Toughness of enemies whose Weakness Type is the same as Shifu's Combat Type. When Breaking Weakness, triggers the Imaginary Weakness Break effect.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Tide Tamer<th></tr><td>After using Enhanced Basic ATK, increases Shifu's CRIT DMG by 60% and Break Effect by 36%, lasting for 2 turn(s).</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>ATK Boost</th><th>CRIT DMG Boost</th><th>DEF Boost</th></tr><tr><td>28.0%</td><td>24.0%</td><td>12.5%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>My Sword Stirs Starlight<th></tr><td>When Shifu is on the field, increases March 7th's SPD by <unbreak>10%</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Blade Dances on Waves' Fight<th></tr><td>After Shifu uses Basic ATK or Skill to attack an enemy target, March 7th immediately launches a follow-up attack and deals Imaginary DMG equal to <unbreak>60%</unbreak> of March 7th's ATK to the primary target of this attack. Additionally, triggers the corresponding effect based on Shifu's Path and then gains <unbreak>1</unbreak> point(s) of Charge. If there is no primary target available to attack, then attacks a single random enemy instead. This effect can only trigger once per turn.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Sharp Wit in Martial Might<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Being Fabulous Never Frights<th></tr><td>At the start of the turn, regenerates <unbreak>5</unbreak> Energy.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Sword Delights, Sugar Blights<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Me, the Best Girl in Sight<th></tr><td>After using Ultimate, increases the CRIT DMG dealt by the next Enhanced Basic ATK by <unbreak>50%</unbreak>.</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

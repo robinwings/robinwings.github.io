@@ -1,0 +1,350 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Topaz & Numby</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Topaz & Numby</h1>
+            <p>Topaz is the Leader of the Special Debts Picket Team and high-level manager of the Strategic Investment Department under the Interastral Peace Corporation.<br>A member of the "Ten Stonehearts" at a young age, Topaz's foundational expertise is "debt retrieval."<br>Her partner, the Warp Trotter "Numby," is also capable of keenly perceiving where "riches" are located, ensuring that jobs based in security, debt collection, and actuarial varieties are of no great challenge.<br>At presently they are traveling the cosmos together, seeking all manner of liability disputes that might be affecting the stable progression of the IPC's businesses.<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1112</td>
+        <td>The Hunt</td><td>Fire</td><td>5*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>931.39</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>412.34</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>620.93</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>110</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>75</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110121.png' />
+                        Arrow of the Beast Hunter
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110122.png' />
+                        Arrow of the Demon Slayer
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110123.png' />
+                        Arrow of the Starchaser
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110412.png' />
+                        Searing Steel Blade
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110503.png' />
+                        Regret of Infinite Ochema
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112001.png' />
+                        Silvermane Badge
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112002.png' />
+                        Silvermane Insignia
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112003.png' />
+                        Silvermane Medal
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">Deficit... (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="111201_description" data-original-description="Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Topaz's ATK to a single enemy.">Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Topaz's ATK to a single enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('111201', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="111201_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="111201_stats"></div><div id="111201_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 1, 1, 2, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Difficulty Paying? (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="111202_description" data-original-description="Inflicts a single target enemy with a Proof of Debt status, increasing the <u>follow-up attack</u> DMG it receives by <b><unbreak>#2[i]%</unbreak></b>. Proof of Debt only takes effect on the most recent target it is applied to. If there are no enemies inflicted with Proof of Debt on the field when an ally's turn starts or when an ally takes action, Topaz will inflict a random enemy with Proof of Debt.<br>Numby deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Topaz's ATK to this target. Using this Skill to deal DMG is considered as launching a <u>follow-up attack</u>.">Inflicts a single target enemy with a Proof of Debt status, increasing the <u>follow-up attack</u> DMG it receives by <b><unbreak>#2[i]%</unbreak></b>. Proof of Debt only takes effect on the most recent target it is applied to. If there are no enemies inflicted with Proof of Debt on the field when an ally's turn starts or when an ally takes action, Topaz will inflict a random enemy with Proof of Debt.<br>Numby deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Topaz's ATK to this target. Using this Skill to deal DMG is considered as launching a <u>follow-up attack</u>.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('111202', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="111202_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="111202_stats"></div><div id="111202_data" style="display:none;" data-level1="0.75, 0.25" data-level2="0.825, 0.275" data-level3="0.9, 0.3" data-level4="0.975, 0.325" data-level5="1.05, 0.35" data-level6="1.125, 0.375" data-level7="1.21875, 0.40625" data-level8="1.3125, 0.4375" data-level9="1.40625, 0.46875" data-level10="1.5, 0.5" data-level11="1.575, 0.525" data-level12="1.65, 0.55" data-level13="1.725, 0.575" data-level14="1.8, 0.6" data-level15="1.875, 0.625" data-levelid="1, 1, 1, 2, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Turn a Profit! (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="111203_description" data-original-description="Numby enters the Windfall Bonanza! state and its DMG multiplier increases by <b><unbreak>#1[i]%</unbreak></b> and CRIT DMG increases by <b><unbreak>#2[i]%</unbreak></b>. Also, when enemies with Proof of Debt are hit by an ally's Basic ATK, Skill, or Ultimate, Numby's action is Advanced Forward by <unbreak>#3[i]%</unbreak>. Numby exits the Windfall Bonanza! state after using <unbreak>#4[i]</unbreak> attacks.">Numby enters the Windfall Bonanza! state and its DMG multiplier increases by <b><unbreak>#1[i]%</unbreak></b> and CRIT DMG increases by <b><unbreak>#2[i]%</unbreak></b>. Also, when enemies with Proof of Debt are hit by an ally's Basic ATK, Skill, or Ultimate, Numby's action is Advanced Forward by <unbreak>#3[i]%</unbreak>. Numby exits the Windfall Bonanza! state after using <unbreak>#4[i]</unbreak> attacks.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('111203', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="111203_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="111203_stats"></div><div id="111203_data" style="display:none;" data-level1="0.75, 0.125, 0.5, 2" data-level2="0.825, 0.1375, 0.5, 2" data-level3="0.9, 0.15, 0.5, 2" data-level4="0.975, 0.1625, 0.5, 2" data-level5="1.05, 0.175, 0.5, 2" data-level6="1.125, 0.1875, 0.5, 2" data-level7="1.21875, 0.203125, 0.5, 2" data-level8="1.3125, 0.21875, 0.5, 2" data-level9="1.40625, 0.234375, 0.5, 2" data-level10="1.5, 0.25, 0.5, 2" data-level11="1.575, 0.2625, 0.5, 2" data-level12="1.65, 0.275, 0.5, 2" data-level13="1.725, 0.2875, 0.5, 2" data-level14="1.8, 0.3, 0.5, 2" data-level15="1.875, 0.3125, 0.5, 2" data-levelid="1, 1, 1, 2, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Trotter Market!? (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="111204_description" data-original-description="Summons Numby at the start of battle. Numby has <unbreak>#1[i]</unbreak> SPD by default. When taking action, Numby launches <u>follow-up attacks</u> on a single enemy target afflicted with Proof of Debt, dealing Fire DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Topaz's ATK.<br>When enemies afflicted with Proof of Debt receive an ally's follow-up attacks, Numby's action is Advanced Forward by <unbreak>#3[i]%</unbreak>. The action Advance Forward effect cannot be triggered during Numby's own turn.<br>When Topaz is <u>downed</u>, Numby disappears.">Summons Numby at the start of battle. Numby has <unbreak>#1[i]</unbreak> SPD by default. When taking action, Numby launches <u>follow-up attacks</u> on a single enemy target afflicted with Proof of Debt, dealing Fire DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Topaz's ATK.<br>When enemies afflicted with Proof of Debt receive an ally's follow-up attacks, Numby's action is Advanced Forward by <unbreak>#3[i]%</unbreak>. The action Advance Forward effect cannot be triggered during Numby's own turn.<br>When Topaz is <u>downed</u>, Numby disappears.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('111204', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="111204_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="111204_stats"></div><div id="111204_data" style="display:none;" data-level1="80, 0.75, 0.5" data-level2="80, 0.825, 0.5" data-level3="80, 0.9, 0.5" data-level4="80, 0.975, 0.5" data-level5="80, 1.05, 0.5" data-level6="80, 1.125, 0.5" data-level7="80, 1.21875, 0.5" data-level8="80, 1.3125, 0.5" data-level9="80, 1.40625, 0.5" data-level10="80, 1.5, 0.5" data-level11="80, 1.575, 0.5" data-level12="80, 1.65, 0.5" data-level13="80, 1.725, 0.5" data-level14="80, 1.8, 0.5" data-level15="80, 1.875, 0.5" data-levelid="1, 1, 1, 2, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="111206_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('111206', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="111206_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="111206_stats"></div><div id="111206_data" style="display:none;" data-level1="" data-levelid="1, 1, 1, 2, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Explicit Subsidy (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="111207_description" data-original-description="Summons Numby when Topaz enters the overworld. Numby will automatically search for Basic Treasures and Trotters within a set radius.<br>Using her Technique will regenerate <unbreak>#1[i]</unbreak> Energy for Topaz after Numby's first attack in the next battle.<br>If Topaz is still in the team after using her Technique and defeating overworld enemies, a small bonus amount of credits will be added to the earned credits. A maximum of <unbreak>#2[i]</unbreak> bonus credits can be received per calendar day.<br>After using her Technique and defeating enemies in Simulated Universe or Divergent Universe, additionally receive a small amount of Cosmic Fragments with a small chance to obtain 1 random Curio.">Summons Numby when Topaz enters the overworld. Numby will automatically search for Basic Treasures and Trotters within a set radius.<br>Using her Technique will regenerate <unbreak>#1[i]</unbreak> Energy for Topaz after Numby's first attack in the next battle.<br>If Topaz is still in the team after using her Technique and defeating overworld enemies, a small bonus amount of credits will be added to the earned credits. A maximum of <unbreak>#2[i]</unbreak> bonus credits can be received per calendar day.<br>After using her Technique and defeating enemies in Simulated Universe or Divergent Universe, additionally receive a small amount of Cosmic Fragments with a small chance to obtain 1 random Curio.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('111207', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="111207_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="111207_stats"></div><div id="111207_data" style="display:none;" data-level1="60, 10000" data-levelid="1, 1, 1, 2, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Overdraft<th></tr><td>When Topaz uses Basic ATK to deal DMG, it will be considered as a follow-up attack.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Financial Turmoil<th></tr><td>Increases Topaz & Numby's DMG dealt to enemy targets with Fire Weakness by 15%.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Stonks Market<th></tr><td>After Numby uses an attack while in the Windfall Bonanza! state, Topaz additionally regenerates 10 Energy.</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>DMG Boost: Fire</th><th>CRIT Rate Boost</th><th>HP Boost</th></tr><tr><td>22.4%</td><td>12.0%</td><td>10.0%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Future Market<th></tr><td>When enemies afflicted with Proof of Debt receive follow-up attacks, they will enter the Debtor state. This can take effect only once within a single attack.<br>The Debtor state increases the CRIT DMG of follow-up attacks inflicted on the target enemies by <unbreak>25%</unbreak>, stacking up to <unbreak>2</unbreak> time(s). When Proof of Debt is removed, the Debtor state is also removed.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Bona Fide Acquisition<th></tr><td>After Numby takes action and launches an attack, Topaz regenerates <unbreak>5</unbreak> Energy.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Seize the Big and Free the Small<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Agile Operation<th></tr><td>After Numby's turn begins, Topaz's action is Advanced Forward by <unbreak>20%</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Inflationary Demand<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Incentive Mechanism<th></tr><td>Numby's attack count during the Windfall Bonanza! state increases by <unbreak>1</unbreak>, and its Fire RES PEN increases by <unbreak>10%</unbreak> when it attacks.</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

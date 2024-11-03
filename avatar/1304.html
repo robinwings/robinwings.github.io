@@ -1,0 +1,350 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Aventurine</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Aventurine</h1>
+            <p>A high-ranking executive of the IPC's Strategic Investment Department.<br>A risk-taker, his constant smile makes it difficult for people to discern his true feelings.<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1304</td>
+        <td>Preservation</td><td>Imaginary</td><td>5*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>1203.05</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>654.88</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>446.29</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>106</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>150</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110211.png' />
+                        Scattered Stardust
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110212.png' />
+                        Crystal Meteorites
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110213.png' />
+                        Divine Amber
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110417.png' />
+                        Suppressing Edict
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110504.png' />
+                        Past Evils of the Borehole Planet Disaster
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114011.png' />
+                        Tatters of Thought
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114012.png' />
+                        Fragments of Impression
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114013.png' />
+                        Shards of Desires
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">Straight Bet (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="130401_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Aventurine's DEF to a single target enemy.">Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Aventurine's DEF to a single target enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('130401', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="130401_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="130401_stats"></div><div id="130401_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 3, 0, 4, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Cornerstone Deluxe (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="130402_description" data-original-description="Provides all allies with a Fortified Wager shield that can block DMG equal to <b><unbreak>#1[f1]%</unbreak></b> of Aventurine's DEF plus <b><unbreak>#2[i]</unbreak></b>, lasting for <unbreak>#3[i]</unbreak> turn(s). When Fortified Wager is gained repeatedly, the Shield Effect can stack, up to <unbreak>#4[i]%</unbreak> of the current Shield Effect provided by the Skill.">Provides all allies with a Fortified Wager shield that can block DMG equal to <b><unbreak>#1[f1]%</unbreak></b> of Aventurine's DEF plus <b><unbreak>#2[i]</unbreak></b>, lasting for <unbreak>#3[i]</unbreak> turn(s). When Fortified Wager is gained repeatedly, the Shield Effect can stack, up to <unbreak>#4[i]%</unbreak> of the current Shield Effect provided by the Skill.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('130402', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="130402_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="130402_stats"></div><div id="130402_data" style="display:none;" data-level1="0.16, 80, 3, 2" data-level2="0.17, 128, 3, 2" data-level3="0.18, 164, 3, 2" data-level4="0.19, 200, 3, 2" data-level5="0.2, 224, 3, 2" data-level6="0.208, 248, 3, 2" data-level7="0.216, 266, 3, 2" data-level8="0.224, 284, 3, 2" data-level9="0.232, 302, 3, 2" data-level10="0.24, 320, 3, 2" data-level11="0.248, 338, 3, 2" data-level12="0.256, 356, 3, 2" data-level13="0.264, 374, 3, 2" data-level14="0.272, 392, 3, 2" data-level15="0.28, 410, 3, 2" data-levelid="1, 3, 0, 4, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Roulette Shark (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="130403_description" data-original-description="Randomly gains 1 to <unbreak>#1[i]</unbreak> points of Blind Bet. Then, inflicts Unnerved on a single target enemy for <unbreak>#4[i]</unbreak> turn(s) and deals Imaginary DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Aventurine's DEF to the single target enemy. When an ally hits an Unnerved enemy target, the CRIT DMG dealt increases by <b><unbreak>#3[f1]%</unbreak></b>.">Randomly gains 1 to <unbreak>#1[i]</unbreak> points of Blind Bet. Then, inflicts Unnerved on a single target enemy for <unbreak>#4[i]</unbreak> turn(s) and deals Imaginary DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Aventurine's DEF to the single target enemy. When an ally hits an Unnerved enemy target, the CRIT DMG dealt increases by <b><unbreak>#3[f1]%</unbreak></b>.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('130403', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="130403_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="130403_stats"></div><div id="130403_data" style="display:none;" data-level1="7, 1.62, 0.09, 3" data-level2="7, 1.728, 0.096, 3" data-level3="7, 1.836, 0.102, 3" data-level4="7, 1.944, 0.108, 3" data-level5="7, 2.052, 0.114, 3" data-level6="7, 2.16, 0.12, 3" data-level7="7, 2.295, 0.1275, 3" data-level8="7, 2.43, 0.135, 3" data-level9="7, 2.565, 0.1425, 3" data-level10="7, 2.7, 0.15, 3" data-level11="7, 2.808, 0.156, 3" data-level12="7, 2.916, 0.162, 3" data-level13="7, 3.024, 0.168, 3" data-level14="7, 3.132, 0.174, 3" data-level15="7, 3.24, 0.18, 3" data-levelid="1, 3, 0, 4, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Shot Loaded Right (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="130404_description" data-original-description="For any single ally with Fortified Wager, their Effect RES increases by <b><unbreak>#4[f1]%</unbreak></b>, and when they get attacked, Aventurine gains 1 point of Blind Bet. When Aventurine has Fortified Wager, he can resist <u>Crowd Control debuffs</u>. This effect can trigger again after <unbreak>#5[i]</unbreak> turn(s). Aventurine additionally gains <unbreak>#1[i]</unbreak> point(s) of Blind Bet after getting attacked. Upon reaching 7 points of Blind Bet, Aventurine consumes the 7 points to launch a <unbreak>#2[i]</unbreak>-hit <u>follow-up attack</u>, with each hit dealing Imaginary DMG equal to <b><unbreak>#3[i]%</unbreak></b> of Aventurine's DEF to a single random enemy. Blind Bet is capped at <unbreak>10</unbreak> points.">For any single ally with Fortified Wager, their Effect RES increases by <b><unbreak>#4[f1]%</unbreak></b>, and when they get attacked, Aventurine gains 1 point of Blind Bet. When Aventurine has Fortified Wager, he can resist <u>Crowd Control debuffs</u>. This effect can trigger again after <unbreak>#5[i]</unbreak> turn(s). Aventurine additionally gains <unbreak>#1[i]</unbreak> point(s) of Blind Bet after getting attacked. Upon reaching 7 points of Blind Bet, Aventurine consumes the 7 points to launch a <unbreak>#2[i]</unbreak>-hit <u>follow-up attack</u>, with each hit dealing Imaginary DMG equal to <b><unbreak>#3[i]%</unbreak></b> of Aventurine's DEF to a single random enemy. Blind Bet is capped at <unbreak>10</unbreak> points.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('130404', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="130404_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="130404_stats"></div><div id="130404_data" style="display:none;" data-level1="1, 7, 0.125, 0.25, 2" data-level2="1, 7, 0.1375, 0.275, 2" data-level3="1, 7, 0.15, 0.3, 2" data-level4="1, 7, 0.1625, 0.325, 2" data-level5="1, 7, 0.175, 0.35, 2" data-level6="1, 7, 0.1875, 0.375, 2" data-level7="1, 7, 0.203125, 0.40625, 2" data-level8="1, 7, 0.21875, 0.4375, 2" data-level9="1, 7, 0.234375, 0.46875, 2" data-level10="1, 7, 0.25, 0.5, 2" data-level11="1, 7, 0.2625, 0.525, 2" data-level12="1, 7, 0.275, 0.55, 2" data-level13="1, 7, 0.2875, 0.575, 2" data-level14="1, 7, 0.3, 0.6, 2" data-level15="1, 7, 0.3125, 0.625, 2" data-levelid="1, 3, 0, 4, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="130406_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('130406', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="130406_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="130406_stats"></div><div id="130406_data" style="display:none;" data-level1="" data-levelid="1, 3, 0, 4, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">The Red or the Black (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="130407_description" data-original-description="After using the Technique, 1 of the following effects will be granted:<br>There is a chance for DEF to increase by <unbreak>#1[i]%</unbreak>.<br>There is a high chance for DEF to increase by <unbreak>#2[i]%</unbreak>.<br>There is a small chance for DEF to increase by <unbreak>#3[i]%</unbreak>.<br><br>When this Technique is used repeatedly, the acquired effect with the highest buff value is retained.<br>When the next battle starts, increases all allies' DEF by the corresponding value, lasting for <unbreak>#4[i]</unbreak> turn(s).">After using the Technique, 1 of the following effects will be granted:<br>There is a chance for DEF to increase by <unbreak>#1[i]%</unbreak>.<br>There is a high chance for DEF to increase by <unbreak>#2[i]%</unbreak>.<br>There is a small chance for DEF to increase by <unbreak>#3[i]%</unbreak>.<br><br>When this Technique is used repeatedly, the acquired effect with the highest buff value is retained.<br>When the next battle starts, increases all allies' DEF by the corresponding value, lasting for <unbreak>#4[i]</unbreak> turn(s).</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('130407', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="130407_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="130407_stats"></div><div id="130407_data" style="display:none;" data-level1="0.24, 0.36, 0.6, 3" data-levelid="1, 3, 0, 4, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Leverage<th></tr><td>For every 100 of Aventurine's DEF that exceeds 1600, increases his own CRIT Rate by 2%, up to a maximum increase of 48%.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Hot Hand<th></tr><td>When battle starts, grants all allies a Fortified Wager shield, whose Shield Effect is equal to 100% of the one provided by the Skill, lasting for 3 turn(s).</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Bingo!<th></tr><td>After a teammate with Fortified Wager launches Follow-up ATK, Aventurine accumulates 1 Blind Bet point. This effect can trigger up to 3 time(s). Its trigger count resets at the start of Aventurine's turn. After Aventurine launches his Talent's Follow-up ATK, provides all ally targets with a Fortified Wager that can block DMG equal to 7.2% of Aventurine's DEF plus 96, and additionally grants a Fortified Wager that can block DMG equal to 7.2% of Aventurine's DEF plus 96 to the ally with the lowest Shield Effect, lasting for 3 turns.</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>DEF Boost</th><th>DMG Boost: Imaginary</th><th>Effect RES Boost</th></tr><tr><td>35.0%</td><td>14.4%</td><td>10.0%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Prisoner's Dilemma<th></tr><td>Increases CRIT DMG by <unbreak>20%</unbreak> for ally targets with Fortified Wager. After using the Ultimate, provides all allies with a Fortified Wager shield, whose Shield Effect is equal to <unbreak>100%</unbreak> of the one provided by the Skill, lasting for <unbreak>3</unbreak> turn(s).</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Bounded Rationality<th></tr><td>When using the Basic ATK, reduces the target's All-Type RES by <unbreak>12%</unbreak> for <unbreak>3</unbreak> turn(s).</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Droprate Maxing<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Unexpected Hanging Paradox<th></tr><td>When triggering his Talent's follow-up attack, first increases Aventurine's DEF by <unbreak>40%</unbreak> for <unbreak>2</unbreak> turn(s), and additionally increases the Hits Per Action for his talent's follow-up attack by <unbreak>3</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Ambiguity Aversion<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Stag Hunt Game<th></tr><td>For every teammate that holds a Shield, the DMG dealt by Aventurine increases by <unbreak>50%</unbreak>, up to a maximum of <unbreak>150%</unbreak>.</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

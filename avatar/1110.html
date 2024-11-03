@@ -1,0 +1,350 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Lynx</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Lynx</h1>
+            <p>A Belobogian Snow Plains Explorer, and the youngest of the Landau siblings.<br>Calm and collected, with a strong drive for action. Often embarks on solo adventures to explore the snowy wilderness.<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1110</td>
+        <td>Abundance</td><td>Quantum</td><td>4*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>1058.40</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>551.25</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>493.92</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>100</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>2646400</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>5</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110171.png' />
+                        Seed of Abundance
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110172.png' />
+                        Sprout of Life
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110173.png' />
+                        Flower of Eternity
+                    </td>
+                    <td>105</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110416.png' />
+                        Nail of the Ape
+                    </td>
+                    <td>50</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110503.png' />
+                        Regret of Infinite Ochema
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111001.png' />
+                        Extinguished Core
+                    </td>
+                    <td>40</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111002.png' />
+                        Glimmering Core
+                    </td>
+                    <td>55</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111003.png' />
+                        Squirming Core
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">Ice Crampon Technique (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="111001_description" data-original-description="Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of this character's Max HP to a single enemy.">Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of this character's Max HP to a single enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('111001', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="111001_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="111001_stats"></div><div id="111001_data" style="display:none;" data-level1="0.25" data-level2="0.3" data-level3="0.35" data-level4="0.4" data-level5="0.45" data-level6="0.5" data-level7="0.55" data-level8="0.6" data-level9="0.65" data-levelid="1, 1, 1, 0, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Salted Camping Cans (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="111002_description" data-original-description="Applies `Survival Response` to a single target ally and increases their Max HP by <b><unbreak>#1[f1]%</unbreak></b> of Lynx's Max HP plus <b><unbreak>#2[i]</unbreak></b>. If the target ally is a character on the Path of Destruction or Preservation, the chance of them being attacked by enemies will greatly increase. `Survival Response` lasts for <unbreak>#3[i]</unbreak> turn(s).<br>Restores the target's HP by <b><unbreak>#4[f1]%</unbreak></b> of Lynx's Max HP plus <b><unbreak>#5[i]</unbreak></b>.">Applies `Survival Response` to a single target ally and increases their Max HP by <b><unbreak>#1[f1]%</unbreak></b> of Lynx's Max HP plus <b><unbreak>#2[i]</unbreak></b>. If the target ally is a character on the Path of Destruction or Preservation, the chance of them being attacked by enemies will greatly increase. `Survival Response` lasts for <unbreak>#3[i]</unbreak> turn(s).<br>Restores the target's HP by <b><unbreak>#4[f1]%</unbreak></b> of Lynx's Max HP plus <b><unbreak>#5[i]</unbreak></b>.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('111002', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="111002_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="111002_stats"></div><div id="111002_data" style="display:none;" data-level1="0.05, 50, 2, 0.08, 80, 5" data-level2="0.052500002, 80, 2, 0.085, 128, 5" data-level3="0.055, 102.5, 2, 0.09, 164, 5" data-level4="0.0575, 125, 2, 0.095, 200, 5" data-level5="0.06, 140, 2, 0.1, 224, 5" data-level6="0.0625, 155, 2, 0.104, 248, 5" data-level7="0.065625, 166.25, 2, 0.108, 266, 5" data-level8="0.06875, 177.5, 2, 0.112, 284, 5" data-level9="0.071875, 188.75, 2, 0.116, 302, 5" data-level10="0.075, 200, 2, 0.12, 320, 5" data-level11="0.0775, 211.25, 2, 0.124, 338, 5" data-level12="0.08, 222.5, 2, 0.128, 356, 5" data-level13="0.0825, 233.75, 2, 0.132, 374, 5" data-level14="0.085, 245, 2, 0.13599999, 392, 5" data-level15="0.0875, 256.25, 2, 0.14, 410, 5" data-levelid="1, 1, 1, 0, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Snowfield <unbreak>First Aid</unbreak> (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="111003_description" data-original-description="Dispels <unbreak>#1[i]</unbreak> <u>debuff(s)</u> from all allies and immediately restores their respective HP by an amount equal to <b><unbreak>#2[f1]%</unbreak></b> of Lynx's Max HP plus <b><unbreak>#3[i]</unbreak></b>.">Dispels <unbreak>#1[i]</unbreak> <u>debuff(s)</u> from all allies and immediately restores their respective HP by an amount equal to <b><unbreak>#2[f1]%</unbreak></b> of Lynx's Max HP plus <b><unbreak>#3[i]</unbreak></b>.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('111003', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="111003_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="111003_stats"></div><div id="111003_data" style="display:none;" data-level1="1, 0.09, 90" data-level2="1, 0.095625, 144" data-level3="1, 0.10125, 184.5" data-level4="1, 0.106875, 225" data-level5="1, 0.1125, 252" data-level6="1, 0.117, 279" data-level7="1, 0.1215, 299.25" data-level8="1, 0.126, 319.5" data-level9="1, 0.1305, 339.75" data-level10="1, 0.135, 360" data-level11="1, 0.1395, 380.25" data-level12="1, 0.144, 400.5" data-level13="1, 0.1485, 420.75" data-level14="1, 0.153, 441" data-level15="1, 0.1575, 461.25" data-levelid="1, 1, 1, 0, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Outdoor Survival Experience (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="111004_description" data-original-description="When using Lynx's Skill or Ultimate, applies continuous healing to the target ally for <unbreak>#1[i]</unbreak> turn(s), restoring the target ally's HP by an amount equal to <b><unbreak>#2[f1]%</unbreak></b> of Lynx's Max HP plus <b><unbreak>#3[i]</unbreak></b> at the start of each turn. If the target has `Survival Response,` the continuous healing effect additionally restores HP by an amount equal to <b><unbreak>#4[f1]%</unbreak></b> of Lynx's Max HP plus <b><unbreak>#5[i]</unbreak></b>.">When using Lynx's Skill or Ultimate, applies continuous healing to the target ally for <unbreak>#1[i]</unbreak> turn(s), restoring the target ally's HP by an amount equal to <b><unbreak>#2[f1]%</unbreak></b> of Lynx's Max HP plus <b><unbreak>#3[i]</unbreak></b> at the start of each turn. If the target has `Survival Response,` the continuous healing effect additionally restores HP by an amount equal to <b><unbreak>#4[f1]%</unbreak></b> of Lynx's Max HP plus <b><unbreak>#5[i]</unbreak></b>.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('111004', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="111004_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="111004_stats"></div><div id="111004_data" style="display:none;" data-level1="2, 0.024, 24, 0.03, 30" data-level2="2, 0.0255, 38.4, 0.031875, 48" data-level3="2, 0.026999999, 49.2, 0.03375, 61.5" data-level4="2, 0.0285, 60, 0.035625, 75" data-level5="2, 0.03, 67.2, 0.0375, 84" data-level6="2, 0.0312, 74.4, 0.039, 93" data-level7="2, 0.0324, 79.8, 0.0405, 99.75" data-level8="2, 0.0336, 85.2, 0.042, 106.5" data-level9="2, 0.0348, 90.6, 0.0435, 113.25" data-level10="2, 0.036, 96, 0.044999998, 120" data-level11="2, 0.0372, 101.4, 0.0465, 126.75" data-level12="2, 0.038399998, 106.8, 0.048, 133.5" data-level13="2, 0.0396, 112.2, 0.0495, 140.25" data-level14="2, 0.0408, 117.6, 0.051, 147" data-level15="2, 0.042, 123, 0.052500002, 153.75" data-levelid="1, 1, 1, 0, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="111006_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('111006', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="111006_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="111006_stats"></div><div id="111006_data" style="display:none;" data-level1="" data-levelid="1, 1, 1, 0, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Chocolate Energy Bar (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="111007_description" data-original-description="After Lynx uses her Technique, at the start of the next battle, all allies are granted her Talent's continuous healing effect, lasting for <unbreak>#1[i]</unbreak> turn(s).">After Lynx uses her Technique, at the start of the next battle, all allies are granted her Talent's continuous healing effect, lasting for <unbreak>#1[i]</unbreak> turn(s).</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('111007', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="111007_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="111007_stats"></div><div id="111007_data" style="display:none;" data-level1="2" data-levelid="1, 1, 1, 0, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Advance Surveying<th></tr><td>After a target with "Survival Response" is hit, Lynx regenerates 2 Energy immediately.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Exploration Techniques<th></tr><td>Increases the chance to resist Crowd Control debuffs by 35%.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Survival in the Extreme<th></tr><td>Extends the duration of the continuous healing effect granted by Talent for 1 turn(s).</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>HP Boost</th><th>DEF Boost</th><th>Effect RES Boost</th></tr><tr><td>28.0%</td><td>22.5%</td><td>10.0%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Morning of Snow Hike<th></tr><td>When healing allies with HP percentage equal to or lower than <unbreak>50%</unbreak>, Lynx's Outgoing Healing increases by <unbreak>20%</unbreak>. This effect also works on continuous healing.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Noon of Portable Furnace<th></tr><td>A target with "Survival Response" can resist debuff application for <unbreak>1</unbreak> time(s).</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Afternoon of Avalanche Beacon<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Dusk of Warm Campfire<th></tr><td>When "Survival Response" is gained, increases the target's ATK by an amount equal to <unbreak>3%</unbreak> of Lynx's Max HP for <unbreak>1</unbreak> turn(s).</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Night of Aurora Tea<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Dawn of Explorers' Chart<th></tr><td>Additionally boosts the Max HP increasing effect of "Survival Response" by an amount equal to <unbreak>6%</unbreak> of Lynx's Max HP and increases Effect RES by <unbreak>30%</unbreak>.</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

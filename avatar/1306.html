@@ -1,0 +1,350 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Sparkle</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Sparkle</h1>
+            <p>A member of the Masked Fools. Inscrutable and unscrupulous.<br>A dangerous maestro of theatrics, utterly engrossed in the art of performance. Adorned with innumerable masks, she is the hero with a thousand faces.<br>Wealth, status, power... None of those matters to Sparkle. The only thing that can get her attention is "amusement."<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1306</td>
+        <td>Harmony</td><td>Quantum</td><td>5*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>1397.09</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>485.10</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>523.91</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>101</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110231.png' />
+                        Firmament Note
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110232.png' />
+                        Celestial Section
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110233.png' />
+                        Heavenly Melody
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110426.png' />
+                        Dream Flamer
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110504.png' />
+                        Past Evils of the Borehole Planet Disaster
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114011.png' />
+                        Tatters of Thought
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114012.png' />
+                        Fragments of Impression
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114013.png' />
+                        Shards of Desires
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">Monodrama (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="130601_description" data-original-description="Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Sparkle's ATK to a single target enemy.">Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Sparkle's ATK to a single target enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('130601', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="130601_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="130601_stats"></div><div id="130601_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 3, 0, 6, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Dreamdiver (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="130602_description" data-original-description="Increases the CRIT DMG of a single target ally by <b><unbreak>#1[f1]%</unbreak></b> of Sparkle's CRIT DMG plus <b><unbreak>#2[f1]%</unbreak></b>, lasting for <unbreak>#3[i]</unbreak> turn(s). And at the same time, Advances Forward this ally's action by <unbreak>#4[i]%</unbreak>.<br>When Sparkle uses this ability on herself, the Action Advance effect will not trigger.">Increases the CRIT DMG of a single target ally by <b><unbreak>#1[f1]%</unbreak></b> of Sparkle's CRIT DMG plus <b><unbreak>#2[f1]%</unbreak></b>, lasting for <unbreak>#3[i]</unbreak> turn(s). And at the same time, Advances Forward this ally's action by <unbreak>#4[i]%</unbreak>.<br>When Sparkle uses this ability on herself, the Action Advance effect will not trigger.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('130602', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="130602_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="130602_stats"></div><div id="130602_data" style="display:none;" data-level1="0.12, 0.27, 1, 0.5" data-level2="0.132, 0.288, 1, 0.5" data-level3="0.144, 0.306, 1, 0.5" data-level4="0.156, 0.324, 1, 0.5" data-level5="0.168, 0.342, 1, 0.5" data-level6="0.18, 0.36, 1, 0.5" data-level7="0.195, 0.3825, 1, 0.5" data-level8="0.21, 0.405, 1, 0.5" data-level9="0.225, 0.4275, 1, 0.5" data-level10="0.24, 0.45, 1, 0.5" data-level11="0.252, 0.468, 1, 0.5" data-level12="0.264, 0.486, 1, 0.5" data-level13="0.276, 0.504, 1, 0.5" data-level14="0.288, 0.522, 1, 0.5" data-level15="0.3, 0.54, 1, 0.5" data-levelid="1, 3, 0, 6, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">The Hero with a Thousand Faces (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="130603_description" data-original-description="Recovers <unbreak>#2[i]</unbreak> Skill Points for the team and grants all allies Cipher. For allies with Cipher, each stack of the DMG Boost effect provided by Sparkle's Talent additionally increases by <b><unbreak>#3[f1]%</unbreak></b>, lasting for <unbreak>#4[i]</unbreak> turns.">Recovers <unbreak>#2[i]</unbreak> Skill Points for the team and grants all allies Cipher. For allies with Cipher, each stack of the DMG Boost effect provided by Sparkle's Talent additionally increases by <b><unbreak>#3[f1]%</unbreak></b>, lasting for <unbreak>#4[i]</unbreak> turns.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('130603', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="130603_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="130603_stats"></div><div id="130603_data" style="display:none;" data-level1="2, 4, 0.06, 2" data-level2="2, 4, 0.064, 2" data-level3="2, 4, 0.067999996, 2" data-level4="2, 4, 0.072, 2" data-level5="2, 4, 0.076, 2" data-level6="2, 4, 0.08, 2" data-level7="2, 4, 0.085, 2" data-level8="2, 4, 0.09, 2" data-level9="2, 4, 0.095, 2" data-level10="2, 4, 0.1, 2" data-level11="2, 4, 0.104, 2" data-level12="2, 4, 0.108, 2" data-level13="2, 4, 0.112, 2" data-level14="2, 4, 0.116, 2" data-level15="2, 4, 0.12, 2" data-levelid="1, 3, 0, 6, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Red Herring (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="130604_description" data-original-description="While Sparkle is on the battlefield, additionally increases the max number of Skill Points by <unbreak>#3[i]</unbreak>. Whenever an ally consumes 1 Skill Point, all allies' DMG dealt increases by <b><unbreak>#2[f1]%</unbreak></b>. This effect lasts for <unbreak>#1[i]</unbreak> turn(s) and can stack up to <unbreak>#4[i]</unbreak> time(s).">While Sparkle is on the battlefield, additionally increases the max number of Skill Points by <unbreak>#3[i]</unbreak>. Whenever an ally consumes 1 Skill Point, all allies' DMG dealt increases by <b><unbreak>#2[f1]%</unbreak></b>. This effect lasts for <unbreak>#1[i]</unbreak> turn(s) and can stack up to <unbreak>#4[i]</unbreak> time(s).</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('130604', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="130604_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="130604_stats"></div><div id="130604_data" style="display:none;" data-level1="2, 0.03, 2, 3" data-level2="2, 0.033, 2, 3" data-level3="2, 0.036, 2, 3" data-level4="2, 0.039, 2, 3" data-level5="2, 0.042, 2, 3" data-level6="2, 0.044999998, 2, 3" data-level7="2, 0.048750002, 2, 3" data-level8="2, 0.052500002, 2, 3" data-level9="2, 0.05625, 2, 3" data-level10="2, 0.06, 2, 3" data-level11="2, 0.063, 2, 3" data-level12="2, 0.066, 2, 3" data-level13="2, 0.069, 2, 3" data-level14="2, 0.072, 2, 3" data-level15="2, 0.075, 2, 3" data-levelid="1, 3, 0, 6, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="130606_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('130606', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="130606_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="130606_stats"></div><div id="130606_data" style="display:none;" data-level1="" data-levelid="1, 3, 0, 6, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Unreliable Narrator (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="130607_description" data-original-description="Using the Technique grants all allies Misdirect for <unbreak>#2[i]</unbreak> seconds. Characters with Misdirect will not be detected by enemies, and entering battle in the Misdirect state recovers <unbreak>#1[i]</unbreak> Skill Point(s) for the team.">Using the Technique grants all allies Misdirect for <unbreak>#2[i]</unbreak> seconds. Characters with Misdirect will not be detected by enemies, and entering battle in the Misdirect state recovers <unbreak>#1[i]</unbreak> Skill Point(s) for the team.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('130607', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="130607_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="130607_stats"></div><div id="130607_data" style="display:none;" data-level1="3, 20" data-levelid="1, 3, 0, 6, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Almanac<th></tr><td>When using Basic ATK, additionally regenerates 10 Energy.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Artificial Flower<th></tr><td>The CRIT DMG Boost effect provided by the Skill will be extended until the start of the target's next turn.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Nocturne<th></tr><td>Increases all allies' ATK by 15%. When there are 1/2/3 Quantum-Type allies in the team, additionally increases Quantum-Type allies' ATK by 5%/15%/30%.</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>HP Boost</th><th>CRIT DMG Boost</th><th>Effect RES Boost</th></tr><tr><td>28.0%</td><td>24.0%</td><td>10.0%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Suspension of Disbelief<th></tr><td>The Cipher effect granted by the Ultimate lasts for 1 extra turn. All allies with Cipher have their ATK increased by <unbreak>40%</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Purely Fictitious<th></tr><td>Every stack of the Talent's effect allows allies to additionally ignore <unbreak>8%</unbreak> of the target's DEF when dealing DMG.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Pipedream<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Life Is a Gamble<th></tr><td>The Ultimate recovers 1 more Skill Point. The Talent additionally increases the Max Skill Points by 1.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Parallax Truth<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Narrative Polysemy<th></tr><td>The CRIT DMG Boost effect provided by the Skill additionally increases by an amount equal to <unbreak>30%</unbreak> of Sparkle's CRIT DMG. When Sparkle uses Skill, her Skill's CRIT DMG Boost effect will apply to all teammates with Cipher. When Sparkle uses her Ultimate, any single ally who benefits from her Skill's CRIT DMG Boost will spread that effect to teammates with Cipher.</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

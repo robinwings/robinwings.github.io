@@ -1,0 +1,351 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Himeko</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Himeko</h1>
+            <p>The one who repaired the Astral Express.<br>To witness the vast starry sky, she decided to travel with the Astral Express.<br>Her hobby is brewing hand-made coffee.<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1003</td>
+        <td>Erudition</td><td>Fire</td><td>5*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>1047.82</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>436.59</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>756.76</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>96</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>75</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110131.png' />
+                        Key of Inspiration
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110132.png' />
+                        Key of Knowledge
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110133.png' />
+                        Key of Wisdom
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110402.png' />
+                        Endotherm Chitin
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110501.png' />
+                        Destroyer's Final Road
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111001.png' />
+                        Extinguished Core
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111002.png' />
+                        Glimmering Core
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111003.png' />
+                        Squirming Core
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">Sawblade Tuning (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="100301_description" data-original-description="Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Himeko's ATK to a single enemy.">Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Himeko's ATK to a single enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('100301', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="100301_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="100301_stats"></div><div id="100301_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 0, 0, 3, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Molten Detonation (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="100302_description" data-original-description="Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Himeko's ATK to a single enemy and Fire DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Himeko's ATK to enemies adjacent to it.">Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Himeko's ATK to a single enemy and Fire DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Himeko's ATK to enemies adjacent to it.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('100302', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="100302_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="100302_stats"></div><div id="100302_data" style="display:none;" data-level1="1, 0.4" data-level2="1.1, 0.44" data-level3="1.2, 0.48" data-level4="1.3, 0.52" data-level5="1.4, 0.56" data-level6="1.5, 0.6" data-level7="1.625, 0.65" data-level8="1.75, 0.7" data-level9="1.875, 0.75" data-level10="2, 0.8" data-level11="2.1, 0.84" data-level12="2.2, 0.88" data-level13="2.3, 0.92" data-level14="2.4, 0.96" data-level15="2.5, 1" data-levelid="1, 0, 0, 3, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Heavenly Flare (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="100303_description" data-original-description="Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Himeko's ATK to all enemies. Himeko regenerates <unbreak>#2[i]</unbreak> extra Energy for each enemy defeated.">Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Himeko's ATK to all enemies. Himeko regenerates <unbreak>#2[i]</unbreak> extra Energy for each enemy defeated.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('100303', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="100303_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="100303_stats"></div><div id="100303_data" style="display:none;" data-level1="1.38, 5" data-level2="1.472, 5" data-level3="1.564, 5" data-level4="1.656, 5" data-level5="1.748, 5" data-level6="1.84, 5" data-level7="1.955, 5" data-level8="2.07, 5" data-level9="2.185, 5" data-level10="2.3, 5" data-level11="2.392, 5" data-level12="2.484, 5" data-level13="2.576, 5" data-level14="2.668, 5" data-level15="2.76, 5" data-levelid="1, 0, 0, 3, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Victory Rush (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="100304_description" data-original-description="When an enemy is inflicted with Weakness Break, Himeko gains 1 point of Charge (max <unbreak>#2[i]</unbreak> points).<br>If Himeko is fully Charged when an ally performs an attack, Himeko immediately performs 1 <u>follow-up attack</u> and deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of her ATK to all enemies, consuming all Charge points.<br>At the start of the battle, Himeko gains 1 point of Charge.">When an enemy is inflicted with Weakness Break, Himeko gains 1 point of Charge (max <unbreak>#2[i]</unbreak> points).<br>If Himeko is fully Charged when an ally performs an attack, Himeko immediately performs 1 <u>follow-up attack</u> and deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of her ATK to all enemies, consuming all Charge points.<br>At the start of the battle, Himeko gains 1 point of Charge.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('100304', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="100304_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="100304_stats"></div><div id="100304_data" style="display:none;" data-level1="0.7, 3" data-level2="0.77, 3" data-level3="0.84, 3" data-level4="0.91, 3" data-level5="0.98, 3" data-level6="1.05, 3" data-level7="1.1375, 3" data-level8="1.225, 3" data-level9="1.3125, 3" data-level10="1.4, 3" data-level11="1.47, 3" data-level12="1.54, 3" data-level13="1.61, 3" data-level14="1.68, 3" data-level15="1.75, 3" data-levelid="1, 0, 0, 3, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="100306_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('100306', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="100306_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="100306_stats"></div><div id="100306_data" style="display:none;" data-level1="" data-levelid="1, 0, 0, 3, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Incomplete Combustion (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="100307_description" data-original-description="After using Technique, creates a Special Dimension that lasts for <unbreak>#4[i]</unbreak> second(s). After entering battle with enemies in the Special Dimension, there is a <unbreak>#1[i]%</unbreak> <u>base chance</u> to increase Fire DMG taken by enemies by <unbreak>#2[i]%</unbreak> for <unbreak>#3[i]</unbreak> turn(s). Only 1 dimension created by allies can exist at the same time.">After using Technique, creates a Special Dimension that lasts for <unbreak>#4[i]</unbreak> second(s). After entering battle with enemies in the Special Dimension, there is a <unbreak>#1[i]%</unbreak> <u>base chance</u> to increase Fire DMG taken by enemies by <unbreak>#2[i]%</unbreak> for <unbreak>#3[i]</unbreak> turn(s). Only 1 dimension created by allies can exist at the same time.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('100307', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="100307_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="100307_stats"></div><div id="100307_data" style="display:none;" data-level1="1, 0.1, 2, 15" data-levelid="1, 0, 0, 3, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Starfire<th></tr><td>After using an attack, there is a 50% base chance to inflict Burn on enemies for 2 turn(s).
+When afflicted with Burn, enemies take Fire DoT equal to 30% of Himeko's ATK at the start of each turn.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Magma<th></tr><td>Skill deals 20% more DMG to enemies currently afflicted with Burn.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Benchmark<th></tr><td>When current HP percentage is 80% or higher, CRIT Rate increases by 15%.</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>DMG Boost: Fire</th><th>ATK Boost</th><th>Effect RES Boost</th></tr><tr><td>22.4%</td><td>18.0%</td><td>10.0%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Childhood<th></tr><td>After "Victory Rush" is triggered, Himeko's SPD increases by <unbreak>20%</unbreak> for <unbreak>2</unbreak> turn(s).</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Convergence<th></tr><td>Deals <unbreak>15%</unbreak> more DMG to enemies whose HP percentage is <unbreak>50%</unbreak> or less.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Poised<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Dedication<th></tr><td>When Himeko's Skill inflicts Weakness Break on an enemy, she gains <unbreak>1</unbreak> extra point(s) of Charge.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Aspiration<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Trailblaze!<th></tr><td>Ultimate deals DMG 2 extra times, each of which deals Fire DMG equal to <unbreak>40%</unbreak> of the original DMG to a random enemy.</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

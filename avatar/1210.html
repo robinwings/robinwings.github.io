@@ -1,0 +1,350 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Guinaifen</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Guinaifen</h1>
+            <p>A performance artist visiting the Xianzhou Luofu — in other words, a street performer.<br>She's chasing a new life on the Luofu when not concerned with food and shelter.<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1210</td>
+        <td>Nihility</td><td>Fire</td><td>4*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>882.00</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>441.00</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>582.12</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>106</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>2646400</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>5</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110151.png' />
+                        Obsidian of Dread
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110152.png' />
+                        Obsidian of Desolation
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110153.png' />
+                        Obsidian of Obsession
+                    </td>
+                    <td>105</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110412.png' />
+                        Searing Steel Blade
+                    </td>
+                    <td>50</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110503.png' />
+                        Regret of Infinite Ochema
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113011.png' />
+                        Artifex's Module
+                    </td>
+                    <td>40</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113012.png' />
+                        Artifex's Cogwheel
+                    </td>
+                    <td>55</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113013.png' />
+                        Artifex's Gyreheart
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">Standing Ovation (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121001_description" data-original-description="Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Guinaifen's ATK to a single enemy.">Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Guinaifen's ATK to a single enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121001', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121001_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121001_stats"></div><div id="121001_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 2, 1, 0, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Blazing Welcome (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121002_description" data-original-description="Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Guinaifen's ATK to a single enemy and Fire DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Guinaifen's ATK to any adjacent enemies, with a <unbreak>#3[i]%</unbreak> <u>base chance</u> to Burn the target and adjacent targets. When Burned, enemies will take a Fire DoT equal to <b><unbreak>#4[i]%</unbreak></b> of Guinaifen's ATK at the beginning of each turn, lasting for <unbreak>#5[i]</unbreak> turn(s).">Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Guinaifen's ATK to a single enemy and Fire DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Guinaifen's ATK to any adjacent enemies, with a <unbreak>#3[i]%</unbreak> <u>base chance</u> to Burn the target and adjacent targets. When Burned, enemies will take a Fire DoT equal to <b><unbreak>#4[i]%</unbreak></b> of Guinaifen's ATK at the beginning of each turn, lasting for <unbreak>#5[i]</unbreak> turn(s).</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121002', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121002_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121002_stats"></div><div id="121002_data" style="display:none;" data-level1="0.6, 0.2, 1, 0.83904, 2" data-level2="0.66, 0.22, 1, 0.92298, 2" data-level3="0.72, 0.24, 1, 1.00692, 2" data-level4="0.78, 0.26, 1, 1.09086, 2" data-level5="0.84, 0.28, 1, 1.1748, 2" data-level6="0.9, 0.3, 1, 1.30071, 2" data-level7="0.975, 0.325, 1, 1.46859, 2" data-level8="1.05, 0.35, 1, 1.67844, 2" data-level9="1.125, 0.375, 1, 1.93026, 2" data-level10="1.2, 0.4, 1, 2.18208, 2" data-level11="1.26, 0.42, 1, 2.291202, 2" data-level12="1.32, 0.44, 1, 2.400324, 2" data-level13="1.38, 0.46, 1, 2.509446, 2" data-level14="1.44, 0.48, 1, 2.618568, 2" data-level15="1.5, 0.5, 1, 2.72769, 2" data-levelid="1, 2, 1, 0, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Watch This Showstopper (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121003_description" data-original-description="Deals Fire DMG equal to <b><unbreak>#1[f1]%</unbreak></b> of Guinaifen's ATK to all enemies. If the target enemy is currently inflicted with Burn, then their Burn status immediately produces DMG equal to <b><unbreak>#2[i]%</unbreak></b> of their original DMG.">Deals Fire DMG equal to <b><unbreak>#1[f1]%</unbreak></b> of Guinaifen's ATK to all enemies. If the target enemy is currently inflicted with Burn, then their Burn status immediately produces DMG equal to <b><unbreak>#2[i]%</unbreak></b> of their original DMG.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121003', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121003_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121003_stats"></div><div id="121003_data" style="display:none;" data-level1="0.72, 0.72" data-level2="0.768, 0.74" data-level3="0.816, 0.76" data-level4="0.864, 0.78" data-level5="0.912, 0.8" data-level6="0.96, 0.82" data-level7="1.02, 0.845" data-level8="1.08, 0.87" data-level9="1.14, 0.895" data-level10="1.2, 0.92" data-level11="1.248, 0.94" data-level12="1.296, 0.96" data-level13="1.344, 0.98" data-level14="1.392, 1" data-level15="1.44, 1.02" data-levelid="1, 2, 1, 0, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">PatrAeon Benefits (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121004_description" data-original-description="When Guinaifen is on the field, there is a <unbreak>#1[i]%</unbreak> <u>base chance</u> to apply Firekiss to an enemy after their Burn status causes DMG. While inflicted with Firekiss, the enemy receives <b><unbreak>#4[f1]%</unbreak></b> increased DMG, which lasts for <unbreak>#5[i]</unbreak> turn(s) and can stack up to <unbreak>#6[i]</unbreak> time(s).">When Guinaifen is on the field, there is a <unbreak>#1[i]%</unbreak> <u>base chance</u> to apply Firekiss to an enemy after their Burn status causes DMG. While inflicted with Firekiss, the enemy receives <b><unbreak>#4[f1]%</unbreak></b> increased DMG, which lasts for <unbreak>#5[i]</unbreak> turn(s) and can stack up to <unbreak>#6[i]</unbreak> time(s).</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121004', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121004_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121004_stats"></div><div id="121004_data" style="display:none;" data-level1="1, 0, 0, 0.04, 3, 3" data-level2="1, 0, 0, 0.043, 3, 3" data-level3="1, 0, 0, 0.046, 3, 3" data-level4="1, 0, 0, 0.049, 3, 3" data-level5="1, 0, 0, 0.052, 3, 3" data-level6="1, 0, 0, 0.055, 3, 3" data-level7="1, 0, 0, 0.05875, 3, 3" data-level8="1, 0, 0, 0.0625, 3, 3" data-level9="1, 0, 0, 0.06625, 3, 3" data-level10="1, 0, 0, 0.07, 3, 3" data-level11="1, 0, 0, 0.073, 3, 3" data-level12="1, 0, 0, 0.076, 3, 3" data-level13="1, 0, 0, 0.078999996, 3, 3" data-level14="1, 0, 0, 0.082, 3, 3" data-level15="1, 0, 0, 0.085, 3, 3" data-levelid="1, 2, 1, 0, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121006_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121006', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121006_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121006_stats"></div><div id="121006_data" style="display:none;" data-level1="" data-levelid="1, 2, 1, 0, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Skill Showcase (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121007_description" data-original-description="Immediately attacks the enemy. After entering battle, deals DMG for <unbreak>#2[i]</unbreak> time(s), dealing Fire DMG equal to <unbreak>#1[i]%</unbreak> of Guinaifen's ATK to a random single enemy target each time, with a <unbreak>#3[i]%</unbreak> <u>base chance</u> of inflicting Firekiss on them.">Immediately attacks the enemy. After entering battle, deals DMG for <unbreak>#2[i]</unbreak> time(s), dealing Fire DMG equal to <unbreak>#1[i]%</unbreak> of Guinaifen's ATK to a random single enemy target each time, with a <unbreak>#3[i]%</unbreak> <u>base chance</u> of inflicting Firekiss on them.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121007', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121007_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121007_stats"></div><div id="121007_data" style="display:none;" data-level1="0.5, 4, 1" data-levelid="1, 2, 1, 0, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>High Poles<th></tr><td>Basic ATK has a 80% base chance of inflicting an enemy with a Burn, equivalent to that of Skill.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Bladed Hoop<th></tr><td>When the battle begins, Guinaifen's action is advanced forward by 25%.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Walking on Knives<th></tr><td>Deals 20% more DMG to Burned enemies.</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>DMG Boost: Fire</th><th>Break Boost</th><th>Effect Hit Rate Boost</th></tr><tr><td>22.4%</td><td>24.0%</td><td>10.0%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Slurping Noodles During Handstand<th></tr><td>When Skill is used, there is a <unbreak>100%</unbreak> base chance to reduce the attacked target enemy's Effect RES by <unbreak>10%</unbreak> for <unbreak>2</unbreak> turn(s).</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Brushing Teeth While Whistling<th></tr><td>When an enemy target is being Burned, the DMG multiplier of the Burn status applied by her Basic ATK or Skill increases by <unbreak>40%</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Smashing Boulder on Chest<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Blocking Pike with Neck<th></tr><td>Every time the Burn status inflicted by Guinaifen causes DMG, Guinaifen regenerates <unbreak>2</unbreak> Energy.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Swallowing Sword to Stomach<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Catching Bullet with Hands<th></tr><td>Increases the stackable Firekiss count by <unbreak>1</unbreak>.</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

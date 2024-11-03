@@ -1,0 +1,350 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Fu Xuan</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Fu Xuan</h1>
+            <p>Head of the Divination Commission on the Luofu.<br>The person who uses the third eye and Matrix of Prescience to foretell the route of Xianzhou and the outcomes of events.<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1208</td>
+        <td>Preservation</td><td>Quantum</td><td>5*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>1474.70</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>606.38</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>465.70</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>100</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>150</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110141.png' />
+                        Endurance of Bronze
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110142.png' />
+                        Oath of Steel
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110143.png' />
+                        Safeguard of Amber
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110416.png' />
+                        Nail of the Ape
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110503.png' />
+                        Regret of Infinite Ochema
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113011.png' />
+                        Artifex's Module
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113012.png' />
+                        Artifex's Cogwheel
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113013.png' />
+                        Artifex's Gyreheart
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">Novaburst (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120801_description" data-original-description="Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Fu Xuan's Max HP to a single enemy.">Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Fu Xuan's Max HP to a single enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120801', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120801_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120801_stats"></div><div id="120801_data" style="display:none;" data-level1="0.25" data-level2="0.3" data-level3="0.35" data-level4="0.4" data-level5="0.45" data-level6="0.5" data-level7="0.55" data-level8="0.6" data-level9="0.65" data-levelid="1, 2, 0, 8, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Known by Stars, Shown by Hearts (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120802_description" data-original-description="Activates Matrix of Prescience, via which Fu Xuan's teammates will <u>Distribute</u> <unbreak>#1[i]%</unbreak> of the DMG they receive (before this DMG is mitigated by any Shields) to Fu Xuan for <unbreak>#3[i]</unbreak> turn(s).<br>While affected by Matrix of Prescience, all ally targets gain the Knowledge effect, which increases their respective Max HP by <b><unbreak>#4[f1]%</unbreak></b> of Fu Xuan's Max HP, and increases CRIT Rate by <b><unbreak>#5[f1]%</unbreak></b>.<br>When Fu Xuan is <u>knocked down</u>, the Matrix of Prescience will be dispelled.">Activates Matrix of Prescience, via which Fu Xuan's teammates will <u>Distribute</u> <unbreak>#1[i]%</unbreak> of the DMG they receive (before this DMG is mitigated by any Shields) to Fu Xuan for <unbreak>#3[i]</unbreak> turn(s).<br>While affected by Matrix of Prescience, all ally targets gain the Knowledge effect, which increases their respective Max HP by <b><unbreak>#4[f1]%</unbreak></b> of Fu Xuan's Max HP, and increases CRIT Rate by <b><unbreak>#5[f1]%</unbreak></b>.<br>When Fu Xuan is <u>knocked down</u>, the Matrix of Prescience will be dispelled.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120802', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120802_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120802_stats"></div><div id="120802_data" style="display:none;" data-level1="0.65, 0, 3, 0.03, 0.06" data-level2="0.65, 0, 3, 0.033, 0.066" data-level3="0.65, 0, 3, 0.036, 0.072" data-level4="0.65, 0, 3, 0.039, 0.078" data-level5="0.65, 0, 3, 0.042, 0.084" data-level6="0.65, 0, 3, 0.044999998, 0.09" data-level7="0.65, 0, 3, 0.048750002, 0.0975" data-level8="0.65, 0, 3, 0.052500002, 0.105" data-level9="0.65, 0, 3, 0.05625, 0.1125" data-level10="0.65, 0, 3, 0.06, 0.12" data-level11="0.65, 0, 3, 0.063, 0.126" data-level12="0.65, 0, 3, 0.066, 0.132" data-level13="0.65, 0, 3, 0.069, 0.138" data-level14="0.65, 0, 3, 0.072, 0.144" data-level15="0.65, 0, 3, 0.075, 0.15" data-levelid="1, 2, 0, 8, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Woes of Many Morphed to One (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120803_description" data-original-description="Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Fu Xuan's Max HP to all enemies and obtains 1 trigger count for the HP Restore effect granted by Fu Xuan's Talent.">Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Fu Xuan's Max HP to all enemies and obtains 1 trigger count for the HP Restore effect granted by Fu Xuan's Talent.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120803', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120803_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120803_stats"></div><div id="120803_data" style="display:none;" data-level1="0.6" data-level2="0.64" data-level3="0.68" data-level4="0.72" data-level5="0.76" data-level6="0.8" data-level7="0.85" data-level8="0.9" data-level9="0.95" data-level10="1" data-level11="1.04" data-level12="1.08" data-level13="1.12" data-level14="1.16" data-level15="1.2" data-levelid="1, 2, 0, 8, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Bleak Breeds Bliss (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120804_description" data-original-description="While Fu Xuan is still active in battle, Misfortune Avoidance is applied to the entire team. With Misfortune Avoidance, allies take <b><unbreak>#1[f1]%</unbreak></b> less DMG.<br>When Fu Xuan's current HP percentage falls to <unbreak>#2[i]%</unbreak> of her Max HP or less, HP Restore will be triggered for Fu Xuan, restoring her HP by <b><unbreak>#3[i]%</unbreak></b> of the amount of HP she is currently missing. This effect cannot be triggered if she receives a killing blow. This effect has 1 trigger count by default and can hold up to a maximum of 2 trigger counts.">While Fu Xuan is still active in battle, Misfortune Avoidance is applied to the entire team. With Misfortune Avoidance, allies take <b><unbreak>#1[f1]%</unbreak></b> less DMG.<br>When Fu Xuan's current HP percentage falls to <unbreak>#2[i]%</unbreak> of her Max HP or less, HP Restore will be triggered for Fu Xuan, restoring her HP by <b><unbreak>#3[i]%</unbreak></b> of the amount of HP she is currently missing. This effect cannot be triggered if she receives a killing blow. This effect has 1 trigger count by default and can hold up to a maximum of 2 trigger counts.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120804', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120804_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120804_stats"></div><div id="120804_data" style="display:none;" data-level1="0.1, 0.5, 0.8" data-level2="0.108, 0.5, 0.81" data-level3="0.116, 0.5, 0.82" data-level4="0.124, 0.5, 0.83" data-level5="0.132, 0.5, 0.84" data-level6="0.14, 0.5, 0.85" data-level7="0.15, 0.5, 0.8625" data-level8="0.16, 0.5, 0.875" data-level9="0.17, 0.5, 0.8875" data-level10="0.18, 0.5, 0.9" data-level11="0.188, 0.5, 0.91" data-level12="0.196, 0.5, 0.92" data-level13="0.204, 0.5, 0.93" data-level14="0.212, 0.5, 0.94" data-level15="0.22, 0.5, 0.95" data-levelid="1, 2, 0, 8, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120806_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120806', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120806_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120806_stats"></div><div id="120806_data" style="display:none;" data-level1="" data-levelid="1, 2, 0, 8, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Of Fortune Comes Fate (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120807_description" data-original-description="After the Technique is used, all team members receive a Barrier, lasting for <unbreak>#1[i]</unbreak> seconds. This Barrier can block all enemy attacks, and the team will not enter battle when attacked. Entering battle while the Barrier is active will have Fu Xuan automatically activate Matrix of Prescience at the start of the battle, lasting for <unbreak>#2[i]</unbreak> turn(s).">After the Technique is used, all team members receive a Barrier, lasting for <unbreak>#1[i]</unbreak> seconds. This Barrier can block all enemy attacks, and the team will not enter battle when attacked. Entering battle while the Barrier is active will have Fu Xuan automatically activate Matrix of Prescience at the start of the battle, lasting for <unbreak>#2[i]</unbreak> turn(s).</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120807', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120807_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120807_stats"></div><div id="120807_data" style="display:none;" data-level1="20, 2" data-levelid="1, 2, 0, 8, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Taiyi, the Macrocosmic<th></tr><td>When Matrix of Prescience is active, Fu Xuan will regenerate 20 extra Energy when she uses her Skill.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Dunjia, the Metamystic<th></tr><td>When Fu Xuan's Ultimate is used, heals all other allies by an amount equal to 5% of Fu Xuan's Max HP plus 133.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Liuren, the Sexagenary<th></tr><td>If a target enemy applies Crowd Control debuffs to allies while the Matrix of Prescience is active, all allies will resist all Crowd Control debuffs applied by the enemy target during the current action. This effect can only be triggered once. When Matrix of Prescience is activated again, the number of times this effect can be triggered will reset.</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>CRIT Rate Boost</th><th>HP Boost</th><th>Effect RES Boost</th></tr><tr><td>18.7%</td><td>18.0%</td><td>10.0%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Dominus Pacis<th></tr><td>The Knowledge effect increases CRIT DMG by <unbreak>30%</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Optimus Felix<th></tr><td>If any team member is struck by a killing blow while Matrix of Prescience is active, then all allies who were struck by a killing blow during this action will not be knocked down, and <unbreak>70%</unbreak> of their Max HP is immediately restored. This effect can trigger 1 time per battle.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Apex Nexus<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Fortuna Stellaris<th></tr><td>When other allies under Matrix of Prescience are attacked, Fu Xuan regenerates <unbreak>5</unbreak> Energy.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Arbiter Primus<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Omnia Vita<th></tr><td>Once Matrix of Prescience is activated, it will keep a tally of the total HP lost by all team members in the current battle. The DMG dealt by Fu Xuan's Ultimate will increase by <unbreak>200%</unbreak> of this tally of HP loss.<br>This tally is also capped at <unbreak>120%</unbreak> of Fu Xuan's Max HP and the tally value will reset and re-accumulate after Fu Xuan's Ultimate is used.</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

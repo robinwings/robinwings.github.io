@@ -1,0 +1,350 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Dr. Ratio</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Dr. Ratio</h1>
+            <p>Member of the Intelligentsia Guild.<br>Eccentric temperament, sharp-tongued but with an elegant demeanor.<br>The face under the strange alabaster head sculpture is apparently unexpectedly handsome.<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1305</td>
+        <td>The Hunt</td><td>Imaginary</td><td>5*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>1047.82</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>460.85</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>776.16</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>103</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>75</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110121.png' />
+                        Arrow of the Beast Hunter
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110122.png' />
+                        Arrow of the Demon Slayer
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110123.png' />
+                        Arrow of the Starchaser
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110417.png' />
+                        Suppressing Edict
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110504.png' />
+                        Past Evils of the Borehole Planet Disaster
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111011.png' />
+                        Thief's Instinct
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111012.png' />
+                        Usurper's Scheme
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111013.png' />
+                        Conqueror's Will
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">Mind is Might (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="130501_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Dr. Ratio's ATK to a single target enemy.">Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Dr. Ratio's ATK to a single target enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('130501', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="130501_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="130501_stats"></div><div id="130501_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 3, 0, 5, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Intellectual Midwifery (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="130502_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Dr. Ratio's ATK to a single target enemy.">Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Dr. Ratio's ATK to a single target enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('130502', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="130502_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="130502_stats"></div><div id="130502_data" style="display:none;" data-level1="0.75" data-level2="0.825" data-level3="0.9" data-level4="0.975" data-level5="1.05" data-level6="1.125" data-level7="1.21875" data-level8="1.3125" data-level9="1.40625" data-level10="1.5" data-level11="1.575" data-level12="1.65" data-level13="1.725" data-level14="1.8" data-level15="1.875" data-levelid="1, 3, 0, 5, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Syllogistic Paradox (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="130503_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Dr. Ratio's ATK to a single target enemy and applies Wiseman's Folly. When Dr. Ratio's teammates attack a target afflicted with Wiseman's Folly, Dr. Ratio launches 1 instance of his Talent's <u>Follow-up ATK</u> against this target.<br>Wiseman's Folly can be triggered for up to <unbreak>#2[i]</unbreak> times and only affects the most recent target of Dr. Ratio's Ultimate. This trigger count resets after Dr. Ratio's Ultimate is used.">Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Dr. Ratio's ATK to a single target enemy and applies Wiseman's Folly. When Dr. Ratio's teammates attack a target afflicted with Wiseman's Folly, Dr. Ratio launches 1 instance of his Talent's <u>Follow-up ATK</u> against this target.<br>Wiseman's Folly can be triggered for up to <unbreak>#2[i]</unbreak> times and only affects the most recent target of Dr. Ratio's Ultimate. This trigger count resets after Dr. Ratio's Ultimate is used.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('130503', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="130503_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="130503_stats"></div><div id="130503_data" style="display:none;" data-level1="1.44, 2" data-level2="1.536, 2" data-level3="1.632, 2" data-level4="1.728, 2" data-level5="1.824, 2" data-level6="1.92, 2" data-level7="2.04, 2" data-level8="2.16, 2" data-level9="2.28, 2" data-level10="2.4, 2" data-level11="2.496, 2" data-level12="2.592, 2" data-level13="2.688, 2" data-level14="2.784, 2" data-level15="2.88, 2" data-levelid="1, 3, 0, 5, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Cogito, Ergo Sum (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="130504_description" data-original-description="When using his Skill, Dr. Ratio has a <unbreak>#2[i]%</unbreak> <u>fixed chance</u> of launching a <u>follow-up attack</u> against his target for 1 time, dealing Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Dr. Ratio's ATK. For each debuff the target enemy has, the <u>fixed chance</u> of launching <u>follow-up attack</u> increases by <unbreak>#3[i]%</unbreak>. If the target enemy is defeated before the <u>follow-up attack</u> triggers, the <u>follow-up attack</u> will be directed at a single random enemy instead.">When using his Skill, Dr. Ratio has a <unbreak>#2[i]%</unbreak> <u>fixed chance</u> of launching a <u>follow-up attack</u> against his target for 1 time, dealing Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Dr. Ratio's ATK. For each debuff the target enemy has, the <u>fixed chance</u> of launching <u>follow-up attack</u> increases by <unbreak>#3[i]%</unbreak>. If the target enemy is defeated before the <u>follow-up attack</u> triggers, the <u>follow-up attack</u> will be directed at a single random enemy instead.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('130504', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="130504_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="130504_stats"></div><div id="130504_data" style="display:none;" data-level1="1.35, 0.4, 0.2" data-level2="1.485, 0.4, 0.2" data-level3="1.62, 0.4, 0.2" data-level4="1.755, 0.4, 0.2" data-level5="1.89, 0.4, 0.2" data-level6="2.025, 0.4, 0.2" data-level7="2.19375, 0.4, 0.2" data-level8="2.3625, 0.4, 0.2" data-level9="2.53125, 0.4, 0.2" data-level10="2.7, 0.4, 0.2" data-level11="2.835, 0.4, 0.2" data-level12="2.97, 0.4, 0.2" data-level13="3.105, 0.4, 0.2" data-level14="3.24, 0.4, 0.2" data-level15="3.375, 0.4, 0.2" data-levelid="1, 3, 0, 5, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="130506_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('130506', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="130506_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="130506_stats"></div><div id="130506_data" style="display:none;" data-level1="" data-levelid="1, 3, 0, 5, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Mold of Idolatry (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="130507_description" data-original-description="After using Technique, creates a Special Dimension that Taunts nearby enemies, lasting for <unbreak>#1[i]</unbreak> second(s). After entering battle with enemies in this Special Dimension, there is a <unbreak>#2[i]%</unbreak> <u>base chance</u> to reduce each single enemy target's SPD by <unbreak>#3[i]%</unbreak> for <unbreak>#4[i]</unbreak> turn(s). Only 1 dimension created by allies can exist at the same time.">After using Technique, creates a Special Dimension that Taunts nearby enemies, lasting for <unbreak>#1[i]</unbreak> second(s). After entering battle with enemies in this Special Dimension, there is a <unbreak>#2[i]%</unbreak> <u>base chance</u> to reduce each single enemy target's SPD by <unbreak>#3[i]%</unbreak> for <unbreak>#4[i]</unbreak> turn(s). Only 1 dimension created by allies can exist at the same time.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('130507', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="130507_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="130507_stats"></div><div id="130507_data" style="display:none;" data-level1="10, 1, 0.15, 2" data-levelid="1, 3, 0, 5, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Summation<th></tr><td>When Dr. Ratio uses his Skill, for every debuff on the target, his CRIT Rate increases by 2.5% and CRIT DMG by 5%. This effect can stack up to 6 time(s).</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Inference<th></tr><td>When Skill is used to attack an enemy target, there is a 100% base chance to reduce the attacked target's Effect RES by 10% for 2 turn(s).</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Deduction<th></tr><td>When dealing DMG to a target that has 3 or more debuff(s), for each debuff the target has, the DMG dealt by Dr. Ratio to this target increases by 10%, up to a maximum increase of 50%.</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>ATK Boost</th><th>CRIT Rate Boost</th><th>DEF Boost</th></tr><tr><td>28.0%</td><td>12.0%</td><td>12.5%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Pride Comes Before a Fall<th></tr><td>The maximum stackable count for the Trace "Summation" increases by <unbreak>4</unbreak>. When a battle begins, immediately obtains <unbreak>4</unbreak> stacks of Summation. Needs to unlock Summation first.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>The Divine Is in the Details<th></tr><td>When his Talent's follow-up attack hits a target, for every debuff the target has, deals Imaginary Additional DMG equal to <unbreak>20%</unbreak> of Dr. Ratio's ATK. This effect can be triggered for a maximum of <unbreak>4</unbreak> time(s) during each follow-up attack.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Know Thyself<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Ignorance Is Blight<th></tr><td>When triggering the Talent, additionally regenerates <unbreak>15</unbreak> Energy for Dr. Ratio.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Sic Itur Ad Astra<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Vincit Omnia Veritas<th></tr><td>Additionally increases the triggerable count for Wiseman's Folly by <unbreak>1</unbreak>. The DMG dealt by the Talent's follow-up attack increases by <unbreak>50%</unbreak>.</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

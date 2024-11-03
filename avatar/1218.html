@@ -1,0 +1,350 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Jiaoqiu</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Jiaoqiu</h1>
+            <p>A foxian healer and counselor from the Xianzhou Yaoqing. Often greets people with a smile on his face and a scheme in his heart.<br>Born into a prestigious Alchemy Commission family, he once withdrew from practicing medicine due to a broken heart. However, he returned to the field to treat "the Merlin's Claw," General Feixiao.<br>Skilled in the study of alchemical prescription that views food as medicine, especially those that induce a sensation of spiciness. They invented a cauldron-based medicinal formula known as the "nine-squared grid."<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1218</td>
+        <td>Nihility</td><td>Fire</td><td>5*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>1358.28</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>509.36</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>601.52</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>98</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110221.png' />
+                        Fiery Spirit
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110222.png' />
+                        Starfire Essence
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110223.png' />
+                        Heaven Incinerator
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110422.png' />
+                        Raging Heart
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110503.png' />
+                        Regret of Infinite Ochema
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113001.png' />
+                        Immortal Scionette
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113002.png' />
+                        Immortal Aeroblossom
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113003.png' />
+                        Immortal Lumintwig
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">Heart Afire (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121801_description" data-original-description="Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Jiaoqiu's ATK to a single target enemy.">Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Jiaoqiu's ATK to a single target enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121801', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121801_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121801_stats"></div><div id="121801_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 2, 1, 8, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Scorch Onslaught (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121802_description" data-original-description="Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Jiaoqiu's ATK to a single target enemy and Fire DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Jiaoqiu's ATK to adjacent targets, with a <unbreak>#3[i]%</unbreak> <u>base chance</u> to inflict 1 stack of Ashen Roast on the primary target.">Deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Jiaoqiu's ATK to a single target enemy and Fire DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Jiaoqiu's ATK to adjacent targets, with a <unbreak>#3[i]%</unbreak> <u>base chance</u> to inflict 1 stack of Ashen Roast on the primary target.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121802', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121802_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121802_stats"></div><div id="121802_data" style="display:none;" data-level1="0.75, 0.45, 1" data-level2="0.825, 0.495, 1" data-level3="0.9, 0.54, 1" data-level4="0.975, 0.585, 1" data-level5="1.05, 0.63, 1" data-level6="1.125, 0.675, 1" data-level7="1.21875, 0.73125, 1" data-level8="1.3125, 0.7875, 1" data-level9="1.40625, 0.84375, 1" data-level10="1.5, 0.9, 1" data-level11="1.575, 0.945, 1" data-level12="1.65, 0.99, 1" data-level13="1.725, 1.035, 1" data-level14="1.8, 1.08, 1" data-level15="1.875, 1.125, 1" data-levelid="1, 2, 1, 8, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Pyrograph Arcanum (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121803_description" data-original-description="Sets the number of `Ashen Roast` stacks on enemy targets to the highest number of `Ashen Roast` stacks present on the battlefield. Then, activates a Zone and deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Jiaoqiu's ATK to all enemies.<br>While inside the Zone, enemy targets receive <b><unbreak>#3[f1]%</unbreak></b> increased Ultimate DMG, with a <b><unbreak>#2[i]%</unbreak></b> <u>base chance</u> of being inflicted with 1 stack of Ashen Roast when taking action. While the Zone exists, this effect can trigger up to <unbreak>#5[i]</unbreak> time(s). And for each enemy target, it can only trigger once per turn. This trigger count resets every time Jiaoqiu uses Ultimate.<br>The Zone lasts for <unbreak>#4[i]</unbreak> turn(s), and its duration decreases by 1 at the start of this unit's every turn. If Jiaoqiu gets <u>knocked down</u>, the Zone will also be dispelled.">Sets the number of `Ashen Roast` stacks on enemy targets to the highest number of `Ashen Roast` stacks present on the battlefield. Then, activates a Zone and deals Fire DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Jiaoqiu's ATK to all enemies.<br>While inside the Zone, enemy targets receive <b><unbreak>#3[f1]%</unbreak></b> increased Ultimate DMG, with a <b><unbreak>#2[i]%</unbreak></b> <u>base chance</u> of being inflicted with 1 stack of Ashen Roast when taking action. While the Zone exists, this effect can trigger up to <unbreak>#5[i]</unbreak> time(s). And for each enemy target, it can only trigger once per turn. This trigger count resets every time Jiaoqiu uses Ultimate.<br>The Zone lasts for <unbreak>#4[i]</unbreak> turn(s), and its duration decreases by 1 at the start of this unit's every turn. If Jiaoqiu gets <u>knocked down</u>, the Zone will also be dispelled.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121803', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121803_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121803_stats"></div><div id="121803_data" style="display:none;" data-level1="0.6, 0.5, 0.09, 3, 6" data-level2="0.64, 0.51, 0.096, 3, 6" data-level3="0.68, 0.52, 0.102, 3, 6" data-level4="0.72, 0.53, 0.108, 3, 6" data-level5="0.76, 0.54, 0.114, 3, 6" data-level6="0.8, 0.55, 0.12, 3, 6" data-level7="0.85, 0.5625, 0.1275, 3, 6" data-level8="0.9, 0.575, 0.135, 3, 6" data-level9="0.95, 0.5875, 0.1425, 3, 6" data-level10="1, 0.6, 0.15, 3, 6" data-level11="1.04, 0.61, 0.156, 3, 6" data-level12="1.08, 0.62, 0.162, 3, 6" data-level13="1.12, 0.63, 0.168, 3, 6" data-level14="1.16, 0.64, 0.174, 3, 6" data-level15="1.2, 0.65, 0.18, 3, 6" data-levelid="1, 2, 1, 8, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Quartet Finesse, Octave Finery (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121804_description" data-original-description="When Jiaoqiu hits an enemy with Basic ATK, Skill or Ultimate, there is a <unbreak>#1[i]%</unbreak> <u>base chance</u> to inflict 1 stack of Ashen Roast on them. At 1 stack, increases DMG received by the enemy by <b><unbreak>#2[f1]%</unbreak></b>. Then, each subsequent stack increases this by <b><unbreak>#3[f1]%</unbreak></b>.<br>Ashen Roast is capped at <unbreak>#4[i]</unbreak> stack(s) and lasts for <unbreak>#5[i]</unbreak> turn(s).<br>When an enemy target is afflicted with Ashen Roast, they are also considered as being Burned at the same time, taking Fire DoT equal to <b><unbreak>#6[i]%</unbreak></b> of Jiaoqiu's ATK at the start of each turn.">When Jiaoqiu hits an enemy with Basic ATK, Skill or Ultimate, there is a <unbreak>#1[i]%</unbreak> <u>base chance</u> to inflict 1 stack of Ashen Roast on them. At 1 stack, increases DMG received by the enemy by <b><unbreak>#2[f1]%</unbreak></b>. Then, each subsequent stack increases this by <b><unbreak>#3[f1]%</unbreak></b>.<br>Ashen Roast is capped at <unbreak>#4[i]</unbreak> stack(s) and lasts for <unbreak>#5[i]</unbreak> turn(s).<br>When an enemy target is afflicted with Ashen Roast, they are also considered as being Burned at the same time, taking Fire DoT equal to <b><unbreak>#6[i]%</unbreak></b> of Jiaoqiu's ATK at the start of each turn.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121804', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121804_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121804_stats"></div><div id="121804_data" style="display:none;" data-level1="1, 0.075, 0.025, 5, 2, 0.9" data-level2="1, 0.0825, 0.0275, 5, 2, 0.99" data-level3="1, 0.09, 0.03, 5, 2, 1.08" data-level4="1, 0.0975, 0.0325, 5, 2, 1.17" data-level5="1, 0.105, 0.035, 5, 2, 1.26" data-level6="1, 0.1125, 0.0375, 5, 2, 1.35" data-level7="1, 0.121875, 0.040625002, 5, 2, 1.4625" data-level8="1, 0.13125, 0.04375, 5, 2, 1.575" data-level9="1, 0.140625, 0.046875, 5, 2, 1.6875" data-level10="1, 0.15, 0.05, 5, 2, 1.8" data-level11="1, 0.1575, 0.052500002, 5, 2, 1.89" data-level12="1, 0.165, 0.055, 5, 2, 1.98" data-level13="1, 0.1725, 0.0575, 5, 2, 2.07" data-level14="1, 0.18, 0.06, 5, 2, 2.16" data-level15="1, 0.1875, 0.0625, 5, 2, 2.25" data-levelid="1, 2, 1, 8, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121806_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121806', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121806_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121806_stats"></div><div id="121806_data" style="display:none;" data-level1="" data-levelid="1, 2, 1, 8, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Fiery Queller (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121807_description" data-original-description="After using Technique, creates a Special Dimension that lasts for <unbreak>#2[i]</unbreak> second(s). After entering combat with enemies in this Special Dimension, deals Fire DMG equal to <unbreak>#1[i]%</unbreak> of Jiaoqiu's ATK to all enemies, with a <unbreak>#3[i]%</unbreak> <u>base chance</u> of applying 1 `Ashen Roast` stack. Only 1 dimension created by allies can exist at the same time.">After using Technique, creates a Special Dimension that lasts for <unbreak>#2[i]</unbreak> second(s). After entering combat with enemies in this Special Dimension, deals Fire DMG equal to <unbreak>#1[i]%</unbreak> of Jiaoqiu's ATK to all enemies, with a <unbreak>#3[i]%</unbreak> <u>base chance</u> of applying 1 `Ashen Roast` stack. Only 1 dimension created by allies can exist at the same time.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121807', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121807_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121807_stats"></div><div id="121807_data" style="display:none;" data-level1="1, 15, 1" data-levelid="1, 2, 1, 8, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Pyre Cleanse<th></tr><td>When battle starts, immediately regenerates 15 Energy.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Hearth Kindle<th></tr><td>For every 15% of Jiaoqiu's Effect Hit Rate that exceeds 80%, additionally increases ATK by 60%, up to 240%.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Seared Scent<th></tr><td>While the Zone exists, enemies entering combat will be inflicted with Ashen Roast. The number of stacks applied will match the highest number of "Ashen Roast" stacks possessed by any unit while the Zone is active, with a minimum of 1 stack(s).</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>Effect Hit Rate Boost</th><th>DMG Boost: Fire</th><th>SPD Boost</th></tr><tr><td>28.0%</td><td>14.4%</td><td>5</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Pentapathic Transference<th></tr><td>Allies deal <unbreak>40%</unbreak> increased DMG to enemy targets afflicted with Ashen Roast. Whenever inflicting Ashen Roast on an enemy target via triggering the Talent's effect, additionally increases the number of "Ashen Roast" stacks applied this time by <unbreak>1</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>From Savor Comes Suffer<th></tr><td>When an enemy target is afflicted with Ashen Roast, increases the multiplier for the Fire DoT dealt by Ashen Roast to this target by <unbreak>300%</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Flavored Euphony Reigns Supreme<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Leisure In, Luster Out<th></tr><td>When the Zone exists, reduces enemy target's ATK by <unbreak>15%</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Duel in Dawn, Dash in Dusk<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Nonamorphic Pyrobind<th></tr><td>When an enemy target gets defeated, their accumulated "Ashen Roast" stacks will transfer to the enemy with the lowest number of "Ashen Roast" stacks on the battlefield. The maximum stack limit of Ashen Roast increases to <unbreak>9</unbreak>, and each "Ashen Roast" stack reduces the target's All-Type RES by <unbreak>3%</unbreak>.</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

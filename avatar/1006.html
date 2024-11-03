@@ -1,0 +1,350 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Silver Wolf</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Silver Wolf</h1>
+            <p>A member of the Stellaron Hunters and a genius hacker.<br>She sees the universe as a massive immersive simulation game and has fun with it.<br>She's mastered the skill known as "aether editing," which can be used to tamper with the data of reality.<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1006</td>
+        <td>Nihility</td><td>Quantum</td><td>5*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>1047.82</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>460.85</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>640.33</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>107</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110151.png' />
+                        Obsidian of Dread
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110152.png' />
+                        Obsidian of Desolation
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110153.png' />
+                        Obsidian of Obsession
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110406.png' />
+                        Void Cast Iron
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110501.png' />
+                        Destroyer's Final Road
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112011.png' />
+                        Ancient Part
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112012.png' />
+                        Ancient Spindle
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112013.png' />
+                        Ancient Engine
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">System Warning (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="100601_description" data-original-description="Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Silver Wolf's ATK to a single enemy.">Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Silver Wolf's ATK to a single enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('100601', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="100601_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="100601_stats"></div><div id="100601_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 0, 0, 6, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Allow Changes? (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="100602_description" data-original-description="There is a <b><unbreak>#2[i]%</unbreak></b> <u>base chance</u> to add 1 Weakness of an on-field character's Type to the target enemy. This also reduces the enemy's DMG RES to that Weakness Type by <unbreak>#4[i]%</unbreak> for <unbreak>#3[i]</unbreak> turn(s). If the enemy already has that Type Weakness, the effect of DMG RES reduction to that Weakness Type will not be triggered.<br>Each enemy can only have 1 Weakness implanted by Silver Wolf. When Silver Wolf implants another Weakness to the target, only the most recent implanted Weakness will be kept.<br>In addition, there is a <unbreak>#5[i]%</unbreak> <u>base chance</u> to further reduce the All-Type RES of the enemy by <b><unbreak>#6[f1]%</unbreak></b> for <unbreak>#7[i]</unbreak> turn(s).<br>Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Silver Wolf's ATK to this enemy.">There is a <b><unbreak>#2[i]%</unbreak></b> <u>base chance</u> to add 1 Weakness of an on-field character's Type to the target enemy. This also reduces the enemy's DMG RES to that Weakness Type by <unbreak>#4[i]%</unbreak> for <unbreak>#3[i]</unbreak> turn(s). If the enemy already has that Type Weakness, the effect of DMG RES reduction to that Weakness Type will not be triggered.<br>Each enemy can only have 1 Weakness implanted by Silver Wolf. When Silver Wolf implants another Weakness to the target, only the most recent implanted Weakness will be kept.<br>In addition, there is a <unbreak>#5[i]%</unbreak> <u>base chance</u> to further reduce the All-Type RES of the enemy by <b><unbreak>#6[f1]%</unbreak></b> for <unbreak>#7[i]</unbreak> turn(s).<br>Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Silver Wolf's ATK to this enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('100602', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="100602_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="100602_stats"></div><div id="100602_data" style="display:none;" data-level1="0.98, 0.75, 2, 0.2, 1, 0.075, 2" data-level2="1.078, 0.76, 2, 0.2, 1, 0.0775, 2" data-level3="1.176, 0.77, 2, 0.2, 1, 0.08, 2" data-level4="1.274, 0.78, 2, 0.2, 1, 0.0825, 2" data-level5="1.372, 0.79, 2, 0.2, 1, 0.085, 2" data-level6="1.47, 0.8, 2, 0.2, 1, 0.0875, 2" data-level7="1.5925, 0.8125, 2, 0.2, 1, 0.090625, 2" data-level8="1.715, 0.825, 2, 0.2, 1, 0.09375, 2" data-level9="1.8375, 0.8375, 2, 0.2, 1, 0.096875, 2" data-level10="1.96, 0.85, 2, 0.2, 1, 0.1, 2" data-level11="2.058, 0.86, 2, 0.2, 1, 0.1025, 2" data-level12="2.156, 0.87, 2, 0.2, 1, 0.105, 2" data-level13="2.254, 0.88, 2, 0.2, 1, 0.1075, 2" data-level14="2.352, 0.89, 2, 0.2, 1, 0.11, 2" data-level15="2.45, 0.9, 2, 0.2, 1, 0.1125, 2" data-levelid="1, 0, 0, 6, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">User Banned (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="100603_description" data-original-description="There's a <b><unbreak>#2[i]%</unbreak></b> <u>base chance</u> to decrease the target enemy's DEF by <b><unbreak>#3[f1]%</unbreak></b> for <unbreak>#4[i]</unbreak> turn(s). And at the same time, deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Silver Wolf's ATK to the target enemy.">There's a <b><unbreak>#2[i]%</unbreak></b> <u>base chance</u> to decrease the target enemy's DEF by <b><unbreak>#3[f1]%</unbreak></b> for <unbreak>#4[i]</unbreak> turn(s). And at the same time, deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Silver Wolf's ATK to the target enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('100603', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="100603_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="100603_stats"></div><div id="100603_data" style="display:none;" data-level1="2.28, 0.85, 0.36, 3" data-level2="2.432, 0.865, 0.369, 3" data-level3="2.584, 0.88, 0.378, 3" data-level4="2.736, 0.895, 0.387, 3" data-level5="2.888, 0.91, 0.396, 3" data-level6="3.04, 0.925, 0.405, 3" data-level7="3.23, 0.94375, 0.41625, 3" data-level8="3.42, 0.9625, 0.4275, 3" data-level9="3.61, 0.98125, 0.43875, 3" data-level10="3.8, 1, 0.45, 3" data-level11="3.952, 1.015, 0.459, 3" data-level12="4.104, 1.03, 0.468, 3" data-level13="4.256, 1.045, 0.477, 3" data-level14="4.408, 1.06, 0.486, 3" data-level15="4.56, 1.075, 0.495, 3" data-levelid="1, 0, 0, 6, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Awaiting System Response... (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="100604_description" data-original-description="Silver Wolf can create three types of Bugs: Reduce ATK by <b><unbreak>#1[f1]%</unbreak></b>, reduce DEF by <b><unbreak>#2[f1]%</unbreak></b>, and reduce SPD by <b><unbreak>#3[f1]%</unbreak></b>.<br>Every time Silver Wolf attacks, she has a <b><unbreak>#4[i]%</unbreak></b> <u>base chance</u> to implant a random Bug that lasts for <unbreak>#5[i]</unbreak> turn(s) in an enemy target.">Silver Wolf can create three types of Bugs: Reduce ATK by <b><unbreak>#1[f1]%</unbreak></b>, reduce DEF by <b><unbreak>#2[f1]%</unbreak></b>, and reduce SPD by <b><unbreak>#3[f1]%</unbreak></b>.<br>Every time Silver Wolf attacks, she has a <b><unbreak>#4[i]%</unbreak></b> <u>base chance</u> to implant a random Bug that lasts for <unbreak>#5[i]</unbreak> turn(s) in an enemy target.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('100604', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="100604_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="100604_stats"></div><div id="100604_data" style="display:none;" data-level1="0.05, 0.04, 0.03, 0.6, 3" data-level2="0.055, 0.044, 0.033, 0.612, 3" data-level3="0.06, 0.048, 0.036, 0.624, 3" data-level4="0.065, 0.052, 0.039, 0.636, 3" data-level5="0.07, 0.055999998, 0.042, 0.648, 3" data-level6="0.075, 0.06, 0.044999998, 0.66, 3" data-level7="0.08125, 0.065, 0.048750002, 0.675, 3" data-level8="0.0875, 0.07, 0.052500002, 0.69, 3" data-level9="0.09375, 0.075, 0.05625, 0.705, 3" data-level10="0.1, 0.08, 0.06, 0.72, 3" data-level11="0.105, 0.084, 0.063, 0.732, 3" data-level12="0.11, 0.088, 0.066, 0.744, 3" data-level13="0.115, 0.092, 0.069, 0.756, 3" data-level14="0.12, 0.096, 0.072, 0.768, 3" data-level15="0.125, 0.1, 0.075, 0.78, 3" data-levelid="1, 0, 0, 6, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="100606_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('100606', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="100606_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="100606_stats"></div><div id="100606_data" style="display:none;" data-level1="" data-levelid="1, 0, 0, 6, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Force Quit Program (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="100607_description" data-original-description="Immediately attacks the enemy. After entering battle, deals Quantum DMG equal to <unbreak>#1[i]%</unbreak> of Silver Wolf's ATK to all enemies, and ignores Weakness Types and reduces Toughness from all enemies. Enemies with their Weakness Broken in this way will trigger the Quantum Weakness Break effect.">Immediately attacks the enemy. After entering battle, deals Quantum DMG equal to <unbreak>#1[i]%</unbreak> of Silver Wolf's ATK to all enemies, and ignores Weakness Types and reduces Toughness from all enemies. Enemies with their Weakness Broken in this way will trigger the Quantum Weakness Break effect.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('100607', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="100607_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="100607_stats"></div><div id="100607_data" style="display:none;" data-level1="0.8" data-levelid="1, 0, 0, 6, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Generate<th></tr><td>Bug's duration is extended for 1 turn(s). Every time an enemy is inflicted with Weakness Break, Silver Wolf has a 65% base chance of implanting a random Bug in the enemy.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Inject<th></tr><td>The duration of the Weakness implanted by Silver Wolf's Skill increases by 1 turn(s).</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Side Note<th></tr><td>If there are 3 or more debuff(s) affecting the enemy when the Skill is used, then the Skill decreases the enemy's All-Type RES by an additional 3%.</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>ATK Boost</th><th>Effect Hit Rate Boost</th><th>DMG Boost: Quantum</th></tr><tr><td>28.0%</td><td>18.0%</td><td>8.0%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Social Engineering<th></tr><td>After using her Ultimate to attack enemies, Silver Wolf regenerates <unbreak>7</unbreak> Energy for every debuff that the target enemy currently has. This effect can be triggered up to <unbreak>5</unbreak> time(s) in each use of her Ultimate.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Zombie Network<th></tr><td>When an enemy enters battle, reduces their Effect RES by <unbreak>20%</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Payload<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Bounce Attack<th></tr><td>After using her Ultimate to attack enemies, deals Quantum Additional DMG equal to <unbreak>20%</unbreak> of Silver Wolf's ATK for every debuff currently on the enemy target. This effect can be triggered for a maximum of <unbreak>5</unbreak> time(s) during each use of her Ultimate.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Brute Force Attack<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Overlay Network<th></tr><td>For every debuff the target enemy has, the DMG dealt by Silver Wolf increases by <unbreak>20%</unbreak>, up to a limit of <unbreak>100%</unbreak>.</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

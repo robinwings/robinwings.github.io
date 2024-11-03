@@ -1,0 +1,146 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../dark.css">
+        <title>Mediation</title>
+        
+    <script>
+    function updateRefinements(weaponId, level) {
+        var refinementDataElement = document.getElementById(weaponId + '_data');
+        var stats = refinementDataElement.getAttribute('data-level' + level);
+        
+        var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+        
+        var refinementsElement = document.getElementById(weaponId + '_refinements');
+        var originalDescription = refinementsElement.getAttribute('data-original-description');
+        
+        statsArray.forEach((stat, index) => {
+            var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+            originalDescription = originalDescription.replace(placeholderRegExp, (match, p1, p2) => {
+                var formattedStat = stat;
+                console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+                if (p2 === '%') {
+                    formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+                } else {
+                    if (stat % 1 !== 0) {
+                        formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                    }
+                }
+                console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+                return formattedStat;
+            });
+        });
+
+        refinementsElement.innerHTML = originalDescription;
+    }
+    function initializeSkills() {
+        var dropdowns = document.querySelectorAll('select[onchange^="updateRefinements"]');
+        dropdowns.forEach(dropdown => {
+            dropdown.value = 1;
+            dropdown.dispatchEvent(new Event('change'));
+        });
+    }
+    </script>
+
+    </head>
+    <body onload="initializeSkills()">
+        <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+<h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+<div style="margin-top:20px; margin-bottom:10px">
+  <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+        
+        <h1>Mediation</h1>
+        <p><strong>ID:</strong> 20019<br>
+           <strong>Rarity:</strong> 3*<br>
+           <strong>Path:</strong> Harmony<br></p>
+
+        <h2>Stats</h2>
+        <ul>
+            <li><strong>Max HP:</strong> 847.00</li>
+            <li><strong>Max ATK:</strong> 318.00</li>
+            <li><strong>Max DEF:</strong> 265.00</li>
+        </ul>
+
+        <h2>Ability</h2>
+        <ul>
+            <li>
+                <strong>Superimposition:</strong> 
+                <select onchange="updateRefinements('20019', this.value)">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <div id="20019_refinements" data-original-description="Upon entering battle, increases SPD of all allies by <b><unbreak>#1[i]</unbreak></b> points for <unbreak>#2[i]</unbreak> turn(s).">
+                    Upon entering battle, increases SPD of all allies by <b><unbreak>#1[i]</unbreak></b> points for <unbreak>#2[i]</unbreak> turn(s).
+                </div>
+                <div id="20019_data" style="display:none;" data-level1="12, 1" data-level2="14, 1" data-level3="16, 1" data-level4="18, 1" data-level5="20, 1" data-levelid="2, 0, 0, 1, 9" >
+                </div>
+            </li>
+        </ul>
+        <h2>Ascension Materials</h2>
+        <table>
+            <tr>
+                <th>Material</th>
+                <th>Amount</th>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                    Credit
+                </td>
+                <td>231000</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110161.png' />
+                    Harmonic Tune
+                </td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110162.png' />
+                    Ancestral Hymn
+                </td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110163.png' />
+                    Stellaris Symphony
+                </td>
+                <td>9</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111001.png' />
+                    Extinguished Core
+                </td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111002.png' />
+                    Glimmering Core
+                </td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111003.png' />
+                    Squirming Core
+                </td>
+                <td>8</td>
+            </tr>
+    </body>
+    </html>
+    

@@ -1,0 +1,418 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Rappa</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Rappa</h1>
+            <p>A peculiar girl who appears in Penacony like a flashbang at the darkest hour of night, identifying herself as a ninja and attributing everything in the world to "ninjutsu."<br>Upholding the recitation of ninja mantra, creating Dazzling Ninja Seals, and studying ninja scrolls — That is, the Way of the Ninja involves rap, graffiti, and manga — Through rigorous self-discipline, she roams the stars, upholding justice and righteousness.<br>As a member of the Galaxy Rangers, she relentlessly pursues the villain known as Evil Ninja Osaru, chasing them to the very edge of the Cosmos.<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1317</td>
+        <td>Erudition</td><td>Imaginary</td><td>5*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>1086.62</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>460.85</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>717.95</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>96</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>75</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110201.png' />
+                        Rough Sketch
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110202.png' />
+                        Dynamic Outlining
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110203.png' />
+                        Exquisite Colored Draft
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110427.png' />
+                        Chordal Mirage
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110505.png' />
+                        Lost Echo of the Shared Wish
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114001.png' />
+                        Dream Collection Component
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114002.png' />
+                        Dream Flow Valve
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114003.png' />
+                        Dream Making Engine
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">Ninjutsu: Rise Above Tumbles (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131701_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Rappa's ATK to one designated enemy.">Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Rappa's ATK to one designated enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131701', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131701_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131701_stats"></div><div id="131701_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 3, 1, 7, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Ninja Strike: Rooted Resolute (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131702_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Rappa's ATK to all enemies.">Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Rappa's ATK to all enemies.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131702', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131702_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131702_stats"></div><div id="131702_data" style="display:none;" data-level1="0.6" data-level2="0.66" data-level3="0.72" data-level4="0.78" data-level5="0.84" data-level6="0.9" data-level7="0.975" data-level8="1.05" data-level9="1.125" data-level10="1.2" data-level11="1.26" data-level12="1.32" data-level13="1.38" data-level14="1.44" data-level15="1.5" data-levelid="1, 3, 1, 7, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Nindō Supreme: Aishiteru (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131703_description" data-original-description="Enters the `Sealform` state, immediately gains 1 <u>extra turn</u>, obtains <unbreak>#3[i]</unbreak> points of `Chroma Ink,` and increases Weakness Break Efficiency by <unbreak>#1[i]%</unbreak> and Break Effect by <b><unbreak>#2[i]%</unbreak></b>.<br>While in the `Sealform` state, Basic ATK is enhanced, and Skill and Ultimate cannot be used. After using Enhanced Basic ATK, consumes 1 point of `Chroma Ink.` When `Chroma Ink` is depleted, exits the `Sealform` state.">Enters the `Sealform` state, immediately gains 1 <u>extra turn</u>, obtains <unbreak>#3[i]</unbreak> points of `Chroma Ink,` and increases Weakness Break Efficiency by <unbreak>#1[i]%</unbreak> and Break Effect by <b><unbreak>#2[i]%</unbreak></b>.<br>While in the `Sealform` state, Basic ATK is enhanced, and Skill and Ultimate cannot be used. After using Enhanced Basic ATK, consumes 1 point of `Chroma Ink.` When `Chroma Ink` is depleted, exits the `Sealform` state.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131703', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131703_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131703_stats"></div><div id="131703_data" style="display:none;" data-level1="0.5, 0.1, 3" data-level2="0.5, 0.12, 3" data-level3="0.5, 0.14, 3" data-level4="0.5, 0.16, 3" data-level5="0.5, 0.18, 3" data-level6="0.5, 0.2, 3" data-level7="0.5, 0.225, 3" data-level8="0.5, 0.25, 3" data-level9="0.5, 0.275, 3" data-level10="0.5, 0.3, 3" data-level11="0.5, 0.32, 3" data-level12="0.5, 0.34, 3" data-level13="0.5, 0.36, 3" data-level14="0.5, 0.38, 3" data-level15="0.5, 0.4, 3" data-levelid="1, 3, 1, 7, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Ninja Tech: Endurance Gauge (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131704_description" data-original-description="Each time the enemy target is Weakness Broken, Rappa gains 1 point of Charge, up to a max of <unbreak>#1[i]</unbreak> points of Charge. When Rappa next launches the third hit of `Ningu: Demonbane Petalblade,` additionally deals Break DMG equal to <b><unbreak>#3[i]%</unbreak></b> of Rappa's Imaginary Break DMG to all enemies. This DMG can ignore Weakness Type to reduce <unbreak>#4[i]</unbreak> Toughness, consuming all Charge. Each point of Charge increases the Break DMG multiplier by <b><unbreak>#5[i]%</unbreak></b> and increases the Toughness Reduction that can ignore Weakness Type by <unbreak>#6[i]</unbreak>.<br>When Breaking Weakness, triggers the Imaginary Weakness Break effect.">Each time the enemy target is Weakness Broken, Rappa gains 1 point of Charge, up to a max of <unbreak>#1[i]</unbreak> points of Charge. When Rappa next launches the third hit of `Ningu: Demonbane Petalblade,` additionally deals Break DMG equal to <b><unbreak>#3[i]%</unbreak></b> of Rappa's Imaginary Break DMG to all enemies. This DMG can ignore Weakness Type to reduce <unbreak>#4[i]</unbreak> Toughness, consuming all Charge. Each point of Charge increases the Break DMG multiplier by <b><unbreak>#5[i]%</unbreak></b> and increases the Toughness Reduction that can ignore Weakness Type by <unbreak>#6[i]</unbreak>.<br>When Breaking Weakness, triggers the Imaginary Weakness Break effect.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131704', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131704_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131704_stats"></div><div id="131704_data" style="display:none;" data-level1="10, 0, 0.3, 2, 0.25, 1" data-level2="10, 0, 0.33, 2, 0.275, 1" data-level3="10, 0, 0.36, 2, 0.3, 1" data-level4="10, 0, 0.39, 2, 0.325, 1" data-level5="10, 0, 0.42, 2, 0.35, 1" data-level6="10, 0, 0.45, 2, 0.375, 1" data-level7="10, 0, 0.4875, 2, 0.40625, 1" data-level8="10, 0, 0.525, 2, 0.4375, 1" data-level9="10, 0, 0.5625, 2, 0.46875, 1" data-level10="10, 0, 0.6, 2, 0.5, 1" data-level11="10, 0, 0.63, 2, 0.525, 1" data-level12="10, 0, 0.66, 2, 0.55, 1" data-level13="10, 0, 0.69, 2, 0.575, 1" data-level14="10, 0, 0.72, 2, 0.6, 1" data-level15="10, 0, 0.75, 2, 0.625, 1" data-levelid="1, 3, 1, 7, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131706_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131706', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131706_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131706_stats"></div><div id="131706_data" style="display:none;" data-level1="" data-levelid="1, 3, 1, 7, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Ninja Dash: By Leaps and Bounds (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131707_description" data-original-description="After using Technique, enters the `Graffiti` state for <unbreak>#1[i]</unbreak> seconds. While in the `Graffiti` state, moves forward rapidly for a set distance and attacks any enemies touched. During the rapid movement, can block all enemies' attacks. Using an attack in the `Graffiti` state can end the state's duration early. After entering combat via attacking enemies, deals <unbreak>#5[i]</unbreak> Toughness Reduction regardless of Weakness Type and Break DMG equal to <unbreak>#2[i]%</unbreak> of Rappa's Imaginary Break DMG to each enemy target, and deals Break DMG equal to <unbreak>#3[i]%</unbreak> of Rappa's Imaginary Break DMG to adjacent targets. At the same time, this unit regenerates <unbreak>#4[i]</unbreak> Energy.">After using Technique, enters the `Graffiti` state for <unbreak>#1[i]</unbreak> seconds. While in the `Graffiti` state, moves forward rapidly for a set distance and attacks any enemies touched. During the rapid movement, can block all enemies' attacks. Using an attack in the `Graffiti` state can end the state's duration early. After entering combat via attacking enemies, deals <unbreak>#5[i]</unbreak> Toughness Reduction regardless of Weakness Type and Break DMG equal to <unbreak>#2[i]%</unbreak> of Rappa's Imaginary Break DMG to each enemy target, and deals Break DMG equal to <unbreak>#3[i]%</unbreak> of Rappa's Imaginary Break DMG to adjacent targets. At the same time, this unit regenerates <unbreak>#4[i]</unbreak> Energy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131707', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131707_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131707_stats"></div><div id="131707_data" style="display:none;" data-level1="20, 2, 1.8, 10, 30" data-levelid="1, 3, 1, 7, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Ningu: Demonbane Petalblade (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131708_description" data-original-description="No description available">No description available</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131708', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131708_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131708_stats"></div><div id="131708_data" style="display:none;" data-level1="0.6, 0.3, 0.6, 0.5" data-level2="0.68, 0.34, 0.68, 0.5" data-level3="0.76, 0.38, 0.76, 0.5" data-level4="0.84, 0.42, 0.84, 0.5" data-level5="0.92, 0.46, 0.92, 0.5" data-level6="1, 0.5, 1, 0.5" data-level7="1.08, 0.54, 1.08, 0.5" data-level8="1.16, 0.58, 1.16, 0.5" data-level9="1.24, 0.62, 1.24, 0.5" data-levelid="1, 3, 1, 7, 0, 8" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Ningu: Demonbane Petalblade (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131710_description" data-original-description="No description available">No description available</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131710', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131710_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131710_stats"></div><div id="131710_data" style="display:none;" data-level1="0.6, 0.3" data-level2="0.68, 0.34" data-level3="0.76, 0.38" data-level4="0.84, 0.42" data-level5="0.92, 0.46" data-level6="1, 0.5" data-level7="1.08, 0.54" data-level8="1.16, 0.58" data-level9="1.24, 0.62" data-levelid="1, 3, 1, 7, 1, 0" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Ningu: Demonbane Petalblade (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131712_description" data-original-description="No description available">No description available</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131712', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131712_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131712_stats"></div><div id="131712_data" style="display:none;" data-level1="0.6" data-level2="0.68" data-level3="0.76" data-level4="0.84" data-level5="0.92" data-level6="1" data-level7="1.08" data-level8="1.16" data-level9="1.24" data-levelid="1, 3, 1, 7, 1, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Ningu: Demonbane Petalblade (Path Resonance)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131718_description" data-original-description="Launches `Ningu: Demonbane Petalblade.` The first 2 hits deal Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Rappa's ATK to one designated enemy and Imaginary DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Rappa's ATK to adjacent targets, and the 3rd hit deals Imaginary DMG equal to <b><unbreak>#3[i]%</unbreak></b> of Rappa's ATK to all enemies.<br>Enhanced Basic ATK will not recover Skill Points. Attacking enemies that don't have Imaginary Weakness can still reduce Toughness, whose effect is equal to <unbreak>#4[i]%</unbreak> of the original Toughness Reduction. When Breaking Weakness, triggers the Imaginary Weakness Break effect.">Launches `Ningu: Demonbane Petalblade.` The first 2 hits deal Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Rappa's ATK to one designated enemy and Imaginary DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Rappa's ATK to adjacent targets, and the 3rd hit deals Imaginary DMG equal to <b><unbreak>#3[i]%</unbreak></b> of Rappa's ATK to all enemies.<br>Enhanced Basic ATK will not recover Skill Points. Attacking enemies that don't have Imaginary Weakness can still reduce Toughness, whose effect is equal to <unbreak>#4[i]%</unbreak> of the original Toughness Reduction. When Breaking Weakness, triggers the Imaginary Weakness Break effect.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131718', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131718_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131718_stats"></div><div id="131718_data" style="display:none;" data-level1="0.6, 0.3, 0.6, 0.5" data-level2="0.68, 0.34, 0.68, 0.5" data-level3="0.76, 0.38, 0.76, 0.5" data-level4="0.84, 0.42, 0.84, 0.5" data-level5="0.92, 0.46, 0.92, 0.5" data-level6="1, 0.5, 1, 0.5" data-level7="1.08, 0.54, 1.08, 0.5" data-level8="1.16, 0.58, 1.16, 0.5" data-level9="1.24, 0.62, 1.24, 0.5" data-levelid="1, 3, 1, 7, 1, 8" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Ninjutsu Inscription: Sky High<th></tr><td>When the Weakness of an elite-level or higher enemy is broken, Rappa additionally gains 1 point(s) of Charge and regenerates 10 Energy.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Ninjutsu Inscription: Sea Echo<th></tr><td>While in the "Sealform" state, after Rappa uses Enhanced Basic ATK to deal DMG to a Weakness Broken enemy target, converts the Toughness Reduction from this instance of DMG to 1 instance of 60% Super Break DMG.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Ninjutsu Inscription: Withered Leaf<th></tr><td>When an enemy target becomes Weakness Broken, increases the Break DMG taken by 2%. If Rappa's current ATK is higher than 2400, for every 100 excess ATK, additionally increases this value by 1%, up to a max additional increase of 8%. This effect lasts for 2 turn(s).</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>ATK Boost</th><th>SPD Boost</th><th>Break Boost</th></tr><tr><td>28.0%</td><td>9</td><td>13.3%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Returned Is the Revenant With No Ferry Toll<th></tr><td>During the "Sealform" state entered by using Ultimate, DMG dealt by Rappa ignores <unbreak>15%</unbreak> of the targets' DEF. After exiting the "Sealform" state, regenerates <unbreak>20</unbreak> Energy.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Free Is the Mind Enlightened by Haikus<th></tr><td>The Enhanced Basic ATK's first 2 hits have their Toughness Reduction against the one designated enemy increased by <unbreak>50%</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Many Are the Shrines That Repel No Hell<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Lost Is the Nindō Devoured by Time<th></tr><td>While in the "Sealform" state, increases all allies' SPD by <unbreak>12%</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Steady Is The Ranger With Unerring Arrows<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Righteous Is the Wrath That Spares No Evil<th></tr><td>When battle starts, Rappa gains <unbreak>5</unbreak> point(s) of her Talent's Charge, whose upper limit is <unbreak>5</unbreak> point(s). After launching the third hit of "Ningu: Demonbane Petalblade," gains <unbreak>5</unbreak> point(s) of Charge.</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

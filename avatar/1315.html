@@ -1,0 +1,367 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Boothill</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Boothill</h1>
+            <p>A cyborg cowboy drifting among the stars. Extremely optimistic and unrestrained.<br>He is a member of the Galaxy Rangers who swore to punish the wretched by any and all means...<br>His flamboyant and brash actions were all to draw the attention of the Interastral Peace Corporation — the target of his revenge.<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1315</td>
+        <td>The Hunt</td><td>Physical</td><td>5*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>1203.05</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>436.59</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>620.93</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>107</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>75</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110191.png' />
+                        Meteoric Bullet
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110192.png' />
+                        Destined Expiration
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110193.png' />
+                        Countertemporal Shot
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110421.png' />
+                        IPC Work Permit
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110505.png' />
+                        Lost Echo of the Shared Wish
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114011.png' />
+                        Tatters of Thought
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114012.png' />
+                        Fragments of Impression
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114013.png' />
+                        Shards of Desires
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">Skullcrush Spurs (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131501_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Boothill's ATK to a single target enemy.">Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Boothill's ATK to a single target enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131501', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131501_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131501_stats"></div><div id="131501_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 3, 1, 5, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Sizzlin' Tango (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131502_description" data-original-description="Forces Boothill and a single target enemy into the Standoff state. Boothill's Basic ATK gets Enhanced, and he cannot use his Skill, lasting for <unbreak>#3[i]</unbreak> turn(s). This duration decreases by 1 at the start of Boothill's every turn.<br>The enemy target in the Standoff becomes Taunted. When this enemy target/Boothill gets attacked by the other party in the Standoff, the DMG they receive increases by <b><unbreak>#1[i]%</unbreak></b>/<unbreak>#2[i]%</unbreak>.<br>After this target is defeated or becomes Weakness Broken, Boothill gains 1 stack of Pocket Trickshot, then dispels the Standoff.<br>This Skill cannot regenerate Energy. After using this Skill, the current turn does not end.">Forces Boothill and a single target enemy into the Standoff state. Boothill's Basic ATK gets Enhanced, and he cannot use his Skill, lasting for <unbreak>#3[i]</unbreak> turn(s). This duration decreases by 1 at the start of Boothill's every turn.<br>The enemy target in the Standoff becomes Taunted. When this enemy target/Boothill gets attacked by the other party in the Standoff, the DMG they receive increases by <b><unbreak>#1[i]%</unbreak></b>/<unbreak>#2[i]%</unbreak>.<br>After this target is defeated or becomes Weakness Broken, Boothill gains 1 stack of Pocket Trickshot, then dispels the Standoff.<br>This Skill cannot regenerate Energy. After using this Skill, the current turn does not end.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131502', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131502_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131502_stats"></div><div id="131502_data" style="display:none;" data-level1="0.15, 0.15, 2" data-level2="0.165, 0.15, 2" data-level3="0.18, 0.15, 2" data-level4="0.195, 0.15, 2" data-level5="0.21, 0.15, 2" data-level6="0.225, 0.15, 2" data-level7="0.24375, 0.15, 2" data-level8="0.2625, 0.15, 2" data-level9="0.28125, 0.15, 2" data-level10="0.3, 0.15, 2" data-level11="0.315, 0.15, 2" data-level12="0.33, 0.15, 2" data-level13="0.345, 0.15, 2" data-level14="0.36, 0.15, 2" data-level15="0.375, 0.15, 2" data-levelid="1, 3, 1, 5, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Dust Devil's Sunset Rodeo (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131503_description" data-original-description="Applies Physical Weakness to a single target enemy, lasting for <unbreak>#3[i]</unbreak> turn(s).<br>Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Boothill's ATK to the target and <u>delays their action</u> by <b><unbreak>#2[i]%</unbreak></b>.">Applies Physical Weakness to a single target enemy, lasting for <unbreak>#3[i]</unbreak> turn(s).<br>Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Boothill's ATK to the target and <u>delays their action</u> by <b><unbreak>#2[i]%</unbreak></b>.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131503', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131503_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131503_stats"></div><div id="131503_data" style="display:none;" data-level1="2.4, 0.3, 2" data-level2="2.56, 0.31, 2" data-level3="2.72, 0.32, 2" data-level4="2.88, 0.33, 2" data-level5="3.04, 0.34, 2" data-level6="3.2, 0.35, 2" data-level7="3.4, 0.3625, 2" data-level8="3.6, 0.375, 2" data-level9="3.8, 0.3875, 2" data-level10="4, 0.4, 2" data-level11="4.16, 0.41, 2" data-level12="4.32, 0.42, 2" data-level13="4.48, 0.43, 2" data-level14="4.64, 0.44, 2" data-level15="4.8, 0.45, 2" data-levelid="1, 3, 1, 5, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Five Peas in a Pod (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131504_description" data-original-description="Each stack of Pocket Trickshot increases the Enhanced Basic Attack's Toughness Reduction by <unbreak>#4[i]%</unbreak>, stacking up to <unbreak>#5[i]</unbreak> time(s).<br>If the target is <u>Weakness Broken</u> while the Enhanced Basic ATK is being used, based on the number of Pocket Trickshot stacks, deals <u>Break DMG</u> to this target equal to <b><unbreak>#1[i]%</unbreak></b>/<b><unbreak>#2[i]%</unbreak></b>/<b><unbreak>#3[i]%</unbreak></b> of Boothill's Physical Break DMG. The max Toughness taken into account for this DMG cannot exceed <unbreak>#6[i]</unbreak> times the base Toughness Reduction of the Basic Attack `Skullcrush Spurs.`<br>After winning the battle, Boothill can retain Pocket Trickshot for the next battle.">Each stack of Pocket Trickshot increases the Enhanced Basic Attack's Toughness Reduction by <unbreak>#4[i]%</unbreak>, stacking up to <unbreak>#5[i]</unbreak> time(s).<br>If the target is <u>Weakness Broken</u> while the Enhanced Basic ATK is being used, based on the number of Pocket Trickshot stacks, deals <u>Break DMG</u> to this target equal to <b><unbreak>#1[i]%</unbreak></b>/<b><unbreak>#2[i]%</unbreak></b>/<b><unbreak>#3[i]%</unbreak></b> of Boothill's Physical Break DMG. The max Toughness taken into account for this DMG cannot exceed <unbreak>#6[i]</unbreak> times the base Toughness Reduction of the Basic Attack `Skullcrush Spurs.`<br>After winning the battle, Boothill can retain Pocket Trickshot for the next battle.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131504', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131504_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131504_stats"></div><div id="131504_data" style="display:none;" data-level1="0.35, 0.6, 0.85, 0.5, 3, 16" data-level2="0.385, 0.66, 0.935, 0.5, 3, 16" data-level3="0.42, 0.72, 1.02, 0.5, 3, 16" data-level4="0.455, 0.78, 1.105, 0.5, 3, 16" data-level5="0.49, 0.84, 1.19, 0.5, 3, 16" data-level6="0.525, 0.9, 1.275, 0.5, 3, 16" data-level7="0.56875, 0.975, 1.38125, 0.5, 3, 16" data-level8="0.6125, 1.05, 1.4875, 0.5, 3, 16" data-level9="0.65625, 1.125, 1.59375, 0.5, 3, 16" data-level10="0.7, 1.2, 1.7, 0.5, 3, 16" data-level11="0.735, 1.26, 1.785, 0.5, 3, 16" data-level12="0.77, 1.32, 1.87, 0.5, 3, 16" data-level13="0.805, 1.38, 1.955, 0.5, 3, 16" data-level14="0.84, 1.44, 2.04, 0.5, 3, 16" data-level15="0.875, 1.5, 2.125, 0.5, 3, 16" data-levelid="1, 3, 1, 5, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131506_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131506', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131506_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131506_stats"></div><div id="131506_data" style="display:none;" data-level1="" data-levelid="1, 3, 1, 5, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">3-9× Smile (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131507_description" data-original-description="After the Technique is used, when casting the Skill for the first time in the next battle, applies the same Physical Weakness to the target as the one induced by the Ultimate, lasting for <unbreak>#1[i]</unbreak> turn(s).">After the Technique is used, when casting the Skill for the first time in the next battle, applies the same Physical Weakness to the target as the one induced by the Ultimate, lasting for <unbreak>#1[i]</unbreak> turn(s).</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131507', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131507_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131507_stats"></div><div id="131507_data" style="display:none;" data-level1="2" data-levelid="1, 3, 1, 5, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Fanning the Hammer (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131508_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Boothill's ATK to a single target enemy.<br>The Enhanced Basic Attack cannot recover Skill Points and can only target the enemy that is in the Standoff.">Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Boothill's ATK to a single target enemy.<br>The Enhanced Basic Attack cannot recover Skill Points and can only target the enemy that is in the Standoff.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131508', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131508_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131508_stats"></div><div id="131508_data" style="display:none;" data-level1="1.1" data-level2="1.32" data-level3="1.54" data-level4="1.76" data-level5="1.98" data-level6="2.2" data-level7="2.42" data-level8="2.64" data-level9="2.86" data-levelid="1, 3, 1, 5, 0, 8" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Ghost Load<th></tr><td>Increase this character's CRIT Rate/CRIT DMG, by an amount equal to 10%/50% of Break Effect, up to a max increase of 30%/150%.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Above Snakes<th></tr><td>While Boothill is in the Standoff, reduces the DMG he receives from targets that are not in the Standoff by 30%.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Point Blank<th></tr><td>When in Standoff and gaining Pocket Trickshot, regenerates 10 Energy. Can also trigger this effect when gaining Pocket Trickshot stacks that exceed the max limit.</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>Break Boost</th><th>ATK Boost</th><th>HP Boost</th></tr><tr><td>37.3%</td><td>18.0%</td><td>10.0%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Dusty Trail's Lone Star<th></tr><td>When the battle starts, obtains 1 stack of Pocket Trickshot. When Boothill deals DMG, ignores <unbreak>16%</unbreak> of the enemy target's DEF.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Milestonemonger<th></tr><td>When in Standoff and gaining Pocket Trickshot, recovers <unbreak>1</unbreak> Skill Point(s) and increases Break Effect by <unbreak>30%</unbreak>, lasting for <unbreak>2</unbreak> turn(s). Can also trigger this effect when gaining Pocket Trickshot stacks that exceed the max limit. But cannot trigger repeatedly within one turn.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Marble Orchard's Guard<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Cold Cuts Chef<th></tr><td>When the enemy target in the Standoff is attacked by Boothill, the DMG they receive additionally increases by <unbreak>12%</unbreak>. When Boothill is attacked by the enemy target in the Standoff, the effect of him receiving increased DMG is offset by <unbreak>12%</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Stump Speech<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Crowbar Hotel's Raccoon<th></tr><td>When triggering the Talent's Break DMG, additionally deals Break DMG to the target equal to <unbreak>40%</unbreak> of the original DMG multiplier and additionally deals Break DMG to adjacent targets equal to <unbreak>70%</unbreak> of the original DMG multiplier.</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

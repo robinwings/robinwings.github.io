@@ -1,0 +1,367 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Qingque</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Qingque</h1>
+            <p>Diviner of the Divination Commission on the Xianzhou Luofu, and a librarian.<br>Always slacks off and is about to be demoted to a "door guardian."<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1201</td>
+        <td>Erudition</td><td>Quantum</td><td>4*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>1023.12</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>441.00</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>652.68</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>98</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>75</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>2646400</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>5</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110131.png' />
+                        Key of Inspiration
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110132.png' />
+                        Key of Knowledge
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110133.png' />
+                        Key of Wisdom
+                    </td>
+                    <td>105</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110406.png' />
+                        Void Cast Iron
+                    </td>
+                    <td>50</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110502.png' />
+                        Guardian's Lament
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111011.png' />
+                        Thief's Instinct
+                    </td>
+                    <td>40</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111012.png' />
+                        Usurper's Scheme
+                    </td>
+                    <td>55</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/111013.png' />
+                        Conqueror's Will
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">Flower Pick (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120101_description" data-original-description="Tosses 1 jade tile from the suit with the fewest tiles in hand to deal Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Qingque's ATK to a single enemy.">Tosses 1 jade tile from the suit with the fewest tiles in hand to deal Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Qingque's ATK to a single enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120101', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120101_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120101_stats"></div><div id="120101_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 2, 0, 1, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">A Scoop of Moon (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120102_description" data-original-description="Immediately draws <unbreak>#1[i]</unbreak> jade tile(s) and increases DMG by <b><unbreak>#2[i]%</unbreak></b> until the end of the current turn. This effect can stack up to <unbreak>#3[i]</unbreak> time(s). The turn will not end after this Skill is used.">Immediately draws <unbreak>#1[i]</unbreak> jade tile(s) and increases DMG by <b><unbreak>#2[i]%</unbreak></b> until the end of the current turn. This effect can stack up to <unbreak>#3[i]</unbreak> time(s). The turn will not end after this Skill is used.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120102', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120102_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120102_stats"></div><div id="120102_data" style="display:none;" data-level1="2, 0.14, 4" data-level2="2, 0.154, 4" data-level3="2, 0.168, 4" data-level4="2, 0.182, 4" data-level5="2, 0.196, 4" data-level6="2, 0.21, 4" data-level7="2, 0.2275, 4" data-level8="2, 0.245, 4" data-level9="2, 0.2625, 4" data-level10="2, 0.28, 4" data-level11="2, 0.294, 4" data-level12="2, 0.308, 4" data-level13="2, 0.322, 4" data-level14="2, 0.336, 4" data-level15="2, 0.35, 4" data-levelid="1, 2, 0, 1, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">A Quartet? Woo-hoo! (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120103_description" data-original-description="Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Qingque's ATK to all enemies, and obtains 4 jade tiles of the same suit.">Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Qingque's ATK to all enemies, and obtains 4 jade tiles of the same suit.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120103', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120103_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120103_stats"></div><div id="120103_data" style="display:none;" data-level1="1.2" data-level2="1.28" data-level3="1.36" data-level4="1.44" data-level5="1.52" data-level6="1.6" data-level7="1.7" data-level8="1.8" data-level9="1.9" data-level10="2" data-level11="2.08" data-level12="2.16" data-level13="2.24" data-level14="2.32" data-level15="2.4" data-levelid="1, 2, 0, 1, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Celestial Jade (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120104_description" data-original-description="When an ally's turn starts, Qingque randomly draws 1 tile from 3 different suits and can hold up to 4 tiles at one time.<br>If Qingque starts her turn with 4 tiles of the same suit, she consumes all tiles to enter the `Hidden Hand` state.<br>While in this state, Qingque cannot use her Skill again. At the same time, Qingque's ATK increases by <b><unbreak>#1[i]%</unbreak></b>, and her Basic ATK `Flower Pick` is enhanced, becoming `Cherry on Top!` The `Hidden Hand` state ends after using `Cherry on Top!`.">When an ally's turn starts, Qingque randomly draws 1 tile from 3 different suits and can hold up to 4 tiles at one time.<br>If Qingque starts her turn with 4 tiles of the same suit, she consumes all tiles to enter the `Hidden Hand` state.<br>While in this state, Qingque cannot use her Skill again. At the same time, Qingque's ATK increases by <b><unbreak>#1[i]%</unbreak></b>, and her Basic ATK `Flower Pick` is enhanced, becoming `Cherry on Top!` The `Hidden Hand` state ends after using `Cherry on Top!`.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120104', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120104_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120104_stats"></div><div id="120104_data" style="display:none;" data-level1="0.36" data-level2="0.396" data-level3="0.432" data-level4="0.468" data-level5="0.504" data-level6="0.54" data-level7="0.585" data-level8="0.63" data-level9="0.675" data-level10="0.72" data-level11="0.756" data-level12="0.792" data-level13="0.828" data-level14="0.864" data-level15="0.9" data-levelid="1, 2, 0, 1, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120106_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120106', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120106_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120106_stats"></div><div id="120106_data" style="display:none;" data-level1="" data-levelid="1, 2, 0, 1, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Game Solitaire (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120107_description" data-original-description="After using Technique, Qingque draws <unbreak>#1[i]</unbreak> jade tile(s) when the battle starts.">After using Technique, Qingque draws <unbreak>#1[i]</unbreak> jade tile(s) when the battle starts.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120107', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120107_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120107_stats"></div><div id="120107_data" style="display:none;" data-level1="2" data-levelid="1, 2, 0, 1, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Cherry on Top! (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120108_description" data-original-description="Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Qingque's ATK to a single enemy, and deals Quantum DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Qingque's ATK to enemies adjacent to it.<br>`Cherry on Top!` cannot recover Skill Points.">Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Qingque's ATK to a single enemy, and deals Quantum DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Qingque's ATK to enemies adjacent to it.<br>`Cherry on Top!` cannot recover Skill Points.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120108', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120108_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120108_stats"></div><div id="120108_data" style="display:none;" data-level1="1.2, 0.5" data-level2="1.44, 0.6" data-level3="1.68, 0.7" data-level4="1.92, 0.8" data-level5="2.16, 0.9" data-level6="2.4, 1" data-level7="2.64, 1.1" data-level8="2.88, 1.2" data-level9="3.12, 1.3" data-levelid="1, 2, 0, 1, 0, 8" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Tile Battle<th></tr><td>Restores 1 Skill Point when using the Skill. This effect can only be triggered 1 time per battle.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Bide Time<th></tr><td>Using the Skill increases DMG Boost effect of attacks by an extra 10%.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Winning Hand<th></tr><td>Qingque's SPD increases by 10% for 1 turn after using the Enhanced Basic ATK.</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>ATK Boost</th><th>DMG Boost: Quantum</th><th>DEF Boost</th></tr><tr><td>28.0%</td><td>14.4%</td><td>12.5%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Rise Through the Tiles<th></tr><td>Ultimate deals <unbreak>10%</unbreak> more DMG.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Sleep on the Tiles<th></tr><td>Every time Draw Tile is triggered, Qingque immediately regenerates <unbreak>1</unbreak> Energy.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Read Between the Tiles<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Right on the Tiles<th></tr><td>After using Skill, there is a <unbreak>24%</unbreak> fixed chance to gain Self-Sufficer, lasting until the end of the current turn. <br>With Self-Sufficer, using Basic ATK or Enhanced Basic ATK immediately launches 1 follow-up attack on the same target, dealing Quantum DMG equal to <unbreak>100%</unbreak> of Basic ATK DMG or Enhanced Basic ATK DMG.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Gambit for the Tiles<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Prevail Beyond the Tiles<th></tr><td>Recovers 1 Skill Point after using Enhanced Basic ATK.</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="dark.css">
+  <style>
+    .filter-icon {
+      opacity: 0.35;
+      cursor: pointer;
+      margin-right: 5px;
+      height: 38px;
+      width: 38px;
+    }
+    .selected {
+      opacity: 1.0;
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lightcone</title>
+</head>
+<body>
+    <noscript>
+        It seems like you have JavaScript disabled, or your browser does not support it.<br>
+        I am sorry but this website cannot function normally without it :)
+        </noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><small>Click ID to see the data :)</small><hr>
+<div style="margin-top:20px; margin-bottom:10px">
+  <a class="button-link" style="text-decoration: none;" href='avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='#'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='relics.html'">Relic Set</a>  </div>
+  <input style="margin-bottom: 20px; margin-top:10px" type="text" id="myInput" onkeyup="myFunction()"placeholder="Search for lightcone"><div style="margin-bottom:20px;">
+<!-- Preservation Icon -->
+<img src="ico/Preservation.png" class="filter-icon" id="preservation-icon" data-path="preservation" onclick="toggleFilter(this, 'path')" />
+
+<!-- Erudition Icon -->
+<img src="ico/Erudition.png" class="filter-icon" id="erudition-icon" data-path="erudition" onclick="toggleFilter(this, 'path')" />
+
+<!-- Abundance Icon -->
+<img src="ico/Abundance.png" class="filter-icon" id="abundance-icon" data-path="abundance" onclick="toggleFilter(this, 'path')" />
+
+<!-- The Hunt Icon -->
+<img src="ico/Hunt.png" class="filter-icon" id="the-hunt-icon" data-path="the hunt" onclick="toggleFilter(this, 'path')" />
+
+<!-- Harmony Icon -->
+<img src="ico/Harmony.png" class="filter-icon" id="harmony-icon" data-path="harmony" onclick="toggleFilter(this, 'path')" />
+
+<!-- Nihility Icon -->
+<img src="ico/Nihility.png" class="filter-icon" id="nihility-icon" data-path="nihility" onclick="toggleFilter(this, 'path')" />
+
+<!-- Destruction Icon -->
+<img src="ico/Destruction.png" class="filter-icon" id="destruction-icon" data-path="destruction" onclick="toggleFilter(this, 'path')" />
+
+<img src="ico/5star.png" class="filter-icon" id="5-star-icon" data-rarity="5*" onclick="toggleFilter(this, 'rarity')" />
+<img src="ico/4star.png" class="filter-icon" id="4-star-icon" data-rarity="4*" onclick="toggleFilter(this, 'rarity')" />
+<img src="ico/3star.png" class="filter-icon" id="3-star-icon" data-rarity="3*" onclick="toggleFilter(this, 'rarity')" />
+        </div>
+
+  <table id="myTable">
+    <tr>
+      <th>Lightcone</th>
+      <th>Path</th>
+      <th>Rarity</th>
+      <th>ID</th>
+    </tr><tr><td>Arrows</td><td>The Hunt</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20000.html'>20000</button></td>
+    </tr><tr><td>Cornucopia</td><td>Abundance</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20001.html'>20001</button></td>
+    </tr><tr><td>Collapsing Sky</td><td>Destruction</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20002.html'>20002</button></td>
+    </tr><tr><td>Amber</td><td>Preservation</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20003.html'>20003</button></td>
+    </tr><tr><td>Void</td><td>Nihility</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20004.html'>20004</button></td>
+    </tr><tr><td>Chorus</td><td>Harmony</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20005.html'>20005</button></td>
+    </tr><tr><td>Data Bank</td><td>Erudition</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20006.html'>20006</button></td>
+    </tr><tr><td>Darting Arrow</td><td>The Hunt</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20007.html'>20007</button></td>
+    </tr><tr><td>Fine Fruit</td><td>Abundance</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20008.html'>20008</button></td>
+    </tr><tr><td>Shattered Home</td><td>Destruction</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20009.html'>20009</button></td>
+    </tr><tr><td>Defense</td><td>Preservation</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20010.html'>20010</button></td>
+    </tr><tr><td>Loop</td><td>Nihility</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20011.html'>20011</button></td>
+    </tr><tr><td>Meshing Cogs</td><td>Harmony</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20012.html'>20012</button></td>
+    </tr><tr><td>Passkey</td><td>Erudition</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20013.html'>20013</button></td>
+    </tr><tr><td>Adversarial</td><td>The Hunt</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20014.html'>20014</button></td>
+    </tr><tr><td>Multiplication</td><td>Abundance</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20015.html'>20015</button></td>
+    </tr><tr><td>Mutual Demise</td><td>Destruction</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20016.html'>20016</button></td>
+    </tr><tr><td>Pioneering</td><td>Preservation</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20017.html'>20017</button></td>
+    </tr><tr><td>Hidden Shadow</td><td>Nihility</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20018.html'>20018</button></td>
+    </tr><tr><td>Mediation</td><td>Harmony</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20019.html'>20019</button></td>
+    </tr><tr><td>Sagacity</td><td>Erudition</td><td>3*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/20020.html'>20020</button></td>
+    </tr><tr><td>Post-Op Conversation</td><td>Abundance</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21000.html'>21000</button></td>
+    </tr><tr><td>Good Night and Sleep Well</td><td>Nihility</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21001.html'>21001</button></td>
+    </tr><tr><td>Day One of My New Life</td><td>Preservation</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21002.html'>21002</button></td>
+    </tr><tr><td>Only Silence Remains</td><td>The Hunt</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21003.html'>21003</button></td>
+    </tr><tr><td>Memories of the Past</td><td>Harmony</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21004.html'>21004</button></td>
+    </tr><tr><td>The Moles Welcome You</td><td>Destruction</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21005.html'>21005</button></td>
+    </tr><tr><td>The Birth of the Self</td><td>Erudition</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21006.html'>21006</button></td>
+    </tr><tr><td>Shared Feeling</td><td>Abundance</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21007.html'>21007</button></td>
+    </tr><tr><td>Eyes of the Prey</td><td>Nihility</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21008.html'>21008</button></td>
+    </tr><tr><td>Landau's Choice</td><td>Preservation</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21009.html'>21009</button></td>
+    </tr><tr><td>Swordplay</td><td>The Hunt</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21010.html'>21010</button></td>
+    </tr><tr><td>Planetary Rendezvous</td><td>Harmony</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21011.html'>21011</button></td>
+    </tr><tr><td>A Secret Vow</td><td>Destruction</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21012.html'>21012</button></td>
+    </tr><tr><td>Make the World Clamor</td><td>Erudition</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21013.html'>21013</button></td>
+    </tr><tr><td>Perfect Timing</td><td>Abundance</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21014.html'>21014</button></td>
+    </tr><tr><td>Resolution Shines As Pearls of Sweat</td><td>Nihility</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21015.html'>21015</button></td>
+    </tr><tr><td>Trend of the Universal Market</td><td>Preservation</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21016.html'>21016</button></td>
+    </tr><tr><td>Subscribe for More!</td><td>The Hunt</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21017.html'>21017</button></td>
+    </tr><tr><td>Dance! Dance! Dance!</td><td>Harmony</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21018.html'>21018</button></td>
+    </tr><tr><td>Under the Blue Sky</td><td>Destruction</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21019.html'>21019</button></td>
+    </tr><tr><td>Geniuses' Repose</td><td>Erudition</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21020.html'>21020</button></td>
+    </tr><tr><td>Quid Pro Quo</td><td>Abundance</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21021.html'>21021</button></td>
+    </tr><tr><td>Fermata</td><td>Nihility</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21022.html'>21022</button></td>
+    </tr><tr><td>We Are Wildfire</td><td>Preservation</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21023.html'>21023</button></td>
+    </tr><tr><td>River Flows in Spring</td><td>The Hunt</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21024.html'>21024</button></td>
+    </tr><tr><td>Past and Future</td><td>Harmony</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21025.html'>21025</button></td>
+    </tr><tr><td>Woof! Walk Time!</td><td>Destruction</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21026.html'>21026</button></td>
+    </tr><tr><td>The Seriousness of Breakfast</td><td>Erudition</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21027.html'>21027</button></td>
+    </tr><tr><td>Warmth Shortens Cold Nights</td><td>Abundance</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21028.html'>21028</button></td>
+    </tr><tr><td>We Will Meet Again</td><td>Nihility</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21029.html'>21029</button></td>
+    </tr><tr><td>This Is Me!</td><td>Preservation</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21030.html'>21030</button></td>
+    </tr><tr><td>Return to Darkness</td><td>The Hunt</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21031.html'>21031</button></td>
+    </tr><tr><td>Carve the Moon, Weave the Clouds</td><td>Harmony</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21032.html'>21032</button></td>
+    </tr><tr><td>Nowhere to Run</td><td>Destruction</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21033.html'>21033</button></td>
+    </tr><tr><td>Today Is Another Peaceful Day</td><td>Erudition</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21034.html'>21034</button></td>
+    </tr><tr><td>What Is Real?</td><td>Abundance</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21035.html'>21035</button></td>
+    </tr><tr><td>Dreamville Adventure</td><td>Harmony</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21036.html'>21036</button></td>
+    </tr><tr><td>Final Victor</td><td>The Hunt</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21037.html'>21037</button></td>
+    </tr><tr><td>Flames Afar</td><td>Destruction</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21038.html'>21038</button></td>
+    </tr><tr><td>Destiny's Threads Forewoven</td><td>Preservation</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21039.html'>21039</button></td>
+    </tr><tr><td>The Day The Cosmos Fell</td><td>Erudition</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21040.html'>21040</button></td>
+    </tr><tr><td>It's Showtime</td><td>Nihility</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21041.html'>21041</button></td>
+    </tr><tr><td>Indelible Promise</td><td>Destruction</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21042.html'>21042</button></td>
+    </tr><tr><td>Concert for Two</td><td>Preservation</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21043.html'>21043</button></td>
+    </tr><tr><td>Boundless Choreo</td><td>Nihility</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21044.html'>21044</button></td>
+    </tr><tr><td>After the Charmony Fall</td><td>Erudition</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21045.html'>21045</button></td>
+    </tr><tr><td>Poised to Bloom</td><td>Harmony</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21046.html'>21046</button></td>
+    </tr><tr><td>Shadowed by Night</td><td>The Hunt</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21047.html'>21047</button></td>
+    </tr><tr><td>Dream's Montage</td><td>Abundance</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/21048.html'>21048</button></td>
+    </tr><tr><td>Before the Tutorial Mission Starts</td><td>Nihility</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/22000.html'>22000</button></td>
+    </tr><tr><td>Hey, Over Here</td><td>Abundance</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/22001.html'>22001</button></td>
+    </tr><tr><td>For Tomorrow's Journey</td><td>Harmony</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/22002.html'>22002</button></td>
+    </tr><tr><td>Ninja Record: Sound Hunt</td><td>Destruction</td><td>4*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/22003.html'>22003</button></td>
+    </tr><tr><td>Night on the Milky Way</td><td>Erudition</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23000.html'>23000</button></td>
+    </tr><tr><td>In the Night</td><td>The Hunt</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23001.html'>23001</button></td>
+    </tr><tr><td>Something Irreplaceable</td><td>Destruction</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23002.html'>23002</button></td>
+    </tr><tr><td>But the Battle Isn't Over</td><td>Harmony</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23003.html'>23003</button></td>
+    </tr><tr><td>In the Name of the World</td><td>Nihility</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23004.html'>23004</button></td>
+    </tr><tr><td>Moment of Victory</td><td>Preservation</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23005.html'>23005</button></td>
+    </tr><tr><td>Patience Is All You Need</td><td>Nihility</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23006.html'>23006</button></td>
+    </tr><tr><td>Incessant Rain</td><td>Nihility</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23007.html'>23007</button></td>
+    </tr><tr><td>Echoes of the Coffin</td><td>Abundance</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23008.html'>23008</button></td>
+    </tr><tr><td>The Unreachable Side</td><td>Destruction</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23009.html'>23009</button></td>
+    </tr><tr><td>Before Dawn</td><td>Erudition</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23010.html'>23010</button></td>
+    </tr><tr><td>She Already Shut Her Eyes</td><td>Preservation</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23011.html'>23011</button></td>
+    </tr><tr><td>Sleep Like the Dead</td><td>The Hunt</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23012.html'>23012</button></td>
+    </tr><tr><td>Time Waits for No One</td><td>Abundance</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23013.html'>23013</button></td>
+    </tr><tr><td>I Shall Be My Own Sword</td><td>Destruction</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23014.html'>23014</button></td>
+    </tr><tr><td>Brighter Than the Sun</td><td>Destruction</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23015.html'>23015</button></td>
+    </tr><tr><td>Worrisome, Blissful</td><td>The Hunt</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23016.html'>23016</button></td>
+    </tr><tr><td>Night of Fright</td><td>Abundance</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23017.html'>23017</button></td>
+    </tr><tr><td>An Instant Before A Gaze</td><td>Erudition</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23018.html'>23018</button></td>
+    </tr><tr><td>Past Self in Mirror</td><td>Harmony</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23019.html'>23019</button></td>
+    </tr><tr><td>Baptism of Pure Thought</td><td>The Hunt</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23020.html'>23020</button></td>
+    </tr><tr><td>Earthly Escapade</td><td>Harmony</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23021.html'>23021</button></td>
+    </tr><tr><td>Reforged Remembrance</td><td>Nihility</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23022.html'>23022</button></td>
+    </tr><tr><td>Inherently Unjust Destiny</td><td>Preservation</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23023.html'>23023</button></td>
+    </tr><tr><td>Along the Passing Shore</td><td>Nihility</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23024.html'>23024</button></td>
+    </tr><tr><td>Whereabouts Should Dreams Rest</td><td>Destruction</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23025.html'>23025</button></td>
+    </tr><tr><td>Flowing Nightglow</td><td>Harmony</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23026.html'>23026</button></td>
+    </tr><tr><td>Sailing Towards a Second Life</td><td>The Hunt</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23027.html'>23027</button></td>
+    </tr><tr><td>Yet Hope Is Priceless</td><td>Erudition</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23028.html'>23028</button></td>
+    </tr><tr><td>Those Many Springs</td><td>Nihility</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23029.html'>23029</button></td>
+    </tr><tr><td>Dance at Sunset</td><td>Destruction</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23030.html'>23030</button></td>
+    </tr><tr><td>I Venture Forth to Hunt</td><td>The Hunt</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23031.html'>23031</button></td>
+    </tr><tr><td>Scent Alone Stays True</td><td>Abundance</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23032.html'>23032</button></td>
+    </tr><tr><td>Ninjutsu Inscription: Dazzling Evilbreaker</td><td>Erudition</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/23033.html'>23033</button></td>
+    </tr><tr><td>On the Fall of an Aeon</td><td>Destruction</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/24000.html'>24000</button></td>
+    </tr><tr><td>Cruising in the Stellar Sea</td><td>The Hunt</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/24001.html'>24001</button></td>
+    </tr><tr><td>Texture of Memories</td><td>Preservation</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/24002.html'>24002</button></td>
+    </tr><tr><td>Solitary Healing</td><td>Nihility</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/24003.html'>24003</button></td>
+    </tr><tr><td>Eternal Calculus</td><td>Erudition</td><td>5*</td><td>
+        <a class='button-link' style='text-decoration: none;' href='weapons/24004.html'>24004</button></td>
+    </tr></table>
+  <script>
+
+let filters = { element: [], path: [], rarity: [] };
+
+function toggleFilter(e, t) {
+    e.classList.toggle("selected");
+    let l = e.getAttribute(`data-${t}`),
+        r = filters[t].indexOf(l);
+    r > -1 ? filters[t].splice(r, 1) : filters[t].push(l);
+    applyFilter();
+}
+
+function myFunction() {
+    applyFilter();
+}
+
+function applyFilter() {
+    let e = document.getElementById("myInput").value.toUpperCase(),
+        t = document.getElementById("myTable").getElementsByTagName("tr"),
+        s = 0;
+
+    for (let l = 1; l < t.length; l++) {
+        let r = t[l],
+            n = r.cells[0],
+            o = r.cells[2].innerText.toLowerCase(),
+            y = r.cells[1].innerText.toLowerCase(),
+            p = r.cells[3].innerText;
+
+        if (n) {
+            let f = (n.textContent || n.innerText).toUpperCase().indexOf(e) > -1,
+                c = filters.element.length === 0 || filters.element.includes(p),
+                d = filters.path.length === 0 || filters.path.includes(y),
+                b = filters.rarity.length === 0 || filters.rarity.includes(o);
+
+            f && c && d && b ? (
+                r.style.display = "",
+                s % 2 == 0 ? r.style.backgroundColor = "var(--table-bg)" : r.style.backgroundColor = "var(--table-bg-alt)",
+                s++
+            ) : r.style.display = "none";
+        }
+    }
+    applyZebraStripes(t);
+}
+
+function applyZebraStripes(e) {
+    let t = 0;
+    for (let l = 1; l < e.length; l++) {
+        let r = e[l];
+        r.style.display !== "none" && (t++ % 2 === 0 ? r.style.backgroundColor = "var(--table-bg-alt)" : r.style.backgroundColor = "var(--table-bg)");
+    }
+}
+
+  </script>
+</body>
+</html>

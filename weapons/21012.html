@@ -1,0 +1,146 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../dark.css">
+        <title>A Secret Vow</title>
+        
+    <script>
+    function updateRefinements(weaponId, level) {
+        var refinementDataElement = document.getElementById(weaponId + '_data');
+        var stats = refinementDataElement.getAttribute('data-level' + level);
+        
+        var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+        
+        var refinementsElement = document.getElementById(weaponId + '_refinements');
+        var originalDescription = refinementsElement.getAttribute('data-original-description');
+        
+        statsArray.forEach((stat, index) => {
+            var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+            originalDescription = originalDescription.replace(placeholderRegExp, (match, p1, p2) => {
+                var formattedStat = stat;
+                console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+                if (p2 === '%') {
+                    formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+                } else {
+                    if (stat % 1 !== 0) {
+                        formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                    }
+                }
+                console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+                return formattedStat;
+            });
+        });
+
+        refinementsElement.innerHTML = originalDescription;
+    }
+    function initializeSkills() {
+        var dropdowns = document.querySelectorAll('select[onchange^="updateRefinements"]');
+        dropdowns.forEach(dropdown => {
+            dropdown.value = 1;
+            dropdown.dispatchEvent(new Event('change'));
+        });
+    }
+    </script>
+
+    </head>
+    <body onload="initializeSkills()">
+        <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+<h1 style="margin-bottom:0px">robinwings</h1><small>Some scalings are in decimals instead of percentage :)</small><hr>
+<div style="margin-top:20px; margin-bottom:10px">
+  <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+        
+        <h1>A Secret Vow</h1>
+        <p><strong>ID:</strong> 21012<br>
+           <strong>Rarity:</strong> 4*<br>
+           <strong>Path:</strong> Destruction<br></p>
+
+        <h2>Stats</h2>
+        <ul>
+            <li><strong>Max HP:</strong> 1058.00</li>
+            <li><strong>Max ATK:</strong> 476.00</li>
+            <li><strong>Max DEF:</strong> 265.00</li>
+        </ul>
+
+        <h2>Ability</h2>
+        <ul>
+            <li>
+                <strong>Superimposition:</strong> 
+                <select onchange="updateRefinements('21012', this.value)">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <div id="21012_refinements" data-original-description="Increases DMG dealt by the wearer by <b><unbreak>#1[i]%</unbreak></b>. The wearer also deals an extra <b><unbreak>#2[i]%</unbreak></b> of DMG to enemies whose current HP percentage is equal to or higher than the wearer's current HP percentage.">
+                    Increases DMG dealt by the wearer by <b><unbreak>#1[i]%</unbreak></b>. The wearer also deals an extra <b><unbreak>#2[i]%</unbreak></b> of DMG to enemies whose current HP percentage is equal to or higher than the wearer's current HP percentage.
+                </div>
+                <div id="21012_data" style="display:none;" data-level1="0.2, 0.2" data-level2="0.25, 0.25" data-level3="0.3, 0.3" data-level4="0.35, 0.35" data-level5="0.4, 0.4" data-levelid="2, 1, 0, 1, 2" >
+                </div>
+            </li>
+        </ul>
+        <h2>Ascension Materials</h2>
+        <table>
+            <tr>
+                <th>Material</th>
+                <th>Amount</th>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                    Credit
+                </td>
+                <td>308000</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110111.png' />
+                    Shattered Blade
+                </td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110112.png' />
+                    Lifeless Blade
+                </td>
+                <td>9</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110113.png' />
+                    Worldbreaker Blade
+                </td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112001.png' />
+                    Silvermane Badge
+                </td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112002.png' />
+                    Silvermane Insignia
+                </td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td style='display: flex; align-items: center;'>
+                    <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112003.png' />
+                    Silvermane Medal
+                </td>
+                <td>12</td>
+            </tr>
+    </body>
+    </html>
+    

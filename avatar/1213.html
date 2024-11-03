@@ -1,0 +1,418 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Dan Heng • Imbibitor Lunae</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Dan Heng • Imbibitor Lunae</h1>
+            <p>Dan Heng's true form from his Vidyadhara lineage carries the residual power left behind by his past incarnation, the Imbibitor Lunae.<br>Upon accepting the majestic horns atop his crown, he must accept all the merits and faults attributed to that sinner.<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1213</td>
+        <td>Destruction</td><td>Imaginary</td><td>5*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>1241.86</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>363.83</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>698.54</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>102</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>125</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110111.png' />
+                        Shattered Blade
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110112.png' />
+                        Lifeless Blade
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110113.png' />
+                        Worldbreaker Blade
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110417.png' />
+                        Suppressing Edict
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110503.png' />
+                        Regret of Infinite Ochema
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113001.png' />
+                        Immortal Scionette
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113002.png' />
+                        Immortal Aeroblossom
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113003.png' />
+                        Immortal Lumintwig
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">Beneficent Lotus (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121301_description" data-original-description="Uses a 2-hit attack and deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Dan Heng • Imbibitor Lunae's ATK to a single enemy target.">Uses a 2-hit attack and deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Dan Heng • Imbibitor Lunae's ATK to a single enemy target.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121301', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121301_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121301_stats"></div><div id="121301_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 2, 1, 3, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Dracore Libre (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121302_description" data-original-description="Enhances Basic ATK. Enhancements may be applied up to 3 times consecutively. Using this ability does not consume Skill Points and is not considered as using a Skill.<br>Enhanced once, Beneficent Lotus becomes Transcendence.<br>Enhanced twice, Beneficent Lotus becomes Divine Spear.<br>Enhanced thrice, Beneficent Lotus becomes Fulgurant Leap.<br>When using Divine Spear or Fulgurant Leap, starting from the fourth hit, 1 stack of Outroar is gained before every hit. Each stack of Outroar increases Dan Heng • Imbibitor Lunae's CRIT DMG by <b><unbreak>#1[f1]%</unbreak></b>, for a max of <unbreak>#2[i]</unbreak> stacks. These stacks last until the end of his turn.">Enhances Basic ATK. Enhancements may be applied up to 3 times consecutively. Using this ability does not consume Skill Points and is not considered as using a Skill.<br>Enhanced once, Beneficent Lotus becomes Transcendence.<br>Enhanced twice, Beneficent Lotus becomes Divine Spear.<br>Enhanced thrice, Beneficent Lotus becomes Fulgurant Leap.<br>When using Divine Spear or Fulgurant Leap, starting from the fourth hit, 1 stack of Outroar is gained before every hit. Each stack of Outroar increases Dan Heng • Imbibitor Lunae's CRIT DMG by <b><unbreak>#1[f1]%</unbreak></b>, for a max of <unbreak>#2[i]</unbreak> stacks. These stacks last until the end of his turn.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121302', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121302_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121302_stats"></div><div id="121302_data" style="display:none;" data-level1="0.06, 4" data-level2="0.066, 4" data-level3="0.072, 4" data-level4="0.078, 4" data-level5="0.084, 4" data-level6="0.09, 4" data-level7="0.0975, 4" data-level8="0.105, 4" data-level9="0.1125, 4" data-level10="0.12, 4" data-level11="0.126, 4" data-level12="0.132, 4" data-level13="0.138, 4" data-level14="0.144, 4" data-level15="0.15, 4" data-levelid="1, 2, 1, 3, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Azure's Aqua Ablutes All (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121303_description" data-original-description="Uses a 3-hit attack and deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Dan Heng • Imbibitor Lunae's ATK to a single enemy target. At the same time, deals Imaginary DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Dan Heng • Imbibitor Lunae's ATK to adjacent targets. Then, obtains <unbreak>#3[i]</unbreak> Squama Sacrosancta.<br>It's possible to hold up to <unbreak>#4[i]</unbreak> Squama Sacrosancta, which can be used to offset Dan Heng • Imbibitor Lunae's consumption of skill points. Consuming Squama Sacrosancta is considered equivalent to consuming skill points.">Uses a 3-hit attack and deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Dan Heng • Imbibitor Lunae's ATK to a single enemy target. At the same time, deals Imaginary DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Dan Heng • Imbibitor Lunae's ATK to adjacent targets. Then, obtains <unbreak>#3[i]</unbreak> Squama Sacrosancta.<br>It's possible to hold up to <unbreak>#4[i]</unbreak> Squama Sacrosancta, which can be used to offset Dan Heng • Imbibitor Lunae's consumption of skill points. Consuming Squama Sacrosancta is considered equivalent to consuming skill points.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121303', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121303_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121303_stats"></div><div id="121303_data" style="display:none;" data-level1="1.8, 0.84, 2, 3" data-level2="1.92, 0.896, 2, 3" data-level3="2.04, 0.952, 2, 3" data-level4="2.16, 1.008, 2, 3" data-level5="2.28, 1.064, 2, 3" data-level6="2.4, 1.12, 2, 3" data-level7="2.55, 1.19, 2, 3" data-level8="2.7, 1.26, 2, 3" data-level9="2.85, 1.33, 2, 3" data-level10="3, 1.4, 2, 3" data-level11="3.12, 1.456, 2, 3" data-level12="3.24, 1.512, 2, 3" data-level13="3.36, 1.568, 2, 3" data-level14="3.48, 1.624, 2, 3" data-level15="3.6, 1.68, 2, 3" data-levelid="1, 2, 1, 3, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Righteous Heart (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121304_description" data-original-description="After each hit dealt during an attack, Dan Heng • Imbibitor Lunae gains 1 stack of Righteous Heart, increasing his DMG by <b><unbreak>#1[f1]%</unbreak></b>. This effect can stack up to <unbreak>#2[i]</unbreak> time(s), lasting until the end of his turn.">After each hit dealt during an attack, Dan Heng • Imbibitor Lunae gains 1 stack of Righteous Heart, increasing his DMG by <b><unbreak>#1[f1]%</unbreak></b>. This effect can stack up to <unbreak>#2[i]</unbreak> time(s), lasting until the end of his turn.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121304', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121304_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121304_stats"></div><div id="121304_data" style="display:none;" data-level1="0.05, 6" data-level2="0.055, 6" data-level3="0.06, 6" data-level4="0.065, 6" data-level5="0.07, 6" data-level6="0.075, 6" data-level7="0.08125, 6" data-level8="0.0875, 6" data-level9="0.09375, 6" data-level10="0.1, 6" data-level11="0.105, 6" data-level12="0.11, 6" data-level13="0.115, 6" data-level14="0.12, 6" data-level15="0.125, 6" data-levelid="1, 2, 1, 3, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121306_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121306', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121306_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121306_stats"></div><div id="121306_data" style="display:none;" data-level1="" data-levelid="1, 2, 1, 3, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Heaven-Quelling Prismadrakon (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121307_description" data-original-description="After using his Technique, Dan Heng • Imbibitor Lunae enters the Leaping Dragon state for <unbreak>#2[i]</unbreak> seconds. While in the Leaping Dragon state, using his attack enables him to move forward rapidly for a set distance, attacking all enemies he touches and blocking all incoming attacks. After entering combat via attacking enemies in the Leaping Dragon state, Dan Heng • Imbibitor Lunae deals Imaginary DMG equal to <unbreak>#3[i]%</unbreak> of his ATK to all enemies, and gains <unbreak>#1[i]</unbreak> Squama Sacrosancta.">After using his Technique, Dan Heng • Imbibitor Lunae enters the Leaping Dragon state for <unbreak>#2[i]</unbreak> seconds. While in the Leaping Dragon state, using his attack enables him to move forward rapidly for a set distance, attacking all enemies he touches and blocking all incoming attacks. After entering combat via attacking enemies in the Leaping Dragon state, Dan Heng • Imbibitor Lunae deals Imaginary DMG equal to <unbreak>#3[i]%</unbreak> of his ATK to all enemies, and gains <unbreak>#1[i]</unbreak> Squama Sacrosancta.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121307', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121307_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121307_stats"></div><div id="121307_data" style="display:none;" data-level1="1, 20, 1.2" data-levelid="1, 2, 1, 3, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Transcendence (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121308_description" data-original-description="Uses a 3-hit attack and deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Dan Heng • Imbibitor Lunae's ATK to a single enemy target.">Uses a 3-hit attack and deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Dan Heng • Imbibitor Lunae's ATK to a single enemy target.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121308', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121308_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121308_stats"></div><div id="121308_data" style="display:none;" data-level1="1.3" data-level2="1.56" data-level3="1.82" data-level4="2.08" data-level5="2.34" data-level6="2.6" data-level7="2.86" data-level8="3.12" data-level9="3.38" data-levelid="1, 2, 1, 3, 0, 8" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Cancel (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121309_description" data-original-description="Cancel Enhancement">Cancel Enhancement</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121309', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121309_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121309_stats"></div><div id="121309_data" style="display:none;" data-level1="" data-levelid="1, 2, 1, 3, 0, 9" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Divine Spear (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121310_description" data-original-description="Uses a 5-hit attack and deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Dan Heng • Imbibitor Lunae's ATK to a single enemy target. From the fourth hit onward, simultaneously deals Imaginary DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Dan Heng • Imbibitor Lunae's ATK to adjacent targets.">Uses a 5-hit attack and deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Dan Heng • Imbibitor Lunae's ATK to a single enemy target. From the fourth hit onward, simultaneously deals Imaginary DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Dan Heng • Imbibitor Lunae's ATK to adjacent targets.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121310', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121310_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121310_stats"></div><div id="121310_data" style="display:none;" data-level1="1.9, 0.3" data-level2="2.28, 0.36" data-level3="2.66, 0.42" data-level4="3.04, 0.48" data-level5="3.42, 0.54" data-level6="3.8, 0.6" data-level7="4.18, 0.66" data-level8="4.56, 0.72" data-level9="4.94, 0.78" data-levelid="1, 2, 1, 3, 1, 0" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Fulgurant Leap (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="121312_description" data-original-description="Uses a 7-hit attack and deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Dan Heng • Imbibitor Lunae's ATK to a single enemy target. From the fourth hit onward, simultaneously deal Imaginary DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Dan Heng • Imbibitor Lunae's ATK to adjacent targets.">Uses a 7-hit attack and deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Dan Heng • Imbibitor Lunae's ATK to a single enemy target. From the fourth hit onward, simultaneously deal Imaginary DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Dan Heng • Imbibitor Lunae's ATK to adjacent targets.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('121312', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="121312_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="121312_stats"></div><div id="121312_data" style="display:none;" data-level1="2.5, 0.9" data-level2="3, 1.08" data-level3="3.5, 1.26" data-level4="4, 1.44" data-level5="4.5, 1.62" data-level6="5, 1.8" data-level7="5.5, 1.98" data-level8="6, 2.16" data-level9="6.5, 2.34" data-levelid="1, 2, 1, 3, 1, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Star Veil<th></tr><td>At the start of the battle, immediately regenerates 15 Energy.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Aqua Reign<th></tr><td>Increases the chance to resist Crowd Control debuffs by 35%.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Jolt Anew<th></tr><td>When dealing DMG to enemy targets with Imaginary Weakness, CRIT DMG increases by 24%.</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>DMG Boost: Imaginary</th><th>CRIT Rate Boost</th><th>HP Boost</th></tr><tr><td>22.4%</td><td>12.0%</td><td>10.0%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Tethered to Sky<th></tr><td>Increases the stackable Righteous Heart count by <unbreak>4</unbreak>, and gains 1 extra stack of Righteous Heart for each hit during an attack.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Imperium On Cloud Nine<th></tr><td>After using his Ultimate, Dan Heng • Imbibitor Lunae's action is Advanced Forward by <unbreak>100%</unbreak> and gains 1 extra Squama Sacrosancta.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Clothed in Clouds<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Zephyr's Bliss<th></tr><td>The buff effect granted by Outroar lasts until the end of this character's next turn.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Fall is the Pride<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Reign, Returned<th></tr><td>After any other ally uses their Ultimate, the Imaginary RES PEN of Dan Heng • Imbibitor Lunae's next Fulgurant Leap attack increases by <unbreak>20%</unbreak>. This effect can stack up to <unbreak>3</unbreak> time(s).</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

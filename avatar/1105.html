@@ -1,0 +1,350 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Natasha</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Natasha</h1>
+            <p>A doctor from the Underworld and a caregiver of children.<br>Alongside her kindness and caring, she also has a hidden dangerous side.<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1105</td>
+        <td>Abundance</td><td>Physical</td><td>4*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>1164.24</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>507.15</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>476.28</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>98</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>2646400</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>5</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110171.png' />
+                        Seed of Abundance
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110172.png' />
+                        Sprout of Life
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110173.png' />
+                        Flower of Eternity
+                    </td>
+                    <td>105</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110401.png' />
+                        Broken Teeth of Iron Wolf
+                    </td>
+                    <td>50</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110502.png' />
+                        Guardian's Lament
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112011.png' />
+                        Ancient Part
+                    </td>
+                    <td>40</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112012.png' />
+                        Ancient Spindle
+                    </td>
+                    <td>55</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/112013.png' />
+                        Ancient Engine
+                    </td>
+                    <td>54</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">Behind the Kindness (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="110501_description" data-original-description="Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Natasha's ATK to a single enemy.">Deals Physical DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Natasha's ATK to a single enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('110501', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="110501_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="110501_stats"></div><div id="110501_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 1, 0, 5, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Love, Heal, and Choose (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="110502_description" data-original-description="Restores a single ally for <b><unbreak>#1[f1]%</unbreak></b> of Natasha's Max HP plus <b><unbreak>#4[i]</unbreak></b>. Restores the ally for another <b><unbreak>#2[f1]%</unbreak></b> of Natasha's Max HP plus <b><unbreak>#5[i]</unbreak></b> at the beginning of each turn for <unbreak>#3[i]</unbreak> turn(s).">Restores a single ally for <b><unbreak>#1[f1]%</unbreak></b> of Natasha's Max HP plus <b><unbreak>#4[i]</unbreak></b>. Restores the ally for another <b><unbreak>#2[f1]%</unbreak></b> of Natasha's Max HP plus <b><unbreak>#5[i]</unbreak></b> at the beginning of each turn for <unbreak>#3[i]</unbreak> turn(s).</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('110502', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="110502_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="110502_stats"></div><div id="110502_data" style="display:none;" data-level1="0.07, 0.048, 2, 70, 48" data-level2="0.074375, 0.051, 2, 112, 76.8" data-level3="0.07875, 0.054, 2, 143.5, 98.4" data-level4="0.083125, 0.057, 2, 175, 120" data-level5="0.0875, 0.06, 2, 196, 134.4" data-level6="0.091, 0.0624, 2, 217, 148.8" data-level7="0.0945, 0.0648, 2, 232.75, 159.6" data-level8="0.098, 0.0672, 2, 248.5, 170.4" data-level9="0.1015, 0.0696, 2, 264.25, 181.2" data-level10="0.105, 0.072, 2, 280, 192" data-level11="0.1085, 0.0744, 2, 295.75, 202.8" data-level12="0.112, 0.0768, 2, 311.5, 213.6" data-level13="0.1155, 0.0792, 2, 327.25, 224.4" data-level14="0.119, 0.0816, 2, 343, 235.2" data-level15="0.1225, 0.084, 2, 358.75, 246" data-levelid="1, 1, 0, 5, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Gift of Rebirth (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="110503_description" data-original-description="Heals all allies for <b><unbreak>#1[f1]%</unbreak></b> of Natasha's Max HP plus <b><unbreak>#2[i]</unbreak></b>.">Heals all allies for <b><unbreak>#1[f1]%</unbreak></b> of Natasha's Max HP plus <b><unbreak>#2[i]</unbreak></b>.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('110503', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="110503_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="110503_stats"></div><div id="110503_data" style="display:none;" data-level1="0.092, 92" data-level2="0.09775, 147.2" data-level3="0.1035, 188.6" data-level4="0.10925, 230" data-level5="0.115, 257.6" data-level6="0.1196, 285.2" data-level7="0.1242, 305.9" data-level8="0.1288, 326.6" data-level9="0.1334, 347.3" data-level10="0.138, 368" data-level11="0.1426, 388.7" data-level12="0.1472, 409.4" data-level13="0.1518, 430.1" data-level14="0.1564, 450.8" data-level15="0.161, 471.5" data-levelid="1, 1, 0, 5, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Innervation (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="110504_description" data-original-description="When healing allies with HP percentage at <unbreak>#1[i]%</unbreak> or lower, increases Natasha's Outgoing Healing by <b><unbreak>#2[i]%</unbreak></b>. This effect also works on continuous healing.">When healing allies with HP percentage at <unbreak>#1[i]%</unbreak> or lower, increases Natasha's Outgoing Healing by <b><unbreak>#2[i]%</unbreak></b>. This effect also works on continuous healing.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('110504', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="110504_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="110504_stats"></div><div id="110504_data" style="display:none;" data-level1="0.3, 0.25" data-level2="0.3, 0.275" data-level3="0.3, 0.3" data-level4="0.3, 0.325" data-level5="0.3, 0.35" data-level6="0.3, 0.375" data-level7="0.3, 0.40625" data-level8="0.3, 0.4375" data-level9="0.3, 0.46875" data-level10="0.3, 0.5" data-level11="0.3, 0.525" data-level12="0.3, 0.55" data-level13="0.3, 0.575" data-level14="0.3, 0.6" data-level15="0.3, 0.625" data-levelid="1, 1, 0, 5, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="110506_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('110506', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="110506_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="110506_stats"></div><div id="110506_data" style="display:none;" data-level1="" data-levelid="1, 1, 0, 5, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Hypnosis Research (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="110507_description" data-original-description="Immediately attacks the enemy. After entering battle, deals Physical DMG equal to <unbreak>#4[i]%</unbreak> of Natasha's ATK to a random enemy, with a <unbreak>#1[i]%</unbreak> <u>base chance</u> to Weaken all enemies.<br>While Weakened, enemies deal <unbreak>#2[i]%</unbreak> less DMG to allies for <unbreak>#3[i]</unbreak> turn(s).">Immediately attacks the enemy. After entering battle, deals Physical DMG equal to <unbreak>#4[i]%</unbreak> of Natasha's ATK to a random enemy, with a <unbreak>#1[i]%</unbreak> <u>base chance</u> to Weaken all enemies.<br>While Weakened, enemies deal <unbreak>#2[i]%</unbreak> less DMG to allies for <unbreak>#3[i]</unbreak> turn(s).</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('110507', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="110507_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="110507_stats"></div><div id="110507_data" style="display:none;" data-level1="1, 0.3, 1, 0.8" data-levelid="1, 1, 0, 5, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Soothe<th></tr><td>The Skill removes 1 debuff(s) from a target ally.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Healer<th></tr><td>Natasha's Outgoing Healing increases by 10%.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Recuperation<th></tr><td>Increases the duration of Skill's continuous healing effect for 1 turn(s).</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>HP Boost</th><th>Effect RES Boost</th><th>DEF Boost</th></tr><tr><td>28.0%</td><td>18.0%</td><td>12.5%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Pharmacology Expertise<th></tr><td>After being attacked, if the current HP percentage is <unbreak>30%</unbreak> or lower, heals self for 1 time to restore HP by an amount equal to <unbreak>15%</unbreak> of Max HP plus <unbreak>400</unbreak>. This effect can only be triggered 1 time per battle.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Clinical Research<th></tr><td>When Natasha uses her Ultimate, grant continuous healing for <unbreak>1</unbreak> turn(s) to allies whose HP percentage is at <unbreak>30%</unbreak> or lower. And at the beginning of their turn, their HP is restored by an amount equal to <unbreak>6%</unbreak> of Natasha's Max HP plus <unbreak>160</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>The Right Cure<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Miracle Cure<th></tr><td>After being attacked, regenerates <unbreak>5</unbreak> extra Energy.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Preventive Treatment<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Doctor's Grace<th></tr><td>Natasha's Basic ATK additionally deals Physical DMG equal to <unbreak>40%</unbreak> of her Max HP.</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

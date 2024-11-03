@@ -1,0 +1,350 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Jade</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Jade</h1>
+            <p>A senior manager in the IPC Strategic Investment Department and one of the Ten Stonehearts, known for her cornerstone "Jade of Credit."<br>A beautiful and elegant moneylender, she is skilled in deciphering the depths of people's minds, with a personal hobby called "Bonajade Exchange."<br>She's willing to wait patiently for high-value acquisitions and adept at extracting value from seemingly destitute clients.<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1314</td>
+        <td>Erudition</td><td>Quantum</td><td>5*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>1086.62</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>509.36</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>659.74</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>103</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>75</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110201.png' />
+                        Rough Sketch
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110202.png' />
+                        Dynamic Outlining
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110203.png' />
+                        Exquisite Colored Draft
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110426.png' />
+                        Dream Flamer
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110505.png' />
+                        Lost Echo of the Shared Wish
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114001.png' />
+                        Dream Collection Component
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114002.png' />
+                        Dream Flow Valve
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/114003.png' />
+                        Dream Making Engine
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">Lash of Riches (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131401_description" data-original-description="Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Jade's ATK to a single target enemy, and Quantum DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Jade's ATK to adjacent enemies.">Deals Quantum DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Jade's ATK to a single target enemy, and Quantum DMG equal to <b><unbreak>#2[i]%</unbreak></b> of Jade's ATK to adjacent enemies.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131401', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131401_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131401_stats"></div><div id="131401_data" style="display:none;" data-level1="0.45, 0.15" data-level2="0.54, 0.18" data-level3="0.63, 0.21" data-level4="0.72, 0.24" data-level5="0.81, 0.27" data-level6="0.9, 0.3" data-level7="0.99, 0.33" data-level8="1.08, 0.36" data-level9="1.17, 0.39" data-levelid="1, 3, 1, 4, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Acquisition Surety (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131402_description" data-original-description="Makes a single target ally become the Debt Collector and increases their SPD by <unbreak>#1[i]</unbreak>, lasting for <unbreak>#4[i]</unbreak> turn(s).<br>After the Debt Collector attacks, deals 1 instance of Quantum <u>Additional DMG</u> equal to <b><unbreak>#3[i]%</unbreak></b> of Jade's ATK to each enemy target hit, and consumes the Debt Collector's HP by an amount equal to <unbreak>#2[i]%</unbreak> of their Max HP. If the current HP is insufficient, reduces HP to 1.<br>If Jade becomes the Debt Collector, she cannot gain the SPD boost effect, and her attacks do not consume HP.<br>When the Debt Collector exists on the field, Jade cannot use her Skill. At the start of Jade's every turn, the Debt Collector's duration decreases by 1 turn.">Makes a single target ally become the Debt Collector and increases their SPD by <unbreak>#1[i]</unbreak>, lasting for <unbreak>#4[i]</unbreak> turn(s).<br>After the Debt Collector attacks, deals 1 instance of Quantum <u>Additional DMG</u> equal to <b><unbreak>#3[i]%</unbreak></b> of Jade's ATK to each enemy target hit, and consumes the Debt Collector's HP by an amount equal to <unbreak>#2[i]%</unbreak> of their Max HP. If the current HP is insufficient, reduces HP to 1.<br>If Jade becomes the Debt Collector, she cannot gain the SPD boost effect, and her attacks do not consume HP.<br>When the Debt Collector exists on the field, Jade cannot use her Skill. At the start of Jade's every turn, the Debt Collector's duration decreases by 1 turn.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131402', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131402_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131402_stats"></div><div id="131402_data" style="display:none;" data-level1="30, 0.02, 0.15, 3" data-level2="30, 0.02, 0.16, 3" data-level3="30, 0.02, 0.17, 3" data-level4="30, 0.02, 0.18, 3" data-level5="30, 0.02, 0.19, 3" data-level6="30, 0.02, 0.2, 3" data-level7="30, 0.02, 0.2125, 3" data-level8="30, 0.02, 0.225, 3" data-level9="30, 0.02, 0.2375, 3" data-level10="30, 0.02, 0.25, 3" data-level11="30, 0.02, 0.26, 3" data-level12="30, 0.02, 0.27, 3" data-level13="30, 0.02, 0.28, 3" data-level14="30, 0.02, 0.29, 3" data-level15="30, 0.02, 0.3, 3" data-levelid="1, 3, 1, 4, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Vow of the Deep (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131403_description" data-original-description="Deals Quantum DMG equal to <b><unbreak>#3[i]%</unbreak></b> of Jade's ATK to all enemies. At the same time, Jade enhances her Talent's <u>follow-up attack</u>, increasing its DMG multiplier by <b><unbreak>#1[i]%</unbreak></b>. This enhancement can take effect <unbreak>#2[i]</unbreak> time(s).">Deals Quantum DMG equal to <b><unbreak>#3[i]%</unbreak></b> of Jade's ATK to all enemies. At the same time, Jade enhances her Talent's <u>follow-up attack</u>, increasing its DMG multiplier by <b><unbreak>#1[i]%</unbreak></b>. This enhancement can take effect <unbreak>#2[i]</unbreak> time(s).</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131403', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131403_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131403_stats"></div><div id="131403_data" style="display:none;" data-level1="0.4, 2, 1.2" data-level2="0.44, 2, 1.32" data-level3="0.48, 2, 1.44" data-level4="0.52, 2, 1.56" data-level5="0.56, 2, 1.68" data-level6="0.6, 2, 1.8" data-level7="0.65, 2, 1.95" data-level8="0.7, 2, 2.1" data-level9="0.75, 2, 2.25" data-level10="0.8, 2, 2.4" data-level11="0.84, 2, 2.52" data-level12="0.88, 2, 2.64" data-level13="0.92, 2, 2.76" data-level14="0.96, 2, 2.88" data-level15="1, 2, 3" data-levelid="1, 3, 1, 4, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Fang of Flare Flaying (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131404_description" data-original-description="After Jade or the Debt Collector unit attacks, gains 1 point of Charge for each enemy target hit. Upon reaching <unbreak>#3[i]</unbreak> points of Charge, consumes the <unbreak>#3[i]</unbreak> points to launch 1 instance of <u>follow-up attack</u>, dealing Quantum DMG equal to <b><unbreak>#5[i]%</unbreak></b> of Jade's ATK to all enemies. This <u>follow-up attack</u> does not generate Charge.<br>When launching her Talent's <u>follow-up attack</u>, Jade immediately gains <unbreak>#4[i]</unbreak> stack(s) of Pawned Asset, with each stack increasing CRIT DMG by <b><unbreak>#1[f1]%</unbreak></b>, stacking up to <unbreak>#2[i]</unbreak> times.">After Jade or the Debt Collector unit attacks, gains 1 point of Charge for each enemy target hit. Upon reaching <unbreak>#3[i]</unbreak> points of Charge, consumes the <unbreak>#3[i]</unbreak> points to launch 1 instance of <u>follow-up attack</u>, dealing Quantum DMG equal to <b><unbreak>#5[i]%</unbreak></b> of Jade's ATK to all enemies. This <u>follow-up attack</u> does not generate Charge.<br>When launching her Talent's <u>follow-up attack</u>, Jade immediately gains <unbreak>#4[i]</unbreak> stack(s) of Pawned Asset, with each stack increasing CRIT DMG by <b><unbreak>#1[f1]%</unbreak></b>, stacking up to <unbreak>#2[i]</unbreak> times.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131404', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131404_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131404_stats"></div><div id="131404_data" style="display:none;" data-level1="0.012, 50, 8, 5, 0.6" data-level2="0.0132, 50, 8, 5, 0.66" data-level3="0.0144, 50, 8, 5, 0.72" data-level4="0.0156, 50, 8, 5, 0.78" data-level5="0.0168, 50, 8, 5, 0.84" data-level6="0.018, 50, 8, 5, 0.9" data-level7="0.0195, 50, 8, 5, 0.975" data-level8="0.021, 50, 8, 5, 1.05" data-level9="0.0225, 50, 8, 5, 1.125" data-level10="0.024, 50, 8, 5, 1.2" data-level11="0.0252, 50, 8, 5, 1.26" data-level12="0.0264, 50, 8, 5, 1.32" data-level13="0.0276, 50, 8, 5, 1.38" data-level14="0.0288, 50, 8, 5, 1.44" data-level15="0.03, 50, 8, 5, 1.5" data-levelid="1, 3, 1, 4, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131406_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131406', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131406_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131406_stats"></div><div id="131406_data" style="display:none;" data-level1="" data-levelid="1, 3, 1, 4, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Visionary Predation (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="131407_description" data-original-description="After using the Technique, inflicts enemies within a set area with Blind Fealty for <unbreak>#1[i]</unbreak> second(s). Enemies inflicted with Blind Fealty will not initiate attacks on allies. When entering battle via actively attacking enemies inflicted with Blind Fealty, all enemies with Blind Fealty will enter combat simultaneously. After entering battle, deals Quantum DMG equal to <unbreak>#2[i]%</unbreak> of Jade's ATK to all enemies, and immediately gains <unbreak>#3[i]</unbreak> stack(s) of Pawned Asset.">After using the Technique, inflicts enemies within a set area with Blind Fealty for <unbreak>#1[i]</unbreak> second(s). Enemies inflicted with Blind Fealty will not initiate attacks on allies. When entering battle via actively attacking enemies inflicted with Blind Fealty, all enemies with Blind Fealty will enter combat simultaneously. After entering battle, deals Quantum DMG equal to <unbreak>#2[i]%</unbreak> of Jade's ATK to all enemies, and immediately gains <unbreak>#3[i]</unbreak> stack(s) of Pawned Asset.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('131407', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="131407_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="131407_stats"></div><div id="131407_data" style="display:none;" data-level1="10, 0.5, 15" data-levelid="1, 3, 1, 4, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Reverse Repo<th></tr><td>When an enemy target enters combat, Jade gains 1 stack(s) of Pawned Asset. When the Debt Collector character's turn starts, additionally gains 3 stack(s) of Pawned Asset.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Collateral Ticket<th></tr><td>When the battle starts, Jade's action is advanced forward by 50%.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Asset Forfeiture<th></tr><td>Each Pawned Asset stack from the Talent additionally increases Jade's ATK by 0.5%.</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>DMG Boost: Quantum</th><th>ATK Boost</th><th>Effect RES Boost</th></tr><tr><td>22.4%</td><td>18.0%</td><td>10.0%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Altruism? Nevertheless Tradable<th></tr><td>The follow-up attack DMG from Jade's Talent increases by <unbreak>32%</unbreak>. After the Debt Collector character attacks and the number of the enemy target(s) hit is either 2 or 1, Jade additionally gains <unbreak>1</unbreak> or <unbreak>2</unbreak> point(s) of Charge respectively.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Morality? Herein Authenticated<th></tr><td>When there are <unbreak>15</unbreak> stacks of Pawned Asset, Jade's CRIT Rate increases by <unbreak>18%</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Honesty? Soon Mortgaged<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Sincerity? Put Option Only<th></tr><td>When using Ultimate, enables the DMG dealt by Jade to ignore <unbreak>12%</unbreak> of enemy targets' DEF, lasting for <unbreak>3</unbreak> turn(s).</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Hope? Hitherto Forfeited<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Equity? Pending Sponsorship<th></tr><td>When the Debt Collector character exists on the field, Jade's Quantum RES PEN increases by <unbreak>20%</unbreak>, and Jade gains the Debt Collector state.</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

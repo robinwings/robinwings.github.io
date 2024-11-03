@@ -1,0 +1,350 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../dark.css">
+            <title>Luocha</title>
+            
+<script>
+function updateSkill(skillId, level) {
+    var skillDataElement = document.getElementById(skillId + '_data');
+    
+    var stats = skillDataElement.getAttribute('data-level' + level);
+    console.log('Selected level:', level);
+    console.log('Stats for selected level:', stats);
+    
+    var statsArray = stats.split(',').map(stat => parseFloat(stat.trim()));
+    console.log('Parsed stats array:', statsArray);
+    
+    var skillDescriptionElement = document.getElementById(skillId + '_description');
+    
+    var originalDescription = skillDescriptionElement.getAttribute('data-original-description');
+    console.log('Original description:', originalDescription);
+    
+    var updatedDescription = originalDescription;
+    statsArray.forEach((stat, index) => {
+        var placeholderRegExp = new RegExp(`#${index + 1}\\[([if1]+)\\](%?)`, 'g');
+
+        updatedDescription = updatedDescription.replace(placeholderRegExp, (match, p1, p2) => {
+            var formattedStat = stat;
+            console.log('Processing placeholder:', match, 'with stat:', stat, 'and format:', p1, 'percentage sign:', p2);
+            
+            if (p2 === '%') {
+                formattedStat = (stat * 100).toFixed(stat < 0.01 ? 2 : 0) + '%';
+            } else {
+                if (stat % 1 !== 0) {
+                    formattedStat = stat.toFixed(stat % 1 !== 0 ? 2 : 0);
+                }
+            }
+            console.log('Replacing placeholder:', match, 'with formatted stat:', formattedStat);
+            return formattedStat;
+        });
+    });
+    
+    console.log('Updated description:', updatedDescription);
+    skillDescriptionElement.innerHTML = updatedDescription;
+}
+function initializeSkills() {
+    var dropdowns = document.querySelectorAll('select[onchange^="updateSkill"]');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = 1;
+        dropdown.dispatchEvent(new Event('change'));
+    });
+}
+</script>
+
+        </head>
+    <body onload="initializeSkills()"">
+    <noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+    <h1 style="margin-bottom:0px">robinwings</h1><hr>
+    <div style="margin-top:20px; margin-bottom:10px">
+    <a class="button-link" style="text-decoration: none;" href='../avatar.html'">Character</a>  <a class="button-link" style="text-decoration: none;" href='../weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='../relics.html'">Relic Set</a>  </div>
+            <h1>Luocha</h1>
+            <p>Carrying a coffin wherever he goes, he is a foreign trader who came from beyond the stellar seas.<br>Has excellent medical skills.<br><br>
+<table>
+        <th>ID</th><th>Path</th><th>Element</th><th>Rarity</th>
+    <tr>
+        <td>1203</td>
+        <td>Abundance</td><td>Imaginary</td><td>5*</td>
+    </tr>
+</table><br>
+    <h2>Stats</h2>
+ <div style="column-count: 2; column-gap: 20px;">
+        <table>
+            <tr>
+                <td><strong>Max HP</strong></td>
+                <td>1280.66</td>
+            </tr>
+            <tr>
+                <td><strong>Max DEF</strong></td>
+                <td>363.83</td>
+            </tr>
+            <tr>
+                <td><strong>Max ATK</strong></td>
+                <td>756.76</td>
+            </tr>
+            <tr>
+                <td><strong>Speed</strong></td>
+                <td>101</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><strong>Aggro</strong></td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT Rate</strong></td>
+                <td>5.0%</td>
+            </tr>
+            <tr>
+                <td><strong>CRIT DMG</strong></td>
+                <td>50.0%</td>
+            </tr>
+        </table>
+    </div><br>
+            <h2>Max Materials</h2>
+            <table>
+                <tr>
+                    <th>Material</th>
+                    <th>Amount</th>
+                </tr>
+                
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/2.png' />
+                        Credit
+                    </td>
+                    <td>3308000</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/241.png' />
+                        Tracks of Destiny
+                    </td>
+                    <td>8</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110171.png' />
+                        Seed of Abundance
+                    </td>
+                    <td>18</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110172.png' />
+                        Sprout of Life
+                    </td>
+                    <td>69</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110173.png' />
+                        Flower of Eternity
+                    </td>
+                    <td>139</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110407.png' />
+                        Golden Crown of the Past Shadow
+                    </td>
+                    <td>65</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/110502.png' />
+                        Guardian's Lament
+                    </td>
+                    <td>12</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113011.png' />
+                        Artifex's Module
+                    </td>
+                    <td>56</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113012.png' />
+                        Artifex's Cogwheel
+                    </td>
+                    <td>71</td>
+                </tr>
+            
+                <tr>
+                    <td style='display: flex; align-items: center;'>
+                        <img style='height: 38px; width: auto; margin-right: 1rem;' src='https://raw.githubusercontent.com/FortOfFans/HSR/main/spriteoutput/itemfigures/113013.png' />
+                        Artifex's Gyreheart
+                    </td>
+                    <td>73</td>
+                </tr>
+            
+            </table><br>
+        
+            <h2>Skills</h2>
+        
+                <table>
+                    <tr>
+                        <th colspan="2">Thorns of the Abyss (Basic ATK)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120301_description" data-original-description="Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Luocha's ATK to a single enemy.">Deals Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Luocha's ATK to a single enemy.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120301', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120301_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120301_stats"></div><div id="120301_data" style="display:none;" data-level1="0.5" data-level2="0.6" data-level3="0.7" data-level4="0.8" data-level5="0.9" data-level6="1" data-level7="1.1" data-level8="1.2" data-level9="1.3" data-levelid="1, 2, 0, 3, 0, 1" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Prayer of Abyss Flower (Skill)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120302_description" data-original-description="After using his Skill, Luocha immediately restores the target ally's HP equal to <b><unbreak>#1[i]%</unbreak></b> of Luocha's ATK plus <b><unbreak>#2[i]</unbreak></b>. Meanwhile, Luocha gains 1 stack of Abyss Flower.<br>When any ally's HP percentage drops to <unbreak>#3[i]%</unbreak> or lower, an effect equivalent to Luocha's Skill will immediately be triggered and applied to this ally for one time (without consuming Skill Points). This effect can be triggered again after <unbreak>#4[i]</unbreak> turn(s).">After using his Skill, Luocha immediately restores the target ally's HP equal to <b><unbreak>#1[i]%</unbreak></b> of Luocha's ATK plus <b><unbreak>#2[i]</unbreak></b>. Meanwhile, Luocha gains 1 stack of Abyss Flower.<br>When any ally's HP percentage drops to <unbreak>#3[i]%</unbreak> or lower, an effect equivalent to Luocha's Skill will immediately be triggered and applied to this ally for one time (without consuming Skill Points). This effect can be triggered again after <unbreak>#4[i]</unbreak> turn(s).</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120302', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120302_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120302_stats"></div><div id="120302_data" style="display:none;" data-level1="0.4, 200, 0.5, 2" data-level2="0.425, 320, 0.5, 2" data-level3="0.45, 410, 0.5, 2" data-level4="0.475, 500, 0.5, 2" data-level5="0.5, 560, 0.5, 2" data-level6="0.52, 620, 0.5, 2" data-level7="0.54, 665, 0.5, 2" data-level8="0.56, 710, 0.5, 2" data-level9="0.58, 755, 0.5, 2" data-level10="0.6, 800, 0.5, 2" data-level11="0.62, 845, 0.5, 2" data-level12="0.64, 890, 0.5, 2" data-level13="0.66, 935, 0.5, 2" data-level14="0.68, 980, 0.5, 2" data-level15="0.7, 1025, 0.5, 2" data-levelid="1, 2, 0, 3, 0, 2" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Death Wish (Ultimate)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120303_description" data-original-description="Removes <unbreak>#2[i]</unbreak> <u>buff(s)</u> from all enemies and deals all enemies Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Luocha's ATK. At the same time, Luocha gains 1 stack of Abyss Flower.">Removes <unbreak>#2[i]</unbreak> <u>buff(s)</u> from all enemies and deals all enemies Imaginary DMG equal to <b><unbreak>#1[i]%</unbreak></b> of Luocha's ATK. At the same time, Luocha gains 1 stack of Abyss Flower.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120303', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120303_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120303_stats"></div><div id="120303_data" style="display:none;" data-level1="1.2, 1" data-level2="1.28, 1" data-level3="1.36, 1" data-level4="1.44, 1" data-level5="1.52, 1" data-level6="1.6, 1" data-level7="1.7, 1" data-level8="1.8, 1" data-level9="1.9, 1" data-level10="2, 1" data-level11="2.08, 1" data-level12="2.16, 1" data-level13="2.24, 1" data-level14="2.32, 1" data-level15="2.4, 1" data-levelid="1, 2, 0, 3, 0, 3" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Cycle of Life (Talent)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120304_description" data-original-description="When Abyss Flower reaches <unbreak>#1[i]</unbreak> stacks, Luocha consumes all stacks of Abyss Flower to deploy a Zone against the enemy.<br>When any enemy in the Zone is attacked by an ally, the attacking ally's HP is immediately restored by an amount equal to <b><unbreak>#2[f1]%</unbreak></b> of Luocha's ATK plus <b><unbreak>#4[i]</unbreak></b>.<br>The Zone's effect lasts for <unbreak>#3[i]</unbreak> turns. When Luocha is <u>knocked down</u>, the Zone will be dispelled.">When Abyss Flower reaches <unbreak>#1[i]</unbreak> stacks, Luocha consumes all stacks of Abyss Flower to deploy a Zone against the enemy.<br>When any enemy in the Zone is attacked by an ally, the attacking ally's HP is immediately restored by an amount equal to <b><unbreak>#2[f1]%</unbreak></b> of Luocha's ATK plus <b><unbreak>#4[i]</unbreak></b>.<br>The Zone's effect lasts for <unbreak>#3[i]</unbreak> turns. When Luocha is <u>knocked down</u>, the Zone will be dispelled.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120304', this.value)"><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option><option value="8">Level 8</option><option value="9">Level 9</option><option value="10">Level 10</option><option value="11">Level 11</option><option value="12">Level 12</option><option value="13">Level 13</option><option value="14">Level 14</option><option value="15">Level 15</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120304_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120304_stats"></div><div id="120304_data" style="display:none;" data-level1="2, 0.12, 2, 60" data-level2="2, 0.1275, 2, 96" data-level3="2, 0.135, 2, 123" data-level4="2, 0.1425, 2, 150" data-level5="2, 0.15, 2, 168" data-level6="2, 0.156, 2, 186" data-level7="2, 0.162, 2, 199.5" data-level8="2, 0.168, 2, 213" data-level9="2, 0.174, 2, 226.5" data-level10="2, 0.18, 2, 240" data-level11="2, 0.186, 2, 253.5" data-level12="2, 0.192, 2, 267" data-level13="2, 0.198, 2, 280.5" data-level14="2, 0.204, 2, 294" data-level15="2, 0.21, 2, 307.5" data-levelid="1, 2, 0, 3, 0, 4" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Attack (Unknown)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120306_description" data-original-description="Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.">Attacks an enemy, and when the battle starts, reduces their Toughness of the corresponding Type.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120306', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120306_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120306_stats"></div><div id="120306_data" style="display:none;" data-level1="" data-levelid="1, 2, 0, 3, 0, 6" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+                <table>
+                    <tr>
+                        <th colspan="2">Mercy of a Fool (Technique)</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="120307_description" data-original-description="After the Technique is used, the Talent will be immediately triggered at the start of the next battle.">After the Technique is used, the Talent will be immediately triggered at the start of the next battle.</div></td>
+                    </tr>
+                    <tr>
+                        <td><select onchange="updateSkill('120307', this.value)"><option value="1">Level 1</option><option value="id">Level id</option></select></td>
+                        <td></td>  <!-- Removed the button -->
+                    </tr>
+                    <tr style="display:none;" id="120307_stats_row">  <!-- stats_row remains hidden -->
+                        <td colspan="2"><div id="120307_stats"></div><div id="120307_data" style="display:none;" data-level1="" data-levelid="1, 2, 0, 3, 0, 7" ></div></td>
+                    </tr>
+                </table>
+                <br>
+            
+            <h2>Ascension Traces</h2>
+        
+                            <table>
+                            <tr><th>Cleansing Revival<th></tr><td>When the Skill's effect is triggered, removes 1 debuff(s) from a target ally.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Sanctified<th></tr><td>When any enemy in the Zone is attacked by an ally, all allies (except the attacker) restore HP equal to 7% of Luocha's ATK plus 93.</td><tr>
+                            </table><br>
+                        
+                            <table>
+                            <tr><th>Through the Valley<th></tr><td>The chance to resist Crowd Control debuffs increases by 70%.</td><tr>
+                            </table><br>
+                        
+                                    <h2>Minor Traces</h2>
+                                    <table><tr>
+                                <th>ATK Boost</th><th>HP Boost</th><th>DEF Boost</th></tr><tr><td>28.0%</td><td>18.0%</td><td>12.5%</td></tr><tr></table>
+                                    </tr></table><br>
+                                
+            <h2>Eidolons</h2>
+        
+                                        <table>
+                            <tr><th>Ablution of the Quick<th></tr><td>While the Zone is active, ATK of all allies increases by <unbreak>20%</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Bestowal From the Pure<th></tr><td>When his Skill is triggered, if the target ally's HP percentage is lower than <unbreak>50%</unbreak>, Luocha's Outgoing Healing increases by <unbreak>30%</unbreak>. If the target ally's HP percentage is at <unbreak>50%</unbreak> or higher, the ally receives a Shield that can absorb DMG equal to <unbreak>18%</unbreak> of Luocha's ATK plus <unbreak>240</unbreak>, lasting for <unbreak>2</unbreak> turns.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Surveyal by the Fool<th></tr><td>Skill Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Basic ATK Lv. +1, up to a maximum of Lv. <unbreak>10</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Heavy Lies the Crown<th></tr><td>When Luocha's Zone is active, enemies become Weakened and deal <unbreak>12%</unbreak> less DMG.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Cicatrix 'Neath the Pain<th></tr><td>Ultimate Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.<br>Talent Lv. +2, up to a maximum of Lv. <unbreak>15</unbreak>.</td><tr>
+                            </table><br>
+            
+                                        <table>
+                            <tr><th>Reunion With the Dust<th></tr><td>When Ultimate is used, there is a <unbreak>100%</unbreak> fixed chance to reduce all enemies' All-Type RES by <unbreak>20%</unbreak> for <unbreak>2</unbreak> turn(s).</td><tr>
+                            </table><br>
+            
+            </body>
+        </html>
+        

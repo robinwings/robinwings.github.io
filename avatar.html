@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="dark.css">
+<style>
+.filter-icon {
+  opacity: 0.35;
+  cursor: pointer;
+  margin-right: 5px;
+  height: 38px;
+  width: 38px;
+}
+.selected {
+  opacity: 1.0;
+}
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Character</title>
+</head>
+<body>
+<noscript>
+It seems like you have JavaScript disabled, or your browser does not support it.<br>
+I am sorry but this website cannot function normally without it :)
+</noscript>
+<h1 style="margin-bottom:0px">robinwings</h1><small>Click ID to see the data :)</small><hr>
+<div style="margin-top:20px; margin-bottom:10px">
+  <a class="button-link" style="text-decoration: none;" href='#'">Character</a>  <a class="button-link" style="text-decoration: none;" href='weapons.html'">Lightcone</a>  <a class="button-link" style="text-decoration: none;" href='relics.html'">Relic Set</a>  </div>
+  <input style="margin-bottom: 20px; margin-top:10px" type="text" id="myInput" onkeyup="myFunction()"placeholder="Search for character"><div style="margin-bottom:20px;">
+  <!-- Fire Icon -->
+<img src="ico/Fire.png" class="filter-icon" id="fire-icon" data-element="fire" onclick="toggleFilter(this, 'element')" />
+
+<!-- Ice Icon -->
+<img src="ico/Ice.png" class="filter-icon" id="ice-icon" data-element="ice" onclick="toggleFilter(this, 'element')" />
+
+<!-- Imaginary Icon -->
+<img src="ico/Imaginary.png" class="filter-icon" id="imaginary-icon" data-element="imaginary" onclick="toggleFilter(this, 'element')" />
+
+<!-- Physical Icon -->
+<img src="ico/Physical.png" class="filter-icon" id="physical-icon" data-element="physical" onclick="toggleFilter(this, 'element')" />
+
+<!-- Quantum Icon -->
+<img src="ico/Quantum.png" class="filter-icon" id="quantum-icon" data-element="quantum" onclick="toggleFilter(this, 'element')" />
+
+<!-- Lightning Icon -->
+<img src="ico/Lightning.png" class="filter-icon" id="lightning-icon" data-element="lightning" onclick="toggleFilter(this, 'element')" />
+
+<!-- Wind Icon -->
+<img src="ico/Wind.png" class="filter-icon" id="wind-icon" data-element="wind" onclick="toggleFilter(this, 'element')" />
+
+<!-- Preservation Icon -->
+<img src="ico/Preservation.png" class="filter-icon" id="preservation-icon" data-path="preservation" onclick="toggleFilter(this, 'path')" />
+
+<!-- Erudition Icon -->
+<img src="ico/Erudition.png" class="filter-icon" id="erudition-icon" data-path="erudition" onclick="toggleFilter(this, 'path')" />
+
+<!-- Abundance Icon -->
+<img src="ico/Abundance.png" class="filter-icon" id="abundance-icon" data-path="abundance" onclick="toggleFilter(this, 'path')" />
+
+<!-- The Hunt Icon -->
+<img src="ico/Hunt.png" class="filter-icon" id="the-hunt-icon" data-path="the hunt" onclick="toggleFilter(this, 'path')" />
+
+<!-- Harmony Icon -->
+<img src="ico/Harmony.png" class="filter-icon" id="harmony-icon" data-path="harmony" onclick="toggleFilter(this, 'path')" />
+
+<!-- Nihility Icon -->
+<img src="ico/Nihility.png" class="filter-icon" id="nihility-icon" data-path="nihility" onclick="toggleFilter(this, 'path')" />
+
+<!-- Destruction Icon -->
+<img src="ico/Destruction.png" class="filter-icon" id="destruction-icon" data-path="destruction" onclick="toggleFilter(this, 'path')" />
+
+<img src="ico/5star.png" class="filter-icon" id="5-star-icon" data-rarity="5*" onclick="toggleFilter(this, 'rarity')" />
+<img src="ico/4star.png" class="filter-icon" id="4-star-icon" data-rarity="4*" onclick="toggleFilter(this, 'rarity')" />
+        </div>
+
+<table id="myTable">
+  <tr>
+    <th>Character</th>
+    <th>Path</th>
+    <th>Element</th>
+    <th>Rarity</th>
+    <th>ID</th>
+  </tr>
+<tr><td>March 7th</td><td>Preservation</td><td>Ice</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1001.html'>1001</a></td></tr><tr><td>Dan Heng</td><td>The Hunt</td><td>Wind</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1002.html'>1002</a></td></tr><tr><td>Himeko</td><td>Erudition</td><td>Fire</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1003.html'>1003</a></td></tr><tr><td>Welt</td><td>Nihility</td><td>Imaginary</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1004.html'>1004</a></td></tr><tr><td>Kafka</td><td>Nihility</td><td>Lightning</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1005.html'>1005</a></td></tr><tr><td>Silver Wolf</td><td>Nihility</td><td>Quantum</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1006.html'>1006</a></td></tr><tr><td>Arlan</td><td>Destruction</td><td>Lightning</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1008.html'>1008</a></td></tr><tr><td>Asta</td><td>Harmony</td><td>Fire</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1009.html'>1009</a></td></tr><tr><td>Herta</td><td>Erudition</td><td>Ice</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1013.html'>1013</a></td></tr><tr><td>Bronya</td><td>Harmony</td><td>Wind</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1101.html'>1101</a></td></tr><tr><td>Seele</td><td>The Hunt</td><td>Quantum</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1102.html'>1102</a></td></tr><tr><td>Serval</td><td>Erudition</td><td>Lightning</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1103.html'>1103</a></td></tr><tr><td>Gepard</td><td>Preservation</td><td>Ice</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1104.html'>1104</a></td></tr><tr><td>Natasha</td><td>Abundance</td><td>Physical</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1105.html'>1105</a></td></tr><tr><td>Pela</td><td>Nihility</td><td>Ice</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1106.html'>1106</a></td></tr><tr><td>Clara</td><td>Destruction</td><td>Physical</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1107.html'>1107</a></td></tr><tr><td>Sampo</td><td>Nihility</td><td>Wind</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1108.html'>1108</a></td></tr><tr><td>Hook</td><td>Destruction</td><td>Fire</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1109.html'>1109</a></td></tr><tr><td>Lynx</td><td>Abundance</td><td>Quantum</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1110.html'>1110</a></td></tr><tr><td>Luka</td><td>Nihility</td><td>Physical</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1111.html'>1111</a></td></tr><tr><td>Topaz & Numby</td><td>The Hunt</td><td>Fire</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1112.html'>1112</a></td></tr><tr><td>Qingque</td><td>Erudition</td><td>Quantum</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1201.html'>1201</a></td></tr><tr><td>Tingyun</td><td>Harmony</td><td>Lightning</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1202.html'>1202</a></td></tr><tr><td>Luocha</td><td>Abundance</td><td>Imaginary</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1203.html'>1203</a></td></tr><tr><td>Jing Yuan</td><td>Erudition</td><td>Lightning</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1204.html'>1204</a></td></tr><tr><td>Blade</td><td>Destruction</td><td>Wind</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1205.html'>1205</a></td></tr><tr><td>Sushang</td><td>The Hunt</td><td>Physical</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1206.html'>1206</a></td></tr><tr><td>Yukong</td><td>Harmony</td><td>Imaginary</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1207.html'>1207</a></td></tr><tr><td>Fu Xuan</td><td>Preservation</td><td>Quantum</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1208.html'>1208</a></td></tr><tr><td>Yanqing</td><td>The Hunt</td><td>Ice</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1209.html'>1209</a></td></tr><tr><td>Guinaifen</td><td>Nihility</td><td>Fire</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1210.html'>1210</a></td></tr><tr><td>Bailu</td><td>Abundance</td><td>Lightning</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1211.html'>1211</a></td></tr><tr><td>Jingliu</td><td>Destruction</td><td>Ice</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1212.html'>1212</a></td></tr><tr><td>Dan Heng • Imbibitor Lunae</td><td>Destruction</td><td>Imaginary</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1213.html'>1213</a></td></tr><tr><td>Xueyi</td><td>Destruction</td><td>Quantum</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1214.html'>1214</a></td></tr><tr><td>Hanya</td><td>Harmony</td><td>Physical</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1215.html'>1215</a></td></tr><tr><td>Huohuo</td><td>Abundance</td><td>Wind</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1217.html'>1217</a></td></tr><tr><td>Jiaoqiu</td><td>Nihility</td><td>Fire</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1218.html'>1218</a></td></tr><tr><td>Feixiao</td><td>The Hunt</td><td>Wind</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1220.html'>1220</a></td></tr><tr><td>Yunli</td><td>Destruction</td><td>Physical</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1221.html'>1221</a></td></tr><tr><td>Lingsha</td><td>Abundance</td><td>Fire</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1222.html'>1222</a></td></tr><tr><td>Moze</td><td>The Hunt</td><td>Lightning</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1223.html'>1223</a></td></tr><tr><td>March 7th (Imaginary)</td><td>The Hunt</td><td>Imaginary</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1224.html'>1224</a></td></tr><tr><td>Gallagher</td><td>Abundance</td><td>Fire</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1301.html'>1301</a></td></tr><tr><td>Argenti</td><td>Erudition</td><td>Physical</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1302.html'>1302</a></td></tr><tr><td>Ruan Mei</td><td>Harmony</td><td>Ice</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1303.html'>1303</a></td></tr><tr><td>Aventurine</td><td>Preservation</td><td>Imaginary</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1304.html'>1304</a></td></tr><tr><td>Dr. Ratio</td><td>The Hunt</td><td>Imaginary</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1305.html'>1305</a></td></tr><tr><td>Sparkle</td><td>Harmony</td><td>Quantum</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1306.html'>1306</a></td></tr><tr><td>Black Swan</td><td>Nihility</td><td>Wind</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1307.html'>1307</a></td></tr><tr><td>Acheron</td><td>Nihility</td><td>Lightning</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1308.html'>1308</a></td></tr><tr><td>Robin</td><td>Harmony</td><td>Physical</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1309.html'>1309</a></td></tr><tr><td>Firefly</td><td>Destruction</td><td>Fire</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1310.html'>1310</a></td></tr><tr><td>Misha</td><td>Destruction</td><td>Ice</td><td>4*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1312.html'>1312</a></td></tr><tr><td>Jade</td><td>Erudition</td><td>Quantum</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1314.html'>1314</a></td></tr><tr><td>Boothill</td><td>The Hunt</td><td>Physical</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1315.html'>1315</a></td></tr><tr><td>Rappa</td><td>Erudition</td><td>Imaginary</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/1317.html'>1317</a></td></tr><tr><td>Destruction Caelus</td><td>Destruction</td><td>Physical</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/8001.html'>8001</a></td></tr><tr><td>Destruction Stelle</td><td>Destruction</td><td>Physical</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/8002.html'>8002</a></td></tr><tr><td>Preservation Caelus</td><td>Preservation</td><td>Fire</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/8003.html'>8003</a></td></tr><tr><td>Preservation Stelle</td><td>Preservation</td><td>Fire</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/8004.html'>8004</a></td></tr><tr><td>Harmony Caelus</td><td>Harmony</td><td>Imaginary</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/8005.html'>8005</a></td></tr><tr><td>Harmony Stelle</td><td>Harmony</td><td>Imaginary</td><td>5*</td><td><a class='button-link' style='text-decoration: none;' href='avatar/8006.html'>8006</a></td></tr>
+</table>
+<script>
+function reloadCSS() {
+    var e = document.querySelector('link[href*="dark.css"]');
+    if (e) {
+        var t = e.getAttribute("href").split("?")[0] + "?v=" + new Date().getTime();
+        e.setAttribute("href", t);
+    }
+}
+
+let filters = {
+    element: [],
+    path: [],
+    rarity: []
+};
+
+function toggleFilter(e, t) {
+    e.classList.toggle("selected");
+    let l = e.getAttribute(`data-${t}`),
+        r = filters[t].indexOf(l);
+    r > -1 ? filters[t].splice(r, 1) : filters[t].push(l);
+    applyFilter();
+}
+
+function applyFilter() {
+    let input = document.getElementById("myInput").value.toUpperCase();
+    let table = document.getElementById("myTable");
+    let rows = table.getElementsByTagName("tr");
+    let count = 0;
+
+    for (let i = 1; i < rows.length; i++) {
+        let row = rows[i];
+        let cell0 = row.cells[0];
+        let cell1 = row.cells[1];
+        let cell2 = row.cells[2];
+        let cell3 = row.cells[3];
+        if (cell0 && cell1 && cell2 && cell3) {
+            let text0 = cell0.innerText.toUpperCase();
+            let text1 = cell1.innerText.toLowerCase();
+            let text2 = cell2.innerText.toLowerCase();
+            let text3 = cell3.innerText;
+
+            let matchesSearch = text0.indexOf(input) > -1;
+            let matchesElement = filters.element.length === 0 || filters.element.includes(text2);
+            let matchesPath = filters.path.length === 0 || filters.path.includes(text1);
+            let matchesRarity = filters.rarity.length === 0 || filters.rarity.includes(text3);
+
+            if (matchesSearch && matchesElement && matchesPath && matchesRarity) {
+                row.style.display = "";
+                count++ % 2 === 0 ? row.style.backgroundColor = "var(--table-bg-alt)" : row.style.backgroundColor = "var(--table-bg)";
+            } else {
+                row.style.display = "none";
+            }
+        }
+    }
+}
+
+function myFunction() {
+    applyFilter();
+}
+</script>
+</body>
+</html>
